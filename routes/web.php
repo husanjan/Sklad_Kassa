@@ -1,0 +1,68 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Spr\SprAccountsController;
+use App\Http\Controllers\Spr\SprEdsController;
+use App\Http\Controllers\Spr\SprSafesController;
+use App\Http\Controllers\Spr\SprShkafsController;
+use App\Http\Controllers\Spr\SprQatorsController;
+use App\Http\Controllers\Spr\SprCellsController;
+use App\Http\Controllers\Fonds\FondEmissionsController;
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+Auth::routes();
+
+
+
+
+Route::group([ 'middleware' => ['auth', 'activity']], function() {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    //Создать Изменит Удалить роуте Ползователь роль
+    Route::resource('roles', RoleController::class);
+    //Создать Изменит Удалить роуте Ползователь
+    Route::resource('users', UserController::class);
+    //Создать Изменит Удалить роуте Справочник счетов
+    Route::resource('spraccounts', SprAccountsController::class);
+    //Создать Изменит Удалить роуте Справочник единиц
+    Route::resource('spreds', SprEdsController::class);
+    //Создать Изменит Удалить роуте Харинилише
+    Route::resource('sprsafes', SprSafesController::class);
+    //Создать Изменит Удалить роуте Шкаф
+    Route::resource('sprshkafs', SprShkafsController::class);
+    //Создать Изменит Удалить роуте Ячейка
+    Route::resource('sprcell', SprCellsController::class) ;
+    //Создать Изменит Удалить роуте Фонд эмиссион
+    Route::resource('fondemission', FondEmissionsController::class);
+
+    //Создать Изменит Удалить роуте Катор
+    Route::resource('sprqators', SprQatorsController::class);
+    //Создать Изменит Удалить роуте Банк справочник
+    Route::resource('bank_spr', App\Http\Controllers\Spr\SprBankController::class);
+    //Создать Изменит Удалить роуте Банк справочник
+    Route::resource('oborot_spr', App\Http\Controllers\Aborot\AborotController::class);
+    //Катор ажакс роуте
+    Route::post('qatorTable',[SprCellsController::class, 'qatorTable'])->name('qatorTable.post');
+    //Ячейка ажакс роуте
+    Route::post('cellsTable',[SprCellsController::class, 'cellsTable'])->name('cellsTable.post');
+    //Шкаф ажакс роуте
+    Route::post('shkafTable',[SprQatorsController::class, 'shkafTable']) ->name('shkafTable.post');
+
+
+});
+
+
