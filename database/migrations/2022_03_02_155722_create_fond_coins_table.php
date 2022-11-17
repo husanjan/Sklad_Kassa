@@ -16,20 +16,22 @@ class CreateFondCoinsTable extends Migration
         Schema::create('fond_coins', function (Blueprint $table) {
             $table->id();
             $table->dateTime('date');
-            $table->integer('priznak')->comment('Ïðèõîä/Ðàñõîä');
-            $table->tinyinteger('type')->comment('1-Ãîäíûå/2-Âåòõûå/3-Óíè÷òîæåííûå');
-            $table->char('src')->comment('Îòêóäà/Êóäà');
-            $table->integer('naminal')->comment('Íàìèíàë êóïþðû');
-            $table->unsignedBiginteger('ed_id')->comment('ID Åäèíèöû');
-            $table->integer('kol')->comment('Êîëè÷åñòâî');
+            $table->integer('priznak')->comment('ÐŸÑ€Ð¸Ñ…Ð¾Ð´/Ð Ð°ÑÑ…Ð¾Ð´');
+            $table->tinyinteger('type')->comment('1-Ð“Ð¾Ð´Ð½Ñ‹Ðµ/2-Ð’ÐµÑ‚Ñ…Ñ‹Ðµ/3-Ð£Ð½Ð¸Ñ‡Ñ‚Ð¾Ð¶ÐµÐ½Ð½Ñ‹Ðµ');
+            $table->char('src')->comment('ÐžÑ‚ÐºÑƒÐ´Ð°/ÐšÑƒÐ´Ð°');
+            $table->integer('naminal')->comment('ÐÐ°Ð¼Ð¸Ð½Ð°Ð» ÐºÑƒÐ¿ÑŽÑ€Ñ‹');
+            $table->unsignedBiginteger('ed_id')->comment('ID   Ð•Ð´Ð¸Ð½Ð¸Ñ†Ñ‹');
+            $table->integer('kol')->comment('ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾');
             $table->integer('summa');
-            $table->unsignedBiginteger('safe_id')->comment('ID Õðàíèëèùå');
-            $table->unsignedBiginteger('shkaf_id')->comment('ID øêàô/ñòèëàæ');
-            $table->unsignedBiginteger('qator_id')->comment('ID ðÿä');
-            $table->unsignedBiginteger('cell_id')->comment('ID ÿ÷åéêè');
+            $table->unsignedBiginteger('safe_id')->comment('ID Ð¥Ñ€Ð°Ð½Ð¸Ð»Ð¸Ñ‰Ðµ');
+            $table->unsignedBiginteger('shkaf_id')->comment('ID ÑˆÐºÐ°Ñ„/ÑÑ‚Ð¸Ð»Ð°Ð¶');
+            $table->unsignedBiginteger('qator_id')->comment('ID Ñ€ÑÐ´');
+            $table->unsignedBiginteger('cell_id')->comment('ID ÑÑ‡ÐµÐ¹ÐºÐ¸');
             $table->char('comment', 255);
             $table->unsignedBiginteger('user_id');
             $table->char('host', 50);
+            $table->unsignedBiginteger('kod_oper');
+            $table->char('n_doc',50);
             $table->timestamps();
             $table->softDeletes();
 

@@ -79,7 +79,7 @@
                         </div>
                     @endif
                     @php($count=0)
-                    <table class="table table-bordered">
+                    <table class="table  col-md-12">
                         <tr>
                             <th>No</th>
                             <th>Номер хранилище</th>
@@ -101,9 +101,10 @@
                                 <td>{{ $shkaf->shkaf }}</td>
                                 <td>{{ $shkaf->comment }}</td>
                                 <td>
-                                    <a class="btn btn-facebook active" href="{{ route('sprshkafs.edit', $shkaf->id) }}"> <i class="align-middle" data-feather="edit"></i>  Изменить</a>
+                                    <a class="btn   btn-d" href="{{ route('sprshkafs.edit', $shkaf->id) }}"> <i class="align-middle" data-feather="edit"></i>  Изменить</a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['sprshkafs.destroy', $shkaf->id],'style'=>'display:inline']) !!}
-                                    {!! Form::submit('Удалить', ['class' => 'btn btn-instagram active']) !!}
+
+                                    {{Form::button('<i class="far fa-trash-alt icon-size"></i>', ['type' =>'submit', 'class' => 'btn btn-danger'])}}
                                     {!! Form::close() !!}
                                 </td>
                             </tr>

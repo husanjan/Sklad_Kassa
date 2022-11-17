@@ -226,9 +226,6 @@ class FondEmissionsController extends Controller
 //
     }
 
-      public function down()
-      {
-          return "ff";
-      }
+
 
      }

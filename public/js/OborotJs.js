@@ -1,22 +1,5 @@
 
 
-$(document).on('change','.schet1', function (){
-    var tegi='';
-    $("#schet1 option").each(function (){
-
-        if(!this.selected){
-            tegi+="<option    "+(this.value==='Выберите счетов' ?'selected disabled value=""':'value="'+this.value+'"')+" >"+this.text+"</option>";
-
-
-            var htmls=$("#schet2").html('<select name="schet2" required id="" class="form-control"  >'+this+'</select>');
-
-        }
-    });
-    $("#schet2").html('<select name="account_id_in" id="" required class="form-control"  >'+tegi+'</select>');
-
-
-});
-
 
 function disabledFalse(status=true)
 {
@@ -112,15 +95,12 @@ function countinc()
 
 }
    var numsum=0;
-$(document).on('keyup','.count ,.nomcou',function (){
+$(document).on('keyup','.count,.nomcou',function (){
+ 
 
-
-
-
-
-
-    var  classes = $('form-control').find('is_invalid').val();
-    console.log(classes);
+  var  classes = $('form-control').find('is_invalid').val();
+   
+    console.log($('input[id^="summacounts"').val());
     var  id = $(this).attr('id');
     $("#"+id.slice(0,-1)).val("");
     var valueField=$(this).attr('id');
@@ -135,6 +115,7 @@ $(document).on('keyup','.count ,.nomcou',function (){
         //var nominal= parseInt(nominal.substr(nominal.indexOf('.')+1));
         //console.log(nominal);
         //value summ
+         
         $('input[name^="summa"]').each(function()
         {
 
@@ -143,7 +124,7 @@ $(document).on('keyup','.count ,.nomcou',function (){
             var sum_id='#'+$(this).attr('id');
             var nom_id='#'+$(this).attr('id')+'h';
             var class_id=$(this).attr('class');
-           console.log(sum_id);
+      
 
 
             if(summ%nominal===0 && summ>0)
@@ -164,6 +145,7 @@ $(document).on('keyup','.count ,.nomcou',function (){
                 if(sum_id=='#'+id)
                 {
                     disabledFalse();
+                    
                     $(sum_id).addClass( "is-invalid");
                     $(sum_id+'h').addClass( "is-invalid");
 
@@ -175,7 +157,7 @@ $(document).on('keyup','.count ,.nomcou',function (){
             }
             disabledFalse();
 
-                  console.log(numsum);
+                 
         });
 
     }else{
