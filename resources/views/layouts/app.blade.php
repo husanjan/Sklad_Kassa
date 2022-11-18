@@ -248,7 +248,7 @@
 
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="{{ route('fondwornou.index') }}" class="nav-link">
+                                <a href="{{ route('korshoyam_tanga.index') }}" class="nav-link">
                                     <i class="fa    nav-icon"></i>
                                     <p>Коршоям танга
                                         <i class="right fas fa-angle-left"></i>
@@ -258,7 +258,7 @@
 
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="{{ route('fondwornou.index') }}" class="nav-link">
+                                <a href="{{ route('farsuda_tanga.index') }}" class="nav-link">
                                     <i class="fa    nav-icon"></i>
                                     <p>Фарсуда танга
                                         <i class="right fas fa-angle-left"></i>
@@ -268,7 +268,7 @@
 
                             </li>
                             <li class="nav-item has-treeview">
-                                <a href="{{ route('fondwornou.index') }}" class="nav-link">
+                                <a href="{{ route('botilshuda_tanga.index') }}" class="nav-link">
                                     <i class="fa    nav-icon"></i>
                                     <p>Ботилшуда танга
                                         <i class="right fas fa-angle-left"></i>
@@ -299,7 +299,16 @@
                                 </a>
 
                             </li>
+                            <li class="nav-item has-treeview">
+                                <a href="{{ route('oborot_tanga.index') }}" class="nav-link">
+                                    <i class="nav-icon fa fa-folder-tree "></i>
+                                    <p>Oборот Танга
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
 
+                                </a>
+
+                            </li>
                         {{-- </ul> --}}
                     {{-- </li> --}}
 

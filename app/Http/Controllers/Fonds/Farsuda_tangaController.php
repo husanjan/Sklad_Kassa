@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\fonds;
 
-use App\Models\oborots_coin;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class OborotsCoinController extends Controller
+class Farsuda_tangaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class OborotsCoinController extends Controller
     public function index()
     {
         //
-        return  view('aborots_tanga.index');
+        return view('fonds.farsuda_tanga.index');
     }
 
     /**
@@ -42,10 +42,10 @@ class OborotsCoinController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\oborots_coin  $oborots_coin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(oborots_coin $oborots_coin)
+    public function show($id)
     {
         //
     }
@@ -53,10 +53,10 @@ class OborotsCoinController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\oborots_coin  $oborots_coin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(oborots_coin $oborots_coin)
+    public function edit($id)
     {
         //
     }
@@ -65,10 +65,10 @@ class OborotsCoinController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\oborots_coin  $oborots_coin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, oborots_coin $oborots_coin)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +76,10 @@ class OborotsCoinController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\oborots_coin  $oborots_coin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(oborots_coin $oborots_coin)
+    public function destroy($id)
     {
         //
     }

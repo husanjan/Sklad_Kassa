@@ -54,6 +54,11 @@ Route::group([ 'middleware' => ['auth', 'activity']], function() {
     Route::resource('fondunusable', App\Http\Controllers\Fonds\UnusableController::class);
     Route::resource('fondcanceled', App\Http\Controllers\Fonds\CanceledController::class);
 
+    Route::resource('korshoyam_tanga', App\Http\Controllers\Fonds\korshoyam_tangaController::class);
+
+    Route::resource('farsuda_tanga', App\Http\Controllers\Fonds\Farsuda_tangaController::class);
+    Route::resource('botilshuda_tanga', App\Http\Controllers\Fonds\Botilshuda_tangaController::class);
+    Route::resource('oborot_tanga', App\Http\Controllers\OborotsCoinController::class);
     //Создать Изменит Удалить роуте Катор
     Route::resource('sprqators', SprQatorsController::class);
     //Создать Изменит Удалить роуте Банк справочник

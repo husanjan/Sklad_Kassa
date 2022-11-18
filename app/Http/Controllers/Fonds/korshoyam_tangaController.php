@@ -1,0 +1,119 @@
+<?php
+
+namespace App\Http\Controllers\fonds;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\SprSafes;
+use App\Models\SprShkafs;
+use App\Models\SprCells;
+use App\Models\SprQators;
+use App\Models\SprEds;
+use App\Models\Oborot;
+use App\Models\FondEmisions;
+use App\Models\SprAccounts;
+use App\Models\FondCoins;
+use App\Models\oborots_coin;
+class korshoyam_tangaController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+        //
+        $kodeOperObort= oborots_coin::orderBy('kod_oper','DESC')->value('kod_oper');
+        if($kodeOperObort<=0)
+        {
+            $kodeOperObort=1;
+        }else{
+        $kodeOperObort++;
+    }
+
+ 
+           $safes = SprSafes::all();
+           $sprEds = SprEds::all();
+            $shkafs = SprShkafs::all();
+            $sprCells= SprCells::all();
+             $sprQators= SprQators::all();
+             $sprAccounts= SprAccounts::all();
+              $kodeOper= FondCoins::orderBy('kod_oper','DESC')->value('kod_oper');
+                       if($kodeOper<=0)
+                       {
+                        $kodeOper=1;
+                        }else{
+                         $kodeOper++;
+                          }
+                  return  view('fonds.korshoyam_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort'));
+      
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
