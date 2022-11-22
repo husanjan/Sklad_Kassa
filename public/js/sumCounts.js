@@ -4,7 +4,17 @@ $(document).ready(function(){
 
         // alert($(this).val())
         // alert($(this).data('id'))
-         if($(this).val()%$('#nominal'+$(this).data('id')+'1').val()===0)
+           let nomin=0;
+                   if($('#nominal'+$(this).data('id')+'1').val()>=1)
+                   {
+                      nomin=$('#nominal'+$(this).data('id')+'1').val();
+                   }
+                   if($('#nominal'+$(this).data('id')+'1').val()<1)
+                   {
+                      nomin=$('#nominal'+$(this).data('id')+'1').val()*100;
+                   }
+
+         if($(this).val()%nomin===0)
          {
             $('#countSumsnepolniySomon'+$(this).data('id')).removeClass( "is-invalid");
       

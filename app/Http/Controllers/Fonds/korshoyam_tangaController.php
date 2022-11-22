@@ -14,6 +14,10 @@ use App\Models\FondEmisions;
 use App\Models\SprAccounts;
 use App\Models\FondCoins;
 use App\Models\oborots_coin;
+use App\Repositories\InterfacesSomoni;
+use App\Repositories\AddRequest;
+use Illuminate\Support\Facades\DB;
+
 class korshoyam_tangaController extends Controller
 {
     /**
@@ -21,6 +25,11 @@ class korshoyam_tangaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $addRepository;
+    public function __construct(AddRequest $addRepository)
+    {
+        $this->addRepository = $addRepository;
+    }
     public function index()
     {
         //
@@ -40,7 +49,7 @@ class korshoyam_tangaController extends Controller
             $sprCells= SprCells::all();
              $sprQators= SprQators::all();
              $sprAccounts= SprAccounts::all();
-              $kodeOper= FondCoins::orderBy('kod_oper','DESC')->value('kod_oper');
+              $kodeOper= FondCoins::orderBy('kode_oper','DESC')->value('kode_oper');
                        if($kodeOper<=0)
                        {
                         $kodeOper=1;
@@ -69,7 +78,76 @@ class korshoyam_tangaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //use App\Repositories\InterfacesSomoni;
+        
+        DB::beginTransaction();
+        $oborots = $this->addRepository->addRequestsOborottanga($request,1);
+        $money= $this->addRepository->addRequestsTanga($request);
+    //     echo "<pre>";
+    //    print_r($money);
+    //    echo "</pre>";
+        // use App\Models\FondCoins;
+        // use App\Models\oborots_coin;
+           echo "<pre>";
+       print_r($money);
+       echo "</pre>";
+    //    //FondCoins::create($money[0]);
+    //    oborots_coin::create($oborots[0]);
+        if(is_array($oborots) AND is_array($money) AND $request->src==7)
+        {
+          
+           
+           try{
+              foreach ($money as $key => $value) {
+                  # code...
+             FondCoins::create($money[$key]);
+              oborots_coin::create($oborots[$key]);
+          }
+              DB::Commit();
+           
+          return redirect()->route('korshoyam_tanga.index')->with('success','Фарсуда фонд успешно создан!');
+            } catch (\Illuminate\Database\QueryException $e) {
+              DB::rollback();
+              return response(['message'=>'FAILURE'], 500);
+              return redirect()->route('korshoyam_tanga.index')->with('danger','Фарсуда фонд  не успешно!');
+            }
+          
+
+            
+
+
+           
+            
+          //  return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
+        
+        }
+     
+        if(is_array($money) AND $request->src==2)
+        {
+          
+           
+           try{
+          
+              foreach ($money as $key => $value) {
+                  # code...
+                FondCoins::create($money[$key]);
+              DB::Commit();
+              
+          }
+              
+           
+          return redirect()->route('korshoyam_tanga.index')->with('success','Фарсуда фонд успешно создан!');
+            } catch (\Illuminate\Database\QueryException $e) {
+              DB::rollback();
+              return response(['message'=>'FAILURE'], 500);
+            return redirect()->route('korshoyam_tanga.index')->with('danger','Фарсуда фонд  не успешно!');
+            }
+          
+             return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
+        
+        }
+
+    
     }
 
     /**

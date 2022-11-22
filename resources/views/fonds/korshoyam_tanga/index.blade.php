@@ -25,7 +25,7 @@
     <p>{{ $message }}</p>
 </div>
 @endif
-<form method="POST" action="{{ route('fondunusable.store') }}" id="submit" >
+<form method="POST" action="{{ route('korshoyam_tanga.store') }}" id="submit" >
     @csrf
   <div class="modal fade " id="rashod" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div  style="height: 70px">
@@ -95,11 +95,11 @@
                   
                   
                              
-                  <div  >
-                      <div  >
+                  <div>
+                      <div>
                         
-                          <div   >
-                              <div  >
+                          <div>
+                              <div>
                                   <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                                       <li class="nav-item">
                                           <a class="nav-link active" id="home-tab" data-toggle="tab" href="#OneD" role="tab" aria-controls="home" aria-selected="true">1 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="gSomon"></i></a>

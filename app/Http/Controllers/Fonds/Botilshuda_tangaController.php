@@ -4,7 +4,19 @@ namespace App\Http\Controllers\fonds;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\SprSafes;
+use App\Models\SprShkafs;
+use App\Models\SprCells;
+use App\Models\SprQators;
+use App\Models\SprEds;
+use App\Models\Oborot;
+use App\Models\FondEmisions;
+use App\Models\SprAccounts;
+use App\Models\FondCoins;
+use App\Models\oborots_coin;
+use App\Repositories\InterfacesSomoni;
+use App\Repositories\AddRequest;
+use Illuminate\Support\Facades\DB;
 class Botilshuda_tangaController extends Controller
 {
     /**
@@ -15,7 +27,31 @@ class Botilshuda_tangaController extends Controller
     public function index()
     {
         //
-        return view('fonds.botilshuda_tanga.index');
+        $kodeOperObort= oborots_coin::orderBy('kod_oper','DESC')->value('kod_oper');
+        if($kodeOperObort<=0)
+        {
+            $kodeOperObort=1;
+        }else{
+        $kodeOperObort++;
+    }
+
+ 
+           $safes = SprSafes::all();
+           $sprEds = SprEds::all();
+            $shkafs = SprShkafs::all();
+            $sprCells= SprCells::all();
+             $sprQators= SprQators::all();
+             $sprAccounts= SprAccounts::all();
+              $kodeOper= FondCoins::orderBy('kode_oper','DESC')->value('kode_oper');
+                       if($kodeOper<=0)
+                       {
+                        $kodeOper=1;
+                        }else{
+                         $kodeOper++;
+                          }
+                  return  view('fonds.botilshuda_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort'));
+  
+        //return view('fonds.botilshuda_tanga.index');
     }
 
     /**

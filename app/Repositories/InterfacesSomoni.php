@@ -14,6 +14,7 @@ use App\Models\SprEds;
       public $Tableoborot=[];
       public  $arr=[];
       public  $arrInsertOborot=[];
+      public  $arrInsertOborotTanga=[];
       public function __construct(FondMoney $DBMoney)
       {
           $this->DBMoney = $DBMoney;
@@ -24,6 +25,118 @@ use App\Models\SprEds;
           $dbSpr= SprEds::where('id',$id)->first();
           return json_decode($dbSpr,true)['kol'];
       }
+
+      public     function  AddInsertnepolOborotTanga($safe,$nominal,$edin,$kol,$shkaf,$qator,$cell,$ip,$date,$priznak,$farsuda,$src,$ndoc,$code_oper,$user,$summa,$comment,$account_id_out)
+      {
+        
+         if($summa>0 &&$edin>0   &&  $shkaf>0 &&  $qator>0 &&  $cell>0)
+            {
+        
+             $addOne['naminal']= $nominal;
+            // $addOne['safe_id']= $safe;
+             $addOne['kol']= $kol;
+          
+     
+      
+             $addOne['date']= $date;
+             if($priznak==0)
+             {
+               $addOne['priznak']=1;
+             }
+             if($priznak==1)
+             {
+               $addOne['priznak']=0;
+             }
+             //$addOne['priznak']= $priznak;
+            // $addOne['type']= $farsuda;
+             $addOne['src']=$account_id_out;
+            // $addOne['account_id_in']= $src;
+             $addOne['n_doc']= $ndoc;
+             $addOne['kod_oper']=$code_oper;
+             $addOne['summa']= $summa;
+             $addOne['comment']=$comment;
+             $addOne['user_id']= $user;
+             $addOne['host'] = $ip;
+                                                       
+             array_push($this->arrInsertOborotTanga, $addOne);
+             //   echo "sdd<pre>";
+             //  print_r($addOne);
+             //   echo "</pre>";
+              //  Oborot::create($addOne);                              //  FondMoney::create($addOnesp);
+         ///  array_push($this->arrInsertOborot, $addOne);                            // $this->DBMoney::create($addOnesp);
+         return   $this->arrInsertOborotTanga;
+             }
+
+           
+          }
+
+
+      //  tanga
+
+      public    function OborotInsertTanga($edin,$count,$safe_id,$shaving,$qator_id,$cells,$nominal,$date,$priznak,$kode_oper,$farsuda,$src,$ndoc,$summacounts,$comment,$user_id,$ip,$account_id_out)
+      {
+
+         
+        if(array_values($edin)[0]>0 && array_values($count)[0] && array_values($safe_id)[0] && array_values($shaving)[0] && array_values($qator_id)[0] && array_values($cells)[0])
+                {
+
+                           $Somoni['nominal']=array_values($nominal);
+                           $Somoni['ed_id']=array_values($edin);
+                           $Somoni['kol']=array_values($count);
+                           $Somoni['safe_id']=array_values($safe_id);
+                           $Somoni['shkaf_id']=array_values($shaving);
+                           $Somoni['qator_id']=array_values($shaving);
+                           $Somoni['cell_id']=array_values($cells);
+                           if(count(array_values($Somoni['ed_id']))===count(array_values($Somoni['kol']))   AND count(array_values($Somoni['safe_id']))==count(array_values($Somoni['cell_id'])) AND count(array_values($Somoni['shkaf_id']))===count(array_values($Somoni['qator_id'])))
+                           {  
+
+                            foreach($Somoni['ed_id'] AS $edin=>$values)
+                                 {
+                                  // $addOne['ed_id']= $Somoni['ed_id'][$edin];
+                                  $addOne['naminal']= array_values($nominal)[0];
+                                  // $addOne['safe_id']= $Somoni['safe_id'][$edin];
+                                  // $addOne['kol']= $Somoni['kol'][$edin];
+                                  // $addOne['shkaf_id']= $Somoni['shkaf_id'][$edin];
+                                  // $addOne['qator_id']= $Somoni['qator_id'][$edin];
+                                  // $addOne['cell_id']= $Somoni['cell_id'][$edin];
+                                  $addOne['date']= $date;
+                                  if($priznak==1)
+                                  {
+                                    $addOne['priznak']=0;
+                                  }
+                                  if($priznak==0)
+                                  {
+                                    $addOne['priznak']=1;
+                                  }
+                             
+                                 // $addOne['type']= $farsuda;
+                                  $addOne['src']=$account_id_out;
+                                  //$addOne['account_id_in']= $src;
+                                  $addOne['n_doc']= $ndoc;
+                                  $addOne['kod_oper']=$kode_oper;
+                                  $addOne['summa']= array_values($nominal)[0]*$this->Spreds($Somoni['ed_id'][$edin])*$Somoni['kol'][$edin];
+                                  $addOne['comment']=$comment;
+                                  $addOne['user_id']= $user_id;
+                                  $addOne['host'] = $ip;
+                                 // return   $addOne;
+                               //  return $addOne;
+                               
+                                 array_push($this->arrInsertOborotTanga, $addOne);
+                                 
+                              // $db= Oborot::create($addOne);
+                            
+                                }
+                              
+                                return $this->arrInsertOborotTanga;
+                          }
+              
+
+               }
+              
+      }
+
+// end tanga
+
       function OborotInserttoOborot($request)
       {
         //$request->request->remove('kode_oper');
@@ -129,7 +242,7 @@ use App\Models\SprEds;
       public    function OborotInsert($edin,$count,$safe_id,$shaving,$qator_id,$cells,$nominal,$date,$priznak,$kode_oper,$farsuda,$src,$ndoc,$summacounts,$comment,$user_id,$ip,$account_id_out)
       {
 
-      
+         
         if(array_values($edin)[0]>0 && array_values($count)[0] && array_values($safe_id)[0] && array_values($shaving)[0] && array_values($qator_id)[0] && array_values($cells)[0])
                 {
 
@@ -193,6 +306,7 @@ use App\Models\SprEds;
          
             // $Spreds=$this->Spreds();
                    
+                   
             if(array_values($edin)[0]>0 && array_values($count)[0] && array_values($safe_id)[0] && array_values($shaving)[0] && array_values($qator_id)[0] && array_values($cells)[0])
                     {
 
@@ -239,10 +353,11 @@ use App\Models\SprEds;
                                     }
                                      
                               }
+                            }
                               return $this->arr;
                          
 
-                   }
+                  
 
                   
           }

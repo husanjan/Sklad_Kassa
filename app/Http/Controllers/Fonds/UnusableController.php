@@ -145,6 +145,7 @@ class UnusableController extends Controller
               return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
          
          }
+         
         //
         // $ShowFuncs= $this->ShowFunc->store($request);
         // echo $ShowFuncs;
