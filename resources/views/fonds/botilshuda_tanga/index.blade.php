@@ -25,7 +25,7 @@
     <p>{{ $message }}</p>
 </div>
 @endif
-<form method="POST" action="{{ route('korshoyam_tanga.store') }}" id="submit" >
+<form method="POST" action="{{ route('botilshuda_tanga.store') }}" id="submit" >
     @csrf
   <div class="modal fade " id="rashod" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div  style="height: 70px">

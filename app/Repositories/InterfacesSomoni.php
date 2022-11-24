@@ -5,7 +5,9 @@ use App\Models\FondMoney;
 use App\Models\Oborot;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\InterfacesSomoni;
+use App\Models\oborots_coin;
 use App\Models\SprEds;
+use Illuminate\Support\Facades\DB;
  class InterfacesSomoni
 {
   
@@ -385,7 +387,7 @@ use App\Models\SprEds;
                                                                          $addOnesp['summa']=$summa;
                                                                          $addOnesp['comment']= $comment;
                                                                          $addOnesp['user_id']= $user;
-
+                                                                   
                                                                         //   echo "<pre>";
                                                                         //  print_r($addOnesp);
                                                                         //   echo "</pre>";
@@ -401,4 +403,49 @@ use App\Models\SprEds;
 
                            return   "Error";
                         }
+
+
+
+
+                        //Oborot Tanga function 
+            public function    OborotTangaInsert($kode_oper,$summa,$bik,$n_doc,$priznak,$date,$src,$comment,$nominal,$ip,$userid)
+            {
+              echo "<br>".$bik;
+                  $array_tanga['date']=date($date.' '.'H:i:s.u');
+                  $array_tanga['kod_oper']=$kode_oper;
+                  $array_tanga['n_doc']=$n_doc;
+                  $array_tanga['naminal']=$nominal;
+                  $array_tanga['summa']=$summa;
+                  $array_tanga['priznak']=$priznak;
+                  $array_tanga['bik']=$bik;
+                  $array_tanga['src']=$src;
+                  $array_tanga['comment']=$comment;
+                  $array_tanga['user_id']= $userid;
+                  $array_tanga['host'] = $ip;
+                  // $array_tanga['kod_oper ']=$kode_oper;
+                  // $array_tanga['kod_oper ']=$kode_oper;
+              //  return   $array_tanga;      
+             
+              // var_dump($array_tanga);
+              // echo "</pre>";  
+              // exit;
+            try{
+              
+                  # code...
+             oborots_coin::create($array_tanga); 
+              DB::Commit();
+              
+           
+           
+          return response(['message'=>'True'], 200);
+            } catch (\Illuminate\Database\QueryException $e) {
+              DB::rollback();
+              return response(['message'=>'False'], 500);
+       
+            }
+                
+              // echo "<pre>";
+              // var_dump($array_tanga);
+              // echo "</pre>";
+            }         
 }

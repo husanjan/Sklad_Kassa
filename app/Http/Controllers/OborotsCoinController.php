@@ -4,7 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\oborots_coin;
 use Illuminate\Http\Request;
-
+use App\Models\Oborot;
+use App\Models\SprAccounts;
+use App\Models\SprBank;
+use App\Models\SprSafes;
+use App\Models\FondMoney;
+ 
+use Illuminate\Support\Facades\Auth;
+use App\Repositories\InterfacesSomoni;
+use App\Repositories\AddRequest;
 class OborotsCoinController extends Controller
 {
     /**
@@ -12,10 +20,42 @@ class OborotsCoinController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $addRepository;
+    public function __construct(AddRequest $addRepository)
+    {
+        $this->addRepository = $addRepository;
+    }
     public function index()
     {
         //
-        return  view('aborots_tanga.index');
+        $safes = SprSafes::all();
+
+        $bik= SprBank::all();
+         $Oborot= new  oborots_coin();
+        $kodeOper= oborots_coin::orderBy('kod_oper','DESC')->value('kod_oper');
+
+
+          $obor= $Oborot::orderBy('date','DESC')->paginate(50);
+        //   $kodOper= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
+        //             if($kodOper<=0)
+        //             {
+        //              $kodOper=1;
+        //              }else{
+        //               $kodOper++;
+        //                }
+        if($kodeOper<=0)
+            {
+                $kodeOper=1;
+            }else{
+            $kodeOper++;
+        }
+
+
+         $sprAccounts= SprAccounts::all();
+
+
+        // return  view('aborots_tanga.index');
+        return  view('aborots_tanga.index',compact('bik','sprAccounts','kodeOper','obor','safes'));
     }
 
     /**
@@ -37,6 +77,9 @@ class OborotsCoinController extends Controller
     public function store(Request $request)
     {
         //
+            //dd($request->all());
+        $this->addRepository->AddInsertOborotTanga($request);
+        return redirect()->route('oborot_tanga.index')->with('success','Оборот Танга  успешно создан!');
     }
 
     /**

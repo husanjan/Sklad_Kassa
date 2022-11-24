@@ -587,5 +587,78 @@ $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouk,$request->comme
 //End Twenty diram
      return  $this->blogRepository->arr;
 } 
+
+
+//Tnaga Oborot function add insert function '
+    public function AddInsertOborotTanga($request)
+    {
+     
+        //One diram 
+          if($request->summaTangaOne>0)
+              {
+             
+                echo  "<br>".$this->blogRepository->OborotTangaInsert($request->kod_oper,$request->summaTangaOne,$request->bik,
+              $request->n_doc,$request->priznak,$request->date,$request->account_id_in,  $request->comment, $request->nominaOneD,$request->ip(),Auth::id());
+               
+          }
+          //end one diram
+           //  Five  diram
+          if($request->summaTangaFive>0)
+          {
+            echo  "<br>".$this->blogRepository->OborotTangaInsert($request->kod_oper,$request->summaTangaFive,$request->bik,
+          $request->n_doc,$request->priznak,$request->date,$request->account_id_in,  $request->comment, $request->nominalFiveD,$request->ip(),Auth::id());
+           
+      } //end Five  diram
+       //  Ten  diram
+      if($request->summaTangaTenD>0)
+      {
+      echo  "<br>".$this->blogRepository->OborotTangaInsert($request->kod_oper,$request->summaTangaTenD,$request->bik,
+      $request->n_doc,$request->priznak,$request->date,$request->account_id_in,  $request->comment, $request->nominalTenD,$request->ip(),Auth::id());
+        }
+        //    end  Ten  diram
+               //  Twinty  diram
+      if($request->summaTangaTwinty>0)
+      {
+        echo  "<br>".$this->blogRepository->OborotTangaInsert($request->kod_oper,$request->summaTangaTwinty,$request->bik,
+      $request->n_doc,$request->priznak,$request->date,$request->account_id_in,  $request->comment, $request->nominalTwentyD,$request->ip(),Auth::id());
+        }
+        //    end  Twinty  diram
+                       //  TwintyFive  diram
+      if($request->summaTangaTwintyFive>0)
+      {
+        echo  "<br>".$this->blogRepository->OborotTangaInsert($request->kod_oper,$request->summaTangaTwintyFive,$request->bik,
+      $request->n_doc,$request->priznak,$request->date,$request->account_id_in,  $request->comment, $request->nominalTwintyFive,$request->ip(),Auth::id());
+        }
+        //    end    TwintyFive diram
+                               //  Fifty  diram
+      if($request->summaTangaFifty>0)
+      {
+        echo  "<br>".$this->blogRepository->OborotTangaInsert($request->kod_oper,$request->summaTangaFifty,$request->bik,
+      $request->n_doc,$request->priznak,$request->date,$request->account_id_in,  $request->comment, $request->nominalFifty,$request->ip(),Auth::id());
+        }
+        //    end  Fifty  diram
+
+                                     //  One somoni  diram
+        if($request->summaTangaOneS>0)
+          {
+            echo  "<br>".$this->blogRepository->OborotTangaInsert($request->kod_oper,$request->summaTangaOneS,$request->bik,
+              $request->n_doc,$request->priznak,$request->date,$request->account_id_in,  $request->comment, $request->nominalOneS,$request->ip(),Auth::id());
+            }
+        //    end  Three somoni   diram
+
+         if($request->summaTangaThrees>0)
+            {
+              echo  "<br>".$this->blogRepository->OborotTangaInsert($request->kod_oper,$request->summaTangaThrees,$request->bik,
+            $request->n_doc,$request->priznak,$request->date,$request->account_id_in,  $request->comment, $request->nominalThrees,$request->ip(),Auth::id());
+            }
+     //    end  Three somoni   diram          
+     if($request->summaTangaFiveS>0)
+     {
+   
+      echo  "<br>".$this->blogRepository->OborotTangaInsert($request->kod_oper,$request->summaTangaFiveS,$request->bik,
+     $request->n_doc,$request->priznak,$request->date,$request->account_id_in,  $request->comment, $request->nominalFiveS,$request->ip(),Auth::id());
+     }
+//    end  Three somoni   diram                              
+      }
     
 }

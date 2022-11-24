@@ -1,5 +1,8 @@
 
-
+function adds()
+{
+    alert('f');
+}
 
 function disabledFalse(status=true)
 {
@@ -42,15 +45,20 @@ function  sumcounts()
         $('#countsum').html("<b> Общие сумма:"+ total+" сомони</b>");
     }
 }
-function add()
+
+function add(id)
 {
     var  new_btn=parseInt($('#total_chq').val())+1;
-
+    
     if(new_btn<=13){
-
-
         var new_input='<div class="row offset-1 mt-2" id="new_'+new_btn+'">  <div class="col-md-4  ">     <div class="input-group"> <span class="input-group-text">Номинал '+new_btn+'</span><input  id="summa'+new_btn+'h"  required   type="text"  class="form-control nomcou" name="nominal[]"  > </div></div> <div class="col-md-4 "> <div class="input-group"> <span class="input-group-text">Сумма</span><input   required   type="text"  class="form-control count" name="summa[]"      id="summa'+new_btn+'" > </div></div> </div>';
-        $('#new_chq').append(new_input);
+ 
+         if(id==9898)
+         {
+            new_input='<div class="row offset-1 mt-2" id="new_'+new_btn+'">     <div class="col-md-4 "> <div class="input-group"> <span class="input-group-text">Сумма</span><input   required   type="text"  class="form-control count" name="summa[]"      id="summa'+new_btn+'" > </div></div> </div>';
+  
+         }
+              $('#new_chq').append(new_input);
         $('#total_chq').val(new_btn);
         //(false);
 
@@ -61,6 +69,7 @@ function add()
     }
 
 }
+ 
 var total=0;
 ///onkey up input summa nominal
 var summincrement=0;
@@ -100,14 +109,19 @@ $(document).on('keyup','.count,.nomcou',function (){
 
   var  classes = $('form-control').find('is_invalid').val();
    
-    console.log($('input[id^="summacounts"').val());
+    
     var  id = $(this).attr('id');
     $("#"+id.slice(0,-1)).val("");
     var valueField=$(this).attr('id');
     //id nominal
     var nominal=parseFloat($('#'+valueField+'h').val());
-
-
+ 
+    let NomOfAll=nominal;
+    if(nominal<1)
+    {
+        NomOfAll=nominal*10;
+    }
+    console.log(NomOfAll);
     if($(this).val()>0 && nomininc()==countinc()){
         var summ=parseFloat($(this).val());
 
@@ -124,10 +138,14 @@ $(document).on('keyup','.count,.nomcou',function (){
             var sum_id='#'+$(this).attr('id');
             var nom_id='#'+$(this).attr('id')+'h';
             var class_id=$(this).attr('class');
-      
-
-
-            if(summ%nominal===0 && summ>0)
+        
+           
+            if(nominal<1)
+            {
+                NomOfAll= nominal*10;
+            }
+            console.log(NomOfAll);
+            if(summ%NomOfAll===0 && summ>0)
             {
 
 

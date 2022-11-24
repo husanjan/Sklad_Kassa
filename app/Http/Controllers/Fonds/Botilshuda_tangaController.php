@@ -17,6 +17,7 @@ use App\Models\oborots_coin;
 use App\Repositories\InterfacesSomoni;
 use App\Repositories\AddRequest;
 use Illuminate\Support\Facades\DB;
+
 class Botilshuda_tangaController extends Controller
 {
     /**
@@ -24,6 +25,11 @@ class Botilshuda_tangaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $addRepository;
+    public function __construct(AddRequest $addRepository)
+    {
+        $this->addRepository = $addRepository;
+    }
     public function index()
     {
         //
@@ -73,6 +79,34 @@ class Botilshuda_tangaController extends Controller
     public function store(Request $request)
     {
         //
+        DB::beginTransaction();
+         
+        //$this->addRepository->addRequests($request);
+        //$money= $this->addRepository->addRequests($request);
+        $money= $this->addRepository->addRequestsTanga($request);
+        if(is_array($money))
+        {
+          
+           
+           try{
+              foreach ($money as $key => $value) {
+                  # code...
+               
+                  FondCoins::create($money[$key]);
+
+          }
+              DB::Commit();
+            
+            return redirect()->route('fondcanceled.index')->with('success','Ботилшуда успешно создан!');
+            } catch (\Illuminate\Database\QueryException $e) {
+              DB::rollback();
+              return response(['message'=>'FAILURE'], 500);
+          return redirect()->route('fondcanceled.index')->with('danger','Ботилшуда не успешно!');
+            }
+          
+         return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
+        
+        }
     }
 
     /**

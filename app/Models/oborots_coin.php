@@ -15,11 +15,11 @@ class oborots_coin extends Model
         'type',
         'src',
         'naminal',
-      
-        'summa',
+         'summa',
         'comment',
         'user_id',
         'n_doc',
+        'bik',
         'kod_oper',
         'host',
         

@@ -88,9 +88,9 @@ class korshoyam_tangaController extends Controller
     //    echo "</pre>";
         // use App\Models\FondCoins;
         // use App\Models\oborots_coin;
-           echo "<pre>";
-       print_r($money);
-       echo "</pre>";
+    //        echo "<pre>";
+    //    print_r($money);
+    //    echo "</pre>";
     //    //FondCoins::create($money[0]);
     //    oborots_coin::create($oborots[0]);
         if(is_array($oborots) AND is_array($money) AND $request->src==7)
