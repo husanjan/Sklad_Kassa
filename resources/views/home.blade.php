@@ -1350,27 +1350,425 @@
             <!-- /.info-box -->
         </div>
     </div>
-        {{-- end korshoyam --}}
-      
-            {{-- <div class="col-md-2  "   data-bs-toggle="dropdown" aria-expanded="false">
+    {{-- //Click Button Modalka Tanga  --}}
+    <div class="row">
+        {{-- //Tanga Oborot --}}
+        <div class="col-2  ">
+          
+                <div class="info-box">
+                
 
-                <div class="small-box " >
+                    <div class="info-box-content">
+                     <center> <h4>Танга Оборот  </h4> 
+                        <button type="button" class="btn btn-outline-primary col-6 " data-toggle="modal" data-target="#ModalkaTangaOborot" >Приход </button>
+                     </center>
+                       
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
             
-               <h4>Оборот </h3> 
-                <button type="button" class="btn btn-success offset-4" data-toggle="modal" data-target="#exampleModalCenter" >Создать </button>
-              
-            </div>
-                
-             
+            <!-- /.info-box -->
+    
+        </div>
+ {{-- // End Tanga Oborot --}}
+
+{{-- Tanga Korshoyam  --}}
+        <div class="col-2  ">
+            <div class="info-box">
                
-              
+
+                <div class="info-box-content">
+                <center>       <h4>Танга Коршоям  </h4></center>
+                    <div class="btn-group col-auto" role="group" aria-label="Basic example">
+                        <button type="button"  onclick="this.form.reset();" class="btn btn-outline-primary"  data-Context="korshoyam" data-toggle="modal" data-target="#rashodTanga"   id="priznak" value="0">Приход </button>
+                        <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam"  data-toggle="modal" data-target="#rashodTanga"  id="priznak" value="1">Расход</button>
+      
+                    </div>
+                   
                  
+                </div>
+                <!--  .info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+{{--End  Tanga Korshoyam  --}}        
+
+{{-- .. Tanga Farsuda  --}}
+
+<div class="col-2 ">
+    <div class="info-box">
+         
+
+        <div class="info-box-content">
+         
+               <center>   <h4>Танга Фарсуда</h4></center>
+
+
+      
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashodTanga" data-Context="farsuda"   id="priznak" value="0">Приход </button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashodTanga" data-Context="farsuda" id="priznak" value="1">Расход</button>
+
+                    </div>
+           
+         
+                </div>
+        <!-- /.info-box-content -->
+            </div>
+    <!-- /.info-box -->
+        </div>
+             {{-- Tanga Botilshuda  --}}
+             <div class="col-2">
+                <div class="info-box">
                
-            </div> --}}
-             
-               
-                
-        {{-- </div> --}}
+    
+                    <div class="info-box-content">
+                        <center>  <h4> Танга Ботилшуда</h4></center>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Context="botilshuda" data-target="#rashodTanga"   id="priznak" value="0">Приход </button>
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashodTanga"  data-Context="botilshuda"  id="priznak" value="1">Расход</button>
+          
+                        </div>
+                       
+                     
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+
+          {{-- End Tanga Botilshuda    --}}
+
+    </div>    
+       {{-- // End Click Button Modalka Tanga  --}}
+      
+            {{-- Modalka Tanga --}}
+            <form      action="{{ route('oborotInsertTanga.post') }}" method="post">
+                <div class="modal fade  bd-example-modal-xl " id="ModalkaTangaOborot" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">{{ __('Добавление нового оборот') }}</h5>
+            
+                            </div>
+            
+                          
+                                @csrf
+            
+                                <input type="hidden" name="kod_oper" value="{{$kodeOper}}">
+                                {{-- <input type="hidden" name="kode_oper" value="{{$kodOper}}"> --}}
+                                <div class="row mb-3 mt-3">
+                                     <div class="container">
+                                         <div class="alert alert-danger alert-dismissible fade  " id="alerts">
+                                          <center>   <strong >Введите правильную сумму   !!</strong> .</center>
+            {{--                                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>--}}
+                                         </div>
+                                     </div>
+                                    <div class="col-md-3 offset-1">
+            
+                                        <input    readonly="readonly" id="date" type="date"  value="<?php echo date('Y-m-d'); ?>" class="form-control" name="date"  >
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        <select name="bik"       class="form-control " required>
+                                <option value="">БИК выберите</option>
+                            
+                                    @foreach($bik AS $biks)
+                                <option value="{{$biks->id}}">{{$biks->BIK}} ({{$biks->full_name}})  </option>
+                                            @endforeach
+            
+                                        </select>
+                                   
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        <input type="text" placeholder="Номер документ"  name="n_doc" class="form-control" required  >
+                                    </div>
+                                </div>
+                                <input type="hidden"  value="0"  name="priznak"  >
+                                <input type="hidden"  value="7"  name="account_id_in"  >
+                              
+                                <div class="row  offset-1 mt-2">
+                                    <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#OneDiramObor" role="tab" aria-controls="home" aria-selected="true">1 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="gSomon"></i></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="FiveD-tab" data-toggle="tab" href="#FiveDiramObor" role="tab" aria-controls="FiveD" aria-selected="false">5 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="hSomon"></i></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#TenDiramObor" role="tab" aria-controls="TenD" aria-selected="false">10 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="jSomon"></i></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#TwintyDiramObor" role="tab" aria-controls="TwintyD" aria-selected="false">20 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="jSomon"></i></a>
+                                        </li>
+                                        
+                                        <li class="nav-item">
+                                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#TwintyFiveDiramObor" role="tab" aria-controls="TwintyFiveD" aria-selected="false">25 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="cSomon"></i></a>
+                                      </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#FiftyDiramObor" role="tab" aria-controls="contact" aria-selected="false">50 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="kSomon"></i></a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#OneSTang" role="tab" aria-controls="OneS" aria-selected="false">1 сомони <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="0Somon"></i></a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#ThreeSTang" role="tab" aria-controls="ThreeS" aria-selected="false">3 сомони <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="3Somon"></i></a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#FiveSTang" role="tab" aria-controls="FiveS" aria-selected="false">5 сомони <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="5Somon"></i></a>
+                                      </li>
+                                  
+                                    </ul>
+                                    <input type="hidden" value="1" id="total_chq">
+                                </div>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="OneDiramObor" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row  offset-1 mt-2">
+                                            {{-- <div class="col-md-4  mt-2"> --}}
+                                                 
+                                                    {{-- <span class="input-group-text">Номинал</span> --}}
+                     <input   value="0.1"    type="hidden"   class="form-control nomcou  summaTangaOne" aria-describedby="btnGroupAddon" name="nominaOneD"  >
+                    
+                                            
+                    
+                    
+                    
+                                                     {{-- </div> --}}
+                    
+                                            <div class="col-md-4 mt-2 ">
+                                                <div class="input-group">
+                                                    <span class="input-group-text">Сумма</span>
+                                                    <input       type="text" id="summaTangaOne" class="form-control count  " aria-describedby="btnGroupAddon" name="summaTangaOne"  >
+                    
+                                                </div>
+                    
+                                                <div class="input-group-tex t" id="btnGroupAddon" disabled ></div>
+                    
+                                            </div>
+                     
+                                       
+                                        </div>
+                                        <div id="summaTangaOneAddnew" >
+                    
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade    " id="FiveDiramObor" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row  offset-1 mt-2">
+                                        <input   value="0.5"    type="hidden"   class="form-control nomcou  summaTangaFive"   name="nominalFiveD"  >
+                    
+                                            
+                    
+                    
+                    
+                                                     {{-- </div> --}}
+                    
+                                            <div class="col-md-4 mt-2  ">
+                                                <div class="input-group">
+                                                    <span class="input-group-text">Сумма</span>
+                                                    <input       type="text" id="summaTangaFive" class="form-control"  name="summaTangaFive"  >
+                    
+                                                </div>
+                    
+                                            </div>
+                    
+                                            </div>
+                                    </div>
+                                    
+                                    <div class="tab-pane fade    " id="TenDiramObor" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row  offset-1 mt-2">
+                                            <input   value="0.10"    type="hidden"   class="form-control nomcou  summaTangaTenD"   name="nominalTenD"  >
+                        
+                                                
+                        
+                        
+                        
+                                                         {{-- </div> --}}
+                        
+                                                <div class="col-md-4 mt-2  ">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">Сумма</span>
+                                                        <input       type="text" id="summaTangaTwinty" class="form-control"  name="summaTangaTenD"  >
+                        
+                                                    </div>
+                        
+                                                </div>
+                        
+                                          </div>
+                                    </div>
+                                    
+                                    <div class="tab-pane fade    " id="TwintyDiramObor" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row  offset-1 mt-2">
+                                            <input   value="0.20"    type="hidden"   class="form-control nomcou  summaTangaTwinty"   name="nominalTwentyD"  >
+                        
+                                                
+                        
+                        
+                        
+                                                         {{-- </div> --}}
+                        
+                                                <div class="col-md-4 mt-2  ">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">Сумма</span>
+                                                        <input       type="text" id="summaTangaTwinty" class="form-control"  name="summaTangaTwinty"  >
+                        
+                                                    </div>
+                        
+                                                </div>
+                        
+                                          </div>
+                                    </div>
+                                    <div class="tab-pane fade    " id="TwintyFiveDiramObor" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row  offset-1 mt-2">
+                                            <input   value="0.25"    type="hidden"   class="form-control nomcou  summaTangaTwintyFive"   name="nominalTwintyFive"  >
+                        
+                                                
+                        
+                        
+                        
+                                                         {{-- </div> --}}
+                        
+                                                <div class="col-md-4 mt-2  ">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">Сумма</span>
+                                                        <input       type="text" id="summaTangaTwintyFive" class="form-control"  name="summaTangaTwintyFive"  >
+                        
+                                                    </div>
+                        
+                                                </div>
+                        
+                                                </div>
+                                    </div>
+                                    <div class="tab-pane fade    " id="FiftyDiramObor" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row  offset-1 mt-2">
+                                            <input   value="0.50"    type="hidden"   class="form-control nomcou  summaTangaFifty"   name="nominalFifty"  >
+                        
+                                                
+                        
+                        
+                        
+                                                         {{-- </div> --}}
+                        
+                                                <div class="col-md-4 mt-2  ">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">Сумма</span>
+                                                        <input       type="text" id="summaTangaFifty" class="form-control"  name="summaTangaFifty"  >
+                        
+                                                    </div>
+                        
+                                                </div>
+                        
+                                                </div>
+                                    </div>
+                                    <div class="tab-pane fade    " id="OneSTang" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row  offset-1 mt-2">
+                                            <input   value="1"    type="hidden"   class="form-control nomcou  summaTangaOneS"   name="nominalOneS"  >
+                        
+                                                
+                        
+                        
+                        
+                                                         {{-- </div> --}}
+                        
+                                                <div class="col-md-4 mt-2  ">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">Сумма</span>
+                                                        <input       type="text" id="summaTangaOneS" class="form-control"  name="summaTangaOneS"  >
+                        
+                                                    </div>
+                        
+                                                </div>
+                        
+                                                </div>
+                                    </div>
+                                    <div class="tab-pane fade    " id="ThreeSTang" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row  offset-1 mt-2">
+                                            <input   value="3"    type="hidden"   class="form-control nomcou  summaTangaThrees"   name="nominalThrees"  >
+                        
+                                                
+                        
+                        
+                        
+                                                         {{-- </div> --}}
+                        
+                                                <div class="col-md-4 mt-2  ">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">Сумма</span>
+                                                        <input       type="text" id="summaTangaThreeS" class="form-control"  name="summaTangaThrees"  >
+                        
+                                                    </div>
+                        
+                                                </div>
+                        
+                                                </div>
+                                    </div>
+                                    <div class="tab-pane fade    " id="FiveSTang" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row  offset-1 mt-2">
+                                            <input   value="5"    type="hidden"   class="form-control nomcou  summaTangaFiveS"   name="nominalFiveS"  >
+                        
+                                                
+                        
+                        
+                        
+                                                         {{-- </div> --}}
+                        
+                                                <div class="col-md-4 mt-2  ">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">Сумма</span>
+                                                        <input       type="text" id="summaTangaFiveS" class="form-control"  name="summaTangaFiveS"  >
+                        
+                                                    </div>
+                        
+                                                </div>
+                        
+                                                </div>
+                                    </div>
+                               
+                                
+                                </div>
+                                <div class="col-md-4 offset-6 mt-2" id="AllSummaTanga"></div>
+                                  {{-- <div class="row offset-1 mt-2" >
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="safe_check"  >
+                                        <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                      </div>
+                                  </div> --}}
+                            
+                                <div class="row col-md-8   offset-1">
+            
+                                    <div class=" ">
+                                        <span class="input-group-text col-md-4">{{ __('Комментраии') }}</span>
+                                        <div class="input-group">
+            
+                                        <textarea id="comment" type="text" class="form-control   text  " name="comment" aria-describedby="btnGroupAddon"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+            
+            
+            
+                                <div class="modal-body">
+            
+                                </div>
+                                <div class="modal-footer ">
+                                    <div class="row mb-0 ">
+                                        <div class="col-md-8 justify-content-center">
+                                            <button type="submit" class="btn btn-primary addform" disabled>
+                                                {{ __('Добавить') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-light offset-11" data-dismiss="modal">Закрыт</button>
+            
+                                </div>
+            
+            
+                           
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{-- End Modalka Tanga  --}}
 
 
  
@@ -1401,6 +1799,7 @@
                         <tbody><tr class="something">
                             <th  >#</th>
                             <th class="col-md-3">Дата</th>
+                            <th>Бик</th>
                             <th >Признак</th>
                             <th>Номер док</th>
                             <th>Номер счета 	</th>
@@ -1417,35 +1816,25 @@
                             <input type="hidden" id="pr{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}" value="{{array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]}}">
                             <td> <b>{{  $count }}</b>  </td>
                  <td id="da{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}"> {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]))}} </td>
-                         
+                 @foreach($bik AS $biks)
+
+    
+         @if($biks->id===array_map(function($value){return   $value['bik'];},$oborots)[0])
+             <td class="col-md-2" id="bik{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}">
+                 {{ $biks->full_name }} 
+                </td>
+          @else
+          <td></td>
+          @endif
+
+     @endforeach
                  @if(array_keys(array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]==0)
-                 <td class="col-md-2 " id="bik{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}"> Приход </td>
+                 <td class="col-md-2 " id="priznak{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}"> Приход </td>
                  @else
-                     <td> Расход</td>
+                     <td id="priznak{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}"> Расход</td>
                    
                  @endif
-                 {{-- @foreach($bik AS $biks)
-                               
-                                @if($biks->id===array_keys(array_count_values(array_map(function($value){return  ( $value['bik']>0) ? ( $value['bik']) : ('');},$oborots)))[0])
-                                <td class="col-md-2 " id="bik{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}"> {{ $biks->full_name }} </td>
-                                @else
-                                    <td> </td>
-                                  
-                                @endif
-                                
-                            @endforeach --}}
-
-                            {{-- @foreach($sprAccounts AS $sprAccount)
-
-                                @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   $value['account_id_out'];},$oborots)))[0])
-                                    <td class="col-md-2" id="ac{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}">
-                                        {{ $sprAccount->account }} </td>
-                                        @else
-
-                                        <td></td>
-                                @endif
-
-                            @endforeach --}}
+               
                             <td>{{array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$oborots)))[0]}} </td>
                             @foreach($sprAccounts AS $sprAccount)
 
@@ -1500,11 +1889,7 @@
                         </tr>
                         @php($krcount=1)
                         <?php
-                        //         echo "<pre>";
-                        //         print_r(json_decode($FondMoney,true));
-                        //         echo "</pre>";
-                        //  // echo   array_sum(array_map(function($value){return   $value['summa'];}, json_decode($FondMoney,true)[0][0]));
-                        //         exit;
+                  
                                 ?>
                         @foreach(json_decode($FondMoney->take(20),true) as $korshoyam)
                       
@@ -1779,6 +2164,7 @@
                 <tbody><tr>
                     <th>#</th>
                     <th>Дата</th>
+                 
                     <th>Номер док</th>
                     <th>Номер счет</th>
                     <th>Признак</th>
@@ -1929,7 +2315,7 @@
                     <label for="biks">БИК	</label>
                     <select   id="biks" aria-describedby="bik"class="form-control was-validated"disabled >
 
-                        <option id="bik"  selected value=""> Выберите</option>
+                        <option id="bik"  selected value="">  </option>
 
 
 
@@ -2009,10 +2395,1322 @@
     </div>
 </div>
 {{-- modal Ajax Table Oborot   end --}}
-@endsection
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
 
+
+
+
+
+{{-- //Tanga  --}}
+
+{{-- //Oborots Tanga  --}}
+
+
+
+
+{{-- modal Ajax Table OborotTanga   --}}
+<div class="modal fade" id="AjaxTableOborotTanga" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Детализация</h5>
+
+            </div>
+
+
+
+
+
+            <div class="row mb-3 mt-2">
+
+                <div class="col-md-3 offset-1  ">
+                    <label for="dates">Дата	</label>
+                    <input     id="Tangadates" disabled type="text" aria-describedby="Data" class="form-control"   >
+                </div>
+                <div class="col-md-2 ">
+                    <label for="Tangabiks">Номер док		</label>
+                    <select   id="Tangadocs" aria-describedby="bik"class="form-control was-validated"disabled >
+
+                        <option id="Tangadoc"  selected value=""> Выберите</option>
+
+
+
+                    </select>
+                </div>
+                
+                <div class="col-md-4  ">
+                    <label for="Tangabiks">БИК	</label>
+                    <select   id="Tangabiks" aria-describedby="bik"class="form-control was-validated"disabled >
+
+                        <option id="Tangabik"  selected value=""> Выберите</option>
+
+
+
+                    </select>
+                </div>
+            </div>
+            <div class="row  offset-1">
+
+                <div class="col-md-3  ">
+                    <label for="Tangapriznak">Признак	</label>
+                    <select id="Tangapriznak" required   class="form-control" disabled >
+
+                        <option  id="Tangapriznaks"> </option>
+
+                    </select>
+                </div>
+                <div class="col-md-4  ">
+                    <label for="schet11">Номер счета 1	</label>
+                    <select name="account_id_out" id="Tangaschet11"  required  class="form-control schet1"  >
+                        <option disabled selected  id="Tangaschets" >Выберите счетов</option>
+
+                    </select>
+                </div>
+                <div class="col-md-4  ">
+                    <div >
+                        <label for="Tangaschet21">Номер счета 2	</label>
+
+                        <select name="" id="Tangaschet21" class="form-control"  disabled  >
+                            <option disabled selected id="Tangaschet2">Выберите счетов</option>
+
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+                <div id="Tangaajaxoborot">
+
+                </div>
+
+
+
+                <input type="hidden" value="1" id="Tangatotal_chq">
+
+            <div id="Tanganew_chq" >
+
+            </div>
+            <div class="row  offset-lg-10 mt-2 ">
+
+
+                <div class="col-md-5 mt-3">
+                    <button type="button"   class="btn btn-light active" id="adds" disabled><div id="Tangacountsum"></div> </button>
+
+                </div>
+            </div>
+
+            <br>
+
+
+
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer ">
+                <div class="row mb-0 ">
+                    <div class="col-md-8 justify-content-center">
+
+                    </div>
+                </div>
+                <button type="button" class="btn btn-light offset-11" data-dismiss="modal">Закрыт</button>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+{{-- end modal Ajax Table Oborot   end --}}
+{{-- Modalka Table OborotTanga  --}}
+{{--        Oborot table --}}
+<div class="row">
+<div class="col-12 col-lg-6 ">
+
+    <div class="card ">
+        <div class="card-body">
+            <h4>Оборот Танга </h4>
+
+            <br>
+{{--                    Oborot table limit 20 //--}}
+            <table class="table col-md-auto">
+                <tbody><tr class="something">
+                    <th  >#</th>
+                    <th class="col-md-3">Дата</th>
+                    <th >БИК</th>
+                    <th >Признак</th>
+                    <th>Номер док</th>
+                    <th>Номер счета 	</th>
+                     <th>Сумма</th>
+                </tr>
+                @php($count=0)
+
+    
+                @foreach(json_decode($OborTanga->take(20),true) AS  $oborotsTanga   )
+
+                    @php($count++)
+
+
+
+                <tr>
+                    <input type="hidden" id="Tangapr{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}" value="{{array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$oborotsTanga)))[0]}}">
+                    <td> <b>{{  $count }}</b>  </td>
+         <td id="Tangada{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}"> {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborotsTanga)))[0]))}} </td>
+         @foreach($bik AS $biks)
+
+    
+         @if($biks->id===array_map(function($value){return   $value['bik'];},$oborotsTanga)[0])
+             <td class="col-md-2" id="Tangabik{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}">
+                 {{ $biks->full_name }} 
+                </td>
+          @else
+          <td></td>
+          @endif
+
+     @endforeach
+     
+         @if(array_keys(array_count_values(array_map(function($value){return   $value['priznak'];},$oborotsTanga)))[0]==0)
+         <td class="col-md-2 " id="TangaPriznak{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}"> Приход </td>
+         @else
+             <td id="TangaPriznak{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}"> Расход</td>
+           
+         @endif
+     
+                    <td id="Tangan_doc{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}">{{array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$oborotsTanga)))[0]}} </td>
+                    @foreach($sprAccounts AS $sprAccount)
+
+
+                        @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   $value['src'];},$oborotsTanga)))[0])
+                            <td class="col-md-2" id="Tangaacn{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}">
+                                {{ $sprAccount->account }} </td>
+                        @endif
+                    @endforeach
+                    <td class="col-md-4 ">
+
+                        <a class=" link-primary   Oborot_idTanga"  href="#" data-toggle="modal" data-target="#AjaxTableOborotTanga"   id="{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}">
+                <i class="text-dark fa fa-eye"></i>     {{   array_sum(array_map(function($value){return   $value['summa'];}, $oborotsTanga)) }}  </a></td>
+
+
+                </tr>
+
+                @endforeach
+
+                </tbody>
+            </table>
+            <div  >
+                <table class="mt-4 offset-lg-10"><tbody><tr>
+                        <td  > <button class="btn btn-secondary "data-toggle="modal" data-target="#exampleModalLong">Подробонее</button></td>
+
+                    </tr></tbody></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{{--        Oborot table end --}}
+
+{{-- //Oborots Tanga End --}}
+
+{{-- //Korshoyam tanga  --}}
+  {{--        Fond table Коршоям --}}
+  <div class="col-12 col-lg-6 ">
+
+    <div class="card  ">
+        <div class="card-body">
+            <h4>Танга Коршоям</h4>
+
+            <br>
+            <table class="table col-md-auto">
+                <tbody><tr>
+                    <th>#</th>
+                    <th>Дата</th>
+                    <th>Номер док</th>
+                    <th>Номер счет</th>
+                    <th>Признак</th>
+                    <th>Сумма</th>
+                     
+
+
+                </tr>
+                @php($krcount=1)
+                <?php
+                //         echo "<pre>";
+                //         print_r(json_decode($FondMoney,true));
+                //         echo "</pre>";
+                //  // echo   array_sum(array_map(function($value){return   $value['summa'];}, json_decode($FondMoney,true)[0][0]));
+                //         exit;
+                        ?>
+                @foreach(json_decode($FondMoneyTang->take(20),true) as $korshoyamTanga)
+              
+                <?php 
+
+//print_r(array_map(function($value){return   $value['summa'];}, $korshoyam));
+?>
+                   @if(array_keys( array_count_values(array_map(function($value){return   $value['type'];},$korshoyamTanga)))[0]==1 || array_keys( array_count_values(array_map(function($value){return   $value['src'];},$korshoyamTanga)))[0]==1)
+                <tr  >
+                   
+                          <td> <b>{{  $krcount++ }}</b>  </td>
+                  
+                    <td  id="Tangakord{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyamTanga)))[0]}}">{{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$korshoyamTanga)))[0]))}}</td>
+                    <td  id="Tangakorfdoc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyamTanga)))[0]}}"> {{   array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$korshoyamTanga)))[0]}} </td>
+                                        @foreach($sprAccounts AS $sprAccounti)
+
+
+                         @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$korshoyamTanga)))[0])
+                            <td class="col-md-2" id="Tangakornfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyamTanga)))[0]}}">
+                                {{$sprAccounti->name  }} </td>
+                        @endif
+                    @endforeach
+                    @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyamTanga)))[0]==0)
+                    <td  id="Tangakor{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyamTanga)))[0]}}">Приход</td>
+                    @endif
+                    @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyamTanga)))[0]==1)
+                    <td  id="Tangakor{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyamTanga)))[0]}}">Расход</td>
+                    @endif
+                   
+               
+                          <td class="col-md-4 ">
+
+                        <a class=" link-primary       Fond_idTanga "  href="#" data-toggle="modal" data-target="#FondsTanga"   data-id="Tangakor"  id="{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyamTanga)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['type'];},$korshoyamTanga)))[0]}}">
+                        <i class="text-dark fa fa-eye"></i>   {{   array_sum(array_map(function($value){return   $value['summa'];}, $korshoyamTanga)) }}  </a></td>
+                       
+                        
+                         </tr>
+                         @endif
+                 @endforeach
+
+                </tbody>
+            </table>
+            <div class="mt-4 offset-lg-10"><table><tbody><tr>
+                        <td valign="middle"><button class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg " data-target="#exampleModalLong">Подробонее</button></td>
+
+                    </tr></tbody></table>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+</div>
+{{--         Fond Коршоям table end --}}
+
+ {{--        Fond table Farsuda --}}
+ <div class="col-12 col-lg-6 ">
+
+    <div class="card  ">
+        <div class="card-body">
+            <h4>Танга Фарсуда</h4>
+
+            <br>
+            <table class="table col-md-auto">
+                <tbody><tr>
+                    <th>#</th>
+                    <th>Дата</th>
+                    <th>Номер док</th>
+                    <th>Номер счет</th>
+                    <th>Признак</th>
+                    <th>Сумма</th>
+                     
+
+
+                </tr>
+                @php($frcount=1)
+                <?php
+                //         echo "<pre>";
+                //         print_r(json_decode($FondMoney,true));
+                //         echo "</pre>";
+                //  // echo   array_sum(array_map(function($value){return   $value['summa'];}, json_decode($FondMoney,true)[0][0]));
+                //         exit;
+                        ?>
+                @foreach(json_decode($FondMoneyTang->take(20),true) as $farsudTanga)
+              
+                <?php 
+
+//print_r(array_map(function($value){return   $value['summa'];}, $korshoyam));
+?>
+                   @if(array_keys( array_count_values(array_map(function($value){return   $value['type'];},$farsudTanga)))[0]==2 || array_keys( array_count_values(array_map(function($value){return   $value['src'];},$farsudTanga)))[0]==2)
+                <tr zippy="mdoclist_1" id="mdoclist_1">
+                   
+                          <td> <b>{{  $frcount++ }}</b>  </td>
+                  
+                    <td  id="Tangafard{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}">{{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$farsudTanga)))[0]))}}</td>
+                    <td  id="Tangafarfdoc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}"> {{   array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$farsudTanga)))[0]}} </td>
+                                        @foreach($sprAccounts AS $sprAccounti)
+
+
+                         @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$farsudTanga)))[0])
+                            <td class="col-md-2" id="Tangafarnfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}">
+                                {{$sprAccounti->name  }} </td>
+                        @endif
+                    @endforeach
+                    @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$farsudTanga)))[0]==0)
+                    <td  id="Tangafar{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}">Приход</td>
+                    @endif
+                    @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$farsudTanga)))[0]==1)
+                    <td  id="Tangafar{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}">Расход</td>
+                    @endif
+                   
+               
+                          <td class="col-md-4 ">
+
+                        <a class=" link-primary       Fond_idTanga "  href="#" data-toggle="modal" data-target="#FondsTanga" data-id="Tangafar"   id="{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['type'];},$farsudTanga)))[0]}}">
+                        <i class="text-dark fa fa-eye"></i>   {{   array_sum(array_map(function($value){return   $value['summa'];}, $farsudTanga)) }} </a></td>
+                   
+                         </tr>
+                         @endif
+                 @endforeach
+
+                </tbody>
+            </table>
+            <div class="mt-4 offset-lg-10"><table><tbody><tr>
+                        <td valign="middle"><button class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg " data-target="#exampleModalLong">Подробонее</button></td>
+
+                    </tr></tbody></table>
+            </div>
+        </div>
+    </div>
+</div>
+{{--         Fond Farsuda table end --}}
+{{--        Fond table Ботилшуда --}}
+<div class="col-12 col-lg-6 ">
+
+<div class="card  ">
+    <div class="card-body">
+        <h4>Танга Ботилшуда</h4>
+
+        <br>
+        <table class="table col-md-auto">
+            <tbody><tr>
+                <th>#</th>
+                <th>Дата</th>
+                <th>Номер док</th>
+                <th>Номер счет</th>
+                <th>Признак</th>
+                <th>Сумма</th>
+                 
+
+
+            </tr>
+            @php($btcount=1)
+            <?php
+            //         echo "<pre>";
+            //         print_r(json_decode($FondMoney,true));
+            //         echo "</pre>";
+            //  // echo   array_sum(array_map(function($value){return   $value['summa'];}, json_decode($FondMoney,true)[0][0]));
+            //         exit;
+                    ?>
+            @foreach(json_decode($FondMoneyTang->take(20),true) as $BotilshudaTanga)
+           
+            <?php 
+
+//print_r(array_map(function($value){return   $value['summa'];}, $korshoyam));
+?>
+               @if(array_keys( array_count_values(array_map(function($value){return   $value['type'];},$BotilshudaTanga)))[0]==3 || array_keys( array_count_values(array_map(function($value){return   $value['src'];},$BotilshudaTanga)))[0]==3)
+            <tr zippy="mdoclist_1" id="mdoclist_1">
+               
+                      <td> <b>{{  $btcount++ }}</b>  </td>
+              
+                <td  id="Tangabotld{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">{{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$BotilshudaTanga)))[0]))}}</td>
+                <td  id="Tangabotlfdoc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}"> {{   array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$BotilshudaTanga)))[0]}} </td>
+                                    @foreach($sprAccounts AS $sprAccounti)
+
+
+                     @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$BotilshudaTanga)))[0])
+                        <td class="col-md-2" id="Tangabotlnfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">
+                    {{$sprAccounti->name  }} </td>
+                    @endif
+                @endforeach
+                @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$BotilshudaTanga)))[0]==0)
+                <td  id="botl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">Приход</td>
+                @endif
+                @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$BotilshudaTanga)))[0]==1)
+                <td  id="Tangabotl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">Расход</td>
+                @endif
+               
+           
+                      <td class="col-md-4 ">
+
+                    <a class=" link-primary       Fond_idTanga"  href="#" data-toggle="modal" data-target="#FondsTanga"  data-id="Tangabotl"  id="{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['type'];},$BotilshudaTanga)))[0]}}">
+                    <i class="text-dark fa fa-eye"></i>  {{   array_sum(array_map(function($value){return   $value['summa'];}, $BotilshudaTanga)) }} </a></td>
+               
+                     </tr>
+                     @endif
+             @endforeach
+
+            </tbody>
+        </table>
+        <div class="mt-4 offset-lg-10"><table><tbody><tr>
+                    <td valign="middle"><button class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg " data-target="#exampleModalLong">Подробонее</button></td>
+
+                </tr></tbody></table>
+        </div>
+    </div>
+</div>
+</div>
+{{--         Fond Ботилшуда table end --}}
+
+
+</div>
+
+{{-- //Fond end  Tanga    --}}
+
+{{--modal 1 Коршоям Детализация--}}
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="FondsTanga" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Детализация
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3 mt-2">
+
+                    <div class="col-md-3     offset-1 ">
+                        <label for="dates">Дата	</label>
+                        <input     id="Tangafdate" disabled type="text" aria-describedby="Data" class="form-control"   >
+                    </div>
+                   
+                    <div class="col-md-3">
+                        <label for="Tangafn_doc">Номер документ	</label>
+                        <input     id="Tangafn_doc" disabled type="text" aria-describedby="Data" class="form-control"   >
+                    </div>
+                    <div class="col-md-2 ">
+                  
+                        <label for="Tangafschyot1">Счет 	</label>
+                        <select name="account_id_out" id="Tangafschyot1"  required  class="form-control schet1" disabled="">
+                            <option   selected  id="Tangafschyot" >Выберите счетов</option>
+    
+                        </select>
+                    </div>
+                    <div class="col-md-2 ">
+                        <label for="Tangafpriznak">Признак	</label>
+                        <input     id="Tangafpriznak" disabled type="text" aria-describedby="Data" class="form-control"   >
+                    </div>
+                </div>
+                
+                <div id="TangafondAjax">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыт</button>
+                {{-- <button type="button" class="btn btn-secondary" >Печать</button> --}}
+            </div>
+        </div>
+    </div>
+</div>
+{{--modal1 end Коршоям  Tanga Детализация--}}
+
+<form method="POST" action="{{ route('korshoyam_tanga.store') }}" id="submit" >
+    @csrf
+  <div class="modal fade " id="rashodTanga" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div  style="height: 70px">
+                <div class="toast offset-md-10">
+                    <div class="toast fade mx-auto toast-danger toast-fixed show showing" id="basic-danger-example" role="alert" aria-live="assertive" aria-atomic="true" data-mdb-autohide="true" data-mdb-delay="2000" data-mdb-position="top-right" data-mdb-append-to-body="true" data-mdb-stacking="true" data-mdb-width="350px" data-mdb-color="danger" style="width: 350px; display: block; top: 10px; right: 10px; bottom: unset; left: unset; transform: unset;">
+                        <div class="toast-header toast-danger bg-danger">
+                            <strong class="me-auto ">ХАТО</strong>
+
+
+                        </div>
+                        <div class="toast-body ">Турги дароред!!</div>
+                    </div>
+                </div>
+            </div>
+      <div class="modal-dialog modal-dialog-top  modal-xl" role="document">
+
+          <div class="modal-content  ">
+
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle"> <div id="textpriznak"></div></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+
+                  <div class="row  offset-1">
+
+                      <div class="col-md-3  ">
+                          <label for="date">Дата	</label>
+                          <input  type="datetime-local"readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"     name="date" class="form-control"    >
+
+                          <input       id="valuepriznak"     name="priznak" type="hidden"    >
+                          <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}">
+                          <input            name="farsuda" type="hidden"   value="1" >
+
+                      </div>
+                      <div class="col-md-2  ">
+
+                          
+                      
+                          <input type="hidden" name="kode_oper_obor" value="{{$kodeOperObort }}">
+                            
+                              <div id="src">
+                              
+                                  
+                                  
+                                 
+                              </div>
+                          {{-- <select name="src"   id="accounted" class="form-control" required>
+                              <option disabled selected value="">Выберите </option>
+                              @foreach($sprAccounts AS $accounts)
+                                  <option value="{{$accounts->id}}">{{$accounts->account}}</option>
+                              @endforeach
+                          </select> --}}
+                          <div id="accounts"></div>
+
+                      </div>
+                    
+                      <div class="col-md-2  ">
+                          <label for="count01">Номер Документ	</label>
+                          <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
+                      </div>
+                      <div class="col-md-4" id="AllSumma"></div>
+                      
+                  </div>
+                  
+                  
+                             
+                  <div>
+                      <div>
+                        
+                          <div>
+                              <div>
+                                  <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                                      <li class="nav-item">
+                                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#OneDTanga" role="tab" aria-controls="home" aria-selected="true">1 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="gSomon"></i></a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link" id="FiveD-tab" data-toggle="tab" href="#FiveDTanga" role="tab" aria-controls="FiveD" aria-selected="false">5 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="hSomon"></i></a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#TwintyDTanga" role="tab" aria-controls="TwintyD" aria-selected="false">20 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="jSomon"></i></a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#TwintyFiveDTanga" role="tab" aria-controls="TwintyFiveD" aria-selected="false">25 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="cSomon"></i></a>
+                                    </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#FiftyDTanga" role="tab" aria-controls="contact" aria-selected="false">50 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="kSomon"></i></a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#OneSTanga" role="tab" aria-controls="OneS" aria-selected="false">1 сомони <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="0Somon"></i></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#ThreeSTanga" role="tab" aria-controls="ThreeS" aria-selected="false">3 сомони <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="3Somon"></i></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#FiveSTanga" role="tab" aria-controls="FiveS" aria-selected="false">5 сомони <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="5Somon"></i></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="razne-tab" data-toggle="tab" href="#razneTanga" role="tab" aria-controls="razne" aria-selected="false">Разные <i class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="rrazne"></i></a>
+                                    </li>
+                                  </ul>
+                                  <div class="tab-content" id="myTabContent">
+                                      <div class="tab-pane fade show active" id="OneDTanga" role="tabpanel" aria-labelledby="home-tab">
+{{--                                              1 dirami --}}
+                                                
+<div class="row  mt-2" id="newg">
+    <input     id="nominalg1"  value="0.01"    type="hidden"  name="nominalg[]"     >
+    <div class="col-md-2   ">
+        <label for="edin_id">Единиц	</label>
+        <select id="edin_idg1" class="form-select selectsd1 Somon edin_id" name="ed_idg[]"  >
+            <option value="">Интихоб</option>
+            @foreach($sprEds as $sprEd)
+                <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
+            @endforeach
+        </select>
+
+    </div>
+    <div class="col-md-1  ">
+        <label for="countcg1">Кол-во	</label>
+        <input      style="width: 05rem;" id="countg1"   type="text"  name="countg[] " class="form-control Somon count">
+
+    </div>
+    <div class="col-md-1 ">
+        <label for="safe_ide1">Хранилище</label>
+        <select name="safe_idg[]"   id="safe_idg1" class="form-control selectsg1 Somon">
+            <option   selected value="">Выберите</option>
+            @foreach($safes as $safe)
+                <option value="{{$safe->id}}">{{$safe->safe}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="col-md-1">  <label for="shavinge1">Шкаф	</label>
+        <select name="shavingg[]"   id="shavingg1" class="form-control selectsg1 Somon">
+
+
+        </select>
+    </div>
+    <div class="col-md-1   ">
+        <label for="qator_idg1">Ряд	</label>
+        <select name="qator_idg[]"   id="qator_idg1" class="form-control selectsg1 Somon">
+            <option   selected value="">Выберите </option>
+
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label for="cellsg1">Ячейка</label>
+        <select name="cellsg[]"   id="cellsg1" class="form-control selectsg1 Somon">
+
+
+        </select>
+    </div>
+    <div class="col-md-3 mt-4">
+        <button type="button"   class="btn btn-primary active" id="addg"    value="g1" > <i class="align-middle" data-feather="plus"></i></button>
+        <button   id="removeg" value="g1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
+        <input type="hidden" value="1" id="total_chqg1">
+    </div>
+</div>
+
+
+<div id="new_chqg1"></div>
+
+<div class="form-check form-switch  col-md-4 mt-4">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomong" >
+    <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
+
+</div>
+<div id="sumg1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
+<div  id="nepolniySomong">   </div> 
+{{-- End One diram --}}
+</div>
+
+
+{{-- //25 diram --}}
+<div class="tab-pane fade " id="TwintyFiveDTanga" role="tabpanel" aria-labelledby="TwintyFiveD-tab"> 
+
+ 
+
+
+
+
+
+    
+
+        <div class="row  mt-2" id="newc">
+            <input id="nominalc1" value="0.25" type="hidden" name="nominalc[]">
+            <div class="col-md-2   ">
+                <label for="edin_id">Единиц	</label>
+                <select id="edin_idc1" class="form-select selectsc1 Somon edin_id" name="ed_idc[]">
+                    <option value="">Интихоб</option>
+                    @foreach($sprEds as $sprEd)
+                    <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
+                @endforeach
+                                                    
+                </select>
+
+            </div>
+            <div class="col-md-1  ">
+                <label for="countc1">Кол-во	</label>
+                <input style="width: 05rem;" id="countc1" type="text" name="countc[]" class="form-control Somon count">
+
+            </div>
+            <div class="col-md-1 ">
+                <label for="safe_idc1">Хранилище</label>
+                <select name="safe_idc[]" id="safe_idc1" class="form-control selectsc1 Somon">
+                    <option selected="" value="">Выберите</option>
+                    @foreach($safes as $safe)
+                    <option value="{{$safe->id}}">{{$safe->safe}}</option>
+                @endforeach                                      
+                </select>
+            </div>
+            <div class="col-md-1">  <label for="shavingc1">Шкаф	</label>
+                <select name="shavingc[]" id="shavingc1" class="form-control selectsc1 Somon">
+
+
+                </select>
+            </div>
+            <div class="col-md-1   ">
+                <label for="qator_idc1">Ряд	</label>
+                <select name="qator_idc[]" id="qator_idc1" class="form-control selectsc1 Somon">
+                    <option selected="" value="">Выберите </option>
+
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="cellsc1">Ячейка</label>
+                <select name="cellsc[]" id="cellsc1" class="form-control selectsc1 Somon">
+
+
+                </select>
+            </div>
+            <div class="col-md-3 mt-4">
+                <button type="button" class="btn btn-primary active" id="addc" value="c1"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                <button id="removec" value="c1" type="button" class="btn btn-bitbucket active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                <input type="hidden" value="1" id="total_chqc1">
+            </div>
+        </div>
+
+
+        <div id="new_chqc1"></div>
+      
+        <div class="form-check form-switch  col-md-4 mt-4">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomonc">
+            <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
+
+        </div>
+        <div id="sumc1" class="col-md-3 offset-8 " style="margin-top:-10px;"></div>
+        <div id="nepolniySomonc">   </div>
+
+   
+
+
+    
+
+</div>
+
+
+{{-- End 25diram --}}
+
+
+
+{{-- //1 Somoni --}}
+<div class="tab-pane fade " id="OneSTanga" role="tabpanel" aria-labelledby="OneS-tab"> 
+
+    
+    
+
+        <div class="row  mt-2     " id="new00">
+
+
+
+
+
+            <input id="nominal01" value="1" class="nominal" type="hidden" name="nominal0[]">
+
+
+             <div class="col-md-2   ">
+                 <label for="edin_id">Единиц	</label>
+                 <select id="edin_id01" class="form-select selects01 Somon edin_id" name="ed_id0[]">
+                     <option value="">Интихоб</option>
+                     @foreach($sprEds as $sprEd)
+                     <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
+                 @endforeach
+               </select>
+
+             </div>
+             <div class="col-md-1  ">
+                 <label for="count01">Кол-во	</label>
+                 <input style="width: 05rem;" id="count01" type="text" name="count0[]" class="form-control  Somon  count">
+
+             </div>
+             <div class="col-md-2 ">
+                 <label for="safe_id01">Хранилище</label>
+                 <select name="safe_id0[]" style="width: 08rem;" id="safe_id01" class="form-control selects01  Somon">
+                     <option selected="" value="">Выберите</option>
+                     
+                     @foreach($safes as $safe)
+                     <option value="{{$safe->id}}">{{$safe->safe}}</option>
+                 @endforeach  
+            </select>
+             </div>
+             <div class="col-md-2" style="width: 08rem;">  <label for="shaving01">Шкаф	</label>
+                 <select name="shaving0[]" id="shaving01" class="form-control selects01  Somon">
+                     <option selected="" value="">Выберите </option>
+
+                 </select>
+             </div>
+             <div class="col-md-2   ">
+                 <label for="qator_id01">Ряд	</label>
+                 <select name="qator_id0[]" style="width: 08rem;" id="qator_id01" class="form-control selects01  Somon">
+                     <option selected="" value="">Выберите </option>
+
+                 </select>
+             </div>
+             <div class="col-md-1">
+                 <label for="cells01">Ячейка</label>
+                 <select name="cells0[]" id="cells01" class="form-control selects01  Somon">
+                     <option selected="" value="">Выберите </option>
+
+                 </select>
+             </div>
+
+
+            <div class="col-md-2 mt-4">
+                <button type="button" class="btn btn-primary active" id="add" value="01"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                <button id="remove" value="01" type="button" class="btn btn-bitbucket active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                <input type="hidden" value="1" id="total_chq01">
+            </div>
+        </div>
+
+
+
+        <div id="new_chq01"></div>
+<div class="form-check form-switch  col-md-4 mt-4">
+   <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon0">
+   <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
+
+</div>
+<div id="sum01" class="col-md-3 offset-8   " style="margin-top:-10px;"></div>
+    <div id="nepolniySomon0">
+
+
+
+    </div>
+
+
+     
+    
+    </div>
+    
+    
+    {{-- End 1 Somoni --}}
+
+    {{-- //3 Somoni --}}
+<div class="tab-pane fade " id="ThreeSTanga" role="tabpanel" aria-labelledby="ThreeS-tab"> 
+
+   <div class="row  mt-2" id="new31">
+            <input id="nominal31" value="3" type="hidden" name="nominal3[]">
+            <div class="col-md-2   ">
+                <label for="edin_id">Единиц	</label>
+                <select id="edin_id31" class="form-select selects31 Somon edin_id" name="ed_id3[]">
+                    <option value="">Интихоб</option>
+                    @foreach($sprEds as $sprEd)
+                    <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
+                @endforeach
+                 
+                @foreach($sprEds as $sprEd)
+                <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
+            @endforeach
+                                                      </select>
+
+            </div>
+            <div class="col-md-1  ">
+                <label for="count31">Кол-во	</label>
+                <input style="width: 05rem;" id="count31" type="text" name="count3[]" class="form-control Somon count">
+
+            </div>
+            <div class="col-md-1 ">
+                <label for="safe_id31">Хранилище</label>
+                <select name="safe_id3[]" id="safe_id31" class="form-control selects31 Somon">
+                    <option selected="" value="">Выберите</option>
+                    @foreach($safes as $safe)
+                    <option value="{{$safe->id}}">{{$safe->safe}}</option>
+                      @endforeach  
+            </select>
+            </div>
+            <div class="col-md-1">  <label for="shaving31">Шкаф	</label>
+                <select name="shaving3[]" id="shaving31" class="form-control selects31 Somon">
+
+                    <option selected="" value="">Выберите </option>
+                </select>
+            </div>
+            <div class="col-md-1   ">
+                <label for="qator_id3[]">Ряд	</label>
+                <select name="qator_id3[]" id="qator_id31" class="form-control selects31 Somon">
+                    <option selected="" value="">Выберите </option>
+
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="cells31">Ячейка</label>
+                <select name="cells3[]" id="cells31" class="form-control selects31 Somon">
+
+
+                </select>
+            </div>
+            <div class="col-md-3 mt-4">
+                <button type="button" class="btn btn-primary active" id="add3" value="31"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                <button id="remove3" value="31" type="button" class="btn btn-bitbucket active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                <input type="hidden" value="1" id="total_chq31">
+            </div>
+        </div>
+           <div id="new_chq31"></div>
+<div class="form-check form-switch  col-md-4 mt-4">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon3">
+    <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
+
+</div>
+<div id="sum31" class="col-md-3 offset-8   " style="margin-top:-10px;"></div>
+<div id="nepolniySomon3">    </div>
+
+
+   
+    
+    </div>
+    
+    
+    {{-- End 3 Somoni --}}
+        {{-- // Somoni --}}
+<div class="tab-pane fade " id="FiveSTanga" role="tabpanel" aria-labelledby="FiveS-tab"> 
+
+       <div class="row  mt-2" id="new51">
+            <input id="nominal51" value="5" type="hidden" name="nominal5[]">
+            <div class="col-md-2   ">
+                <label for="edin_id">Единиц	</label>
+                <select id="edin_id51" class="form-select selects51 Somon edin_id" name="ed_id5[]">
+                    <option value="">Интихоб</option>
+                    @foreach($sprEds as $sprEd)
+                    <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
+                @endforeach
+                
+           
+        </select>
+
+            </div>
+            <div class="col-md-1  ">
+                <label for="count51">Кол-во	</label>
+                <input style="width: 05rem;" id="count51" type="text" name="count5[]" class="form-control Somon count">
+
+            </div>
+            <div class="col-md-1 ">
+                <label for="safe_id51">Хранилище</label>
+                <select name="safe_id5[]" id="safe_id51" class="form-control selects51 Somon">
+                    <option selected="" value="">Выберите</option>
+                    @foreach($safes as $safe)
+                    <option value="{{$safe->id}}">{{$safe->safe}}</option>
+                @endforeach  
+                                                             
+             </select>
+            </div>
+            <div class="col-md-1">  <label for="shaving51">Шкаф	</label>
+                <select name="shaving5[]" id="shaving51" class="form-control selects51 Somon">
+
+
+                </select>
+            </div>
+            <div class="col-md-1   ">
+                <label for="qator_id51">Ряд	</label>
+                <select name="qator_id5[]" id="qator_id51" class="form-control selects51 Somon">
+                    <option selected="" value="">Выберите </option>
+
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="cells51">Ячейка</label>
+                <select name="cells5[]" id="cells51" class="form-control selects51 Somon">
+
+
+                </select>
+            </div>
+            <div class="col-md-3 mt-4">
+                <button type="button" class="btn btn-primary active" id="add5" value="51"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                <button id="remove5" value="51" type="button" class="btn btn-bitbucket active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                <input type="hidden" value="1" id="total_chq51">
+            </div>
+        </div>
+
+
+        <div id="new_chq51"></div>
+
+        <div class="form-check form-switch  col-md-4 mt-4">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon5">
+            <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
+
+        </div>
+        <div id="nepolniySomon5">   </div>
+        <div id="sum51" class="col-md-4 offset-8"></div>
+
+
+     
+
+    </div>
+    
+    
+    {{-- End 1 Somoni --}}
+
+
+
+{{-- razne --}}
+<div class="tab-pane fade " id="razne" role="tabpanel" aria-labelledby="razne-tab">
+    <div class="row  mt-2" id="newf">
+          
+         
+           <div class="col-md-1  ">
+               <label for="countcf1">Сумма	</label>
+               <input style="width: 05rem;" id="countSumsrazSomon" type="text" name="summarazne" class="form-control Somon count">
+
+           </div>
+           <div class="col-md-1 ">
+               <label for="safe_idf1">Хранилище</label>
+               <select name="safe_idrazned" id="safe_idr1" class="form-control selectsf1 Somon">
+                   <option selected="" value="">Выберите</option>
+                   @foreach($safes as $safe)
+                   <option value="{{$safe->id}}">{{$safe->safe}}</option>
+               @endforeach
+                                                      </select>
+           </div>
+           <div class="col-md-1">  <label for="shavingr1">Шкаф	</label>
+               <select name="shavingrazne" id="shavingr1" class="form-control selectsf1 Somon">
+
+
+               </select>
+           </div>
+           <div class="col-md-1   ">
+               <label for="qator_idr1">Ряд	</label>
+               <select name="qator_idrazne" id="qator_idr1" class="form-control selectsf1 Somon">
+                   <option selected="" value="">Выберите </option>
+
+               </select>
+           </div>
+           <div class="col-md-2">
+               <label for="cellsf1">Ячейка</label>
+               <select name="cellsrazne" id="cellsr1" class="form-control selectsf1 Somon">
+                   <option selected="" value="">Выберите </option>
+
+               </select>
+           </div>
+       
+       </div>
+
+
+   
+   
+ 
+      
+
+   </div>
+{{-- nepolnoe end --}}
+
+ <div class="tab-pane fade " id="FiveD" role="tabpanel" aria-labelledby="FiveD-tab"> 
+                                        
+                                        <div class="row  mt-2" id="newh">
+                                            <input     id="nominalh1"  value="0.05"    type="hidden"  name="nominalh[]"     >
+                                            <div class="col-md-2   ">
+                                                <label for="edin_id">Единиц	</label>
+                                                <select id="edin_idh1" class="form-select selectsd1 Somon edin_id" name="ed_idh[]"  >
+                                                    <option value="">Интихоб</option>
+                                                    @foreach($sprEds as $sprEd)
+                                                        <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+              
+                                            </div>
+                                            <div class="col-md-1  ">
+                                                <label for="counth1">Кол-во	</label>
+                                                <input      style="width: 05rem;" id="counth1"   type="text"  name="counth[] " class="form-control Somon count">
+              
+                                            </div>
+                                            <div class="col-md-1 ">
+                                                <label for="safe_idh1">Хранилище</label>
+                                                <select name="safe_idh[]"   id="safe_idh1" class="form-control selectsh Somon">
+                                                    <option   selected value="">Выберите</option>
+                                                    @foreach($safes as $safe)
+                                                        <option value="{{$safe->id}}">{{$safe->safe}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1">  <label for="shavingh1">Шкаф	</label>
+                                                <select name="shavingh[]"   id="shavingh1" class="form-control selectsh Somon">
+              
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1   ">
+                                                <label for="qator_ide1">Ряд	</label>
+                                                <select name="qator_idh[]"   id="qator_idh1" class="form-control selectsh Somon">
+                                                    <option   selected value="">Выберите </option>
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="cellsh1">Ячейка</label>
+                                                <select name="cellsh[]"   id="cellsh1" class="form-control selectsh Somon">
+              
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 mt-4">
+                                                <button type="button"   class="btn btn-primary active" id="addh"    value="h1" > <i class="align-middle" data-feather="plus"></i></button>
+                                                <button   id="removeh" value="h1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
+                                                <input type="hidden" value="1" id="total_chqh1">
+                                            </div>
+                                        </div>
+              
+              
+                                        <div id="new_chqh1"></div>
+                                      
+                                        <div class="form-check form-switch  col-md-4 mt-4">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonh" >
+                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
+              
+                                        </div>
+                                        <div id="sumh1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
+                                        <div  id="nepolniySomonh">   </div>
+                                    </div>
+                                      <div class="tab-pane fade " id="TwintyD" role="tabpanel" aria-labelledby="TwintyD-tab">  
+
+                                        <div class="row  mt-2" id="newj">
+                                            <input     id="nominalj1"  value="0.20"    type="hidden"  name="nominalj[]"     >
+                                            <div class="col-md-2   ">
+                                                <label for="edin_id">Единиц	</label>
+                                                <select id="edin_idj1" class="form-select selectsd1 Somon edin_id" name="ed_idj[]"  >
+                                                    <option value="">Интихоб</option>
+                                                    @foreach($sprEds as $sprEd)
+                                                        <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+              
+                                            </div>
+                                            <div class="col-md-1  ">
+                                                <label for="countcj1">Кол-во	</label>
+                                                <input      style="width: 05rem;" id="countj1"   type="text"  name="countj[] " class="form-control Somon count">
+              
+                                            </div>
+                                            <div class="col-md-1 ">
+                                                <label for="safe_idj1">Хранилище</label>
+                                                <select name="safe_idj[]"   id="safe_idj1" class="form-control selectsj1 Somon">
+                                                    <option   selected value="">Выберите</option>
+                                                    @foreach($safes as $safe)
+                                                        <option value="{{$safe->id}}">{{$safe->safe}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1">  <label for="shavinge1">Шкаф	</label>
+                                                <select name="shavingj[]"   id="shavingj1" class="form-control selectsj1 Somon">
+              
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1   ">
+                                                <label for="qator_idh1">Ряд	</label>
+                                                <select name="qator_idj[]"   id="qator_idj1" class="form-control selectsj1 Somon">
+                                                    <option   selected value="">Выберите </option>
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="cellsj1">Ячейка</label>
+                                                <select name="cellsj[]"   id="cellsj1" class="form-control selectsj1 Somon">
+              
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 mt-4">
+                                                <button type="button"   class="btn btn-primary active" id="addj"    value="j1" > <i class="align-middle" data-feather="plus"></i></button>
+                                                <button   id="removej" value="j1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
+                                                <input type="hidden" value="1" id="total_chqj1">
+                                            </div>
+                                        </div>
+              
+              
+                                        <div id="new_chqj1"></div>
+                                      
+                                        <div class="form-check form-switch  col-md-4 mt-4">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonj" >
+                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
+              
+                                        </div>
+                                        <div id="sumj1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
+                                        <div  id="nepolniySomonj">   </div>
+                                      </div>
+
+
+                                      {{-- Fifty 50 diram --}}
+                                      <div class="tab-pane fade " id="FiftyD" role="tabpanel" aria-labelledby="FiftyD-tab"> 
+                                        <div class="row  mt-2" id="newk">
+                                            <input     id="nominalk1"  value="0.50"    type="hidden"  name="nominalk[]"     >
+                                            <div class="col-md-2   ">
+                                                <label for="edin_id">Единиц	</label>
+                                                <select id="edin_idk1" class="form-select selectsd1 Somon edin_id" name="ed_idk[]"  >
+                                                    <option value="">Интихоб</option>
+                                                    @foreach($sprEds as $sprEd)
+                                                        <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+              
+                                            </div>
+                                            <div class="col-md-1  ">
+                                                <label for="countce1">Кол-во	</label>
+                                                <input      style="width: 05rem;" id="countk1"   type="text"  name="countk[] " class="form-control Somon count">
+              
+                                            </div>
+                                            <div class="col-md-1 ">
+                                                <label for="safe_ide1">Хранилище</label>
+                                                <select name="safe_idk[]"   id="safe_idk1" class="form-control selectsk1 Somon">
+                                                    <option   selected value="">Выберите</option>
+                                                    @foreach($safes as $safe)
+                                                        <option value="{{$safe->id}}">{{$safe->safe}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1">  <label for="shavingk1">Шкаф	</label>
+                                                <select name="shavingk[]"   id="shavingk1" class="form-control selectsk1 Somon">
+              
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1   ">
+                                                <label for="qator_ide1">Ряд	</label>
+                                                <select name="qator_idk[]"   id="qator_idk1" class="form-control selectsk1 Somon">
+                                                    <option   selected value="">Выберите </option>
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="cellsk1">Ячейка</label>
+                                                <select name="cellsk[]"   id="cellsk1" class="form-control selectsk1 Somon">
+              
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 mt-4">
+                                                <button type="button"   class="btn btn-primary active" id="addk"    value="k1" > <i class="align-middle" data-feather="plus"></i></button>
+                                                <button   id="removek" value="k1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
+                                                <input type="hidden" value="1" id="total_chqk1">
+                                            </div>
+                                        </div>
+              
+              
+                                        <div id="new_chqk1"></div>
+                                      
+                                        <div class="form-check form-switch  col-md-4 mt-4">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonk" >
+                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
+              
+                                        </div>
+                                        <div id="sumk1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
+                                        <div  id="nepolniySomonk">   </div>    
+                                    </div>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      </div>
+                      
+                  <textarea name="comment" id="" cols="50" rows="3" class="form-control mt-5" placeholder="Коммент"></textarea>
+                  <button   type="submit" id="submits"   class="btn btn-success mt-2  offset-10">Submit</button>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</form>
+{{-- //Fonds Korshoyam botilshuda farsuda  --}}
+
+
+
+{{-- //End Tanga  --}}
+
+
+
+
+
+
+
+
+
+
+
+@endsection
+ 
 <script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('js/ajax.min.js')}}"></script>
 {{-- this sccript nepolnie input add --}}
@@ -2028,52 +3726,155 @@
 {{-- this sccript count all Safe  safeshkaf    --}}
 
 {{-- end this sccript   count all Sum   --}}
+<script src='{{asset('js/OborotTanga.js')}}'></script>
 <script src="{{asset('js/OborotJs.js')}}"></script>
 <script>
-    $(document).ready(function() {
+              
 
-        $(".Oborot_id").click(function(){
-             var  id=$(this).attr('id');
-                 
-            var accounted1= $(`#ac${id}`).text();
-            var accounted2= $(`#acn${id}`).text();
-            var date=$(`#da${id}`).text();
-            var priznak=$(`#pr${id}`).val();
-           
-            //console.log(id);
-            if(priznak==1)
-            {
-                $("#priznaks").text('Приход');
-            }else{
-                $("#priznaks").text('Расход');
-            }
-            var bik=$(`#bik${id}`).text();
 
-             $('#bik').text(bik);
-             $('#schet1').text( accounted1 );
-             $('#schet2').text(accounted2);
-            $("#dates").val(date);
 
-            $.ajax({
-                url: "{{route('OborotTable.post')}}",
-                type:"POST",
+$(document).ready(function() {
+        
+//Oborots 
+$(".Oborot_id").click(function(){
+
+
+
+var  id=$(this).attr('id');
+    
+var accounted1= $(`#ac${id}`).text();
+var accounted2= $(`#acn${id}`).text();
+var date=$(`#da${id}`).text();
+var priznak=$(`#priznak${id}`).text();
+
+  
+   $("#priznaks").text(priznak);
+  
+var bik=$(`#bik${id}`).text();
+ 
+$('#bik').text(bik);
+$('#schet1').text( 'Оборот' );
+$('#schet2').text(accounted2);
+$("#dates").val(date);
+
+$.ajax({
+   url: "{{route('OborotTable.post')}}",
+   type:"POST",
+   data:{
+       "_token": "{{ csrf_token() }}",
+       id:id,date:date,
+
+   },
+   success:function(response){
+
+
+
+
+     // console.log(response);
+      $('#ajaxoborot').html(response);
+   },
+});
+
+
+});
+        //   tanga obroots
+ $(".Oborot_idTanga").click(function(){
+
+          
+var  id=$(this).attr('id');
+  
+var accounted1= $(`#Tangaac${id}`).text();
+var accounted2= $(`#Tangaacn${id}`).text();
+var n_doc= $(`#Tangan_doc${id}`).text();
+var date=$(`#Tangada${id}`).text();
+var priznak=$(`#TangaPriznak${id}`).text();
+//    $("#Tangadoc").text('Расход');
+ 
+$("#Tangapriznaks").text(priznak);
+// if(priznak==1)
+// {
+//    $("#Tangapriznaks").text(priznak);
+// }else{
+//    $("#Tangapriznaks").text('Расход');
+// }
+var bik=$(`#Tangabik${id}`).text();
+ 
+$('#Tangabik').text(bik);
+$('#Tangaschets').text( 'Оборот' );
+$('#Tangaschet2').text(accounted2);
+$("#Tangadates").val(date);
+$("#Tangadoc").text(n_doc);
+$.ajax({
+   url: "{{route('OborotTangaTable.post')}}",
+   type:"POST",
+   data:{
+       "_token": "{{ csrf_token() }}",
+       id:id,date:date,
+
+   },
+   success:function(response){
+
+
+  
+
+     
+      $('#Tangaajaxoborot').html(response);
+   },
+});
+
+
+});
+
+
+// End tanga obroots
+        //fondes Tanga korshoyam farsuda botilshuda 
+        $(".Fond_idTanga").click(function(){
+            $('#fpriznak').val('');
+             var  kode_opers=$(this).attr('id');
+             var  data=$(this).data('id');
+             var  id_type=$(this).attr('value');
+             var cnt=`#${data}nfc${kode_opers}`;
+              
+             //var id_accounted=$().text();
+            var id_accounted=$(`#${data}nfc${kode_opers}`).text();
+            var priznak=$(`#${data}${kode_opers}`).text();
+           // Tangakord1
+            var date=$(`#${data}d${kode_opers}`).text();
+            var doc=$(`#${data}fdoc${kode_opers}`).text();
+      
+            
+        
+            $('#Tangafn_doc').val(doc);
+            $('#Tangafdate').val(date);
+            $('#Tangafpriznak').val(priznak);
+            $('#Tangafschyot').text(String(id_accounted));
+        
+        
+                
+             $.ajax({
+                url: "{{route('FondTableTanga.post')}}",
+                method:"POST",
+                dataType: 'html', 
                 data:{
                     "_token": "{{ csrf_token() }}",
-                    id:id,date:date,
+                    id:kode_opers,id_type:id_type,
 
                 },
-                success:function(response){
+                success:function(fondData){
 
 
+                   console.log(fondData);
 
-
-                  // console.log(response);
-                   $('#ajaxoborot').html(response);
+                  
+                   $('#TangafondAjax').html(fondData);
                 },
             });
 
-
         });
+    });
+
+    // end Botilshuda korshoyam farsuda tanga js  
+
                 //fondes korshoyam farsuda botilshuda
         $(".Fond_id").click(function(){
             $('#fpriznak').val('');
@@ -2113,8 +3914,8 @@
                 },
             });
 
-        });
-    })
+    
+    });
 </script>
 
 
@@ -2333,75 +4134,7 @@ $("#count"+id_number).val("");
 $("#sum"+id_number).html("");
 
 });
-// $("#add,#add3,#add5,#addt,#addb,#addc,#addd,#adde,#addf,#addg,#addh,#addj,#addk").click(function(){
-
-
-
-
-// var id_btn=$(this).val();
-
-    
-// //  console.log('.selects'+id_btn);
-//  var idv=id_btn.substr(-2,1);
-
-// var  new_btn=parseInt($('#total_chq'+id_btn).val())+1;
-// var values=$("#total_chq"+id_btn).val();
-// var counts=$("#count"+idv+values).val();
-// // console.log("#count"+idv+values);
-
-
-// // console.log(selectValidation('.selects'+idv));
-
-// if(selectValidation('.selects'+idv) && counts>0 && values<=9)
-// {
-// var   nominal= $('#'+'nominal'+id_number).val();
-// var   nominalsss= $('input[id^=count]').val();
-// var   edins= $("#edin_id"+id_number).val();
-
-
-// var val_nominal=$("#nominal"+id_btn).val();
-// var val_edin=$("#edin_id"+idv+values).val();
-// var val_count=$("#count"+idv+values).val();
-
-// var $safe_id = $("#safe_id"+id_btn+" > option").clone();
-// var $edin_id = $("#edin_id"+id_btn+" > option").clone();
-
-
-// var new_input='<div class="row  mt-2" id="new'+idv+new_btn+'"><div>';
-
-// var edi= '<div class="col-md-2   ">  <div>';
-// var select_edin='<select id="edin_id'+idv+new_btn+'"  class="form-select Somon selects edin_id'+id_btn+'  edin_id" name="ed_id'+idv+'[]" > </select>';
-// var select_edin= $(select_edin).append($edin_id);
-// var edinLabel='<label for="edin_id'+idv+new_btn+'">Единиц	</label>';
-// var edins=$(edi).append(edinLabel,select_edin);
-// var counts= '  <div class="col-md-1  "><label for="count'+idv+new_btn+'">Кол-во	</label><input      style="width: 05rem;" id="count'+idv+new_btn+'"   type="text"  name="count'+idv+'[]" class="form-control Somon  count"></div>';
-//   // ..Хранилище тег
-// var saf='<div class="col-md-2 "></div>';
-// var safeLabel='<label for="safe_id0'+new_btn+'">Хранилище</label>';
-// var safe_Select='<select name="safe_id'+idv+'[]"   id="safe_id'+idv+new_btn+'" style="width: 08rem;" class="form-control  Somon selects'+id_btn+'"></select>   <input     id="nominal'+val_nominal+'"  value="1" disabled  type="hidden"  name="nominal"     >';
-// safe_Select=$(safe_Select).append($safe_id);
-// var safes=$(saf).append(safeLabel,safe_Select);
-// // ..Хранилище тег end
-// var shkaf='<div class="col-md-2">  <label for="shaving0">Шкаф	</label><select style="width: 08rem;" name="shaving'+idv+'[]"   id="shaving'+idv+new_btn+'" class="form-control Somon selects'+id_btn+'"><select></div>';
-// var ryad='<div class="col-md-2   "><label for="qator_id'+idv+new_btn+'">Ряд	</label><select name="qator_id'+idv+'[]" style="width: 08rem;"    id="qator_id'+idv+new_btn+'" class="form-control Somon selects'+id_btn+'"></select></div>';
-// var cell='<div class="col-md-1   "> <label for="cells0'+new_btn+'">Ячейка</label> <select name="cells'+idv+'[]"   id="cells'+idv+new_btn+'" class="form-control  Somon selects'+id_btn+'"></select></div>    <input     id="nominal'+idv+new_btn+'"  value="1" disabled  type="hidden"  name="nominal"     >';
-
-
-
-// var new_ip=$(new_input).append(edins,counts,safes,shkaf,ryad,cell);
-
-// $('#new_chq'+id_btn).append(new_ip);
-
-
-
-// $('#total_chq'+id_btn).val(new_btn);
-// $('#edin_id'+idv+id_btn).append($safe_id);
-
-// return;
-// }
-// $('.toast').toast('show');
-// });
-
+ 
 
 
  </script>

@@ -69,9 +69,12 @@ Route::group([ 'middleware' => ['auth', 'activity']], function() {
     Route::post('qatorTable',[SprCellsController::class, 'qatorTable'])->name('qatorTable.post');
     //Ajax HomeController
     Route::post('OborotTable',[HomeController::class, 'OborotTable'])->name('OborotTable.post');
+    Route::post('OborotTangaTable',[HomeController::class, 'OborotTangaTable'])->name('OborotTangaTable.post');
     Route::post('FondTable',[HomeController::class, 'FondTable'])->name('FondTable.post');
+    Route::post('FondTableTanga',[HomeController::class, 'FondTableTanga'])->name('FondTableTanga.post');
     Route::post('oborotInsert',[HomeController::class, 'oborotInsert'])->name('oborotInsert.post');
-
+    //Inserrt Oborot Tanga 
+    Route::post('oborotInsertTanga',[HomeController::class, 'oborotInsertTanga'])->name('oborotInsertTanga.post');
     Route::post('FondInsert',[HomeController::class, 'FondInsert'])->name('FondInsert.post');
     //Ячейка ажакс роуте
     Route::post('cellsTable',[SprCellsController::class, 'cellsTable'])->name('cellsTable.post');

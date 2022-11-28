@@ -46,12 +46,11 @@ $request->qator_idnepolniySomon5s,$request->cellsnepolniySomon5s,$request->ip(),
 $request->ndoc,$request->kode_oper_obor,Auth::id(),$request->summcou5,$request->comment,8);
        //         End Five Somoni
  
-if($request->src=='razne')
-{
+ 
 $razne= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idrazned,'razne',1,1,$request->shavingrazne,
 $request->qator_idrazne,$request->cellsrazne,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
 $request->ndoc,$request->kode_oper_obor,Auth::id(),$request->summarazne,$request->comment,8);
-}
+ 
  
 
 
@@ -585,6 +584,9 @@ $addneplonoefiftyDiramDiram= $this->blogRepository->AddInsertnepol($request->saf
 $request->qator_idnepolniySomonks,$request->cellsnepolniySomonks,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
 $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouk,$request->comment);
 //End Twenty diram
+$razne= $this->blogRepository->AddInsertnepol($request->safe_idrazned,'razne',1,1,$request->shavingrazne,
+$request->qator_idrazne,$request->cellsrazne,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+$request->ndoc,$request->kode_oper,Auth::id(),$request->summarazne,$request->comment);
      return  $this->blogRepository->arr;
 } 
 

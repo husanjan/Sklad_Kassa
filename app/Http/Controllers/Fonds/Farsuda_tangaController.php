@@ -79,13 +79,14 @@ class Farsuda_tangaController extends Controller
     public function store(Request $request)
     {
        
-        // //   echo "<pre>";
-        // //   print_r($arr);
-        // //   echo "</pre>";
-        // //    exit;
+        
         DB::beginTransaction();
         $oborots = $this->addRepository->addRequestsOborottanga($request,2);
         $money= $this->addRepository->addRequestsTanga($request);
+        // echo "<pre>";
+        // print_r($money);
+        // echo "</pre>";
+         // exit;
         if(is_array($money) AND is_array($oborots) AND $request->src==7)
           {
             
@@ -99,32 +100,32 @@ class Farsuda_tangaController extends Controller
             }
                 DB::Commit();
              
-                return redirect()->route('fondwornou.index')->with('success','Фарсуда фонд успешно создан!');
+                return redirect()->route('farsuda_tanga.index')->with('success','Фарсуда фонд успешно создан!');
               } catch (\Illuminate\Database\QueryException $e) {
                 DB::rollback();
                 return response(['message'=>'FAILURE'], 500);
-                return redirect()->route('fondwornou.index')->with('danger','Фарсуда фонд  не успешно!');
+                return redirect()->route('farsuda_tanga.index')->with('danger','Фарсуда фонд  не успешно!');
               }
             
               return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
           
           }
           //korshoyam 
-          if(is_array($arr) AND $request->src==3 OR  $request->src==1)
+          if(is_array($money) AND $request->src==3 OR  $request->src==1)
           {
             try{
-                foreach ($arr as $key => $value) {
+                foreach ($money as $key => $value) {
                     # code...
                
-                    FondCoins::create($arr[$key]);
+                    FondCoins::create($money[$key]);
             }
                 DB::Commit();
-                  response(['message'=>'ALL GOOD'], 200);
-               return redirect()->route('fondwornou.index')->with('success','Фарсуда Ба оборот рафт фонд успешно создан!');
+                  response(['message'=>'ALL farsuda_tanga'], 200);
+               return redirect()->route('farsuda_tanga.index')->with('success','Фарсуда Ба оборот рафт фонд успешно создан!');
               } catch (\Illuminate\Database\QueryException $e) {
                 DB::rollback();
                
-                return redirect()->route('fondwornou.index')->with('danger','Фарсуда фонд   не успешно!');
+                return redirect()->route('farsuda_tanga.index')->with('danger','Фарсуда фонд   не успешно!');
               }
     }
 }
