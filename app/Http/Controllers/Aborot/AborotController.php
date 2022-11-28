@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Oborot;
 use App\Models\SprAccounts;
 use App\Models\SprBank;
-use App\Models\SprSafes;
-use App\Models\FondMoney;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\InterfacesSomoni;
+
 class AborotController extends Controller
 {
     /**
@@ -18,17 +16,12 @@ class AborotController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $blogRepository;
-    public function __construct(InterfacesSomoni $blogRepository)
-    {
-        $this->blogRepository = $blogRepository;
-    }
+
 
 
     public function index()
     {
         //
-    $safes = SprSafes::all();
 
            $bik= SprBank::all();
             $Oborot= new  Oborot();
@@ -36,13 +29,7 @@ class AborotController extends Controller
 
 
              $obor= $Oborot::orderBy('date','DESC')->paginate(50);
-             $kodOper= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
-                       if($kodOper<=0)
-                       {
-                        $kodOper=1;
-                        }else{
-                         $kodOper++;
-                          }
+
            if($kodeOper<=0)
                {
                    $kodeOper=1;
@@ -50,14 +37,13 @@ class AborotController extends Controller
                $kodeOper++;
            }
 
-
             $sprAccounts= SprAccounts::all();
 
 
 
 
 
-        return  view('oborot.index',compact('bik','sprAccounts','kodeOper','obor','safes','kodOper'));
+        return  view('oborot.index',compact('bik','sprAccounts','kodeOper','obor'));
     }
 
     /**
@@ -81,8 +67,8 @@ class AborotController extends Controller
      //  echo    date('h:i:s');
         $this->validate($request, [
             'date' => 'required',
-            'bik' => 'required',
-            // 'account_id_out' => 'required',
+            'Bik' => 'required',
+            'account_id_out' => 'required',
             'account_id_in' => 'required',
             'priznak' => 'required',
             'summa' => 'required',
@@ -91,28 +77,30 @@ class AborotController extends Controller
           ]);
         $request->request->remove('_token');
 
+                $account = $request->all();
 
-
-
+               $inc=$account['kod_oper'];
 
      // date($account['date'].' '.'H:i:s');
+          $date=date($account['date'].' '.'H:i:s.u ');
 
+           foreach ($request->nominal AS $nominal=>$value)
+           {
+             $account['nominal']=$value;
+              $account['date']=  $date;
+             $account['kod_oper']=$inc++;
+             $account['summa']=$request->summa[$nominal];
+             $account['user_id'] = Auth::id();
+             $account['comment'] = $request->comment;
+             $account['host'] = $request->ip();
+             $bb= Oborot::create($account);
+//               echo "<pre>";
+//               print_r($bb);
+//               echo "</pre>";
+           }
 
-
-            
-            // id /korshoyam 
-                  $this->blogRepository->OborotInserttoOborot($request);
-                           // if($request->account_id_in==8)
-                //             {
-                //                      $this->blogRepository->oborotInsertKorshoyam($request);
-                //             }
-                //             if($request->account_id_in==9)
-                //             {
-                //                      $this->blogRepository->oborotInsertKorshoyam($request);
-                //             }
-                
         return redirect()->route('oborot_spr.index')
-          ->with('success','Счет успешно создан!');
+            ->with('success','Счет успешно создан!');
 
     }
 

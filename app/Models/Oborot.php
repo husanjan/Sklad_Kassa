@@ -15,13 +15,11 @@ class Oborot extends Model
         'comment',
         'priznak',
         'account_id_out',
-        'bik',
+        'Bik',
         'account_id_in',
-        'n_doc',
         'user_id',
         'date',
         'host',
-        
 
     ];
 }

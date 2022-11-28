@@ -1,347 +1,252 @@
 <!DOCTYPE html>
-<!-- saved from url=(0027)https://store.zippy.com.ua/ -->
-<html style="height: auto;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
 
-
-    <meta lang="ua">
-    <title>  Хазина</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="{{asset('css1/adminlte.css')}}">
-
-    <link href=" {{asset('css/app.css')}}" rel="stylesheet">
-    <!--<link rel="stylesheet" href="/vendor/leon-mbs/zippy/assets/css/bootstrap.css">   -->
-
-       <script src=" {{asset('js1/jquery.js')}}" type="text/javascript"></script>
-{{--      <script src=" {{asset('js1/bootstrap.bundle.js')}}" type="text/javascript"></script>--}}
-     <script src=" {{asset('js1/adminlte.js')}}" type="text/javascript"></script>
-     <script src=" {{asset('js1/app.js')}}" type="text/javascript"></script>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="text/html;charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
 
 
- </head>
-
-<body class="sidebar-mini sidebar-collapse" style="height: auto;">
 
 
+    <link href=" {{asset('css/styles.css')}}" rel="stylesheet">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
 
+
+
+        <style>
+            .bgColor{
+                background-color: #222e3c;
+            }
+        </style>
+
+    <title>Хазина</title>
+
+
+
+</head>
+<body   >
 <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand    ">
-        <ul class="navbar-nav">
-            <li class="nav-item ">
-                <a class="nav-link  text-dark" data-widget="pushmenu" href=" "><i class="fas fa-bars"></i></a>
-            </li>
+    <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar" >
+            <a class="sidebar-brand" href="/" style="text-decoration: none">
+                <span class="align-middle">Хазина</span>
+            </a>
 
-        </ul>
+            <ul class="sidebar-nav mt-2 ">
+                <div class="accordion  "  id="accordionExample">
+                    <div class="accordion-item bgColor"   >
+                        @can('spr-list')
 
+                        <h2 class="accordion-header text-white" id="headingOne">
 
-
-        <ul class="navbar-nav ml-auto">
-
-
-            <li class="nav-item dropdown   ">
-            @guest
-                @if(Route::has('login'))
-                    <li class="nav-item dropdown">
-                        {{--                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">--}}
-                        {{--                                <!--	<img src=" " class="avatar img-fluid rounded me-1" alt="Charles Hall" />-->--}}
-                        {{--                                <span class="text-dark">--}}
-                        {{--                              Вход--}}
-                        {{--                            </span>--}}
-                        {{--                            </a>--}}
-                    </li>
-
-                @endif
-            @else
-                <a href=" " class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span zippy="username" id="username">{{Auth::user()->name}}</span> </a>
-                <ul class="navbar-nav navbar-align">
-
-                        <li class="nav-item dropdown">
-
-
-
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Пользователи</a>
-                                <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Группы</a>
-                                <div class="dropdown-divider"></div>
-
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">{{__('Выход')}}
-                                </a>
-                                <form action="{{route('logout')}}" id="logout-form" method="POST" class="d-none" >
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-
-            <li class="nav-item  ">
-                &nbsp; &nbsp; &nbsp; &nbsp;
-            </li>
-        </ul></nav>
-
-    <aside class="  main-sidebar sidebar-dark-primary elevation-4   h-100 "><!-- Brand Logo -->
-        <a href=" " class="brand-link text-decoration-none">
-
-            <span class="brand-text font-weight-light">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Касса   </span>
-        </a>
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-            @can('spr-list')
-            <nav class="mt-2">
-                <ul class="nav  nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-
-                    <li class="nav-item  ">
-                        <a href="/" class="nav-link">
-                            <i class="nav-icon fa fa-home"></i>
-                            <p>
-                                Главная
-                            </p>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-item has-treeview {{ request()->is('spr*')?'menu-open':'' }}">
-                        <a href=" " class="nav-link  ">
-                            <i class="nav-icon fa fa-file "></i>
-                            <p>
-                                Справочники
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('spraccounts.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
-                                    <p>Счет
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                            
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('bank_spr.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
-                                    <p>Счет банк
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('spreds.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
-                                    <p>Единицы
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('sprsafes.index') }}" class="nav-link">
-
-                                    <i class="nav-icon fa fa-safe "></i>
-                                    <p>Хранилище
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('sprshkafs.index') }}" class="nav-link">
-
-                                    <i class="nav-icon fa fa-safe "></i>
-                                    <p>Шкаф/Полка
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('sprqators.index') }}" class="nav-link">
-
-                                    <i class="nav-icon fa fa-safe "></i>
-                                    <p>Ряд
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('sprcell.index') }}" class="nav-link">
-
-                                    <i class="nav-icon fa fa-safe "></i>
-                                    <p>Ячейка
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-                        </ul>
-                            </li>
-
-                    <li class="nav-item has-treeview {{ request()->is('fondemission*')?'menu-open':'' }}">
-                        <a href=" " class="nav-link  ">
-                            <i class="nav-icon fa fa-funnel-dollar "></i>
-                            <p>
-                              {{ __('Фонды') }}
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('fondemission.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
-                                    <p>Эмиссионный
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('fondunusable.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
-                                    <p>Коршоям
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('fondwornou.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
-                                    <p>Фарсуда
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                           
-                          
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('fondcanceled.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
-                                    <p>Ботилшуда
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('korshoyam_tanga.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
-                                    <p>Коршоям танга
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('farsuda_tanga.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
-                                    <p>Фарсуда танга
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('botilshuda_tanga.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
-                                    <p>Ботилшуда танга
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                            </li>
-                        </ul>
-                    </li>
-                    {{-- <li class="nav-item has-treeview {{ request()->is('bank*')?'menu-open':'' }} {{ request()->is('oborot*')?'menu-open':'' }}"> --}}
-                        {{-- <a href="{{ route('oborot_spr.index') }}" class="nav-link  ">
-                            <i class="nav-icon fa fa-folder-tree "></i>
-                            <p>
+                            <button type="button"  style="border:none" onclick="Addclass(event)"id="btn1"   data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                    class="btn btn-outline-light col-md-12  {{ request()->is('spr*')?'active':'' }} "  >	<i class="align-middle" data-feather="book"></i>
                                 {{ __('Справочники') }}
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a> --}}
-                        {{-- <ul class="nav nav-treeview"> --}}
+                            </button>
+                        </h2>
+                        <div id="collapseOne"  class="accordion-collapse collapse {{ request()->is('spr*')?'show':'' }} " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
 
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('oborot_spr.index') }}" class="nav-link">
-                                    <i class="nav-icon fa fa-folder-tree "></i>
-                                    <p>Oборот
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+                                <li class="sidebar-item    {{ request()->is('spraccounts*')?'active':'' }}">
+                                    <a class="sidebar-link" href="{{ route('spraccounts.index') }}">
+                                        <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Суратҳисобҳо</span>
+                                    </a>
+                                </li>
 
-                                </a>
+                                <li class="sidebar-item {{ request()->is('spreds*')?'active':'' }}">
+                                    <a class="sidebar-link" href="{{ route('spreds.index') }}">
+                                        <i class="align-middle" data-feather="maximize-2"></i> <span class="align-middle">Воҳидҳои ченак</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item {{ request()->is('sprsafes*')?'active':'' }}">
+                                    <a class="sidebar-link" href="{{ route('sprsafes.index') }}">
+                                        <i class="align-middle" data-feather="server"></i> <span class="align-middle">Ганҷхонаҳо</span>
+                                    </a>
+                                </li>
 
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="{{ route('oborot_tanga.index') }}" class="nav-link">
-                                    <i class="nav-icon fa fa-folder-tree "></i>
-                                    <p>Oборот Танга
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+                                <li class="sidebar-item {{ request()->is('sprshkafs*')?'active':'' }}">
+                                    <a class="sidebar-link" href="{{ route('sprshkafs.index') }}">
+                                        <i class="align-middle" data-feather="tablet"></i>
+                                        <span class="align-middle">Ҷевон/Раф</span>
+                                    </a>
+                                </li>
 
-                                </a>
+                                <li class="sidebar-item {{ request()->is('sprqators*')?'active':'' }}">
+                                    <a class="sidebar-link" href="{{ route('sprqators.index') }}">
+                                        <i class="chevrons-down" data-feather="chevrons-down"></i> <span class="align-middle">Қатор</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item {{ request()->is('sprcell*')?'active':''   }}">
+                                    <a class="sidebar-link" href="{{ route('sprcell.index') }}">
+                                        <i class=" " data-feather="chevrons-right"></i> <span class="align-middle">Ячейка</span>
+                                    </a>
+                                </li>
 
-                            </li>
-                        {{-- </ul> --}}
-                    {{-- </li> --}}
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="accordion-item bgColor mt-2">
+                        <h2 class="accordion-header" id="headingTwo">
+
+                            <button type="button"  style="border:none" onclick="Addclass(event)" id="btn2"  data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                    aria-expanded="true" aria-controls="collapseTwo" class="btn btn-outline-light  col-md-12  {{ request()->is('fond*')?'active':'' }}"  >
+                                <i class="align-middle" data-feather="dollar-sign"></i> {{ __('Фонды') }}
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse {{ request()->is('fond*')?'show':'' }}" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <li class="sidebar-item {{ request()->is('fondemission*')?'active':''   }}">
+                                    <a class="sidebar-link" href="{{ route('fondemission.index') }}">
+                                        <i   data-feather="grid"></i>
+                                        Эмиссионный
+                                    </a>
+                                </li>
+
+                            </div>
+                        </div>
+                    </div>
 
 
 
+{{--                    Spr Bank--}}
+                    <div class="accordion-item bgColor mt-2">
+                        <h2 class="accordion-header" id="headingTwo">
 
-           </ul>
+                            <button type="button"  style="border:none" onclick="Addclass(event)" id="btn3"   data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                    aria-expanded="true" aria-controls="collapseThree" class="btn btn-outline-light  col-md-12  {{ request()->is('bank*')?'active':'' }}"  >
+                                <i class="align-middle" data-feather="dollar-sign"></i> {{ __('Справочник банк') }}
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse {{ request()->is('bank*')?'show':'' }}" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
 
-            </nav>
-            @endcan
+                                <li class="sidebar-item {{ request()->is('bank*')?'active':''   }}">
+                                    <a class="sidebar-link" href="{{ route('bank_spr.index') }}">  <i   data-feather="grid"></i>   Счет банк
+   </a>
+                                </li>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bgColor mt-2">
+                        <h2 class="accordion-header" id="headingTwo">
+
+                            <button type="button" onclick="Addclass(event)" id="btn3"   data-bs-toggle="collapse" data-bs-target="#collapsesss"
+                                    aria-expanded="true" aria-controls="collapsesss"  style="border:none"  class="btn btn-outline-light    col-md-12  {{ request()->is('oborot*')?'active':'' }}"  >
+                                <i class="align-middle" data-feather="dollar-sign"></i> {{ __('Справочник оборот') }}
+                            </button>
+                        </h2>
+                        <div id="collapsesss" class="accordion-collapse collapse {{ request()->is('oborot*')?'show':'' }}" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <li class="sidebar-item {{ request()->is('oborot*')?'active':''   }}">
+                                    <a class="sidebar-link" href="{{ route('oborot_spr.index') }}">  <i   data-feather="grid"></i>   Oборот банк
+                                    </a>
+                                </li>
+
+                            </div>
+                        </div>
+                    </div>
+                    @endcan
+
+                </div>
+
+
+
+            </ul>
+
+
         </div>
-        <!-- /.sidebar -->
-    </aside>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper mb-4" style="height: auto;">
+    </nav>
 
-        <!-- Main content -->
-        @yield('content')
+    <div class="main">
+
+        <nav class="navbar navbar-expand navbar-light navbar-bg ">
+            <a class="sidebar-toggle js-sidebar-toggle">
+                <i class="hamburger align-self-center"></i>
+            </a>
+
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav navbar-align">
+                    @guest
+                    @if(Route::has('login'))
+                        <li class="nav-item dropdown">
+{{--                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">--}}
+{{--                                <!--	<img src=" " class="avatar img-fluid rounded me-1" alt="Charles Hall" />-->--}}
+{{--                                <span class="text-dark">--}}
+{{--                              Вход--}}
+{{--                            </span>--}}
+{{--                            </a>--}}
+                        </li>
+
+                    @endif
+                    @else
+                    <li class="nav-item dropdown">
+
+
+                        <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                            <!--	<img src=" " class="avatar img-fluid rounded me-1" alt="Charles Hall" />-->
+                            <span class="text-dark">
+                             {{Auth::user()->name}}
+                            </span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Пользователи</a>
+                            <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Группы</a>
+                            <div class="dropdown-divider"></div>
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">{{__('Выход')}}
+                            </a>
+                            <form action="{{route('logout')}}" id="logout-form" method="POST" class="d-none" >
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                        @endguest
+                </ul>
+            </div>
+        </nav>
+
+
+        <main class="content">
+            @yield('content')
+        </main>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row text-muted">
+
+                </div>
+            </div>
+        </footer>
     </div>
-    <!-- /.content-wrapper -->
-
-    <div id="sidebar-overlay"></div>
 </div>
-<!-- ./wrapper -->
 
 
 
 
 
-</body></html>
-<script src="{{asset('js/scripts.js')}}"></script>
+
+
+
+</body>
+
+    <script src="{{asset('js/scripts.js')}}"></script>
 <script src="{{asset('/js/jquery.slim.min.js')}}"   ></script>
-<script src="{{asset('js/ajax.min.js')}}"></script>
+    <script src="{{asset('js/ajax.min.js')}}"></script>
 
-
+<script src="{{asset('/js/popper.min.js')}}" ></script>
 <script src="{{asset('/js/bootstrap.min.js')}}"  ></script>
+
+</html>

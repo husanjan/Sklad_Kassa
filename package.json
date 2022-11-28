@@ -1,8 +1,10 @@
 {
     "private": true,
+
     "scripts": {
         "dev": "vite",
         "build": "vite build",
+
         "development": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
@@ -11,7 +13,6 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@fortawesome/fontawesome-free": "^6.2.0",
         "@popperjs/core": "^2.10.2",
         "@vitejs/plugin-vue": "^3.0.3",
         "axios": "^0.21",
@@ -24,8 +25,5 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
         "vite": "^3.0.9"
-    },
-    "dependencies": {
-        "font-awesome": "^4.7.0"
     }
 }
