@@ -12,7 +12,6 @@ use App\Http\Controllers\Spr\SprShkafsController;
 use App\Http\Controllers\Spr\SprQatorsController;
 use App\Http\Controllers\Spr\SprCellsController;
 use App\Http\Controllers\Fonds\FondEmissionsController;
-use App\Http\Controllers\Ajax\AjaxController;
 
 
 
@@ -47,18 +46,9 @@ Route::group([ 'middleware' => ['auth', 'activity']], function() {
     Route::resource('sprshkafs', SprShkafsController::class);
     //Создать Изменит Удалить роуте Ячейка
     Route::resource('sprcell', SprCellsController::class) ;
-
     //Создать Изменит Удалить роуте Фонд эмиссион
     Route::resource('fondemission', FondEmissionsController::class);
-    Route::resource('fondwornou', App\Http\Controllers\Fonds\WornouController::class);
-    Route::resource('fondunusable', App\Http\Controllers\Fonds\UnusableController::class);
-    Route::resource('fondcanceled', App\Http\Controllers\Fonds\CanceledController::class);
 
-    Route::resource('korshoyam_tanga', App\Http\Controllers\Fonds\korshoyam_tangaController::class);
-
-    Route::resource('farsuda_tanga', App\Http\Controllers\Fonds\Farsuda_tangaController::class);
-    Route::resource('botilshuda_tanga', App\Http\Controllers\Fonds\Botilshuda_tangaController::class);
-    Route::resource('oborot_tanga', App\Http\Controllers\OborotsCoinController::class);
     //Создать Изменит Удалить роуте Катор
     Route::resource('sprqators', SprQatorsController::class);
     //Создать Изменит Удалить роуте Банк справочник
@@ -67,15 +57,6 @@ Route::group([ 'middleware' => ['auth', 'activity']], function() {
     Route::resource('oborot_spr', App\Http\Controllers\Aborot\AborotController::class);
     //Катор ажакс роуте
     Route::post('qatorTable',[SprCellsController::class, 'qatorTable'])->name('qatorTable.post');
-    //Ajax HomeController
-    Route::post('OborotTable',[HomeController::class, 'OborotTable'])->name('OborotTable.post');
-    Route::post('OborotTangaTable',[HomeController::class, 'OborotTangaTable'])->name('OborotTangaTable.post');
-    Route::post('FondTable',[HomeController::class, 'FondTable'])->name('FondTable.post');
-    Route::post('FondTableTanga',[HomeController::class, 'FondTableTanga'])->name('FondTableTanga.post');
-    Route::post('oborotInsert',[HomeController::class, 'oborotInsert'])->name('oborotInsert.post');
-    //Inserrt Oborot Tanga 
-    Route::post('oborotInsertTanga',[HomeController::class, 'oborotInsertTanga'])->name('oborotInsertTanga.post');
-    Route::post('FondInsert',[HomeController::class, 'FondInsert'])->name('FondInsert.post');
     //Ячейка ажакс роуте
     Route::post('cellsTable',[SprCellsController::class, 'cellsTable'])->name('cellsTable.post');
     //Шкаф ажакс роуте

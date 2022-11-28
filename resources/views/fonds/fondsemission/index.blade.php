@@ -30,7 +30,7 @@
 
 {{--                    <--Таблица Эмиссонный --}}
 
-                        <a class="   offset-md-11" target="_blank"   href="{{ route('fondemission.show', date('d-m-Y').time()) }}?page={{$data}}"  > Просмотр_PDF</a>
+                        <a class="btn btn-github active offset-md-11" target="_blank"   href="{{ route('fondemission.show', date('d-m-Y').time()) }}?page={{$data}}" id="pdf"> Просмотр_PDF</a>
                    <div id="tab">
                     <table class="table table-bordered"  id="tab">
 
