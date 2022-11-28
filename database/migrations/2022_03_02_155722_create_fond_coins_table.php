@@ -1,52 +1,81 @@
-<?php
+ï»¿<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
 
 class CreateFondCoinsTable extends Migration
 {
     /**
      * Run the migrations.
      *
-     * @return void
+     
+* @return void
      */
     public function up()
     {
-        Schema::create('fond_coins', function (Blueprint $table) {
-            $table->id();
-            $table->dateTime('date');
-            $table->integer('priznak')->comment('Ïðèõîä/Ðàñõîä');
-            $table->tinyinteger('type')->comment('1-Ãîäíûå/2-Âåòõûå/3-Óíè÷òîæåííûå');
-            $table->char('src')->comment('Îòêóäà/Êóäà');
-            $table->integer('naminal')->comment('Íàìèíàë êóïþðû');
-            $table->unsignedBiginteger('ed_id')->comment('ID Åäèíèöû');
-            $table->integer('kol')->comment('Êîëè÷åñòâî');
-            $table->integer('summa');
-            $table->unsignedBiginteger('safe_id')->comment('ID Õðàíèëèùå');
-            $table->unsignedBiginteger('shkaf_id')->comment('ID øêàô/ñòèëàæ');
-            $table->unsignedBiginteger('qator_id')->comment('ID ðÿä');
-            $table->unsignedBiginteger('cell_id')->comment('ID ÿ÷åéêè');
-            $table->char('comment', 255);
-            $table->unsignedBiginteger('user_id');
-            $table->char('host', 50);
+       
+ Schema::create('fond_coins', function (Blueprint $table) {
+        
+    $table->id();
+      $table->dateTime('date');
+            
+$table->integer('priznak')->comment('ÐŸÑ€Ð¸Ñ…Ð¾Ð´/Ð Ð°ÑÑ…Ð¾Ð´');
+          
+  $table->tinyinteger('type')->comment('1-Ð“Ð¾Ð´Ð½Ñ‹Ðµ/2-Ð’ÐµÑ‚Ñ…Ñ‹Ðµ/3-Ð£Ð½Ð¸Ñ‡Ñ‚Ð¾Ð¶ÐµÐ½Ð½Ñ‹Ðµ');
+         
+   $table->char('src')->comment('ÐžÑ‚ÐºÑƒÐ´Ð°/ÐšÑƒÐ´Ð°');
+           
+ $table->integer('naminal')->comment('ÐÐ°Ð¼Ð¸Ð½Ð°Ð» ÐºÑƒÐ¿ÑŽÑ€Ñ‹');
+         
+   $table->unsignedBiginteger('kode_oper') ;
+           
+ $table->integer('kol')->comment('ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾');
+           
+ $table->integer('summa');
+           
+ $table->unsignedBiginteger('safe_id')->comment('ID Ð¥Ñ€Ð°Ð½Ð¸Ð»Ð¸Ñ‰Ðµ');
+    
+       $table->unsignedBiginteger('shkaf_id')->comment('ID ÑˆÐºÐ°Ñ„/ÑÑ‚Ð¸Ð»Ð°Ð¶');
+         
+   $table->unsignedBiginteger('qator_id')->comment('ID Ñ€ÑÐ´');
+          
+  $table->unsignedBiginteger('cell_id')->comment('ID ÑÑ‡ÐµÐ¹ÐºÐ¸');
+     
+       $table->char('comment', 255);
+         
+   $table->unsignedBiginteger('user_id');
+         
+   $table->char('host', 50);
+            $table->unsignedBiginteger('kod_oper');
+           
+ $table->char('n_doc',50);
             $table->timestamps();
-            $table->softDeletes();
+          
+  $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('ed_id')->references('id')->on('spr_eds');
-            $table->foreign('safe_id')->references('id')->on('spr_safes');
-            $table->foreign('shkaf_id')->references('id')->on('spr_shkafs');
-            $table->foreign('qator_id')->references('id')->on('spr_qators');
-            $table->foreign('cell_id')->references('id')->on('spr_cells');
-            $table->index('date');
+          
+  $table->foreign('ed_id')->references('id')->on('spr_eds');
+          
+  $table->foreign('safe_id')->references('id')->on('spr_safes');
+       
+     $table->foreign('shkaf_id')->references('id')->on('spr_shkafs');
+      
+      $table->foreign('qator_id')->references('id')->on('spr_qators');
+       
+     $table->foreign('cell_id')->references('id')->on('spr_cells');
+      
+      $table->index('date');
         });
     }
 
     /**
      * Reverse the migrations.
      *
-     * @return void
+ 
+    * @return void
      */
     public function down()
     {

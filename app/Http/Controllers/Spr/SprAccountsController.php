@@ -67,6 +67,7 @@ class SprAccountsController extends Controller
     public function show($id)
     {
         //
+           return view('layouts.app1');
     }
 
     /**
