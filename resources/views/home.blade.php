@@ -1278,7 +1278,7 @@
                 
 
                     <div class="info-box-content">
-                     <center> <h4>     Оборот </h4> 
+                     <center> <h4>Оборот </h4> 
                         <button type="button" class="btn btn-outline-primary col-6 " data-toggle="modal" data-target="#exampleModalCenter" >Приход </button>
                      </center>
                        
@@ -1297,8 +1297,8 @@
                 <div class="info-box-content">
                 <center>       <h4>Коршоям</h4></center>
                     <div class="btn-group col-auto" role="group" aria-label="Basic example">
-                        <button type="button"  onclick="this.form.reset();" class="btn btn-outline-primary"  data-Context="korshoyam" data-toggle="modal" data-target="#rashod"   id="priznak" value="0">Приход </button>
-                        <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam"  data-toggle="modal" data-target="#rashod"  id="priznak" value="1">Расход</button>
+                        <button type="button"  onclick="this.form.reset();" class="btn btn-outline-primary"  data-Context="korshoyam" data-toggle="modal" data-target="#rashod"   id="priznaki" value="0">Приход </button>
+                        <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam"  data-toggle="modal" data-target="#rashod"  id="priznaki" value="1">Расход</button>
       
                     </div>
                    
@@ -1320,8 +1320,8 @@
 
               
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod" data-Context="farsuda"   id="priznak" value="0">Приход </button>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod" data-Context="farsuda" id="priznak" value="1">Расход</button>
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod" data-Context="farsuda"   id="priznaki" value="0">Приход </button>
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod" data-Context="farsuda" id="priznaki" value="1">Расход</button>
       
                     </div>
                    
@@ -1338,8 +1338,8 @@
                 <div class="info-box-content">
                     <center>  <h4>Ботилшуда</h4></center>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Context="botilshuda" data-target="#rashod"   id="priznak" value="0">Приход </button>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod"  data-Context="botilshuda"  id="priznak" value="1">Расход</button>
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Context="botilshuda" data-target="#rashod"   id="priznaki" value="0">Приход </button>
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod"  data-Context="botilshuda"  id="priznaki" value="1">Расход</button>
       
                     </div>
                    
@@ -1360,7 +1360,7 @@
 
                     <div class="info-box-content">
                      <center> <h4>Танга Оборот  </h4> 
-                        <button type="button" class="btn btn-outline-primary col-6 " data-toggle="modal" data-target="#ModalkaTangaOborot" >Приход </button>
+                        <button type="button" class="btn btn-outline-primary col-6 " data-toggle="modal"  data-target="#ModalkaTangaOborot" >Приход </button>
                      </center>
                        
                     </div>
@@ -1381,8 +1381,8 @@
                 <div class="info-box-content">
                 <center>       <h4>Танга Коршоям  </h4></center>
                     <div class="btn-group col-auto" role="group" aria-label="Basic example">
-                        <button type="button"  onclick="this.form.reset();" class="btn btn-outline-primary"  data-Context="korshoyam" data-toggle="modal" data-target="#rashodTanga"   id="priznak" value="0">Приход </button>
-                        <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam"  data-toggle="modal" data-target="#rashodTanga"  id="priznak" value="1">Расход</button>
+                        <button type="button"  onclick="this.form.reset();" class="btn btn-outline-primary"  data-Type="Tanga" data-Context="korshoyam" data-toggle="modal" data-target="#rashodTanga"   id="priznaki" value="0">Приход </button>
+                        <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam" data-Type="Tanga"   data-toggle="modal" data-target="#rashodTanga"  id="priznaki" value="1">Расход</button>
       
                     </div>
                    
@@ -1407,8 +1407,8 @@
 
       
                     <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashodTanga" data-Context="farsuda"   id="priznak" value="0">Приход </button>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashodTanga" data-Context="farsuda" id="priznak" value="1">Расход</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashodTanga"  data-Type="Tanga" data-Context="farsuda"   id="priznaki" value="0">Приход </button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashodTanga" data-Type="Tanga" data-Context="farsuda" id="priznaki" value="1">Расход</button>
 
                     </div>
            
@@ -1426,9 +1426,9 @@
                     <div class="info-box-content">
                         <center>  <h4> Танга Ботилшуда</h4></center>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Context="botilshuda" data-target="#rashodTanga"   id="priznak" value="0">Приход </button>
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashodTanga"  data-Context="botilshuda"  id="priznak" value="1">Расход</button>
-          
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Type="Tanga" data-Context="botilshuda" data-target="#rashodTanga"   id="priznaki" value="0">Приход </button>
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-Type="Tanga" data-target="#rashodTanga"  data-Context="botilshuda"  id="priznaki" value="1">Расход</button>
+                                
                         </div>
                        
                      
@@ -1444,7 +1444,7 @@
        {{-- // End Click Button Modalka Tanga  --}}
       
             {{-- Modalka Tanga --}}
-            <form      action="{{ route('oborotInsertTanga.post') }}" method="post">
+            <form      action="{{ route('oborotInsertTanga.post') }}" id="TangaSumbit" method="post">
                 <div class="modal fade  bd-example-modal-xl " id="ModalkaTangaOborot" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                         <div class="modal-content">
@@ -1479,6 +1479,14 @@
             
                                         </select>
                                    
+                                    </div>
+                                    <div class="col-md-2  ">
+
+                                        <span class=""></span>
+                                      
+              
+              
+              
                                     </div>
                                     <div class="col-md-3 ">
                                         <input type="text" placeholder="Номер документ"  name="n_doc" class="form-control" required  >
@@ -2913,7 +2921,7 @@
 </div>
 {{--modal1 end Коршоям  Tanga Детализация--}}
 
-<form method="POST" action="{{ route('korshoyam_tanga.store') }}" id="submit" >
+<form method="POST" action="{{ route('korshoyam_tanga.store') }}" id="calcForms" >
     @csrf
   <div class="modal fade " id="rashodTanga" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div  style="height: 70px">
@@ -2951,7 +2959,7 @@
                           <input            name="farsuda" type="hidden"   value="1" >
 
                       </div>
-                      <div class="col-md-2  ">
+                      <div class="col-md-2  mt-1">
 
                           
                       
@@ -2970,6 +2978,10 @@
                               @endforeach
                           </select> --}}
                           <div id="accounts"></div>
+                          
+                          <div id="srcHomeTanga" class=" mt-4">
+                                            
+                        </div>
 
                       </div>
                     
@@ -2977,7 +2989,7 @@
                           <label for="count01">Номер Документ	</label>
                           <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
                       </div>
-                      <div class="col-md-4" id="AllSumma"></div>
+                      <div class="col-md-4" id="AllSummaTangaD"></div>
                       
                   </div>
                   
@@ -3018,14 +3030,86 @@
                                     </li>
                                   </ul>
                                   <div class="tab-content" id="myTabContent">
+                                    {{-- //Twenty 20 diram tanga  --}}
+                                    <div class="tab-pane fade " id="TwintyDTanga" role="tabpanel" aria-labelledby="TwintyDTanga-tab">  
+
+                                        <div class="row  mt-2" id="neww">
+                                            <input     id="nominalw1"  value="0.20"    type="hidden"  name="nominalj[]"     >
+                                            <div class="col-md-2   ">
+                                                <label for="edin_id">Единиц	</label>
+                                                <select id="edin_idw1" class="form-select selectsw1 Somon edin_id" name="ed_idj[]"  >
+                                                    <option value="">Интихоб</option>
+                                                    @foreach($sprEds as $sprEd)
+                                                        <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+              
+                                            </div>
+                                            <div class="col-md-1  ">
+                                                <label for="countcw1">Кол-во	</label>
+                                                <input      style="width: 05rem;" id="countw1"   type="text"  name="countj[] " class="form-control Somon count">
+              
+                                            </div>
+                                            <div class="col-md-1 ">
+                                                <label for="safe_idw1">Хранилище</label>
+                                                <select name="safe_idj[]"   id="safe_idw1" class="form-control selectsw1 Somon">
+                                                    <option   selected value="">Выберите</option>
+                                                    @foreach($safes as $safe)
+                                                        <option value="{{$safe->id}}">{{$safe->safe}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1">  <label for="shavingw1">Шкаф	</label>
+                                                <select name="shavingj[]"   id="shavingw1" class="form-control selectsw1 Somon">
+              
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1   ">
+                                                <label for="qator_idh1">Ряд	</label>
+                                                <select name="qator_idj[]"   id="qator_idw1" class="form-control selectsw1 Somon">
+                                                    <option   selected value="">Выберите </option>
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="cellsw1">Ячейка</label>
+                                                <select name="cellsj[]"   id="cellsw1" class="form-control selectsw1 Somon">
+              
+              
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 mt-4">
+                                                <button type="button"   class="btn btn-primary active" id="addw"    value="w1" > <i class="align-middle" data-feather="plus"></i></button>
+                                                <button   id="removew" value="w1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
+                                                <input type="hidden" value="1" id="total_chqw1">
+                                            </div>
+                                        </div>
+              
+              
+                                        <div id="new_chqw1"></div>
+                                      
+                                        <div class="form-check form-switch  col-md-4 mt-4">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonw" >
+                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
+              
+                                        </div>
+                                        <div id="sumw1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
+                                        <div  id="nepolniySomonw">   </div>
+                                      </div>
+
+
+    {{-- //End Twenty 20 diram tanga  --}}
+
                                       <div class="tab-pane fade show active" id="OneDTanga" role="tabpanel" aria-labelledby="home-tab">
 {{--                                              1 dirami --}}
                                                 
-<div class="row  mt-2" id="newg">
-    <input     id="nominalg1"  value="0.01"    type="hidden"  name="nominalg[]"     >
+<div class="row  mt-2" id="newq">
+    <input     id="nominalq1"  value="0.01"    type="hidden"  name="nominalg[]"     >
     <div class="col-md-2   ">
         <label for="edin_id">Единиц	</label>
-        <select id="edin_idg1" class="form-select selectsd1 Somon edin_id" name="ed_idg[]"  >
+        <select id="edin_idq1" class="form-select selectsd1 Somon edin_id" name="ed_idg[]"  >
             <option value="">Интихоб</option>
             @foreach($sprEds as $sprEd)
                 <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
@@ -3034,135 +3118,127 @@
 
     </div>
     <div class="col-md-1  ">
-        <label for="countcg1">Кол-во	</label>
-        <input      style="width: 05rem;" id="countg1"   type="text"  name="countg[] " class="form-control Somon count">
+        <label for="countcq1">Кол-во	</label>
+        <input      style="width: 05rem;" id="countq1"   type="text"  name="countg[] " class="form-control Somon count">
 
     </div>
     <div class="col-md-1 ">
         <label for="safe_ide1">Хранилище</label>
-        <select name="safe_idg[]"   id="safe_idg1" class="form-control selectsg1 Somon">
+        <select name="safe_idg[]"   id="safe_idq1" class="form-control selectsq1 Somon">
             <option   selected value="">Выберите</option>
             @foreach($safes as $safe)
                 <option value="{{$safe->id}}">{{$safe->safe}}</option>
             @endforeach
         </select>
     </div>
-    <div class="col-md-1">  <label for="shavinge1">Шкаф	</label>
-        <select name="shavingg[]"   id="shavingg1" class="form-control selectsg1 Somon">
+    <div class="col-md-1">  <label for="shavingq1">Шкаф	</label>
+        <select name="shavingq[]"   id="shavingq1" class="form-control selectsq1 Somon">
 
 
         </select>
     </div>
     <div class="col-md-1   ">
         <label for="qator_idg1">Ряд	</label>
-        <select name="qator_idg[]"   id="qator_idg1" class="form-control selectsg1 Somon">
+        <select name="qator_idg[]"   id="qator_idq1" class="form-control selectsq1 Somon">
             <option   selected value="">Выберите </option>
 
         </select>
     </div>
     <div class="col-md-2">
-        <label for="cellsg1">Ячейка</label>
-        <select name="cellsg[]"   id="cellsg1" class="form-control selectsg1 Somon">
+        <label for="cellsq1">Ячейка</label>
+        <select name="cellsq[]"   id="cellsq1" class="form-control selectsq1 Somon">
 
 
         </select>
     </div>
     <div class="col-md-3 mt-4">
-        <button type="button"   class="btn btn-primary active" id="addg"    value="g1" > <i class="align-middle" data-feather="plus"></i></button>
-        <button   id="removeg" value="g1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
-        <input type="hidden" value="1" id="total_chqg1">
+        <button type="button"   class="btn btn-primary active" id="addq"    value="q1" > <i class="align-middle" data-feather="plus"></i></button>
+        <button   id="removeq" value="q1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
+        <input type="hidden" value="1" id="total_chqq1">
     </div>
 </div>
 
 
-<div id="new_chqg1"></div>
+<div id="new_chqq1"></div>
 
 <div class="form-check form-switch  col-md-4 mt-4">
-    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomong" >
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonq" >
     <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
 </div>
-<div id="sumg1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
-<div  id="nepolniySomong">   </div> 
+<div id="sumq1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
+<div  id="nepolniySomonq">   </div> 
 {{-- End One diram --}}
 </div>
 
-
+{{--                                           end    1 dirami --}}
 {{-- //25 diram --}}
 <div class="tab-pane fade " id="TwintyFiveDTanga" role="tabpanel" aria-labelledby="TwintyFiveD-tab"> 
 
- 
-
-
-
-
-
-    
-
-        <div class="row  mt-2" id="newc">
-            <input id="nominalc1" value="0.25" type="hidden" name="nominalc[]">
+          <div class="row  mt-2" id="newy">
+            <input id="nominaly1" value="0.25" type="hidden" name="nominalc[]">
             <div class="col-md-2   ">
                 <label for="edin_id">Единиц	</label>
-                <select id="edin_idc1" class="form-select selectsc1 Somon edin_id" name="ed_idc[]">
+                <select id="edin_idy1" class="form-select selectse1 Somon edin_id" name="ed_idc[]">
                     <option value="">Интихоб</option>
                     @foreach($sprEds as $sprEd)
                     <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
-                @endforeach
+                        @endforeach
                                                     
                 </select>
 
             </div>
             <div class="col-md-1  ">
-                <label for="countc1">Кол-во	</label>
-                <input style="width: 05rem;" id="countc1" type="text" name="countc[]" class="form-control Somon count">
+                <label for="counte1">Кол-во	</label>
+                <input style="width: 05rem;" id="county1" type="text" name="countc[]" class="form-control Somon count">
 
             </div>
             <div class="col-md-1 ">
-                <label for="safe_idc1">Хранилище</label>
-                <select name="safe_idc[]" id="safe_idc1" class="form-control selectsc1 Somon">
+                <label for="safe_idy1">Хранилище</label>
+                <select name="safe_idc[]" id="safe_idy1" class="form-control selectse1 Somon">
                     <option selected="" value="">Выберите</option>
                     @foreach($safes as $safe)
                     <option value="{{$safe->id}}">{{$safe->safe}}</option>
                 @endforeach                                      
                 </select>
             </div>
-            <div class="col-md-1">  <label for="shavingc1">Шкаф	</label>
-                <select name="shavingc[]" id="shavingc1" class="form-control selectsc1 Somon">
+            <div class="col-md-1">  <label for="shavingy1">Шкаф	</label>
+                <select name="shavingc[]" id="shavingy1" class="form-control selectse1 Somon">
 
 
                 </select>
             </div>
             <div class="col-md-1   ">
-                <label for="qator_idc1">Ряд	</label>
-                <select name="qator_idc[]" id="qator_idc1" class="form-control selectsc1 Somon">
+                <label for="qator_idy1">Ряд	</label>
+                <select name="qator_idc[]" id="qator_idy1" class="form-control selectse1 Somon">
                     <option selected="" value="">Выберите </option>
 
                 </select>
             </div>
             <div class="col-md-2">
-                <label for="cellsc1">Ячейка</label>
-                <select name="cellsc[]" id="cellsc1" class="form-control selectsc1 Somon">
+                <label for="cellsy1">Ячейка</label>
+                <select name="cellsc[]" id="cellsy1" class="form-control selectse1 Somon">
 
 
                 </select>
             </div>
             <div class="col-md-3 mt-4">
-                <button type="button" class="btn btn-primary active" id="addc" value="c1"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-                <button id="removec" value="c1" type="button" class="btn btn-bitbucket active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
-                <input type="hidden" value="1" id="total_chqc1">
+                <button type="button" class="btn btn-primary active" id="addy" value="y1"> <svg   width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                <button id="removey" value="y1" type="button" class="btn btn-bitbucket active"><svg  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                <input type="hidden" value="1" id="total_chqy1">
             </div>
         </div>
 
 
-        <div id="new_chqc1"></div>
+        <div id="new_chqy1"></div>
       
         <div class="form-check form-switch  col-md-4 mt-4">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomonc">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomony">
             <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
 
         </div>
-        <div id="sumc1" class="col-md-3 offset-8 " style="margin-top:-10px;"></div>
-        <div id="nepolniySomonc">   </div>
+        <div id="sumy1" class="col-md-3 offset-8 " style="margin-top:-10px;"></div>
+        <div id="nepolniySomony">   </div>
 
    
 
@@ -3182,18 +3258,18 @@
     
     
 
-        <div class="row  mt-2     " id="new00">
+        <div class="row  mt-2     " id="newu">
 
 
 
 
 
-            <input id="nominal01" value="1" class="nominal" type="hidden" name="nominal0[]">
+            <input id="nominalu1" value="1" class="nominal" type="hidden" name="nominal0[]">
 
 
              <div class="col-md-2   ">
-                 <label for="edin_id">Единиц	</label>
-                 <select id="edin_id01" class="form-select selects01 Somon edin_id" name="ed_id0[]">
+                 <label for="edin_idu">Единиц	</label>
+                 <select id="edin_idu1" class="form-select selectsu1 Somon edin_id" name="ed_id0[]">
                      <option value="">Интихоб</option>
                      @foreach($sprEds as $sprEd)
                      <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
@@ -3202,13 +3278,13 @@
 
              </div>
              <div class="col-md-1  ">
-                 <label for="count01">Кол-во	</label>
-                 <input style="width: 05rem;" id="count01" type="text" name="count0[]" class="form-control  Somon  count">
+                 <label for="countu1">Кол-во	</label>
+                 <input style="width: 05rem;" id="countu1" type="text" name="count0[]" class="form-control  Somon  count">
 
              </div>
              <div class="col-md-2 ">
-                 <label for="safe_id01">Хранилище</label>
-                 <select name="safe_id0[]" style="width: 08rem;" id="safe_id01" class="form-control selects01  Somon">
+                 <label for="safe_idu1">Хранилище</label>
+                 <select name="safe_id0[]" style="width: 08rem;" id="safe_idu1" class="form-control selectsu1  Somon">
                      <option selected="" value="">Выберите</option>
                      
                      @foreach($safes as $safe)
@@ -3216,22 +3292,22 @@
                  @endforeach  
             </select>
              </div>
-             <div class="col-md-2" style="width: 08rem;">  <label for="shaving01">Шкаф	</label>
-                 <select name="shaving0[]" id="shaving01" class="form-control selects01  Somon">
+             <div class="col-md-2" style="width: 08rem;">  <label for="shavingu1">Шкаф	</label>
+                 <select name="shaving0[]" id="shavingu1" class="form-control selectsu1  Somon">
                      <option selected="" value="">Выберите </option>
 
                  </select>
              </div>
              <div class="col-md-2   ">
                  <label for="qator_id01">Ряд	</label>
-                 <select name="qator_id0[]" style="width: 08rem;" id="qator_id01" class="form-control selects01  Somon">
+                 <select name="qator_id0[]" style="width: 08rem;" id="qator_idu1" class="form-control selectsu1  Somon">
                      <option selected="" value="">Выберите </option>
 
                  </select>
              </div>
              <div class="col-md-1">
                  <label for="cells01">Ячейка</label>
-                 <select name="cells0[]" id="cells01" class="form-control selects01  Somon">
+                 <select name="cells0[]" id="cellsu1" class="form-control selectsu1  Somon">
                      <option selected="" value="">Выберите </option>
 
                  </select>
@@ -3239,22 +3315,22 @@
 
 
             <div class="col-md-2 mt-4">
-                <button type="button" class="btn btn-primary active" id="add" value="01"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-                <button id="remove" value="01" type="button" class="btn btn-bitbucket active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                <button type="button" class="btn btn-primary  " id="addu" value="u1"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                <button id="removu" value="u1" type="button" class="btn btn-bitbucket active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
                 <input type="hidden" value="1" id="total_chq01">
             </div>
         </div>
 
 
 
-        <div id="new_chq01"></div>
+        <div id="new_chqu1"></div>
 <div class="form-check form-switch  col-md-4 mt-4">
-   <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon0">
+   <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomonu">
    <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
 
 </div>
-<div id="sum01" class="col-md-3 offset-8   " style="margin-top:-10px;"></div>
-    <div id="nepolniySomon0">
+<div id="sumu1" class="col-md-3 offset-8   " style="margin-top:-10px;"></div>
+    <div id="nepolniySomonu">
 
 
 
@@ -3271,70 +3347,68 @@
     {{-- //3 Somoni --}}
 <div class="tab-pane fade " id="ThreeSTanga" role="tabpanel" aria-labelledby="ThreeS-tab"> 
 
-   <div class="row  mt-2" id="new31">
-            <input id="nominal31" value="3" type="hidden" name="nominal3[]">
+   <div class="row  mt-2" id="newi1">
+            <input id="nominali1" value="3" type="hidden" name="nominal3[]">
             <div class="col-md-2   ">
                 <label for="edin_id">Единиц	</label>
-                <select id="edin_id31" class="form-select selects31 Somon edin_id" name="ed_id3[]">
+                <select id="edin_idi1" class="form-select selects31 Somon edin_id" name="ed_id3[]">
                     <option value="">Интихоб</option>
                     @foreach($sprEds as $sprEd)
                     <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
                 @endforeach
                  
-                @foreach($sprEds as $sprEd)
-                <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
-            @endforeach
+           
                                                       </select>
 
             </div>
             <div class="col-md-1  ">
                 <label for="count31">Кол-во	</label>
-                <input style="width: 05rem;" id="count31" type="text" name="count3[]" class="form-control Somon count">
+                <input style="width: 05rem;" id="counti1" type="text" name="count3[]" class="form-control Somon count">
 
             </div>
             <div class="col-md-1 ">
                 <label for="safe_id31">Хранилище</label>
-                <select name="safe_id3[]" id="safe_id31" class="form-control selects31 Somon">
+                <select name="safe_id3[]" id="safe_idi1" class="form-control selectsi1 Somon">
                     <option selected="" value="">Выберите</option>
                     @foreach($safes as $safe)
                     <option value="{{$safe->id}}">{{$safe->safe}}</option>
                       @endforeach  
             </select>
             </div>
-            <div class="col-md-1">  <label for="shaving31">Шкаф	</label>
-                <select name="shaving3[]" id="shaving31" class="form-control selects31 Somon">
+            <div class="col-md-1">  <label for="shavingi1">Шкаф	</label>
+                <select name="shaving3[]" id="shavingi1" class="form-control selectsi1 Somon">
 
                     <option selected="" value="">Выберите </option>
                 </select>
             </div>
             <div class="col-md-1   ">
                 <label for="qator_id3[]">Ряд	</label>
-                <select name="qator_id3[]" id="qator_id31" class="form-control selects31 Somon">
+                <select name="qator_id3[]" id="qator_idi1" class="form-control selectsi1 Somon">
                     <option selected="" value="">Выберите </option>
 
                 </select>
             </div>
             <div class="col-md-2">
-                <label for="cells31">Ячейка</label>
-                <select name="cells3[]" id="cells31" class="form-control selects31 Somon">
+                <label for="cellsi1">Ячейка</label>
+                <select name="cells3[]" id="cellsi1" class="form-control selectsi1 Somon">
 
 
                 </select>
             </div>
             <div class="col-md-3 mt-4">
-                <button type="button" class="btn btn-primary active" id="add3" value="31"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-                <button id="remove3" value="31" type="button" class="btn btn-bitbucket active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
-                <input type="hidden" value="1" id="total_chq31">
+                <button type="button" class="btn btn-primary active" id="addi" value="i1"> <svg   width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                <button id="removei" value="i1" type="button" class="btn btn-bitbucket active"><svg   width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                <input type="hidden" value="1" id="total_chqi1">
             </div>
         </div>
-           <div id="new_chq31"></div>
+           <div id="new_chqi1"></div>
 <div class="form-check form-switch  col-md-4 mt-4">
-    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon3">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomoni">
     <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
 
 </div>
-<div id="sum31" class="col-md-3 offset-8   " style="margin-top:-10px;"></div>
-<div id="nepolniySomon3">    </div>
+<div id="sumi1" class="col-md-3 offset-8   " style="margin-top:-10px;"></div>
+<div id="nepolniySomoni">    </div>
 
 
    
@@ -3346,11 +3420,11 @@
         {{-- // Somoni --}}
 <div class="tab-pane fade " id="FiveSTanga" role="tabpanel" aria-labelledby="FiveS-tab"> 
 
-       <div class="row  mt-2" id="new51">
-            <input id="nominal51" value="5" type="hidden" name="nominal5[]">
+       <div class="row  mt-2" id="newo1">
+            <input id="nominalo1" value="5" type="hidden" name="nominal5[]">
             <div class="col-md-2   ">
-                <label for="edin_id">Единиц	</label>
-                <select id="edin_id51" class="form-select selects51 Somon edin_id" name="ed_id5[]">
+                <label for="edin_ido1">Единиц	</label>
+                <select id="edin_ido1" class="form-select selectso1 Somon edin_id" name="ed_id5[]">
                     <option value="">Интихоб</option>
                     @foreach($sprEds as $sprEd)
                     <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
@@ -3361,13 +3435,13 @@
 
             </div>
             <div class="col-md-1  ">
-                <label for="count51">Кол-во	</label>
-                <input style="width: 05rem;" id="count51" type="text" name="count5[]" class="form-control Somon count">
+                <label for="counto1">Кол-во	</label>
+                <input style="width: 05rem;" id="counto1" type="text" name="count5[]" class="form-control Somon count">
 
             </div>
             <div class="col-md-1 ">
-                <label for="safe_id51">Хранилище</label>
-                <select name="safe_id5[]" id="safe_id51" class="form-control selects51 Somon">
+                <label for="safe_ido1">Хранилище</label>
+                <select name="safe_id5[]" id="safe_ido1" class="form-control selectso1 Somon">
                     <option selected="" value="">Выберите</option>
                     @foreach($safes as $safe)
                     <option value="{{$safe->id}}">{{$safe->safe}}</option>
@@ -3375,43 +3449,43 @@
                                                              
              </select>
             </div>
-            <div class="col-md-1">  <label for="shaving51">Шкаф	</label>
-                <select name="shaving5[]" id="shaving51" class="form-control selects51 Somon">
+            <div class="col-md-1">  <label for="shavingo1">Шкаф	</label>
+                <select name="shaving5[]" id="shavingo1" class="form-control selectso1 Somon">
 
 
                 </select>
             </div>
             <div class="col-md-1   ">
                 <label for="qator_id51">Ряд	</label>
-                <select name="qator_id5[]" id="qator_id51" class="form-control selects51 Somon">
+                <select name="qator_id5[]" id="qator_ido1" class="form-control selectso1 Somon">
                     <option selected="" value="">Выберите </option>
 
                 </select>
             </div>
             <div class="col-md-2">
                 <label for="cells51">Ячейка</label>
-                <select name="cells5[]" id="cells51" class="form-control selects51 Somon">
+                <select name="cells5[]" id="cellso1" class="form-control selectso1 Somon">
 
 
                 </select>
             </div>
             <div class="col-md-3 mt-4">
-                <button type="button" class="btn btn-primary active" id="add5" value="51"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-                <button id="remove5" value="51" type="button" class="btn btn-bitbucket active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
-                <input type="hidden" value="1" id="total_chq51">
+                <button type="button" class="btn btn-primary active" id="addo" value="o1"> <svg   width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                <button id="removo" value="o1" type="button" class="btn btn-bitbucket active"><svg   width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                <input type="hidden" value="1" id="total_chqo1">
             </div>
         </div>
 
 
-        <div id="new_chq51"></div>
+        <div id="new_chqo1"></div>
 
         <div class="form-check form-switch  col-md-4 mt-4">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon5">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomono">
             <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
 
         </div>
-        <div id="nepolniySomon5">   </div>
-        <div id="sum51" class="col-md-4 offset-8"></div>
+        <div id="nepolniySomono">   </div>
+        <div id="sumo1" class="col-md-4 offset-8"></div>
 
 
      
@@ -3424,40 +3498,40 @@
 
 
 {{-- razne --}}
-<div class="tab-pane fade " id="razne" role="tabpanel" aria-labelledby="razne-tab">
-    <div class="row  mt-2" id="newf">
+<div class="tab-pane fade " id="razneTanga" role="tabpanel" aria-labelledby="razne-tab">
+    <div class="row  mt-2" id="new6">
           
          
            <div class="col-md-1  ">
-               <label for="countcf1">Сумма	</label>
+               <label for="countc61">Сумма	</label>
                <input style="width: 05rem;" id="countSumsrazSomon" type="text" name="summarazne" class="form-control Somon count">
 
            </div>
            <div class="col-md-1 ">
-               <label for="safe_idf1">Хранилище</label>
-               <select name="safe_idrazned" id="safe_idr1" class="form-control selectsf1 Somon">
+               <label for="safe_id61">Хранилище</label>
+               <select name="safe_idrazned" id="safe_id61" class="form-control selectsf1 Somon">
                    <option selected="" value="">Выберите</option>
                    @foreach($safes as $safe)
                    <option value="{{$safe->id}}">{{$safe->safe}}</option>
                @endforeach
                                                       </select>
            </div>
-           <div class="col-md-1">  <label for="shavingr1">Шкаф	</label>
-               <select name="shavingrazne" id="shavingr1" class="form-control selectsf1 Somon">
+           <div class="col-md-1">  <label for="shaving61">Шкаф	</label>
+               <select name="shavingrazne" id="shaving61" class="form-control shaving61 Somon">
 
 
                </select>
            </div>
            <div class="col-md-1   ">
                <label for="qator_idr1">Ряд	</label>
-               <select name="qator_idrazne" id="qator_idr1" class="form-control selectsf1 Somon">
+               <select name="qator_idrazne" id="qator_id61" class="form-control shaving61 Somon">
                    <option selected="" value="">Выберите </option>
 
                </select>
            </div>
            <div class="col-md-2">
                <label for="cellsf1">Ячейка</label>
-               <select name="cellsrazne" id="cellsr1" class="form-control selectsf1 Somon">
+               <select name="cellsrazne" id="cells61" class="form-control shaving61 Somon">
                    <option selected="" value="">Выберите </option>
 
                </select>
@@ -3474,13 +3548,13 @@
    </div>
 {{-- nepolnoe end --}}
 
- <div class="tab-pane fade " id="FiveD" role="tabpanel" aria-labelledby="FiveD-tab"> 
+ <div class="tab-pane fade " id="FiveDTanga" role="tabpanel" aria-labelledby="FiveD-tab"> 
                                         
-                                        <div class="row  mt-2" id="newh">
-                                            <input     id="nominalh1"  value="0.05"    type="hidden"  name="nominalh[]"     >
+                                        <div class="row  mt-2" id="newp">
+                                            <input     id="nominalp1"  value="0.05"    type="hidden"  name="nominalh[]"     >
                                             <div class="col-md-2   ">
-                                                <label for="edin_id">Единиц	</label>
-                                                <select id="edin_idh1" class="form-select selectsd1 Somon edin_id" name="ed_idh[]"  >
+                                                <label for="edin_idp">Единиц	</label>
+                                                <select id="edin_idp1" class="form-select selectsp1 Somon edin_id" name="ed_idh[]"  >
                                                     <option value="">Интихоб</option>
                                                     @foreach($sprEds as $sprEd)
                                                         <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}
@@ -3491,132 +3565,67 @@
                                             </div>
                                             <div class="col-md-1  ">
                                                 <label for="counth1">Кол-во	</label>
-                                                <input      style="width: 05rem;" id="counth1"   type="text"  name="counth[] " class="form-control Somon count">
+                                                <input      style="width: 05rem;" id="countp1"   type="text"  name="counth[] " class="form-control Somon count">
               
                                             </div>
                                             <div class="col-md-1 ">
                                                 <label for="safe_idh1">Хранилище</label>
-                                                <select name="safe_idh[]"   id="safe_idh1" class="form-control selectsh Somon">
+                                                <select name="safe_idh[]"   id="safe_idp1" class="form-control selectsp1 Somon">
                                                     <option   selected value="">Выберите</option>
                                                     @foreach($safes as $safe)
                                                         <option value="{{$safe->id}}">{{$safe->safe}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-1">  <label for="shavingh1">Шкаф	</label>
-                                                <select name="shavingh[]"   id="shavingh1" class="form-control selectsh Somon">
+                                            <div class="col-md-1">  <label for="shavingp1">Шкаф	</label>
+                                                <select name="shavingh[]"   id="shavingp1" class="form-control selectsp1 Somon">
               
               
                                                 </select>
                                             </div>
                                             <div class="col-md-1   ">
                                                 <label for="qator_ide1">Ряд	</label>
-                                                <select name="qator_idh[]"   id="qator_idh1" class="form-control selectsh Somon">
+                                                <select name="qator_idh[]"   id="qator_idp1" class="form-control selectsp1 Somon">
                                                     <option   selected value="">Выберите </option>
               
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <label for="cellsh1">Ячейка</label>
-                                                <select name="cellsh[]"   id="cellsh1" class="form-control selectsh Somon">
+                                                <label for="cellsp1">Ячейка</label>
+                                                <select name="cellsh[]"   id="cellsp1" class="form-control selectsp1 Somon">
               
               
                                                 </select>
                                             </div>
                                             <div class="col-md-3 mt-4">
-                                                <button type="button"   class="btn btn-primary active" id="addh"    value="h1" > <i class="align-middle" data-feather="plus"></i></button>
-                                                <button   id="removeh" value="h1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
-                                                <input type="hidden" value="1" id="total_chqh1">
+                                                <button type="button"   class="btn btn-primary active" id="addp"    value="p1" > <i class="align-middle" data-feather="plus"></i></button>
+                                                <button   id="removep" value="p1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
+                                                <input type="hidden" value="1" id="total_chqp1">
                                             </div>
                                         </div>
               
               
-                                        <div id="new_chqh1"></div>
+                                        <div id="new_chqp1"></div>
                                       
                                         <div class="form-check form-switch  col-md-4 mt-4">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonh" >
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonp" >
                                             <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
               
                                         </div>
-                                        <div id="sumh1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
-                                        <div  id="nepolniySomonh">   </div>
+                                        <div id="sump1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
+                                        <div  id="nepolniySomonp">   </div>
                                     </div>
-                                      <div class="tab-pane fade " id="TwintyD" role="tabpanel" aria-labelledby="TwintyD-tab">  
-
-                                        <div class="row  mt-2" id="newj">
-                                            <input     id="nominalj1"  value="0.20"    type="hidden"  name="nominalj[]"     >
-                                            <div class="col-md-2   ">
-                                                <label for="edin_id">Единиц	</label>
-                                                <select id="edin_idj1" class="form-select selectsd1 Somon edin_id" name="ed_idj[]"  >
-                                                    <option value="">Интихоб</option>
-                                                    @foreach($sprEds as $sprEd)
-                                                        <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-              
-                                            </div>
-                                            <div class="col-md-1  ">
-                                                <label for="countcj1">Кол-во	</label>
-                                                <input      style="width: 05rem;" id="countj1"   type="text"  name="countj[] " class="form-control Somon count">
-              
-                                            </div>
-                                            <div class="col-md-1 ">
-                                                <label for="safe_idj1">Хранилище</label>
-                                                <select name="safe_idj[]"   id="safe_idj1" class="form-control selectsj1 Somon">
-                                                    <option   selected value="">Выберите</option>
-                                                    @foreach($safes as $safe)
-                                                        <option value="{{$safe->id}}">{{$safe->safe}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-1">  <label for="shavinge1">Шкаф	</label>
-                                                <select name="shavingj[]"   id="shavingj1" class="form-control selectsj1 Somon">
-              
-              
-                                                </select>
-                                            </div>
-                                            <div class="col-md-1   ">
-                                                <label for="qator_idh1">Ряд	</label>
-                                                <select name="qator_idj[]"   id="qator_idj1" class="form-control selectsj1 Somon">
-                                                    <option   selected value="">Выберите </option>
-              
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label for="cellsj1">Ячейка</label>
-                                                <select name="cellsj[]"   id="cellsj1" class="form-control selectsj1 Somon">
-              
-              
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3 mt-4">
-                                                <button type="button"   class="btn btn-primary active" id="addj"    value="j1" > <i class="align-middle" data-feather="plus"></i></button>
-                                                <button   id="removej" value="j1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
-                                                <input type="hidden" value="1" id="total_chqj1">
-                                            </div>
-                                        </div>
-              
-              
-                                        <div id="new_chqj1"></div>
                                       
-                                        <div class="form-check form-switch  col-md-4 mt-4">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonj" >
-                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
-              
-                                        </div>
-                                        <div id="sumj1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
-                                        <div  id="nepolniySomonj">   </div>
-                                      </div>
+                                    
 
 
                                       {{-- Fifty 50 diram --}}
-                                      <div class="tab-pane fade " id="FiftyD" role="tabpanel" aria-labelledby="FiftyD-tab"> 
-                                        <div class="row  mt-2" id="newk">
-                                            <input     id="nominalk1"  value="0.50"    type="hidden"  name="nominalk[]"     >
+                                      <div class="tab-pane fade " id="FiftyDTanga" role="tabpanel" aria-labelledby="FiftyD-tab"> 
+                                        <div class="row  mt-2" id="new4">
+                                            <input     id="nominal41"  value="0.50"    type="hidden"  name="nominalk[]"     >
                                             <div class="col-md-2   ">
                                                 <label for="edin_id">Единиц	</label>
-                                                <select id="edin_idk1" class="form-select selectsd1 Somon edin_id" name="ed_idk[]"  >
+                                                <select id="edin_id41" class="form-select selects41 Somon edin_id" name="ed_idk[]"  >
                                                     <option value="">Интихоб</option>
                                                     @foreach($sprEds as $sprEd)
                                                         <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}
@@ -3626,56 +3635,56 @@
               
                                             </div>
                                             <div class="col-md-1  ">
-                                                <label for="countce1">Кол-во	</label>
-                                                <input      style="width: 05rem;" id="countk1"   type="text"  name="countk[] " class="form-control Somon count">
+                                                <label for="countc41">Кол-во	</label>
+                                                <input      style="width: 05rem;" id="count41"   type="text"  name="countk[] " class="form-control Somon count">
               
                                             </div>
                                             <div class="col-md-1 ">
                                                 <label for="safe_ide1">Хранилище</label>
-                                                <select name="safe_idk[]"   id="safe_idk1" class="form-control selectsk1 Somon">
+                                                <select name="safe_idk[]"   id="safe_id41" class="form-control selects41 Somon">
                                                     <option   selected value="">Выберите</option>
                                                     @foreach($safes as $safe)
                                                         <option value="{{$safe->id}}">{{$safe->safe}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-1">  <label for="shavingk1">Шкаф	</label>
-                                                <select name="shavingk[]"   id="shavingk1" class="form-control selectsk1 Somon">
+                                            <div class="col-md-1">  <label for="shaving41">Шкаф	</label>
+                                                <select name="shavingk[]"   id="shaving41" class="form-control selects41 Somon">
               
               
                                                 </select>
                                             </div>
                                             <div class="col-md-1   ">
-                                                <label for="qator_ide1">Ряд	</label>
-                                                <select name="qator_idk[]"   id="qator_idk1" class="form-control selectsk1 Somon">
+                                                <label for="qator_id41">Ряд	</label>
+                                                <select name="qator_idk[]"   id="qator_id41" class="form-control selects41 Somon">
                                                     <option   selected value="">Выберите </option>
               
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <label for="cellsk1">Ячейка</label>
-                                                <select name="cellsk[]"   id="cellsk1" class="form-control selectsk1 Somon">
+                                                <label for="cells41">Ячейка</label>
+                                                <select name="cellsk[]"   id="cells41" class="form-control selects41 Somon">
               
               
                                                 </select>
                                             </div>
                                             <div class="col-md-3 mt-4">
-                                                <button type="button"   class="btn btn-primary active" id="addk"    value="k1" > <i class="align-middle" data-feather="plus"></i></button>
-                                                <button   id="removek" value="k1" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
-                                                <input type="hidden" value="1" id="total_chqk1">
+                                                <button type="button"   class="btn btn-primary active" id="add4"    value="41" > <i class="align-middle" data-feather="plus"></i></button>
+                                                <button   id="remove4" value="41" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
+                                                <input type="hidden" value="1" id="total_chq41">
                                             </div>
                                         </div>
               
               
-                                        <div id="new_chqk1"></div>
+                                        <div id="new_chq41"></div>
                                       
                                         <div class="form-check form-switch  col-md-4 mt-4">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonk" >
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomon4" >
                                             <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
               
                                         </div>
-                                        <div id="sumk1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
-                                        <div  id="nepolniySomonk">   </div>    
+                                        <div id="sum41" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
+                                        <div  id="nepolniySomon4">   </div>    
                                     </div>
 
                                   </div>
@@ -3921,30 +3930,44 @@ $.ajax({
 
 
  <script>
-   $(document).on('click','#priznak',function(){
+   $(document).on('click','#priznaki',function(){
+   
+    document.getElementById("TangaSumbit").reset();
     document.getElementById("submit").reset();
     $('[id^=sum]').html('');
     $('[id^=AllSumma]').html('');
-            $('#srcHome').html('');
+    $('#srcHome').html('');
+    $('#srcHomeTanga').html('');
           //console.log($(this).data('context'));
           $('#textpriznak').html("");
           $('#type').val('');
+          
+           var id='#srcHome';
+           if($(this).data('type')=='Tanga')
+           {
+            id='#srcHomeTanga';
+           }
           if($(this).data('context')=='korshoyam')
           {
+         
             $('#type').val(1)
             $('#textpriznak').html('Коршоям/'+$(this).text());
-            
+       
             if($(this).val()==0)
             {
-                $('#srcHome').html('<input type="hidden" name="src" value="7">');
+                $(id).html('<input type="hidden" name="src" value="7">');
+               
                 // console.log($(this).val());
+          
                 return
             }
             if($(this).val()==1)
             {
-                $('#srcHome').html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" value="7" required=""><label class="btn btn-outline-secondary" for="option1">Оборот</label> <input type="radio" class="btn-check" name="src" id="option2" value="2" autocomplete="off" required=""><label class="btn btn-outline-secondary" for="option2">Фарсуда</label> </div>');
+              
+                $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" value="7" required=""><label class="btn btn-outline-secondary" for="option1">Оборот</label> <input type="radio" class="btn-check" name="src" id="option2" value="2" autocomplete="off" required=""><label class="btn btn-outline-secondary" for="option2">Фарсуда</label> </div>');
                 // console.log($(this).val());
-            return 
+              
+                           return 
             }
           }
           if($(this).data('context')=='farsuda')
@@ -3953,11 +3976,14 @@ $.ajax({
             $('#type').val(2)
             if($(this).val()==0)
             {
-                $('#srcHome').html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" required="" value="7"><label class="btn btn-outline-secondary" for="option1">Оборот</label> <input type="radio" required="" class="btn-check" name="src" id="option2" value="1" autocomplete="off"><label class="btn btn-outline-secondary" for="option2">Коршоям</label> </div>');
+                $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" required="" value="7"><label class="btn btn-outline-secondary" for="option1">Оборот</label> <input type="radio" required="" class="btn-check" name="src" id="option2" value="1" autocomplete="off"><label class="btn btn-outline-secondary" for="option2">Коршоям</label> </div>');
+                
             }
             if($(this).val()==1)
             {
-                $('#srcHome').html('<input type="hidden" name="src" value="3">');
+                $(id).html('<input type="hidden" name="src" value="3">');
+                 
+      
                 // console.log($(this).val());
                 return
             }
@@ -3968,13 +3994,16 @@ $.ajax({
             $('#type').val(3)
             if($(this).val()==0)
             {
-                $('#srcHome').html('<input type="hidden" name="src" value="2">');
+                $(id).html('<input type="hidden" name="src" value="2">');
+              
+        
                 // console.log($(this).val());
                 return
             }
             if($(this).val()==1)
             {
-                $('#srcHome').html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" required="" value="7"><label class="btn btn-outline-secondary" for="option1">Душанбе</label> <input type="radio" required="" class="btn-check" name="src" id="option2" value="1" autocomplete="off"><label class="btn btn-outline-secondary" for="option2">Нобудкуни</label> </div>');
+                $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" required="" value="7"><label class="btn btn-outline-secondary" for="option1">Душанбе</label> <input type="radio" required="" class="btn-check" name="src" id="option2" value="1" autocomplete="off"><label class="btn btn-outline-secondary" for="option2">Нобудкуни</label> </div>');
+               
                 // console.log($(this).val());
                 return
             }

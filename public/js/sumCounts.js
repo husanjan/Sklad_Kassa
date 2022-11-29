@@ -86,7 +86,7 @@ function add(accumulator, a) {
       var   edins= $("#edin_id"+id_number).val();
       var edin_id='[id^=edin_id'+ id_number.substr(-2,1)+']';
       var count_id='[id^=count'+ id_number.substr(-2,1)+']';
-
+         console.log(nominal);
 
      
      var AllSum= SumEdinCount('[id^=new'+id_number.substr(-2,1)+']',nominal,id_number.substr(-2,1));
@@ -100,6 +100,7 @@ function add(accumulator, a) {
            // sumCounts.push(obj.value);
           obj.value;
           arrays.push();
+        
           sum+=parseFloat(obj.value);
               
              
@@ -110,6 +111,9 @@ function add(accumulator, a) {
     });
     
     var htmlSum='<div class="alert alert-primary  mt-2"><div class="btn-group" role="group" aria-label="Basic example"> Общие сумма  '+sum+' Cомони  </div></div>';
-          $("#AllSumma").html(htmlSum);
+               
+    $("#AllSumma").html(htmlSum);
+    
+          $("#AllSummaTangaD").html(htmlSum);
   
   });

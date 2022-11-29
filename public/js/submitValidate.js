@@ -136,9 +136,75 @@ $(document).on("click",'#submits', function(){
         {
             ErrorValidateSomon($(this).find('.Somon'),'#f');
         } });
-    $('[id^=newf]').each(function(){
+        // one diram validate 
+        $('[id^=newq]').each(function(){
+            // do stuff
+            var len= filters($(this).find('.Somon'));
+            if(len>0)
+            {
+                ErrorValidateSomon($(this).find('.Somon'),'#f');
+            } });
+            $('[id^=neww]').each(function(){
+                // do stuff
+                var len= filters($(this).find('.Somon'));
+                if(len>0)
+                {
+                    ErrorValidateSomon($(this).find('.Somon'),'#f');
+                } });
 
-    });
+                //25 diram 
+                $('[id^=newy]').each(function(){
+                    // do stuff
+                    var len= filters($(this).find('.Somon'));
+                    if(len>0)
+                    {
+                        ErrorValidateSomon($(this).find('.Somon'),'#y');
+                    } });
+                    $('[id^=newu]').each(function(){
+                        // do stuff
+                        var len= filters($(this).find('.Somon'));
+                        if(len>0)
+                        {
+                            ErrorValidateSomon($(this).find('.Somon'),'#u');
+                        } });
+                        $('[id^=newi]').each(function(){
+                            // do stuff
+                            var len= filters($(this).find('.Somon'));
+                            if(len>0)
+                            {
+                                ErrorValidateSomon($(this).find('.Somon'),'#i');
+                            } });
+
+                            $('[id^=newo]').each(function(){
+                                // do stuff
+                                var len= filters($(this).find('.Somon'));
+                                if(len>0)
+                                {
+                                    ErrorValidateSomon($(this).find('.Somon'),'#o');
+                                } });
+                                $('[id^=newp]').each(function(){
+                                    // do stuff
+                                    var len= filters($(this).find('.Somon'));
+                                    if(len>0)
+                                    {
+                                        ErrorValidateSomon($(this).find('.Somon'),'#p');
+                                    } });
+                                    
+                                    // 50 diram
+                                    $('[id^=new4]').each(function(){
+                                        // do stuff
+                                        var len= filters($(this).find('.Somon'));
+                                        if(len>0)
+                                        {
+                                            ErrorValidateSomon($(this).find('.Somon'),'#4');
+                                        } });
+                                        $('[id^=new6]').each(function(){
+                                            // do stuff
+                                            var len= filters($(this).find('.Somon'));
+                                            if(len>0)
+                                            {
+                                                ErrorValidateSomon($(this).find('.Somon'),'#4');
+                                            } });
     //post form validateArr.length
     var len= filters($('[id^=new]').find('.Somon'));
     //nipolnoe validate
