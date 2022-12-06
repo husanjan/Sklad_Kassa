@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     //remove button
     
-    $("#remove,#remove3,#remove5,#removet,#removeb,#removec,#remove4,#removep,#removed,#removee,#removef,#removeg,#removeh,#removej,#removek,#removeq,#removew,#removo,#removey,#removeu,#removei").click(function(){
+    $("#remove,#remove3,#remove5,#removet,#removeb,#removec,#remove4,#removep,#removed,#removee,#removef,#removeg,#removeh,#removej,#removek,#removeq,#removew,#removo,#removey,#removeu,#removei,#remove7").click(function(){
      var id_btn=$(this).val();
     
      var   nominal= $('#'+'nominal'+id_btn).val();
@@ -37,7 +37,7 @@ $(document).ready(function(){
      });
      return selectIsValid;
     }
-    $("#add,#add3,#add5,#addt,#addb,#addc,#addd,#adde,#addf,#addg,#addh,#addj,#addk,#addq,#addw,#addy,#addu,#addi,#addo,#addp,#add4").click(function(){
+    $("#add,#add3,#add5,#addt,#addb,#addc,#addd,#adde,#addf,#addg,#addh,#addj,#addk,#addq,#addw,#addy,#addu,#addi,#addo,#addp,#add4,#add7").click(function(){
     
     
     

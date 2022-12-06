@@ -12,6 +12,313 @@ class AddRequest{
     {
         $this->blogRepository = $blogRepository;
     }
+
+    
+ public function ModaladdRequestsTanga($request)
+ {
+ 
+                 //One diram
+      if($request->ed_idq>0)
+      {
+
+    
+      $this->blogRepository->allInsertDB($request->ed_idq,$request->countq,$request->safe_idq,$request->shavingq,$request->qator_idq,
+      $request->cellsq,$request->nominalq,
+           $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
+                  $request->ndoc,$request->summacountsq,$request->comment,Auth::id(),$request->ip() );
+                //  end diram one
+      }
+     //Nepolnone 
+     $addOneNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonqs,array_values($request->nominalq)[0],1,1,$request->shavingnepolniySomonqs,
+     $request->qator_idnepolniySomonqs,$request->cellsnepolniySomonqs,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+     $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouq,$request->comment);    
+                      
+                // ..0.20  дирам
+             
+                if($request->ed_idw>0)
+      {  
+                $this->blogRepository->allInsertDB($request->ed_idw,$request->countw,$request->safe_idw,$request->shavingw,$request->qator_idw,
+                $request->cellsw,$request->nominalw,
+                     $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
+                            $request->ndoc,$request->summacountsw,$request->comment,Auth::id(),$request->ip());
+      }  
+           //                     neplone
+$addTwentyNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonws,array_values($request->nominalw)[0],1,1,$request->shavingnepolniySomonws,
+$request->qator_idnepolniySomonws,$request->cellsnepolniySomonws,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+$request->ndoc,$request->kode_oper,Auth::id(),$request->summcouw,$request->comment);                    
+   //      // ..0.20  дирам
+     // ..0.25  дирам
+   
+     if($request->ed_idy>0)
+     {  
+     $this->blogRepository->allInsertDB($request->ed_idy,$request->county,$request->safe_idy,$request->shavingy,$request->qator_idy,
+     $request->cellsy,$request->nominaly,
+          $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
+                 $request->ndoc,$request->summacountsy,$request->comment,Auth::id(),$request->ip());
+     }            
+     //25 nepolnoe 
+     $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonys,array_values($request->nominaly)[0],1,1,$request->shavingnepolniySomonys,
+     $request->qator_idnepolniySomonys,$request->cellsnepolniySomonys,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+     $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouw,$request->comment);        
+   // ned 25 nepolnoe 
+//      // ..0.25   дирам
+
+
+     // 0.1 diram 
+   
+     if($request->ed_id7>0)
+     {  
+     $this->blogRepository->allInsertDB($request->ed_id7,$request->count7,$request->safe_id7,$request->shaving7,$request->qator_id7,
+     $request->cells7,$request->nominal7,
+          $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
+                 $request->ndoc,$request->summacountsu,$request->comment,Auth::id(),$request->ip());
+     }            
+     //0.1 nepolnoe 
+     $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomon7s,array_values($request->nominal7)[0],1,1,$request->shavingnepolniySomon7s,
+     $request->qator_idnepolniySomon7s,$request->cellsnepolniySomon7s,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+     $request->ndoc,$request->kode_oper,Auth::id(),$request->summcou7,$request->comment);        
+   // ned 0.1 diram  nepolnoe 
+//      // end ..0.1 diram 
+  // 1 somon
+   
+  if($request->ed_idu>0)
+  {  
+  $this->blogRepository->allInsertDB($request->ed_idu,$request->countu,$request->safe_idu,$request->shavingu,$request->qator_idu,
+  $request->cellsu,$request->nominalu,
+       $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+              $request->ndoc,$request->summcouu,$request->comment,Auth::id(),$request->ip());
+  }            
+  //1 nepolnoe 
+  $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonus,array_values($request->nominalu)[0],1,1,$request->shavingnepolniySomonus,
+  $request->qator_idnepolniySomonus,$request->cellsnepolniySomonus,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+  $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouu,$request->comment);        
+// ned .1 somon nepolnoe 
+//      // ...1 somon
+     // ..3  somon
+     if($request->ed_idi>0)
+     {  
+     $this->blogRepository->allInsertDB($request->ed_idi,$request->counti,$request->safe_idi,$request->shavingi,$request->qator_idi,
+     $request->cellsi,$request->nominali,
+          $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+                 $request->ndoc,$request->summacountsi,$request->comment,Auth::id(),$request->ip() );
+     }
+       
+          //3 nepolnoe 
+  $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonis,array_values($request->nominali)[0],1,1,$request->shavingnepolniySomonis,
+  $request->qator_idnepolniySomonis,$request->cellsnepolniySomonis,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+  $request->ndoc,$request->kode_oper,Auth::id(),$request->summcoui,$request->comment);        
+// ned .3 somon nepolnoe 
+            
+        // end  3 nepolnoe 
+//      // ..3 somon   дирам
+     // ..5  somon
+     if($request->ed_ido>0)
+     { 
+     $this->blogRepository->allInsertDB($request->ed_ido,$request->counto,$request->safe_ido,$request->shavingo,$request->qator_ido,
+     $request->cellso,$request->nominalo,
+          $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
+                 $request->ndoc,$request->summacountso,$request->comment,Auth::id(),$request->ip());
+     }
+               //5 nepolnoe 
+  $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonos,array_values($request->nominalo)[0],1,1,$request->shavingnepolniySomonos,
+  $request->qator_idnepolniySomonos,$request->cellsnepolniySomonos,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+  $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouo,$request->comment);        
+// ned .5 somon nepolnoe 
+//      // ..5 somon   дирам
+             //Razne Tanga
+             if($request->safe_idrazned>0)
+     { 
+$razne= $this->blogRepository->AddInsertnepol($request->safe_idrazned,'razne',1,1,$request->shavingrazne,
+$request->qator_idrazne,$request->cellsrazne,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+$request->ndoc,$request->kode_oper,Auth::id(),$request->summarazne,$request->comment,8);
+     }
+ 
+   //End Razne Tanga
+     // .0.5  somon
+     if($request->ed_idp>0)
+     { 
+     $this->blogRepository->allInsertDB($request->ed_idp,$request->countp,$request->safe_idp,$request->shavingp,$request->qator_idp,
+     $request->cellsp,$request->nominalp,
+          $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
+                 $request->ndoc,$request->summacountsp,$request->comment,Auth::id(),$request->ip());
+     }
+               //0, 5 nepolnoe 
+  $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonps,array_values($request->nominalp)[0],1,1,$request->shavingnepolniySomonps,
+  $request->qator_idnepolniySomonps,$request->cellsnepolniySomonps,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+  $request->ndoc,$request->kode_oper,Auth::id(),$request->summcoup,$request->comment);        
+// ned 0.5 somon nepolnoe 
+//      // .0.5 somon   дирам
+    // .0.50  somon
+    if($request->ed_id4>0)
+    { 
+    $this->blogRepository->allInsertDB($request->ed_id4,$request->count4,$request->safe_id4,$request->shaving4,$request->qator_id4,
+    $request->cells4,$request->nominal4,
+         $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
+                $request->ndoc,$request->summacounts4,$request->comment,Auth::id(),$request->ip());
+    }
+    $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomon4s,array_values($request->nominal4)[0],1,1,$request->shavingnepolniySomon4s,
+    $request->qator_idnepolniySomonps,$request->cellsnepolniySomonps,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+    $request->ndoc,$request->kode_oper,Auth::id(),$request->summcoup,$request->comment);   
+
+//      // 0.50 somon   дирам
+return  $this->blogRepository->arr;
+ 
+        
+ }              
+
+
+
+
+
+
+
+    public function  ModaladdRequestsOborottanga($request,$account_id_out)
+    {
+
+      //One diram
+      if($request->ed_idq>0)
+      {
+
+    
+      $this->blogRepository->OborotInsertTanga($request->ed_idq,$request->countq,$request->safe_idq,$request->shavingq,$request->qator_idq,
+      $request->cellsq,$request->nominalq,
+           $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+                  $request->ndoc,$request->summacountsq,$request->comment,Auth::id(),$request->ip(),$account_id_out);
+                //  end diram one
+      }
+                      // ..0.10  дирам
+                      if($request->ed_id7>0)
+                      {  
+                                $this->blogRepository->OborotInsertTanga($request->ed_id7,$request->count7,$request->safe_id7,$request->shaving7,$request->qator_id7,
+                                $request->cells7,$request->nominal7,
+                                     $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+                                            $request->ndoc,$request->summacounts7,$request->comment,Auth::id(),$request->ip(),$account_id_out);
+                      }                     
+                   //      // ..0.10  дирам
+                // ..0.20  дирам
+                if($request->ed_idw>0)
+      {  
+                $this->blogRepository->OborotInsertTanga($request->ed_idw,$request->countw,$request->safe_idw,$request->shavingw,$request->qator_idw,
+                $request->cellsw,$request->nominalw,
+                     $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+                            $request->ndoc,$request->summacountsw,$request->comment,Auth::id(),$request->ip(),$account_id_out);
+      }                     
+   //      // ..0.20  дирам
+     // ..0.25  дирам
+     if($request->ed_idy>0)
+     {  
+     $this->blogRepository->OborotInsertTanga($request->ed_idy,$request->county,$request->safe_idy,$request->shavingy,$request->qator_idy,
+     $request->cellsy,$request->nominaly,
+          $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+                 $request->ndoc,$request->summacountsy,$request->comment,Auth::id(),$request->ip(),$account_id_out);
+     }             
+//      // ..0.25   дирам
+     // ..3  somon
+     if($request->counti>0)
+     {  
+     $this->blogRepository->OborotInsertTanga($request->ed_idi,$request->counti,$request->safe_idi,$request->shavingi,$request->qator_idi,
+     $request->cellsi,$request->nominali,
+          $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+                 $request->ndoc,$request->summacountsi,$request->comment,Auth::id(),$request->ip(),$account_id_out);
+     }
+//      // ..3 somon   дирам
+     // ..5  somon
+     if($request->counto>0)
+     { 
+     $this->blogRepository->OborotInsertTanga($request->ed_ido,$request->counto,$request->safe_ido,$request->shavingo,$request->qator_ido,
+     $request->cellso,$request->nominalo,
+          $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+                 $request->ndoc,$request->summacountso,$request->comment,Auth::id(),$request->ip(),$account_id_out);
+     }
+//      // ..5 somon   дирам
+             //Razne Tanga
+             if($request->safe_idrazned>0)
+     { 
+$razne= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idrazned,'razne',1,1,$request->shavingrazne,
+$request->qator_idrazne,$request->cellsrazne,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+$request->ndoc,$request->kode_oper_obor,Auth::id(),$request->summarazne,$request->comment,8);
+     }
+ 
+   //End Razne Tanga
+     // .0.5  somon
+     if($request->countp>0)
+     { 
+     $this->blogRepository->OborotInsertTanga($request->ed_idp,$request->countp,$request->safe_idp,$request->shavingp,$request->qator_idp,
+     $request->cellsp,$request->nominalp,
+          $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+                 $request->ndoc,$request->summacountsp,$request->comment,Auth::id(),$request->ip(),$account_id_out);
+     }
+//      // .0.5 somon   дирам
+    // .0.50  somon
+    if($request->ed_id4>0)
+    { 
+    $this->blogRepository->OborotInsertTanga($request->ed_id4,$request->count4,$request->safe_id4,$request->shaving4,$request->qator_id4,
+    $request->cells4,$request->nominal4,
+         $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+                $request->ndoc,$request->summacounts4,$request->comment,Auth::id(),$request->ip(),$account_id_out);
+    }
+//      // .0.50 somon   дирам
+
+ //Nepolnone   One diram
+ $addOneNeplan= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idnepolniySomonqs,array_values($request->nominalq)[0],1,1,$request->shavingnepolniySomonqs,
+ $request->qator_idnepolniySomonqs,$request->cellsnepolniySomonqs,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+ $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouq,$request->comment,$account_id_out);    
+       //                     neplone  ..0.20  дирам
+$addTwentyNeplan= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idnepolniySomonws,array_values($request->nominalw)[0],1,1,$request->shavingnepolniySomonws,
+$request->qator_idnepolniySomonws,$request->cellsnepolniySomonws,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+$request->ndoc,$request->kode_oper,Auth::id(),$request->summcouw,$request->comment,$account_id_out);                    
+
+ //25 nepolnoe 
+ $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idnepolniySomonys,array_values($request->nominaly)[0],1,1,$request->shavingnepolniySomonys,
+ $request->qator_idnepolniySomonys,$request->cellsnepolniySomonys,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+ $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouw,$request->comment,$account_id_out);        
+// ned 25 nepolnoe   
+
+//0.1 nepolnoe 
+ $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idnepolniySomon7s,array_values($request->nominal7)[0],1,1,$request->shavingnepolniySomon7s,
+ $request->qator_idnepolniySomon7s,$request->cellsnepolniySomon7s,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+ $request->ndoc,$request->kode_oper,Auth::id(),$request->summcou7,$request->comment,$account_id_out);        
+// ned 0.1 diram  nepolnoe 
+//      // end ..0.1 diram    
+
+//1 nepolnoe 
+$addTwentyFiveNeplan= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idnepolniySomonus,array_values($request->nominalu)[0],1,1,$request->shavingnepolniySomonus,
+$request->qator_idnepolniySomonus,$request->cellsnepolniySomonus,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+$request->ndoc,$request->kode_oper,Auth::id(),$request->summcouu,$request->comment,$account_id_out);        
+// ned .1 somon nepolnoe   
+
+      //3 nepolnoe 
+$addTwentyFiveNeplan= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idnepolniySomonis,array_values($request->nominali)[0],1,1,$request->shavingnepolniySomonis,
+$request->qator_idnepolniySomonis,$request->cellsnepolniySomonis,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+$request->ndoc,$request->kode_oper,Auth::id(),$request->summcoui,$request->comment,$account_id_out);        
+// ned .3 somon nepolnoe 
+    //5 nepolnoe 
+$addTwentyFiveNeplan= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idnepolniySomonos,array_values($request->nominalo)[0],1,1,$request->shavingnepolniySomonos,
+$request->qator_idnepolniySomonos,$request->cellsnepolniySomonos,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+$request->ndoc,$request->kode_oper,Auth::id(),$request->summcouo,$request->comment,$account_id_out);        
+// ned .5 somon nepolnoe 
+
+           //0, 5 nepolnoe 
+$addTwentyFiveNeplan= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idnepolniySomonps,array_values($request->nominalp)[0],1,1,$request->shavingnepolniySomonps,
+$request->qator_idnepolniySomonps,$request->cellsnepolniySomonps,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+$request->ndoc,$request->kode_oper,Auth::id(),$request->summcoup,$request->comment,$account_id_out);        
+// ned 0.5 somon nepolnoe 
+
+
+$addTwentyFiveNeplan= $this->blogRepository->AddInsertnepolOborotTanga($request->safe_idnepolniySomon4s,array_values($request->nominal4)[0],1,1,$request->shavingnepolniySomon4s,
+$request->qator_idnepolniySomonps,$request->cellsnepolniySomonps,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
+$request->ndoc,$request->kode_oper,Auth::id(),$request->summcoup,$request->comment,$account_id_out);   
+
+//      // 0.50 somon   дирам
+          return  $this->blogRepository->arrInsertOborotTanga;
+    }
+
+
+
+
+
+
+
     public function addRequestsOborottanga($request,$account_id_out)
     {
       $Onesomoni=$this->blogRepository->OborotInsertTanga($request->ed_id0,$request->count0,$request->safe_id0,$request->shaving0,$request->qator_id0,
@@ -388,17 +695,7 @@ $addneplonoeOnehundred= $this->blogRepository->AddInsertnepol($request->safe_idn
 $request->qator_idnepolniySomonds,$request->cellsnepolniySomonds,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
 $request->ndoc,$request->kode_oper,Auth::id(),$request->summcoud,$request->comment);
 //         End Fifty Somoni
-//          Onehundred Somoni
-// $Onehundredsomon= $this->blogRepository->allInsertDB($request->ed_idd,$request->countd,$request->safe_idd,$request->shavingd,$request->qator_idd,
-// $request->cellsd,$request->nominald,$request->date,$request->priznak,$request->kode_oper,$request->farsuda,
-// $request->src,$request->ndoc,$request->summacountsd,$request->comment,Auth::id(),$request->ip());
-
-   //    neplone Onehundred
-// $addneplonoeOnehundred= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonds,array_values($request->nominalc)[0],1,1,$request->shavingnepolniySomonds,
-// $request->qator_idnepolniySomonds,$request->cellsnepolniySomonds,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
-// $request->ndoc,$request->kode_oper,Auth::id(),$request->summcoud,$request->comment);
-//         End Onehundred Somoni
-
+ 
 
 //Twohundred Somoni
 $Twohundredsomon= $this->blogRepository->allInsertDB($request->ed_ide,$request->counte,$request->safe_ide,$request->shavinge,$request->qator_ide,

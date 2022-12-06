@@ -1456,7 +1456,7 @@
                           
                                 @csrf
             
-                                <input type="hidden" name="kod_oper" value="{{$kodeOper}}">
+                                <input type="hidden" name="kod_oper" value="{{$kodeOperObortTanga}}">
                                 {{-- <input type="hidden" name="kode_oper" value="{{$kodOper}}"> --}}
                                 <div class="row mb-3 mt-3">
                                      <div class="container">
@@ -1480,7 +1480,7 @@
                                         </select>
                                    
                                     </div>
-                                    <div class="col-md-2  ">
+                                    <div class="col-md-1">
 
                                         <span class=""></span>
                                       
@@ -2589,7 +2589,7 @@
 
                         @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   $value['src'];},$oborotsTanga)))[0])
                             <td class="col-md-2" id="Tangaacn{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}">
-                                {{ $sprAccount->account }} </td>
+                                {{ $sprAccount->name }} </td>
                         @endif
                     @endforeach
                     <td class="col-md-4 ">
@@ -2921,7 +2921,7 @@
 </div>
 {{--modal1 end Коршоям  Tanga Детализация--}}
 
-<form method="POST" action="{{ route('korshoyam_tanga.store') }}" id="calcForms" >
+<form method="POST" action="{{ route('InsertTanga.post') }}" id="calcForms" >
     @csrf
   <div class="modal fade " id="rashodTanga" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div  style="height: 70px">
@@ -2954,8 +2954,8 @@
                           <label for="date">Дата	</label>
                           <input  type="datetime-local"readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"     name="date" class="form-control"    >
 
-                          <input       id="valuepriznak"     name="priznak" type="hidden"    >
-                          <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}">
+                          <input       id="valuepriznakTanga"     name="priznak" type="hidden"    >
+                          <input            name="kode_oper" type="hidden"   value="{{$kodOperTanga}}">
                           <input            name="farsuda" type="hidden"   value="1" >
 
                       </div>
@@ -2963,7 +2963,7 @@
 
                           
                       
-                          <input type="hidden" name="kode_oper_obor" value="{{$kodeOperObort }}">
+                          <input type="hidden" name="kode_oper_obor" value="{{$kodeOperObortTanga}}">
                             
                               <div id="src">
                               
@@ -2985,7 +2985,7 @@
 
                       </div>
                     
-                      <div class="col-md-2  ">
+                      <div class="col-md-2  offset-1">
                           <label for="count01">Номер Документ	</label>
                           <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
                       </div>
@@ -3007,6 +3007,9 @@
                                       <li class="nav-item">
                                           <a class="nav-link" id="FiveD-tab" data-toggle="tab" href="#FiveDTanga" role="tab" aria-controls="FiveD" aria-selected="false">5 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="hSomon"></i></a>
                                       </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#TenDiram" role="tab" aria-controls="TenD" aria-selected="false">10 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="jSomon"></i></a>
+                                    </li>
                                       <li class="nav-item">
                                           <a class="nav-link" id="contact-tab" data-toggle="tab" href="#TwintyDTanga" role="tab" aria-controls="TwintyD" aria-selected="false">20 дирам <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="jSomon"></i></a>
                                       </li>
@@ -3034,10 +3037,10 @@
                                     <div class="tab-pane fade " id="TwintyDTanga" role="tabpanel" aria-labelledby="TwintyDTanga-tab">  
 
                                         <div class="row  mt-2" id="neww">
-                                            <input     id="nominalw1"  value="0.20"    type="hidden"  name="nominalj[]"     >
+                                            <input     id="nominalw1"  value="0.20"    type="hidden"  name="nominalw[]"     >
                                             <div class="col-md-2   ">
                                                 <label for="edin_id">Единиц	</label>
-                                                <select id="edin_idw1" class="form-select selectsw1 Somon edin_id" name="ed_idj[]"  >
+                                                <select id="edin_idw1" class="form-select selectsw1 Somon edin_id" name="ed_idw[]"  >
                                                     <option value="">Интихоб</option>
                                                     @foreach($sprEds as $sprEd)
                                                         <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}
@@ -3048,12 +3051,12 @@
                                             </div>
                                             <div class="col-md-1  ">
                                                 <label for="countcw1">Кол-во	</label>
-                                                <input      style="width: 05rem;" id="countw1"   type="text"  name="countj[] " class="form-control Somon count">
+                                                <input      style="width: 05rem;" id="countw1"   type="text"  name="countw[] " class="form-control Somon count">
               
                                             </div>
                                             <div class="col-md-1 ">
                                                 <label for="safe_idw1">Хранилище</label>
-                                                <select name="safe_idj[]"   id="safe_idw1" class="form-control selectsw1 Somon">
+                                                <select name="safe_idw[]"   id="safe_idw1" class="form-control selectsw1 Somon">
                                                     <option   selected value="">Выберите</option>
                                                     @foreach($safes as $safe)
                                                         <option value="{{$safe->id}}">{{$safe->safe}}</option>
@@ -3061,21 +3064,21 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-1">  <label for="shavingw1">Шкаф	</label>
-                                                <select name="shavingj[]"   id="shavingw1" class="form-control selectsw1 Somon">
+                                                <select name="shavingw[]"   id="shavingw1" class="form-control selectsw1 Somon">
               
               
                                                 </select>
                                             </div>
                                             <div class="col-md-1   ">
                                                 <label for="qator_idh1">Ряд	</label>
-                                                <select name="qator_idj[]"   id="qator_idw1" class="form-control selectsw1 Somon">
+                                                <select name="qator_idw[]"   id="qator_idw1" class="form-control selectsw1 Somon">
                                                     <option   selected value="">Выберите </option>
               
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="cellsw1">Ячейка</label>
-                                                <select name="cellsj[]"   id="cellsw1" class="form-control selectsw1 Somon">
+                                                <select name="cellsw[]"   id="cellsw1" class="form-control selectsw1 Somon">
               
               
                                                 </select>
@@ -3104,12 +3107,12 @@
 
                                       <div class="tab-pane fade show active" id="OneDTanga" role="tabpanel" aria-labelledby="home-tab">
 {{--                                              1 dirami --}}
-                                                
+                  {{-- //q one diram                               --}}
 <div class="row  mt-2" id="newq">
-    <input     id="nominalq1"  value="0.01"    type="hidden"  name="nominalg[]"     >
+    <input     id="nominalq1"  value="0.01"    type="hidden"  name="nominalq[]"     >
     <div class="col-md-2   ">
         <label for="edin_id">Единиц	</label>
-        <select id="edin_idq1" class="form-select selectsd1 Somon edin_id" name="ed_idg[]"  >
+        <select id="edin_idq1" class="form-select selectsd1 Somon edin_id" name="ed_idq[]"  >
             <option value="">Интихоб</option>
             @foreach($sprEds as $sprEd)
                 <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
@@ -3119,12 +3122,12 @@
     </div>
     <div class="col-md-1  ">
         <label for="countcq1">Кол-во	</label>
-        <input      style="width: 05rem;" id="countq1"   type="text"  name="countg[] " class="form-control Somon count">
+        <input      style="width: 05rem;" id="countq1"   type="text"  name="countq[] " class="form-control Somon count">
 
     </div>
     <div class="col-md-1 ">
         <label for="safe_ide1">Хранилище</label>
-        <select name="safe_idg[]"   id="safe_idq1" class="form-control selectsq1 Somon">
+        <select name="safe_idq[]"   id="safe_idq1" class="form-control selectsq1 Somon">
             <option   selected value="">Выберите</option>
             @foreach($safes as $safe)
                 <option value="{{$safe->id}}">{{$safe->safe}}</option>
@@ -3139,7 +3142,7 @@
     </div>
     <div class="col-md-1   ">
         <label for="qator_idg1">Ряд	</label>
-        <select name="qator_idg[]"   id="qator_idq1" class="form-control selectsq1 Somon">
+        <select name="qator_idq[]"   id="qator_idq1" class="form-control selectsq1 Somon">
             <option   selected value="">Выберите </option>
 
         </select>
@@ -3176,10 +3179,10 @@
 <div class="tab-pane fade " id="TwintyFiveDTanga" role="tabpanel" aria-labelledby="TwintyFiveD-tab"> 
 
           <div class="row  mt-2" id="newy">
-            <input id="nominaly1" value="0.25" type="hidden" name="nominalc[]">
+            <input id="nominaly1" value="0.25" type="hidden" name="nominaly[]">
             <div class="col-md-2   ">
                 <label for="edin_id">Единиц	</label>
-                <select id="edin_idy1" class="form-select selectse1 Somon edin_id" name="ed_idc[]">
+                <select id="edin_idy1" class="form-select selectse1 Somon edin_id" name="ed_idy[]">
                     <option value="">Интихоб</option>
                     @foreach($sprEds as $sprEd)
                     <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
@@ -3190,12 +3193,12 @@
             </div>
             <div class="col-md-1  ">
                 <label for="counte1">Кол-во	</label>
-                <input style="width: 05rem;" id="county1" type="text" name="countc[]" class="form-control Somon count">
+                <input style="width: 05rem;" id="county1" type="text" name="county[]" class="form-control Somon count">
 
             </div>
             <div class="col-md-1 ">
                 <label for="safe_idy1">Хранилище</label>
-                <select name="safe_idc[]" id="safe_idy1" class="form-control selectse1 Somon">
+                <select name="safe_idy[]" id="safe_idy1" class="form-control selectse1 Somon">
                     <option selected="" value="">Выберите</option>
                     @foreach($safes as $safe)
                     <option value="{{$safe->id}}">{{$safe->safe}}</option>
@@ -3203,21 +3206,21 @@
                 </select>
             </div>
             <div class="col-md-1">  <label for="shavingy1">Шкаф	</label>
-                <select name="shavingc[]" id="shavingy1" class="form-control selectse1 Somon">
+                <select name="shavingy[]" id="shavingy1" class="form-control selectse1 Somon">
 
 
                 </select>
             </div>
             <div class="col-md-1   ">
                 <label for="qator_idy1">Ряд	</label>
-                <select name="qator_idc[]" id="qator_idy1" class="form-control selectse1 Somon">
+                <select name="qator_idy[]" id="qator_idy1" class="form-control selectse1 Somon">
                     <option selected="" value="">Выберите </option>
 
                 </select>
             </div>
             <div class="col-md-2">
                 <label for="cellsy1">Ячейка</label>
-                <select name="cellsc[]" id="cellsy1" class="form-control selectse1 Somon">
+                <select name="cellsy[]" id="cellsy1" class="form-control selectse1 Somon">
 
 
                 </select>
@@ -3248,8 +3251,84 @@
 </div>
 
 
-{{-- End 25diram --}}
+{{-- End 25  diram --}}
+{{-- // 0.10 diram --}}
+<div class="tab-pane fade " id="TenDiram" role="tabpanel" aria-labelledby="TenDiram-tab"> 
 
+    <div class="row  mt-2" id="new7">
+      <input id="nominal71" value="0.10" type="hidden" name="nominal7[]">
+      <div class="col-md-2   ">
+          <label for="edin_id">Единиц	</label>
+          <select id="edin_id71" class="form-select selectse7 Somon edin_id" name="ed_id7[]">
+              <option value="">Интихоб</option>
+              @foreach($sprEds as $sprEd)
+              <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
+                @endforeach
+                                              
+          </select>
+
+      </div>
+      <div class="col-md-1  ">
+          <label for="count7">Кол-во	</label>
+          <input style="width: 05rem;" id="count71" type="text" name="count7[]" class="form-control Somon count">
+
+      </div>
+      <div class="col-md-1 ">
+          <label for="safe_id71">Хранилище</label>
+          <select name="safe_id7[]" id="safe_id71" class="form-control selectse7 Somon">
+              <option selected="" value="">Выберите</option>
+              @foreach($safes as $safe)
+              <option value="{{$safe->id}}">{{$safe->safe}}</option>
+          @endforeach                                      
+          </select>
+      </div>
+      <div class="col-md-1">  <label for="shaving71">Шкаф	</label>
+          <select name="shaving7[]" id="shaving71" class="form-control selectse7 Somon">
+
+
+          </select>
+      </div>
+      <div class="col-md-1   ">
+          <label for="qator_id71">Ряд	</label>
+          <select name="qator_id7[]" id="qator_id71" class="form-control selectse7 Somon">
+              <option selected="" value="">Выберите </option>
+
+          </select>
+      </div>
+      <div class="col-md-2">
+          <label for="cells71">Ячейка</label>
+          <select name="cells7[]" id="cells71" class="form-control selectse7 Somon">
+
+
+          </select>
+      </div>
+      <div class="col-md-3 mt-4">
+          <button type="button" class="btn btn-primary active" id="add7" value="71"> <svg   width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus align-middle"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+          <button id="remove7" value="71" type="button" class="btn btn-bitbucket active"><svg  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+          <input type="hidden" value="1" id="total_chq71">
+      </div>
+  </div>
+
+
+  <div id="new_chq71"></div>
+
+  <div class="form-check form-switch  col-md-4 mt-4">
+      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon7">
+      <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
+
+  </div>
+  <div id="sum71" class="col-md-3 offset-8 " style="margin-top:-10px;"></div>
+  <div id="nepolniySomon7">   </div>
+
+
+
+
+
+
+</div>
+
+
+{{-- End 0.10  diram --}}
 
 
 {{-- //1 Somoni --}}
@@ -3264,12 +3343,12 @@
 
 
 
-            <input id="nominalu1" value="1" class="nominal" type="hidden" name="nominal0[]">
+            <input id="nominalu1" value="1" class="nominal" type="hidden" name="nominalu[]">
 
 
              <div class="col-md-2   ">
                  <label for="edin_idu">Единиц	</label>
-                 <select id="edin_idu1" class="form-select selectsu1 Somon edin_id" name="ed_id0[]">
+                 <select id="edin_idu1" class="form-select selectsu1 Somon edin_id" name="ed_idu[]">
                      <option value="">Интихоб</option>
                      @foreach($sprEds as $sprEd)
                      <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
@@ -3279,12 +3358,12 @@
              </div>
              <div class="col-md-1  ">
                  <label for="countu1">Кол-во	</label>
-                 <input style="width: 05rem;" id="countu1" type="text" name="count0[]" class="form-control  Somon  count">
+                 <input style="width: 05rem;" id="countu1" type="text" name="countu[]" class="form-control  Somon  count">
 
              </div>
              <div class="col-md-2 ">
                  <label for="safe_idu1">Хранилище</label>
-                 <select name="safe_id0[]" style="width: 08rem;" id="safe_idu1" class="form-control selectsu1  Somon">
+                 <select name="safe_idu[]" style="width: 08rem;" id="safe_idu1" class="form-control selectsu1  Somon">
                      <option selected="" value="">Выберите</option>
                      
                      @foreach($safes as $safe)
@@ -3293,21 +3372,21 @@
             </select>
              </div>
              <div class="col-md-2" style="width: 08rem;">  <label for="shavingu1">Шкаф	</label>
-                 <select name="shaving0[]" id="shavingu1" class="form-control selectsu1  Somon">
+                 <select name="shavingu[]" id="shavingu1" class="form-control selectsu1  Somon">
                      <option selected="" value="">Выберите </option>
 
                  </select>
              </div>
              <div class="col-md-2   ">
-                 <label for="qator_id01">Ряд	</label>
-                 <select name="qator_id0[]" style="width: 08rem;" id="qator_idu1" class="form-control selectsu1  Somon">
+                 <label for="qator_idu1">Ряд	</label>
+                 <select name="qator_idu[]" style="width: 08rem;" id="qator_idu1" class="form-control selectsu1  Somon">
                      <option selected="" value="">Выберите </option>
 
                  </select>
              </div>
              <div class="col-md-1">
                  <label for="cells01">Ячейка</label>
-                 <select name="cells0[]" id="cellsu1" class="form-control selectsu1  Somon">
+                 <select name="cellsu[]" id="cellsu1" class="form-control selectsu1  Somon">
                      <option selected="" value="">Выберите </option>
 
                  </select>
@@ -3348,10 +3427,10 @@
 <div class="tab-pane fade " id="ThreeSTanga" role="tabpanel" aria-labelledby="ThreeS-tab"> 
 
    <div class="row  mt-2" id="newi1">
-            <input id="nominali1" value="3" type="hidden" name="nominal3[]">
+            <input id="nominali1" value="3" type="hidden" name="nominali[]">
             <div class="col-md-2   ">
                 <label for="edin_id">Единиц	</label>
-                <select id="edin_idi1" class="form-select selects31 Somon edin_id" name="ed_id3[]">
+                <select id="edin_idi1" class="form-select selects31 Somon edin_id" name="ed_idi[]">
                     <option value="">Интихоб</option>
                     @foreach($sprEds as $sprEd)
                     <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
@@ -3363,12 +3442,12 @@
             </div>
             <div class="col-md-1  ">
                 <label for="count31">Кол-во	</label>
-                <input style="width: 05rem;" id="counti1" type="text" name="count3[]" class="form-control Somon count">
+                <input style="width: 05rem;" id="counti1" type="text" name="counti[]" class="form-control Somon count">
 
             </div>
             <div class="col-md-1 ">
                 <label for="safe_id31">Хранилище</label>
-                <select name="safe_id3[]" id="safe_idi1" class="form-control selectsi1 Somon">
+                <select name="safe_idi[]" id="safe_idi1" class="form-control selectsi1 Somon">
                     <option selected="" value="">Выберите</option>
                     @foreach($safes as $safe)
                     <option value="{{$safe->id}}">{{$safe->safe}}</option>
@@ -3376,21 +3455,21 @@
             </select>
             </div>
             <div class="col-md-1">  <label for="shavingi1">Шкаф	</label>
-                <select name="shaving3[]" id="shavingi1" class="form-control selectsi1 Somon">
+                <select name="shavingi[]" id="shavingi1" class="form-control selectsi1 Somon">
 
                     <option selected="" value="">Выберите </option>
                 </select>
             </div>
             <div class="col-md-1   ">
                 <label for="qator_id3[]">Ряд	</label>
-                <select name="qator_id3[]" id="qator_idi1" class="form-control selectsi1 Somon">
+                <select name="qator_idi[]" id="qator_idi1" class="form-control selectsi1 Somon">
                     <option selected="" value="">Выберите </option>
 
                 </select>
             </div>
             <div class="col-md-2">
                 <label for="cellsi1">Ячейка</label>
-                <select name="cells3[]" id="cellsi1" class="form-control selectsi1 Somon">
+                <select name="cellsi[]" id="cellsi1" class="form-control selectsi1 Somon">
 
 
                 </select>
@@ -3421,10 +3500,10 @@
 <div class="tab-pane fade " id="FiveSTanga" role="tabpanel" aria-labelledby="FiveS-tab"> 
 
        <div class="row  mt-2" id="newo1">
-            <input id="nominalo1" value="5" type="hidden" name="nominal5[]">
+            <input id="nominalo1" value="5" type="hidden" name="nominalo[]">
             <div class="col-md-2   ">
                 <label for="edin_ido1">Единиц	</label>
-                <select id="edin_ido1" class="form-select selectso1 Somon edin_id" name="ed_id5[]">
+                <select id="edin_ido1" class="form-select selectso1 Somon edin_id" name="ed_ido[]">
                     <option value="">Интихоб</option>
                     @foreach($sprEds as $sprEd)
                     <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}  </option>
@@ -3436,12 +3515,12 @@
             </div>
             <div class="col-md-1  ">
                 <label for="counto1">Кол-во	</label>
-                <input style="width: 05rem;" id="counto1" type="text" name="count5[]" class="form-control Somon count">
+                <input style="width: 05rem;" id="counto1" type="text" name="counto[]" class="form-control Somon count">
 
             </div>
             <div class="col-md-1 ">
                 <label for="safe_ido1">Хранилище</label>
-                <select name="safe_id5[]" id="safe_ido1" class="form-control selectso1 Somon">
+                <select name="safe_ido[]" id="safe_ido1" class="form-control selectso1 Somon">
                     <option selected="" value="">Выберите</option>
                     @foreach($safes as $safe)
                     <option value="{{$safe->id}}">{{$safe->safe}}</option>
@@ -3450,21 +3529,21 @@
              </select>
             </div>
             <div class="col-md-1">  <label for="shavingo1">Шкаф	</label>
-                <select name="shaving5[]" id="shavingo1" class="form-control selectso1 Somon">
+                <select name="shavingo[]" id="shavingo1" class="form-control selectso1 Somon">
 
 
                 </select>
             </div>
             <div class="col-md-1   ">
-                <label for="qator_id51">Ряд	</label>
-                <select name="qator_id5[]" id="qator_ido1" class="form-control selectso1 Somon">
+                <label for="qator_ido1">Ряд	</label>
+                <select name="qator_ido[]" id="qator_ido1" class="form-control selectso1 Somon">
                     <option selected="" value="">Выберите </option>
 
                 </select>
             </div>
-            <div class="col-md-2">
-                <label for="cells51">Ячейка</label>
-                <select name="cells5[]" id="cellso1" class="form-control selectso1 Somon">
+            <div class="col-md-2">   
+                <label for="cellso1">Ячейка</label>
+                <select name="cellso[]" id="cellso1" class="form-control selectso1 Somon">
 
 
                 </select>
@@ -3551,10 +3630,10 @@
  <div class="tab-pane fade " id="FiveDTanga" role="tabpanel" aria-labelledby="FiveD-tab"> 
                                         
                                         <div class="row  mt-2" id="newp">
-                                            <input     id="nominalp1"  value="0.05"    type="hidden"  name="nominalh[]"     >
+                                            <input     id="nominalp1"  value="0.05"    type="hidden"  name="nominalp[]"     >
                                             <div class="col-md-2   ">
                                                 <label for="edin_idp">Единиц	</label>
-                                                <select id="edin_idp1" class="form-select selectsp1 Somon edin_id" name="ed_idh[]"  >
+                                                <select id="edin_idp1" class="form-select selectsp1 Somon edin_id" name="ed_idp[]"  >
                                                     <option value="">Интихоб</option>
                                                     @foreach($sprEds as $sprEd)
                                                         <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}
@@ -3565,12 +3644,12 @@
                                             </div>
                                             <div class="col-md-1  ">
                                                 <label for="counth1">Кол-во	</label>
-                                                <input      style="width: 05rem;" id="countp1"   type="text"  name="counth[] " class="form-control Somon count">
+                                                <input      style="width: 05rem;" id="countp1"   type="text"  name="countp[] " class="form-control Somon count">
               
                                             </div>
                                             <div class="col-md-1 ">
                                                 <label for="safe_idh1">Хранилище</label>
-                                                <select name="safe_idh[]"   id="safe_idp1" class="form-control selectsp1 Somon">
+                                                <select name="safe_idp[]"   id="safe_idp1" class="form-control selectsp1 Somon">
                                                     <option   selected value="">Выберите</option>
                                                     @foreach($safes as $safe)
                                                         <option value="{{$safe->id}}">{{$safe->safe}}</option>
@@ -3578,21 +3657,21 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-1">  <label for="shavingp1">Шкаф	</label>
-                                                <select name="shavingh[]"   id="shavingp1" class="form-control selectsp1 Somon">
+                                                <select name="shavingp[]"   id="shavingp1" class="form-control selectsp1 Somon">
               
               
                                                 </select>
                                             </div>
                                             <div class="col-md-1   ">
                                                 <label for="qator_ide1">Ряд	</label>
-                                                <select name="qator_idh[]"   id="qator_idp1" class="form-control selectsp1 Somon">
+                                                <select name="qator_idp[]"   id="qator_idp1" class="form-control selectsp1 Somon">
                                                     <option   selected value="">Выберите </option>
               
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="cellsp1">Ячейка</label>
-                                                <select name="cellsh[]"   id="cellsp1" class="form-control selectsp1 Somon">
+                                                <select name="cellsp[]"   id="cellsp1" class="form-control selectsp1 Somon">
               
               
                                                 </select>
@@ -3622,10 +3701,10 @@
                                       {{-- Fifty 50 diram --}}
                                       <div class="tab-pane fade " id="FiftyDTanga" role="tabpanel" aria-labelledby="FiftyD-tab"> 
                                         <div class="row  mt-2" id="new4">
-                                            <input     id="nominal41"  value="0.50"    type="hidden"  name="nominalk[]"     >
+                                            <input     id="nominal41"  value="0.50"    type="hidden"  name="nominal4[]"     >
                                             <div class="col-md-2   ">
                                                 <label for="edin_id">Единиц	</label>
-                                                <select id="edin_id41" class="form-select selects41 Somon edin_id" name="ed_idk[]"  >
+                                                <select id="edin_id41" class="form-select selects41 Somon edin_id" name="ed_id4[]"  >
                                                     <option value="">Интихоб</option>
                                                     @foreach($sprEds as $sprEd)
                                                         <option value="{{$sprEd->id}} " data-id="{{$sprEd->kol}}" >{{$sprEd->name}}
@@ -3636,12 +3715,12 @@
                                             </div>
                                             <div class="col-md-1  ">
                                                 <label for="countc41">Кол-во	</label>
-                                                <input      style="width: 05rem;" id="count41"   type="text"  name="countk[] " class="form-control Somon count">
+                                                <input      style="width: 05rem;" id="count41"   type="text"  name="count4[] " class="form-control Somon count">
               
                                             </div>
                                             <div class="col-md-1 ">
                                                 <label for="safe_ide1">Хранилище</label>
-                                                <select name="safe_idk[]"   id="safe_id41" class="form-control selects41 Somon">
+                                                <select name="safe_id4[]"   id="safe_id41" class="form-control selects41 Somon">
                                                     <option   selected value="">Выберите</option>
                                                     @foreach($safes as $safe)
                                                         <option value="{{$safe->id}}">{{$safe->safe}}</option>
@@ -3649,21 +3728,21 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-1">  <label for="shaving41">Шкаф	</label>
-                                                <select name="shavingk[]"   id="shaving41" class="form-control selects41 Somon">
+                                                <select name="shaving4[]"   id="shaving41" class="form-control selects41 Somon">
               
               
                                                 </select>
                                             </div>
                                             <div class="col-md-1   ">
                                                 <label for="qator_id41">Ряд	</label>
-                                                <select name="qator_idk[]"   id="qator_id41" class="form-control selects41 Somon">
+                                                <select name="qator_id4[]"   id="qator_id41" class="form-control selects41 Somon">
                                                     <option   selected value="">Выберите </option>
               
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="cells41">Ячейка</label>
-                                                <select name="cellsk[]"   id="cells41" class="form-control selects41 Somon">
+                                                <select name="cells4[]"   id="cells41" class="form-control selects41 Somon">
               
               
                                                 </select>
@@ -3809,7 +3888,7 @@ $("#Tangapriznaks").text(priznak);
 var bik=$(`#Tangabik${id}`).text();
  
 $('#Tangabik').text(bik);
-$('#Tangaschets').text( 'Оборот' );
+$('#Tangaschets').text( 'Оборот');
 $('#Tangaschet2').text(accounted2);
 $("#Tangadates").val(date);
 $("#Tangadoc").text(n_doc);
@@ -3822,12 +3901,7 @@ $.ajax({
 
    },
    success:function(response){
-
-
-  
-
-     
-      $('#Tangaajaxoborot').html(response);
+    $('#Tangaajaxoborot').html(response);
    },
 });
 
@@ -3869,24 +3943,26 @@ $.ajax({
                     id:kode_opers,id_type:id_type,
 
                 },
-                success:function(fondData){
+                success:function(fondDataTanga){
 
 
-                   console.log(fondData);
+                 
 
                   
-                   $('#TangafondAjax').html(fondData);
+                   $('#TangafondAjax').html(fondDataTanga);
                 },
             });
 
         });
-    });
+   
 
     // end Botilshuda korshoyam farsuda tanga js  
 
                 //fondes korshoyam farsuda botilshuda
         $(".Fond_id").click(function(){
+            console.log("dd");
             $('#fpriznak').val('');
+       
              var  kode_opers=$(this).attr('id');
              var  data=$(this).data('id');
              var  id_type=$(this).attr('value');
@@ -3902,7 +3978,8 @@ $.ajax({
             $('#fpriznak').val(priznak);
             $('#fschyot').text(String(id_accounted));
         
-        
+     
+
                 
              $.ajax({
                 url: "{{route('FondTable.post')}}",
@@ -3913,18 +3990,19 @@ $.ajax({
                     id:kode_opers,id_type:id_type,
 
                 },
-                success:function(fondData){
+                success:function(fondDatas){
 
 
-           
-
+              
                   
-                   $('#fondAjax').html(fondData);
+                   $('#fondAjax').html(fondDatas);
                 },
             });
 
     
     });
+
+});
 </script>
 
 
@@ -3938,11 +4016,14 @@ $.ajax({
     $('[id^=AllSumma]').html('');
     $('#srcHome').html('');
     $('#srcHomeTanga').html('');
+   
           //console.log($(this).data('context'));
           $('#textpriznak').html("");
           $('#type').val('');
           
            var id='#srcHome';
+           $('#valuepriznak').val($(this).val());
+           $('#valuepriznakTanga').val($(this).val());
            if($(this).data('type')=='Tanga')
            {
             id='#srcHomeTanga';

@@ -203,8 +203,15 @@ $(document).on("click",'#submits', function(){
                                             var len= filters($(this).find('.Somon'));
                                             if(len>0)
                                             {
-                                                ErrorValidateSomon($(this).find('.Somon'),'#4');
+                                                ErrorValidateSomon($(this).find('.Somon'),'#6');
                                             } });
+                                            $('[id^=new7]').each(function(){
+                                                // do stuff
+                                                var len= filters($(this).find('.Somon'));
+                                                if(len>0)
+                                                {
+                                                    ErrorValidateSomon($(this).find('.Somon'),'#7');
+                                                } });
     //post form validateArr.length
     var len= filters($('[id^=new]').find('.Somon'));
     //nipolnoe validate

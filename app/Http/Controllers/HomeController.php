@@ -52,12 +52,20 @@ class HomeController extends Controller
 
            $kodeOpero= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
            $kodeOperObort= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
+         
+           $kodeOperObortTanga= oborots_coin::orderBy('kod_oper','DESC')->value('kod_oper');
            if($kodeOperObort<=0)
            {
                $kodeOperObort=1;
            }else{
            $kodeOperObort++;
        }
+       if($kodeOperObortTanga<=0)
+       {
+           $kodeOperObortTanga=1;
+       }else{
+       $kodeOperObortTanga++;
+   }
              $response= $Oborot::orderBy('date','DESC')->get()->groupBy('kod_oper');
              $OborTanga= $OborotTanga::orderBy('date','DESC')->get()->groupBy('kod_oper');
              //Pul 
@@ -65,6 +73,15 @@ class HomeController extends Controller
              //Fond tanga
              $FondMoneyTang= $FondMoneysTanga::orderBy('date','DESC')->get()->groupBy('kode_oper');
              $kodOperf= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
+             $kodOperTanga= FondCoins::orderBy('kode_oper','DESC')->value('kode_oper');
+             if($kodOperTanga<=0)
+             {
+                  $kodOperTanga=1;
+             }else{
+               $kodOperTanga++;
+             }
+
+
              if($kodOperf<=0)
              {
               $kodOperf=1;
@@ -84,7 +101,7 @@ class HomeController extends Controller
 
             $sprAccounts= SprAccounts::all();
 
-                return view('home',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','OborTanga','FondMoneyTang'));
+                return view('home',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'));
     }
     public function OborotTable(Request $request)
     {
@@ -555,7 +572,58 @@ public function oborotInsertTanga(Request $request)
      $this->addRepository->AddInsertOborotTanga($request);
      return redirect()->route('home')->with('success','Оборот Танга  успешно создан!');
 }
-
+public function InsertTanga(Request $request)
+{
+                //   dd($request->all());
+       DB::beginTransaction();
+       $oborots = $this->addRepository->ModaladdRequestsOborottanga($request,$request->farsuda);
+        $money= $this->addRepository->ModaladdRequestsTanga($request);
+       // oborots_coin::create($oborots[0]);
+        // echo "<pre>";
+        // print_r($money);
+        // echo "</pre>";
+        // echo $request->src;
+         
+        if(is_array($money) AND is_array($oborots) AND $request->src==7)
+          {
+            
+             
+             try{
+                foreach ($money as $key => $value) {
+                    # code...
+             
+                FondCoins::create($money[$key]);
+                oborots_coin::create($oborots[$key]);
+            }
+                DB::Commit();
+             
+             return redirect()->route('home')->with('success','Фарсуда фонд успешно создан!');
+              } catch (\Illuminate\Database\QueryException $e) {
+                DB::rollback();
+               return response(['message'=>'FAILURE'], 500);
+               return redirect()->route('home')->with('danger','Фарсуда фонд  не успешно!');
+              }
+            
+             // return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
+          
+          }
+          //korshoyam 
+          if(is_array($money) AND $request->src==2 || $request->src==3 || $request->src==1)
+           {
+            try{
+                foreach ($money as $key => $value) {
+                    FondCoins::create($money[$key]);
+            }
+                DB::Commit();
+                  response(['message'=>'ALL farsuda_tanga'], 200);
+             return redirect()->route('home')->with('success','Фарсуда Ба оборот рафт фонд успешно создан!');
+              } catch (\Illuminate\Database\QueryException $e) {
+                DB::rollback();
+               
+             return redirect()->route('home')->with('danger','Фарсуда фонд   не успешно!');
+              }
+            }
+          }
 
 
 }
