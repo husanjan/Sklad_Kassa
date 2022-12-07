@@ -1,8 +1,5 @@
 @extends('layouts.app')
-<style>
-    {{!include('css/styles.css')}}
-    {{!include('css/app.css')}}
-</style>
+ 
 @section('content')
 
     <div class="container">

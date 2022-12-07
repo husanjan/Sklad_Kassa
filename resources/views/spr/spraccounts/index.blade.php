@@ -97,9 +97,9 @@
                                 <td>{{ $account->name }}</td>
                                 <td>{{ $account->comment }}</td>
                                 <td>
-                                    <a class="btn btn-facebook active" href="{{ route('spraccounts.edit', $account->id) }}"> <i class="align-middle" data-feather="edit"></i> Изменить</a>
+                                    <a class="btn btn-primary active" href="{{ route('spraccounts.edit', $account->id) }}"> <i class="align-middle" data-feather="edit"></i> Изменить</a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['spraccounts.destroy', $account->id],'style'=>'display:inline']) !!}
-                                    {!! Form::submit('Удалить', ['class' => 'btn btn-instagram active']) !!}
+                                    {!! Form::submit('Удалить', ['class' => 'btn btn-danger active']) !!}
                                     {!! Form::close() !!}
                                 </td>
                             </tr>

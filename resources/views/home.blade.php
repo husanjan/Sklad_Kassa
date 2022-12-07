@@ -40,7 +40,7 @@
 
                           <input       id="valuepriznak"     name="priznak" type="hidden"    >
                           <input            name="kode_oper" type="hidden"   value="{{$kodOperf}}" >
-                          <input            name="farsuda" type="hidden"  id="type" >
+                  
                           <input type="hidden" name="kode_oper_obor" value="{{$kodeOperObort }}">
                       </div>
                       <div class="col-md-2  ">
@@ -1278,7 +1278,8 @@
                 
 
                     <div class="info-box-content">
-                     <center> <h4>Оборот </h4> 
+                  
+                        <center> <h4>  <a class="list-group-item-action" href="#oborot-Pul"> Оборот</a></h4>  
                         <button type="button" class="btn btn-outline-primary col-6 " data-toggle="modal" data-target="#exampleModalCenter" >Приход </button>
                      </center>
                        
@@ -1295,7 +1296,8 @@
                
 
                 <div class="info-box-content">
-                <center>       <h4>Коршоям</h4></center>
+             
+                <center> <h4>  <a class="list-group-item-action" href="#korshoyam-Pul"> Коршоям</a></h4>   </center>
                     <div class="btn-group col-auto" role="group" aria-label="Basic example">
                         <button type="button"  onclick="this.form.reset();" class="btn btn-outline-primary"  data-Context="korshoyam" data-toggle="modal" data-target="#rashod"   id="priznaki" value="0">Приход </button>
                         <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam"  data-toggle="modal" data-target="#rashod"  id="priznaki" value="1">Расход</button>
@@ -1314,8 +1316,8 @@
                  
 
                 <div class="info-box-content">
-                 
-                       <center>   <h4>Фарсуда</h4></center>
+                    <center> <h4>  <a class="list-group-item-action" href="#farsuda-Pul"> Фарсуда</a></h4>   </center>
+         
 
 
               
@@ -1336,7 +1338,8 @@
            
 
                 <div class="info-box-content">
-                    <center>  <h4>Ботилшуда</h4></center>
+                    <center> <h4>  <a class="list-group-item-action" href="#botilshuda-Pul"> Ботилшуда</a></h4>   </center>
+              
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Context="botilshuda" data-target="#rashod"   id="priznaki" value="0">Приход </button>
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod"  data-Context="botilshuda"  id="priznaki" value="1">Расход</button>
@@ -1359,7 +1362,7 @@
                 
 
                     <div class="info-box-content">
-                     <center> <h4>Танга Оборот  </h4> 
+                     <center> <h4>  <a class="list-group-item-action" href="#Oborot-Tanga">Танга Оборот</a></h4> 
                         <button type="button" class="btn btn-outline-primary col-6 " data-toggle="modal"  data-target="#ModalkaTangaOborot" >Приход </button>
                      </center>
                        
@@ -1379,7 +1382,8 @@
                
 
                 <div class="info-box-content">
-                <center>       <h4>Танга Коршоям  </h4></center>
+         
+                <center> <h4>  <a class="list-group-item-action" href="#korshoyam-Tanga">Танга Коршоям  </a></h4> </center>
                     <div class="btn-group col-auto" role="group" aria-label="Basic example">
                         <button type="button"  onclick="this.form.reset();" class="btn btn-outline-primary"  data-Type="Tanga" data-Context="korshoyam" data-toggle="modal" data-target="#rashodTanga"   id="priznaki" value="0">Приход </button>
                         <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam" data-Type="Tanga"   data-toggle="modal" data-target="#rashodTanga"  id="priznaki" value="1">Расход</button>
@@ -1402,8 +1406,8 @@
 
         <div class="info-box-content">
          
-               <center>   <h4>Танга Фарсуда</h4></center>
-
+            
+               <center> <h4>  <a class="list-group-item-action" href="#farsuda-Tanga">Танга Фарсуда  </a></h4> </center>
 
       
                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -1424,7 +1428,8 @@
                
     
                     <div class="info-box-content">
-                        <center>  <h4> Танга Ботилшуда</h4></center>
+                        <center> <h4>  <a class="list-group-item-action" href="#korshoyam-Tanga">Танга Ботилшуда</a></h4> </center>
+                     
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Type="Tanga" data-Context="botilshuda" data-target="#rashodTanga"   id="priznaki" value="0">Приход </button>
                             <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-Type="Tanga" data-target="#rashodTanga"  data-Context="botilshuda"  id="priznaki" value="1">Расход</button>
@@ -1782,20 +1787,10 @@
  
     <div class="row  mt-3">
      
-           
-
-
-
-
-
-
-
-
-
-
+   
 
 {{--        Oborot table --}}
-        <div class="col-12 col-lg-6 ">
+        <div class="col-12 col-lg-6 " id="oborot-Pul">
 
             <div class="card ">
                 <div class="card-body">
@@ -1808,27 +1803,27 @@
                             <th  >#</th>
                             <th class="col-md-3">Дата</th>
                             <th>Бик</th>
-                            <th >Признак</th>
+                            <th>Признак</th>
                             <th>Номер док</th>
-                            <th>Номер счета 	</th>
-                             <th>Сумма</th>
+                            <th>Номер счета</th>
+                            <th>Сумма</th>
                         </tr>
                         @php($count=0)
-                        @foreach(json_decode($response->take(20),true) AS  $oborots   )
+                        @foreach(json_decode($response->groupBy('kod_oper')->take(20),true) AS  $oborots   )
 
                             @php($count++)
 
 
 
                         <tr>
-                            <input type="hidden" id="pr{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}" value="{{array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]}}">
+                            <input type="hidden"  value="{{array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]}}">
                             <td> <b>{{  $count }}</b>  </td>
-                 <td id="da{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}"> {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]))}} </td>
+                 <td  > {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]))}} </td>
                  @foreach($bik AS $biks)
 
     
          @if($biks->id===array_map(function($value){return   $value['bik'];},$oborots)[0])
-             <td class="col-md-2" id="bik{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}">
+             <td class="col-md-2"  >
                  {{ $biks->full_name }} 
                 </td>
           @else
@@ -1837,9 +1832,9 @@
 
      @endforeach
                  @if(array_keys(array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]==0)
-                 <td class="col-md-2 " id="priznak{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}"> Приход </td>
+                 <td class="col-md-2 " > Приход </td>
                  @else
-                     <td id="priznak{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}"> Расход</td>
+                     <td  > Расход</td>
                    
                  @endif
                
@@ -1848,7 +1843,7 @@
 
 
                                 @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   $value['account_id_in'];},$oborots)))[0])
-                                    <td class="col-md-2" id="acn{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}">
+                                    <td class="col-md-2"  >
                                         {{ $sprAccount->account }} </td>
                                 @endif
                             @endforeach
@@ -1866,17 +1861,45 @@
                     </table>
                     <div  >
                         <table class="mt-4 offset-lg-10"><tbody><tr>
-                                <td  > <button class="btn btn-secondary "data-toggle="modal" data-target="#exampleModalLong">Подробонее</button></td>
+                                <td>
+                               <a href="#?type_id=oborot_pul">
+                                <button class="btn btn-secondary "data-toggle="modal"  data-target=".Oborot_detal" id="oborot_pul">Подробонее</button>
+                               </a>
+                                </td>
 
                             </tr></tbody></table>
                     </div>
                 </div>
             </div>
         </div>
+          <input type="hidden" id="podrobnee">
+{{-- detal Oborot --}} 
+ 
+{{-- //style="display: block; padding-right: 17px;" --}}
+<div class="modal fade Oborot_detal show" tabindex="-1" role="dialog"       aria-labelledby="myLargeModalLabel" aria-hidden="true"  >
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+        <div class="card-body">
+            <h4>Оборот</h4>
+        </div>
+        <section class="oborot_pul">
+        @include('oborot.pagination')
+        </section>  
+ 
+        <div class="modal-footer flex-row">
+                     
+              
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыт</button>
+          
+          </div>
+    </div>
+  </div>
+</div>
 
+{{-- detal Oborot --}}
         {{--        Oborot table end --}}
         {{--        Fond table Коршоям --}}
-        <div class="col-12 col-lg-6 ">
+        <div class="col-12 col-lg-6 " id="korshoyam-Pul">
 
             <div class="card  ">
                 <div class="card-body">
@@ -1941,7 +1964,9 @@
                         </tbody>
                     </table>
                     <div class="mt-4 offset-lg-10"><table><tbody><tr>
-                                <td valign="middle"><button class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg " data-target="#exampleModalLong">Подробонее</button></td>
+                                <td valign="middle">
+                                         <button class="btn btn-secondary "data-toggle="modal"  data-target=".korshoyam_detal" id="korshoyam_pul">Подробонее</button>
+                                </td>
 
                             </tr></tbody></table>
                     </div>
@@ -1949,8 +1974,32 @@
             </div>
         </div>
         {{--         Fond Коршоям table end --}}
+        {{-- detal Korshoyam --}} 
+ 
+{{-- //style="display: block; padding-right: 17px;" --}}
+<div class="modal fade korshoyam_detal show" tabindex="-1" role="dialog"       aria-labelledby="myLargeModalLabel" aria-hidden="true"  >
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+          <div class="card-body">
+              <h4>Коршоям</h4>
+          </div>
+          <section class="oborot_pul">
+          @include('oborot.pagination')
+          </section>  
+   
+          <div class="modal-footer flex-row">
+                       
+                
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыт</button>
+            
+            </div>
+      </div>
+    </div>
+  </div>
+  
+  {{-- detal Korshoyam --}}
          {{--        Fond table Farsuda --}}
-         <div class="col-12 col-lg-6 ">
+         <div class="col-12 col-lg-6 " id="farsuda-Pul">
 
             <div class="card  ">
                 <div class="card-body">
@@ -2018,8 +2067,13 @@
                         </tbody>
                     </table>
                     <div class="mt-4 offset-lg-10"><table><tbody><tr>
-                                <td valign="middle"><button class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg " data-target="#exampleModalLong">Подробонее</button></td>
-
+                                <td valign="middle">
+                                    
+                                    <a href="#?type_id=farsuda_pul">
+                                      
+                                        <button class="btn btn-secondary "data-toggle="modal"  data-target=".farsuda_detal" id="farsuda_pul">Подробонее</button>
+                                       </a>
+                                 
                             </tr></tbody></table>
                     </div>
                 </div>
@@ -2027,7 +2081,7 @@
         </div>
         {{--         Fond Farsuda table end --}}
     {{--        Fond table Ботилшуда --}}
-    <div class="col-12 col-lg-6 ">
+    <div class="col-12 col-lg-6 " id="botilshuda-Pul">
 
         <div class="card  ">
             <div class="card-body">
@@ -2095,7 +2149,10 @@
                     </tbody>
                 </table>
                 <div class="mt-4 offset-lg-10"><table><tbody><tr>
-                            <td valign="middle"><button class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg " data-target="#exampleModalLong">Подробонее</button></td>
+                            <td valign="middle">
+                                
+                                <button class="btn btn-secondary "data-toggle="modal"  data-target=".botilshuda_detal" id="botilshuda_pul">Подробонее</button>
+                            </td>
 
                         </tr></tbody></table>
                 </div>
@@ -2156,148 +2213,7 @@
     </div>
 </div>
 {{--modal1 end Коршоям Детализация--}}
-{{--modal 1 Коршоям--}}
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-
-        <div class="modal-content">  
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Коршоям
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <table class="table col-md-auto">
-                <tbody><tr>
-                    <th>#</th>
-                    <th>Дата</th>
-                 
-                    <th>Номер док</th>
-                    <th>Номер счет</th>
-                    <th>Признак</th>
-                    <th>Сумма</th>
-                     
-
-
-                </tr>
-                @php($count=0)
-                @foreach(json_decode($FondMoney->take(50),true) as $korshoyam)
-                @php($count++)
-                   @if(array_keys( array_count_values(array_map(function($value){return   $value['type'];},$korshoyam)))[0]==1)
-                <tr zippy="mdoclist_1" id="mdoclist_1">
-                   
-                          <td> <b>{{  $count }}</b>  </td>
-                  
-                    <td     >{{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$korshoyam)))[0]))}}</td>
-                    <td   > {{   array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$korshoyam)))[0]}} </td>
-                                        @foreach($sprAccounts AS $sprAccounti)
-
-
-                         @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$korshoyam)))[0])
-                            <td class="col-md-2"   >
-                                {{$sprAccounti->name  }} </td>
-                        @endif
-                    @endforeach
-                    @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyam)))[0]==0)
-                    <td  >Приход</td>
-                    @endif
-                    @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyam)))[0]==1)
-                    <td  >Расход</td>
-                    @endif
-                   
-               
-                          <td class="col-md-4 ">
-
-                        <a class=" link-primary         "  href="#" data-toggle="modal" data-target="#Fonds"   id="{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['type'];},$korshoyam)))[0]}}">
-                        <i class="text-dark fa fa-eye"></i>   {{   array_sum(array_map(function($value){return   $value['summa'];}, $korshoyam))}}  </a></td>
-                   
-                         </tr>
-                         @endif
-                 @endforeach
-
-                </tbody>
-            </table>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыт</button>
-                <button type="button" class="btn btn-secondary" >Печать</button>
-            </div>
-        </div>
-    </div>
-</div>
-{{--modal1 end Коршоям--}}
-{{--modal 2  --}}
-<!-- Modal -->
-<div class="modal fade " id="Fonds" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog    modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Коршоям</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table class="table col-md-auto">
-                    <tbody><tr class="something">
-                        <th  >#</th>
-                        <th class="col-md-3">Дата</th>
-                        <th >БИК</th>
-                        <th>Номер счета 1	</th>
-                        <th>Номер счета 2	</th>
-                        <th>Сумма</th>
-                    </tr>
-                    @php($count=0)
-                    @foreach(json_decode($response->take(50),true) AS  $oborots   )
-                        @php($count++)
-
-
-
-                        <tr>
-                            <td> <b>{{  $count }}</b>  </td>
-                            <td  > {{array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]}} </td>
-                            @foreach($bik AS $biks)
-
-                                @if($biks->id===array_keys(array_count_values(array_map(function($value){return  ( $value['bik']>0) ? ( $value['bik']) : ('');},$oborots)))[0])
-                                    <td class="col-md-3"> {{ $biks->full_name }} </td>
-                                    @else
-                                        <td> </td>
-                                      
-                                @endif
-                            @endforeach
-                             <td>
-
-
-                             </td>
-                            @foreach($sprAccounts AS $sprAccount)
-
-                                {{-- @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   $value['account_id_out'];},$oborots)))[0])
-                                    <td class="col-md-3"> {{ $sprAccount->account }} </td>
-                                @endif --}}
-                                @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   $value['account_id_in'];},$oborots)))[0])
-                                    <td class="col-md-3"> {{ $sprAccount->account }} </td>
-                                @endif
-                            @endforeach
-
-                            <td>{{array_sum(array_keys( array_count_values(array_map(function($value){return   $value['summa'];}, $oborots))))}} </td>
-
-
-                        </tr>
-
-                    @endforeach
-
-                    </tbody>
-                </table>
-
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыт</button>
-                <button type="button" class="btn btn-secondary ">Печать</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-{{--modal 2 end--}}
+  
 
 
 {{-- modal Ajax Table Oborot   --}}
@@ -2531,9 +2447,11 @@
 {{-- end modal Ajax Table Oborot   end --}}
 {{-- Modalka Table OborotTanga  --}}
 {{--        Oborot table --}}
-<div class="row">
-<div class="col-12 col-lg-6 ">
-
+<div class="container-fluid">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded mt-4"> <center><h3><b>ТАНГА</b></h3></center></div>
+    <div class="row">
+<div class="col-12 col-lg-6" id="Oborot-Tanga">
+    
     <div class="card ">
         <div class="card-body">
             <h4>Оборот Танга </h4>
@@ -2627,9 +2545,9 @@
 
 {{-- //Korshoyam tanga  --}}
   {{--        Fond table Коршоям --}}
-  <div class="col-12 col-lg-6 ">
+  <div class="col-12 col-lg-6 " id="korshoyam-Tanga">
 
-    <div class="card  ">
+    <div class="card">
         <div class="card-body">
             <h4>Танга Коршоям</h4>
 
@@ -2660,6 +2578,7 @@
 
 //print_r(array_map(function($value){return   $value['summa'];}, $korshoyam));
 ?>
+                                  
                    @if(array_keys( array_count_values(array_map(function($value){return   $value['type'];},$korshoyamTanga)))[0]==1 || array_keys( array_count_values(array_map(function($value){return   $value['src'];},$korshoyamTanga)))[0]==1)
                 <tr  >
                    
@@ -2710,7 +2629,7 @@
 {{--         Fond Коршоям table end --}}
 
  {{--        Fond table Farsuda --}}
- <div class="col-12 col-lg-6 ">
+ <div class="col-12 col-lg-6 " id="farsuda-Tanga">
 
     <div class="card  ">
         <div class="card-body">
@@ -2787,7 +2706,7 @@
 </div>
 {{--         Fond Farsuda table end --}}
 {{--        Fond table Ботилшуда --}}
-<div class="col-12 col-lg-6 ">
+<div class="col-12 col-lg-6 " id="botilshuda-Tanga">
 
 <div class="card  ">
     <div class="card-body">
@@ -2868,7 +2787,7 @@
 </div>
 
 {{-- //Fond end  Tanga    --}}
-
+</div>
 {{--modal 1 Коршоям Детализация--}}
 <div class="modal fade bd-example-modal-lg" tabindex="-1" id="FondsTanga" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -2941,7 +2860,7 @@
           <div class="modal-content  ">
 
               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle"> <div id="textpriznak"></div></h5>
+                  <h5 class="modal-title" id="exampleModalLongTitle"> <div id="textpriznakTanga"></div></h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
@@ -2956,7 +2875,7 @@
 
                           <input       id="valuepriznakTanga"     name="priznak" type="hidden"    >
                           <input            name="kode_oper" type="hidden"   value="{{$kodOperTanga}}">
-                          <input            name="farsuda" type="hidden"   value="1" >
+                          {{-- <input            name="farsuda" type="hidden"   value="1" > --}}
 
                       </div>
                       <div class="col-md-2  mt-1">
@@ -3109,7 +3028,7 @@
 {{--                                              1 dirami --}}
                   {{-- //q one diram                               --}}
 <div class="row  mt-2" id="newq">
-    <input     id="nominalq1"  value="0.01"    type="hidden"  name="nominalq[]"     >
+    <input     id="nominalq1"  value="0.1"    type="hidden"  name="nominalq[]"     >
     <div class="col-md-2   ">
         <label for="edin_id">Единиц	</label>
         <select id="edin_idq1" class="form-select selectsd1 Somon edin_id" name="ed_idq[]"  >
@@ -3792,7 +3711,7 @@
 
 
 
-
+ 
 
 
 
@@ -3816,13 +3735,47 @@
 {{-- end this sccript   count all Sum   --}}
 <script src='{{asset('js/OborotTanga.js')}}'></script>
 <script src="{{asset('js/OborotJs.js')}}"></script>
+ 
 <script>
-              
-
-
+ 
 
 $(document).ready(function() {
+    //Id detalizasiya type 
+      $('#oborot_pul,#korshoyam_pul,#farsuda_pul,#botilshuda_pul').on('click',function()
+      {
+    
+        $('#podrobnee').val($(this).attr('id'));
+     //   console.log( $('#podrobnee').val());
         
+      });
+      
+    $('body').on('click', '.pagination a', function(e) {
+   
+         e.preventDefault();
+        //  console.log($(this).parent('div'));
+          
+
+            var url = $(this).attr('href');
+            getArticles(url,$('#podrobnee').val());
+            window.history.pushState("", "", url);
+        });
+
+        function getArticles(url,id) {
+       
+            $('#load a').css('color', '#dfecf6');
+            $('#load').append('<center><img style="position: absolute;   top: 0; z-index: 100000;" src="loading.gif" /></center>');
+          
+            $.ajax({
+                url : url
+            }).done(function (data) {
+                
+                $('.'+id).html(data);
+            }).fail(function () {
+                alert('Articles could not be loaded.');
+            });
+        }
+  
+ 
 //Oborots 
 $(".Oborot_id").click(function(){
 
@@ -4018,7 +3971,8 @@ $.ajax({
     $('#srcHomeTanga').html('');
    
           //console.log($(this).data('context'));
-          $('#textpriznak').html("");
+          var textpriznak='#textpriznak';
+          $(textpriznak).html("");
           $('#type').val('');
           
            var id='#srcHome';
@@ -4027,16 +3981,17 @@ $.ajax({
            if($(this).data('type')=='Tanga')
            {
             id='#srcHomeTanga';
+              textpriznak='#textpriznakTanga';
            }
           if($(this).data('context')=='korshoyam')
           {
          
             $('#type').val(1)
-            $('#textpriznak').html('Коршоям/'+$(this).text());
-       
+            $(textpriznak).html('Коршоям/'+$(this).text()+'<input name="farsuda" type="hidden"  value="1" >');
+            
             if($(this).val()==0)
             {
-                $(id).html('<input type="hidden" name="src" value="7">');
+                $(id).html('<input type="hidden" name="src" value="7"> ');
                
                 // console.log($(this).val());
           
@@ -4053,7 +4008,8 @@ $.ajax({
           }
           if($(this).data('context')=='farsuda')
           {
-            $('#textpriznak').html('Фарсуда / '+$(this).text());
+         
+            $(textpriznak).html('Фарсуда /'+$(this).text()+' <input name="farsuda" type="hidden"  value="2" >');
             $('#type').val(2)
             if($(this).val()==0)
             {
@@ -4071,7 +4027,8 @@ $.ajax({
           }
           if($(this).data('context')=='botilshuda')
           {
-            $('#textpriznak').html('Ботилшуда / '+$(this).text());
+            
+            $(textpriznak).html('Ботилшуда / '+$(this).text()+'<input name="farsuda" type="hidden"  value="3">');
             $('#type').val(3)
             if($(this).val()==0)
             {
@@ -4107,6 +4064,7 @@ $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
 console.log(id_number.substr(-2,1));
 $("#"+$(this).attr('id')).removeClass("border-danger");
  var shaving=$("#shaving"+id_number);
+ $("#shaving"+id_number).html("");
 
  if(this.value>0)
  {
@@ -4148,12 +4106,12 @@ id_number.substr(-2,1);
 $("#"+$(this).attr('id')).removeClass("border-danger");
 $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
  var qator=$("#qator_id"+id_number);
-
+ qator.html("");
  if(this.value>0)
  {
      var safe=$("#safe_id"+id_number+" option:selected").val();
 
-     qator.html("");
+    
      qator.append("<option >Интихоб</option>");
 
      $.ajax({
@@ -4196,6 +4154,7 @@ $("#"+$(this).attr('id')).removeClass("border-danger");
 var  id_number= $(this).attr("id").substr(-2);
 $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
  var cell=$("#cells"+id_number);
+ cell.html("");
  if(this.value>0)
  {
      //вактин$("#safe_id option:selected").val();
@@ -4203,8 +4162,8 @@ $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
      var safe=$("#safe_id"+id_number+" option:selected").val();
      var shaving=$("#shaving"+id_number+" option:selected").val();
 
-     cell.html("");
-     cell.append("<option >Интихоб</option>");
+   
+     cell.append("<option>Интихоб</option>");
 
      $.ajax({
          url: "{{route('cellsTable.post')}}",
@@ -4228,7 +4187,7 @@ $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
          },
      });
  }else{
-     qator.html(" <option >Интихоб</option>");
+     qator.html("<option >Интихоб</option>");
 
  }
 

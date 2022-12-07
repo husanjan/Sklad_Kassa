@@ -39,9 +39,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-
+        
            $bik= SprBank::all();
            $sprEds= SprEds::all();
           $Oborot= new  Oborot();
@@ -66,7 +66,8 @@ class HomeController extends Controller
        }else{
        $kodeOperObortTanga++;
    }
-             $response= $Oborot::orderBy('date','DESC')->get()->groupBy('kod_oper');
+             $response= $Oborot::orderBy('date','DESC')->paginate(5);
+
              $OborTanga= $OborotTanga::orderBy('date','DESC')->get()->groupBy('kod_oper');
              //Pul 
              $FondMoney= $FondMoneys::orderBy('date','DESC')->get()->groupBy('kode_oper');
@@ -96,12 +97,24 @@ class HomeController extends Controller
             $kodeOpero++;
           }
          
-       
-
-
+          
+              //  dd($request->all());
+              //  exit;
             $sprAccounts= SprAccounts::all();
+            if ($request->ajax()) {
+            
+              return view('oborot.pagination',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'))->render();
 
+          }
                 return view('home',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'));
+    }
+    public function fetch_data()
+    {
+      $bik= SprBank::all();
+      $sprAccounts= SprAccounts::all();
+       $response = Oborot::orderBy('date','DESC')->paginate(2);
+       return view('oborot.pagination', compact('response','bik','sprAccounts'))->render();
+     
     }
     public function OborotTable(Request $request)
     {
@@ -373,7 +386,7 @@ public function FondInsert(Request $request)
                   $Oborot= new  oborots_coin();
                   $sprAccounts= SprAccounts::all();
                   $bik= SprBank::all();
-                $obor= $Oborot::where('kod_oper',   $request->id)->get();
+                $obor= $Oborot::where('kod_oper',$request->id)->get();
                 // $obor= $Oborot::where('date',  date("Y-m-d H:i:s", strtotime($request->date)))->get();
                 $obor->where('kod_oper', $request->id);
               // echo "ss<pre>";
@@ -582,6 +595,7 @@ public function InsertTanga(Request $request)
         // echo "<pre>";
         // print_r($money);
         // echo "</pre>";
+        // exit;
         // echo $request->src;
          
         if(is_array($money) AND is_array($oborots) AND $request->src==7)

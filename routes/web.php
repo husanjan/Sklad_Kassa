@@ -76,6 +76,8 @@ Route::group([ 'middleware' => ['auth', 'activity']], function() {
     //Inserrt Oborot Tanga 
     Route::post('oborotInsertTanga',[HomeController::class, 'oborotInsertTanga'])->name('oborotInsertTanga.post');
     Route::post('InsertTanga',[HomeController::class, 'InsertTanga'])->name('InsertTanga.post');
+
+    Route::get('fetch_data',[HomeController::class, 'fetch_data']);
     Route::post('FondInsert',[HomeController::class, 'FondInsert'])->name('FondInsert.post');
     //Ячейка ажакс роуте
     Route::post('cellsTable',[SprCellsController::class, 'cellsTable'])->name('cellsTable.post');
