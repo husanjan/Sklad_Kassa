@@ -987,5 +987,56 @@ $request->ndoc,$request->kode_oper,Auth::id(),$request->summarazne,$request->com
      }
 //    end  Three somoni   diram                              
       }
-    
+      public function Fondostatki($money,$key)
+    {
+               $array=[];
+          //    $key_array=[];
+          //    $naminal_array=[];
+          $ids = array_column($money, 'naminal');
+          $ids = array_unique($ids);
+          $result = array();
+          foreach($money as $value){
+            $result[$value['cell_id']][]=$value;
+            if(in_array($value['cell_id'],$result))
+           {
+              
+             $result[$value['cell_id']][]=$value;
+           }
+          
+                //  $results = array_reduce($result, function($temp, $item){
+        //     isset($temp[$item['naminal']])
+        //        ? $temp[$item['naminal']]['summa']+=$item['summa']
+        //        : $temp[$item['naminal']] = $item;
+        //     return $temp;
+        // }, []);
+          
+          }
+                 foreach( $result AS $res):
+               
+                 $array[]= array_reduce($res, function($temp, $item){
+                  isset($temp[$item['naminal']])
+                     ? $temp[$item['naminal']]['summa'] += $item['summa']
+                     : $temp[$item['naminal']] = $item;
+                  return $temp;
+              }, []);
+                  
+                 endforeach;
+                 return $array;
+        //return $result;
+
+    //$results= array_unique($money);
+      
+//       foreach ($money as $agentInfo) {
+
+//     // create new item in result array if pair 'id'+'name' not exists
+//     if (!isset($sumArray[$agentInfo[$key]])) {
+//         $sumArray[$agentInfo[$key]] = $agentInfo;
+//     } else {
+//         // apply sum to existing element otherwise
+//         $sumArray[$agentInfo[$key]]['summa'] += $agentInfo['summa'];
+//     }
+// }
+//          return $sumArray;
+                  
+     }
 }

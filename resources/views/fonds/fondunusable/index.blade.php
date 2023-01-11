@@ -69,13 +69,14 @@
                           
                       
                           <input type="hidden" name="kode_oper_obor" value="{{$kodeOperObort }}">
+                          <input type="hidden"  name="src" value="4">
                             
-                              <div id="src">
+                              {{-- <div id="src">
                               
                                   
                                   
                                  
-                              </div>
+                              </div> --}}
                           {{-- <select name="src"   id="accounted" class="form-control" required>
                               <option disabled selected value="">Выберите </option>
                               @foreach($sprAccounts AS $accounts)
@@ -1262,7 +1263,152 @@
 <script src="{{asset('js/sumCounts.js')}}"></script>
 {{-- end this sccript   count all Sum   --}}
 {{-- this sccript count all Safe  safeshkaf    --}}
+<script>
+    $(document).on('change','[id^=safe_id]',function (){
+    
 
+     var  id_number= $(this).attr("id").substr(-2);
+     $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
+     console.log(id_number.substr(-2,1));
+     $("#"+$(this).attr('id')).removeClass("border-danger");
+      var shaving=$("#shaving"+id_number);
+     
+      if(this.value>0)
+      {
+          $("#shaving"+id_number).html("");
+          shaving.append("<option >Интихоб</option>");
+     
+          $.ajax({
+              url: "{{route('shkafTable.post')}}",
+              type:"POST",
+              data:{
+                  "_token": "{{ csrf_token() }}",
+                  id:this.value
+     
+              },
+              success:function(response){
+     
+     
+                  for (const [key, value] of Object.entries(response)) {
+                      var newMsgs='<option  value="'+value.id+'">'+value.shkaf+'</option>';
+     
+                      shaving.append(newMsgs);
+     
+                  }
+     
+              },
+          });
+      }else{
+          $("#shaving"+id_number).html(" <option >Интихоб</option>");
+     
+      }
+     });
+     //Safe ajax end
+     ///shaving ajax send
+     $(document).on('change','[id^=shaving]',function (){
+     
+     
+     var  id_number= $(this).attr("id").substr(-2);
+     id_number.substr(-2,1);
+     $("#"+$(this).attr('id')).removeClass("border-danger");
+     $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
+      var qator=$("#qator_id"+id_number);
+     
+      if(this.value>0)
+      {
+          var safe=$("#safe_id"+id_number+" option:selected").val();
+     
+          qator.html("");
+          qator.append("<option >Интихоб</option>");
+     
+          $.ajax({
+              url: "{{route('qatorTable.post')}}",
+              type:"POST",
+              data:{
+                  "_token": "{{ csrf_token() }}",
+                  id_shkaf:this.value,safe_id:safe,
+     
+              },
+              //safe_id
+              success:function(response){
+     
+     
+                  for (const [key, value] of Object.entries(response)) {
+                      var newMsgs='<option  value="'+value.id+'">'+value.qator+'</option>';
+     
+                      qator.append(newMsgs);
+     
+                  }
+     
+              },
+          });
+      }else{
+          qator.html(" <option >Интихоб</option>");
+     
+      }
+     
+     });
+     //end ajax send shaving
+     ///qator_id ajax send
+     $(document).on('change','[id^=cells]',function (){
+     var  id_number= $(this).attr("id").substr(-2);
+     $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
+     $("#"+$(this).attr('id')).removeClass("border-danger");
+     
+     });
+     $(document).on('change','[id^=qator_id]',function (){
+     $("#"+$(this).attr('id')).removeClass("border-danger");
+     var  id_number= $(this).attr("id").substr(-2);
+     $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
+      var cell=$("#cells"+id_number);
+      if(this.value>0)
+      {
+          //вактин$("#safe_id option:selected").val();
+     
+          var safe=$("#safe_id"+id_number+" option:selected").val();
+          var shaving=$("#shaving"+id_number+" option:selected").val();
+     
+          cell.html("");
+          cell.append("<option >Интихоб</option>");
+     
+          $.ajax({
+              url: "{{route('cellsTable.post')}}",
+              type:"POST",
+              data:{
+                  "_token": "{{ csrf_token() }}",
+                  id_shkaf:shaving,qator_id:this.value,safe_id:safe,
+     
+              },
+              //safe_id
+              success:function(response){
+     
+     
+                  for (const [key, value] of Object.entries(response)) {
+                      var newMsgs='<option  value="'+value.id+'">'+value.cell+'</option>';
+     
+                      cell.append(newMsgs);
+     
+                  }
+     
+              },
+          });
+      }else{
+          qator.html(" <option >Интихоб</option>");
+     
+      }
+     
+     });
+     //end ajax send qator
+     //clear counts
+     $(document).on('change','[id^=edin_id]',function (){
+     
+     $("#"+$(this).attr('id')).removeClass("border-danger");
+     var  id_number= $(this).attr("id").substr(-2);
+     $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
+     $("#count"+id_number).val("");
+     $("#sum"+id_number).html("");
+     
+     });</script>
 {{-- end this sccript   count all Sum   --}}
  <script>
 $(document).ready(function(){
@@ -1426,10 +1572,9 @@ return;
 }
 $('.toast').toast('show');
 });
-
-
-
+ 
  </script>
+ 
   <script src="{{asset('js/AddRemoveButton.js')}}"></script>
 <script src="/js/Sprjs.js"></script>
 

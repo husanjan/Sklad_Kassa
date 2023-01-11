@@ -114,129 +114,67 @@ class UnusableController extends Controller
     {
 
         $inputs=$request->all();
-     dd($inputs);
+    //  dd($inputs);
 //         echo "<pre>";
 //    print_r($request['Summarashod9'][0]);
 //   echo "</pre>";   
 //   exit;
     //      $arrayRashod=[];
-        foreach($request['id'] AS $input)
-        {
-            // print_r($input);
-                    if($request['Summarashod'.$input][0]>0)
-                    {
-                        // FondMoney::create($money[$key]);
-                        // Oborot::create($oborots[$key]);
+    //     foreach($request['id'] AS $input)
+    //     {
+    //         // print_r($input);
+    //                 if($request['Summarashod'.$input][0]>0)
+    //                 {
+    //                     // FondMoney::create($money[$key]);
+    //                     // Oborot::create($oborots[$key]);
                     
-                    $FondMoney = new FondMoney;
-                    $FondMoney->date=$request['date'];
-                    $FondMoney->priznak=$request['priznak'];
-                    $FondMoney->type=$request['farsudaRashod'];
-                    $FondMoney->src=$request['src'];
-                    $FondMoney->naminal=$request['naminal'.$input];
-                    $FondMoney->ed_id=2; 
-                    $FondMoney->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
-                    $FondMoney->summa  = $request['Summarashod'.$input][0];   
-                    $FondMoney->safe_id= $request['safe'.$input];   
-                    $FondMoney->shkaf_id=$request['shkaf'.$input];   
-                    $FondMoney->qator_id=$request['sprQator'.$input];   
-                    $FondMoney->cell_id = $request['sprCell'.$input];   
-                    $FondMoney->kode_oper= $request['kode_operRashod'];   
-                    $FondMoney->n_doc= $request['ndoc'];   
-                    $FondMoney->n_doc= $request['ndoc'];   
-                    $FondMoney->host = $request->ip();   
-                    $FondMoney->user_id = Auth::id();   
-                     $FondMoney->save();
-                   // echo $request['priznak'];
-                    //echo "<br>".$request['kode_oper'];
-                    // echo $request['farsuda'];
-                    // echo $request['src'];
-                    // echo $request['date'];
-                    // echo $request['kode_operRashod'];
-                    // echo $request['farsudaRashod'];
-                    // echo $request['KorshoyamRashod'];
-                    // echo $request['kode_oper_oborRashod'];
-                    // echo $request['ndoc'];
-                    // echo "ssssr<br>".$request['ostatkiResults'.$input];
-                    // echo "safe<br>".$request['safe'.$input];
-                    // echo "shkaf<br>".$request['shkaf'.$input];
-                    // echo "sprQator<br>".$request['sprQator'.$input];
-                    // echo "sprCell<br>".$request['sprCell'.$input];
-                    // echo "spred<br>".$request['sprEd'.$input];
-                    // echo "naminal<br>".$request['naminal'.$input];
-                    // echo "sss<br>".$request['Summarashod'.$input][0];
-                    }
+    //                 $FondMoney = new FondMoney;
+    //                 $FondMoney->date=$request['date'];
+    //                 $FondMoney->priznak=$request['priznak'];
+    //                 $FondMoney->type=$request['farsudaRashod'];
+    //                 $FondMoney->src=$request['src'];
+    //                 $FondMoney->naminal=$request['naminal'.$input];
+    //                 $FondMoney->ed_id=2; 
+    //                 $FondMoney->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+    //                 $FondMoney->summa  = $request['Summarashod'.$input][0];   
+    //                 $FondMoney->safe_id= $request['safe'.$input];   
+    //                 $FondMoney->shkaf_id=$request['shkaf'.$input];   
+    //                 $FondMoney->qator_id=$request['sprQator'.$input];   
+    //                 $FondMoney->cell_id = $request['sprCell'.$input];   
+    //                 $FondMoney->kode_oper= $request['kode_operRashod'];   
+    //                 $FondMoney->n_doc= $request['ndoc'];   
+    //                 $FondMoney->n_doc= $request['ndoc'];   
+    //                 $FondMoney->host = $request->ip();   
+    //                 $FondMoney->user_id = Auth::id();   
+    //                  $FondMoney->save();
+    //                // echo $request['priznak'];
+    //                 //echo "<br>".$request['kode_oper'];
+    //                 // echo $request['farsuda'];
+    //                 // echo $request['src'];
+    //                 // echo $request['date'];
+    //                 // echo $request['kode_operRashod'];
+    //                 // echo $request['farsudaRashod'];
+    //                 // echo $request['KorshoyamRashod'];
+    //                 // echo $request['kode_oper_oborRashod'];
+    //                 // echo $request['ndoc'];
+    //                 // echo "ssssr<br>".$request['ostatkiResults'.$input];
+    //                 // echo "safe<br>".$request['safe'.$input];
+    //                 // echo "shkaf<br>".$request['shkaf'.$input];
+    //                 // echo "sprQator<br>".$request['sprQator'.$input];
+    //                 // echo "sprCell<br>".$request['sprCell'.$input];
+    //                 // echo "spred<br>".$request['sprEd'.$input];
+    //                 // echo "naminal<br>".$request['naminal'.$input];
+    //                 // echo "sss<br>".$request['Summarashod'.$input][0];
+    //                 }
                
           
             
 
-        }     
-    exit;
+    //     }     
+    // exit;
         DB::beginTransaction();
         $inputs = $request->all();
-    //     $ostatki= ostatki_safe::distinct('cell_id')->select('cell_id','safe_id','shkaf_id','qator_id')->where('type',1)->where('priznak',0)->get();
-    //         $arrayResult=[];
-    //         // echo "<pre>";
-    //         // print_r(json_decode($ostatki,true));
-    //         // echo "</pre>";         
-    //         // exit;  
-    //         // echo '<table class="table">
-    //         // <thead>
-    //         //   <tr>
-    //         //     <th scope="col">#</th>
-    //         //     <th scope="col">Хранилище</th>
-    //         //     <th scope="col">Шкаф/Стилаж</th>
-    //         //     <th scope="col">Катор</th>
-    //         //     <th scope="col">Ячейка</th>
-    //         //     <th scope="col">Единиц</th>
-    //         //     <th scope="col">Наминал</th>
-    //         //     <th scope="col">Сумма</th>
-    //         //   </tr>
-    //         // </thead>
-    //         // <tbody>';
-    //         foreach($ostatki AS $ostatks)
-    //         {
-    //             $ostatkNominalDistinct= ostatki_safe::select('naminal')->where('cell_id', $ostatks['cell_id'])->groupBy('naminal')->get();
-    //             // echo "<pre>";
-    //             // print_r(json_decode($ostatkNominalDistinct,true));
-    //             // echo "</pre>"; 
-    //             foreach($ostatkNominalDistinct AS $distinctNaminal):
-                
-    //               // echo "<br>".$distinctNaminal['naminal'];
-    //                $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa')->where('naminal',$distinctNaminal['naminal'])->where('cell_id',$ostatks['cell_id'])->where('type',1)->where('priznak',0)->orderBy('id','desc')->limit(1)->get();
-    //             //  echo "<pre>";
-    //             // print_r(json_decode($ostatkiResult,true));
-    //             // echo "</pre>"; 
-         
-    //            foreach( $ostatkiResult AS  $ostatkiResults):
-    //             $arrayResult[]=$ostatkiResults;
-    //             // echo '
-    //             //   <tr>
-                    
-    //             //      <td>'.$ostatkiResults["id"].'</td>
-    //             //     <td>'.$ostatkiResults["safe_id"].'</td>
-    //             //     <td>'.$ostatkiResults["shkaf_id"].'</td>
-    //             //     <td>'.$ostatkiResults["qator_id"].'</td>
-    //             //     <td>'.$ostatkiResults["cell_id"].'</td>
-    //             //     <td>'.$ostatkiResults["ed_id"].'</td>
-    //             //     <td>'.$ostatkiResults["naminal"].'</td>
-    //             //     <td>'.$ostatkiResults["summa"].'</td>
-                    
-    //             //   </tr>';
-                 
-    //              endforeach;
-    //         endforeach;
-              
-    //         }
-           
-    //        // $ostatkid= ostatki_safe::selectRaw("SUM(summa) as summa")->where('cell_id',4)->groupBy('naminal')->orderBy('id','desc')->get();
-          
-    //         //    echo "<pre>";
-    //         //     print_r($arrayResult);
-    //         //     echo "</pre>"; 
-    // //    print_r($arrayResult);
-    //         exit;  
-                   
+ 
        
         $oborots =  $this->addRepository->addRequestsOborot($request,1);
                 
@@ -246,10 +184,10 @@ class UnusableController extends Controller
          $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
         //     dd($request->all());
         //  echo "<pre>";
-        //  print_r($money);
+        //  print_r($detailsFond);
         //  echo "</pre>";
 
-        // exit;
+    
          foreach($detailsFond AS $detailFonds)
          {
             $detailFondsRazne=$detailFonds;
@@ -288,16 +226,17 @@ class UnusableController extends Controller
                         $detailFondsRazne[$keys]['summa']+=$ostatksr['summa'];
                       
                      }
-                    ostatki_safe::create($detailFondsRazne[$keys]);
+                   ostatki_safe::create($detailFondsRazne[$keys]);
                 }
             }
-        //    print_r($detals);
+        //   // print_r($detals);
             // echo "<pre>";
             // print_r($detailFonds);
             // echo "</pre>";
+           
          }
          
-        
+   
         /// dd( $ostatki);
         $arrostat=$money;
         
@@ -353,10 +292,12 @@ class UnusableController extends Controller
         //  echo "</pre>";
     
         //  exit;
-  
+ 
          if(is_array($oborots) AND is_array($money) AND $request->src==4)
          {
-        
+            // echo "<pre>";
+            // print_r($money);
+            //  echo "</pre>";
         
             try{
                foreach ($money as $key => $value) {
@@ -365,15 +306,16 @@ class UnusableController extends Controller
               
               FondMoney::create($money[$key]);
                Oborot::create($oborots[$key]);
+       
             
            }
                DB::Commit();
             
-          return redirect()->route('fondunusable.index')->with('success','Фарсуда фонд успешно создан!');
+         return redirect()->route('fondunusable.index')->with('success','Фарсуда фонд успешно создан!');
              } catch (\Illuminate\Database\QueryException $e) {
                DB::rollback();
                
-              return redirect()->route('fondunusable.index')->with('danger','Фарсуда фонд  не успешно!');
+          return redirect()->route('fondunusable.index')->with('danger','Фарсуда фонд  не успешно!');
              }
            
          return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
