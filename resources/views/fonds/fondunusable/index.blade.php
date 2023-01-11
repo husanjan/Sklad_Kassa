@@ -45,7 +45,8 @@
           <div class="modal-content  ">
 
               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle"> <div id="textpriznak"></div></h5>
+                  <h5 class="modal-title" id="exampleModalLongTitle">
+                     <div id="textpriznak"></div></h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
@@ -58,7 +59,7 @@
                           <label for="date">Дата	</label>
                           <input  type="datetime-local"readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"     name="date" class="form-control"    >
 
-                          <input       id="valuepriznak"     name="priznak" type="hidden"    >
+                          <input      value="0"    name="priznak" type="hidden"    >
                           <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}">
                           <input            name="farsuda" type="hidden"   value="1" >
 
@@ -1121,18 +1122,126 @@
       </div>
   </div>
 </form>
-  {{--  Расход Модал--}}
+<form method="POST" action="{{route('fondunusable.store')}}">
+    @csrf
+    <input     value="1"   name="priznak" type="hidden">
+    <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}">
+    <input            name="farsuda" type="hidden"   value="1" >
+    <input type="hidden" name="src" value="4">
+  <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog  modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-3  ">
+                    <label for="date">Дата	</label>
+                    <input  type="datetime-local"readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"     name="date" class="form-control"    >
 
+                    <input     value="1"    name="priznak" type="hidden"    >
+                    <input            name="kode_operRashod" type="hidden"   value="{{$kodeOper}}">
+                    <input            name="KorshoyamRashod" type="hidden"   value="1" >
 
+                </div>
+             
+                    <input type="hidden" name="kode_oper_oborRashod" value="{{$kodeOperObort }}">
+           
+              
+                <div class="col-md-2">
+                    <label for="count01">Номер Документ	</label>
+                    <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
+                </div>
+ 
+         {{-- //Table ostatki  --}}
+         <table class="table mt-2">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Хранилище</th>
+                <th scope="col">Шкаф/Стилаж</th>
+                <th scope="col">Катор</th>
+                <th scope="col">Ячейка</th>
+                <th scope="col">Единиц</th>
+                <th scope="col">Наминал</th>
+                <th scope="col">Сумма</th>
+                <th scope="col">Сумма расход</th>
+              </tr>
+            </thead>
+            <tbody>
+               
+                @php
+               $i=1;//Initialize variable
+              @endphp
+                @foreach( $arrayResult AS  $ostatkiResults)
+         
+                <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
+                  <tr class="border-bottom" id="t{{$ostatkiResults->id}}">
+                    <td> {{ $i}} </td>
+                   
+                    <?php  $i++ ?>
+                    @foreach ($safes as $safe)
+                                 
+                    @if($ostatkiResults->safe_id===$safe->id) <td> <input type="hidden" name="safe{{$ostatkiResults->id}}" value="{{$safe->id}}">{{$safe->safe}}</td>  @endif
+                    @endforeach
+                    {{-- <td>{{ $ostatkiResults->safe_id }}</td> --}}
+            
+                    @foreach ( $shkafs as $shkaf )
+           
+                    @if($ostatkiResults->shkaf_id===$shkaf->id ) <td><input type="hidden" name="shkaf{{$ostatkiResults->id}}" value="{{$shkaf->id}}">{{ $shkaf->shkaf }}</td>  @endif
+                    @endforeach
+                    @foreach ( $sprQators as $sprQator )
+           
+                    @if($ostatkiResults->qator_id===$sprQator->id ) <td><input type="hidden" name="sprQator{{$ostatkiResults->id}}" value="{{$sprQator->id}}">{{ $sprQator->qator }}</td>  @endif
+                    @endforeach
+                    @foreach ( $sprCells as $sprCell )
+           
+                    @if($ostatkiResults->cell_id===$sprCell->id ) <td><input type="hidden" name="sprCell{{$ostatkiResults->id}}" value="{{$sprCell->id}}">{{ $sprCell->cell }}</td>  @endif
+                    @endforeach
+                    @foreach ($sprEds as $sprEd )
+           
+                    @if($ostatkiResults->ed_id===$sprEd->id ) <td><input type="hidden" name="sprEd{{$ostatkiResults->id}}" value="{{$sprEd->id}}" >{{ $sprEd->name }}</td>  @endif
+                    @endforeach
+              
+                    <td> {{ $ostatkiResults->naminal=='razne'?'Разные':$ostatkiResults->naminal}} <input type="hidden"  id="naminal{{$ostatkiResults->id}}"  name="naminal{{$ostatkiResults->id}}" value="{{$ostatkiResults->naminal}}"></td>
+                    <td ><label for="" id="sumr{{$ostatkiResults->id}}" class="{{$ostatkiResults->id}}"><input type="hidden" name="ostatkiResults{{$ostatkiResults->id}}" value="{{ $ostatkiResults->summa}}"> {{ $ostatkiResults->summa}}</label> сомони</td>
+                    <td><input type="text" class="form-control col-md-4 summaR"  name="Summarashod{{$ostatkiResults->id}}[]" id="{{$ostatkiResults->id}}"></td>
+                    
+                  </tr>
+                 
+                @endforeach
+        </tbody>
+         </table>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыт</button>
+          <button type="submit" class="btn btn-primary" disabled>Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   </form>
       <div class="container">
           <div class="col-md-12">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod"   id="priznak" value="0">Приход </button>
-                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod"  id="priznak" value="1">Расход</button>
+            <div class="btn-group col-auto" role="group" aria-label="Basic example">
+                <button type="button" onclick="this.form.reset();" class="btn btn-outline-primary" data-context="korshoyam" data-toggle="modal" data-target="#rashod" id="priznak" value="0">Приход </button>
+                <button type="button" class="btn btn-outline-primary"   data-toggle="modal" data-target="#exampleModalCenter"  value="1">Расход</button>
+                
 
-              </div>
+            </div>
           </div>
       </div>
+
+
+
+  {{--  Расход Модал--}}
 
 
 
@@ -1156,158 +1265,100 @@
 
 {{-- end this sccript   count all Sum   --}}
  <script>
-     //Safe ajax
-    //    $(document).on('change','#accounted',function(){
-               
-    //           $('#accounts').html('<input type="hidden" name="accounts" value="'+$("#accounted option:selected").text()+'">')
-               
-    //    });
-     $(document).on('change','[id^=safe_id]',function (){
+$(document).ready(function(){
+        //   name="naminal{{$ostatkiResults->id}}" 
      
+  $(".summaR").keyup(function(){
+    // console.log();
+    // console.log(parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0);
+    if(parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0)
+    {
 
-var  id_number= $(this).attr("id").substr(-2);
-$('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
-console.log(id_number.substr(-2,1));
-$("#"+$(this).attr('id')).removeClass("border-danger");
- var shaving=$("#shaving"+id_number);
+    
+    function selectValidation(id_select) {
+     var selectIsValid = null;
+     var incr=0;
+     var decriment=0;
+     
+    $('.summaR').each(function() {
 
- if(this.value>0)
- {
-     $("#shaving"+id_number).html("");
-     shaving.append("<option >Интихоб</option>");
+        var values= $('#sumr'+$(this).attr('id')).text();
+        if(parseFloat($(this).val())>0 && parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0)
+        {
+        
+  
+             incr++;
+          
+            if(values>=parseFloat($(this).val())&& parseFloat($(this).val())>0)
+            {
+                decriment++;
+                // console.log(values);
+                if(incr==decriment)
+        {
+                 selectIsValid=true;
+                 $(':input[type="submit"]').prop('disabled', true);
+                  return;
+          }
+            }
 
-     $.ajax({
-         url: "{{route('shkafTable.post')}}",
-         type:"POST",
-         data:{
-             "_token": "{{ csrf_token() }}",
-             id:this.value
+               
+     
+            }
 
-         },
-         success:function(response){
-
-
-             for (const [key, value] of Object.entries(response)) {
-                 var newMsgs='<option  value="'+value.id+'">'+value.shkaf+'</option>';
-
-                 shaving.append(newMsgs);
-
-             }
-
-         },
-     });
- }else{
-     $("#shaving"+id_number).html(" <option >Интихоб</option>");
-
- }
+            });
+ 
+   
+    return     selectIsValid;
+    }
+ 
+   
+      //console.log($(this).val());
+   let id=$(this).attr("id");
+    //input '' danger remover
+    //$('#t'+id).removeClass('border-success');
+//    if(isNaN(parseFloat($(this).val())))
+//     {
+//         // $('#t'+id).removeClass('border-danger');
+//         // $('#t'+id).removeClass('border-success');
+//     }
+    // end  //input '' danger remover
+        //    console.log(selectValidation());
+        if(selectValidation())
+        {
+            $(':input[type="submit"]').prop('disabled', false);
+        }else{
+            $(':input[type="submit"]').prop('disabled', true);
+           return;
+        }
+ 
+ 
+   if($('#sumr'+id).text()>=parseFloat($(this).val()) && parseFloat($(this).val())>0)
+   {
+          $('#t'+id).removeClass('border-danger');
+         // $('#t'+id).addClass('border-success');
+          return;
+   
+   }else{
+  //  $('#t'+id).removeClass('border-success');
+          $('#t'+id).addClass('border-danger');  
+          $(':input[type="submit"]').prop('disabled', true);
+          return;
+   }
+//     if(selectValidation()==false){
+//     $('#t'+id).removeClass('border-danger');  
+//     $('#t'+id).removeClass('border-success');
+//             return 
+//    }
+}else{
+    $(':input[type="submit"]').prop('disabled', true);
+}
+//end validate checked nomnal summa rashod summa
+  });
+ 
 });
-//Safe ajax end
-///shaving ajax send
-$(document).on('change','[id^=shaving]',function (){
-
-
-var  id_number= $(this).attr("id").substr(-2);
-id_number.substr(-2,1);
-$("#"+$(this).attr('id')).removeClass("border-danger");
-$('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
- var qator=$("#qator_id"+id_number);
-
- if(this.value>0)
- {
-     var safe=$("#safe_id"+id_number+" option:selected").val();
-
-     qator.html("");
-     qator.append("<option >Интихоб</option>");
-
-     $.ajax({
-         url: "{{route('qatorTable.post')}}",
-         type:"POST",
-         data:{
-             "_token": "{{ csrf_token() }}",
-             id_shkaf:this.value,safe_id:safe,
-
-         },
-         //safe_id
-         success:function(response){
-
-
-             for (const [key, value] of Object.entries(response)) {
-                 var newMsgs='<option  value="'+value.id+'">'+value.qator+'</option>';
-
-                 qator.append(newMsgs);
-
-             }
-
-         },
-     });
- }else{
-     qator.html(" <option >Интихоб</option>");
-
- }
-
-});
-//end ajax send shaving
-///qator_id ajax send
-$(document).on('change','[id^=cells]',function (){
-var  id_number= $(this).attr("id").substr(-2);
-$('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
-$("#"+$(this).attr('id')).removeClass("border-danger");
-
-});
-$(document).on('change','[id^=qator_id]',function (){
-$("#"+$(this).attr('id')).removeClass("border-danger");
-var  id_number= $(this).attr("id").substr(-2);
-$('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
- var cell=$("#cells"+id_number);
- if(this.value>0)
- {
-     //вактин$("#safe_id option:selected").val();
-
-     var safe=$("#safe_id"+id_number+" option:selected").val();
-     var shaving=$("#shaving"+id_number+" option:selected").val();
-
-     cell.html("");
-     cell.append("<option >Интихоб</option>");
-
-     $.ajax({
-         url: "{{route('cellsTable.post')}}",
-         type:"POST",
-         data:{
-             "_token": "{{ csrf_token() }}",
-             id_shkaf:shaving,qator_id:this.value,safe_id:safe,
-
-         },
-         //safe_id
-         success:function(response){
-
-
-             for (const [key, value] of Object.entries(response)) {
-                 var newMsgs='<option  value="'+value.id+'">'+value.cell+'</option>';
-
-                 cell.append(newMsgs);
-
-             }
-
-         },
-     });
- }else{
-     qator.html(" <option >Интихоб</option>");
-
- }
-
-});
-//end ajax send qator
-//clear counts
-$(document).on('change','[id^=edin_id]',function (){
-
-$("#"+$(this).attr('id')).removeClass("border-danger");
-var  id_number= $(this).attr("id").substr(-2);
-$('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
-$("#count"+id_number).val("");
-$("#sum"+id_number).html("");
-
-});
-$("#add,#add3,#add5,#addt,#addb,#addc,#addd,#adde,#addf,#addg,#addh,#addj,#addk").click(function(){
+his sccript   count all Sum   --}}
+ <script>
+ddk").click(function(){
 
 
 
