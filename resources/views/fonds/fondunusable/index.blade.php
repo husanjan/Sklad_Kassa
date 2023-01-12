@@ -1416,7 +1416,7 @@ $(document).ready(function(){
      
   $(".summaR").keyup(function(){
     // console.log();
-    // console.log(parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0);
+     console.log(parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0);
     if(parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0)
     {
 
@@ -1502,76 +1502,76 @@ $(document).ready(function(){
   });
  
 });
-his sccript   count all Sum   --}}
- <script>
-ddk").click(function(){
+// his sccript   count all Sum   --}}
+ 
+//  ddk").click(function(){
 
 
 
 
-var id_btn=$(this).val();
+// var id_btn=$(this).val();
 
     
-//  console.log('.selects'+id_btn);
- var idv=id_btn.substr(-2,1);
+// //  console.log('.selects'+id_btn);
+//  var idv=id_btn.substr(-2,1);
 
-var  new_btn=parseInt($('#total_chq'+id_btn).val())+1;
-var values=$("#total_chq"+id_btn).val();
-var counts=$("#count"+idv+values).val();
-// console.log("#count"+idv+values);
-
-
-console.log(selectValidation('.selects'+idv));
-
-if(selectValidation('.selects'+idv) && counts>0 && values<=9)
-{
-var   nominal= $('#'+'nominal'+id_number).val();
-var   nominalsss= $('input[id^=count]').val();
-var   edins= $("#edin_id"+id_number).val();
+// var  new_btn=parseInt($('#total_chq'+id_btn).val())+1;
+// var values=$("#total_chq"+id_btn).val();
+// var counts=$("#count"+idv+values).val();
+// // console.log("#count"+idv+values);
 
 
-var val_nominal=$("#nominal"+id_btn).val();
-var val_edin=$("#edin_id"+idv+values).val();
-var val_count=$("#count"+idv+values).val();
+// console.log(selectValidation('.selects'+idv));
 
-var $safe_id = $("#safe_id"+id_btn+" > option").clone();
-var $edin_id = $("#edin_id"+id_btn+" > option").clone();
-
-
-var new_input='<div class="row  mt-2" id="new'+idv+new_btn+'"><div>';
-
-var edi= '<div class="col-md-2   ">  <div>';
-var select_edin='<select id="edin_id'+idv+new_btn+'"  class="form-select Somon selects edin_id'+id_btn+'  edin_id" name="ed_id'+idv+'[]" > </select>';
-var select_edin= $(select_edin).append($edin_id);
-var edinLabel='<label for="edin_id'+idv+new_btn+'">Единиц	</label>';
-var edins=$(edi).append(edinLabel,select_edin);
-var counts= '  <div class="col-md-1  "><label for="count'+idv+new_btn+'">Кол-во	</label><input      style="width: 05rem;" id="count'+idv+new_btn+'"   type="text"  name="count'+idv+'[]" class="form-control Somon  count"></div>';
-  // ..Хранилище тег
-var saf='<div class="col-md-2 "></div>';
-var safeLabel='<label for="safe_id0'+new_btn+'">Хранилище</label>';
-var safe_Select='<select name="safe_id'+idv+'[]"   id="safe_id'+idv+new_btn+'" style="width: 08rem;" class="form-control  Somon selects'+id_btn+'"></select>   <input     id="nominal'+val_nominal+'"  value="1" disabled  type="hidden"  name="nominal"     >';
-safe_Select=$(safe_Select).append($safe_id);
-var safes=$(saf).append(safeLabel,safe_Select);
-// ..Хранилище тег end
-var shkaf='<div class="col-md-2">  <label for="shaving0">Шкаф	</label><select style="width: 08rem;" name="shaving'+idv+'[]"   id="shaving'+idv+new_btn+'" class="form-control Somon selects'+id_btn+'"><select></div>';
-var ryad='<div class="col-md-2   "><label for="qator_id'+idv+new_btn+'">Ряд	</label><select name="qator_id'+idv+'[]" style="width: 08rem;"    id="qator_id'+idv+new_btn+'" class="form-control Somon selects'+id_btn+'"></select></div>';
-var cell='<div class="col-md-1   "> <label for="cells0'+new_btn+'">Ячейка</label> <select name="cells'+idv+'[]"   id="cells'+idv+new_btn+'" class="form-control  Somon selects'+id_btn+'"></select></div>    <input     id="nominal'+idv+new_btn+'"  value="1" disabled  type="hidden"  name="nominal"     >';
+// if(selectValidation('.selects'+idv) && counts>0 && values<=9)
+// {
+// var   nominal= $('#'+'nominal'+id_number).val();
+// var   nominalsss= $('input[id^=count]').val();
+// var   edins= $("#edin_id"+id_number).val();
 
 
+// var val_nominal=$("#nominal"+id_btn).val();
+// var val_edin=$("#edin_id"+idv+values).val();
+// var val_count=$("#count"+idv+values).val();
 
-var new_ip=$(new_input).append(edins,counts,safes,shkaf,ryad,cell);
+// var $safe_id = $("#safe_id"+id_btn+" > option").clone();
+// var $edin_id = $("#edin_id"+id_btn+" > option").clone();
 
-$('#new_chq'+id_btn).append(new_ip);
+
+// var new_input='<div class="row  mt-2" id="new'+idv+new_btn+'"><div>';
+
+// var edi= '<div class="col-md-2   ">  <div>';
+// var select_edin='<select id="edin_id'+idv+new_btn+'"  class="form-select Somon selects edin_id'+id_btn+'  edin_id" name="ed_id'+idv+'[]" > </select>';
+// var select_edin= $(select_edin).append($edin_id);
+// var edinLabel='<label for="edin_id'+idv+new_btn+'">Единиц	</label>';
+// var edins=$(edi).append(edinLabel,select_edin);
+// var counts= '  <div class="col-md-1  "><label for="count'+idv+new_btn+'">Кол-во	</label><input      style="width: 05rem;" id="count'+idv+new_btn+'"   type="text"  name="count'+idv+'[]" class="form-control Somon  count"></div>';
+//   // ..Хранилище тег
+// var saf='<div class="col-md-2 "></div>';
+// var safeLabel='<label for="safe_id0'+new_btn+'">Хранилище</label>';
+// var safe_Select='<select name="safe_id'+idv+'[]"   id="safe_id'+idv+new_btn+'" style="width: 08rem;" class="form-control  Somon selects'+id_btn+'"></select>   <input     id="nominal'+val_nominal+'"  value="1" disabled  type="hidden"  name="nominal"     >';
+// safe_Select=$(safe_Select).append($safe_id);
+// var safes=$(saf).append(safeLabel,safe_Select);
+// // ..Хранилище тег end
+// var shkaf='<div class="col-md-2">  <label for="shaving0">Шкаф	</label><select style="width: 08rem;" name="shaving'+idv+'[]"   id="shaving'+idv+new_btn+'" class="form-control Somon selects'+id_btn+'"><select></div>';
+// var ryad='<div class="col-md-2   "><label for="qator_id'+idv+new_btn+'">Ряд	</label><select name="qator_id'+idv+'[]" style="width: 08rem;"    id="qator_id'+idv+new_btn+'" class="form-control Somon selects'+id_btn+'"></select></div>';
+// var cell='<div class="col-md-1   "> <label for="cells0'+new_btn+'">Ячейка</label> <select name="cells'+idv+'[]"   id="cells'+idv+new_btn+'" class="form-control  Somon selects'+id_btn+'"></select></div>    <input     id="nominal'+idv+new_btn+'"  value="1" disabled  type="hidden"  name="nominal"     >';
 
 
 
-$('#total_chq'+id_btn).val(new_btn);
-$('#edin_id'+idv+id_btn).append($safe_id);
+// var new_ip=$(new_input).append(edins,counts,safes,shkaf,ryad,cell);
 
-return;
-}
-$('.toast').toast('show');
-});
+// $('#new_chq'+id_btn).append(new_ip);
+
+
+
+// $('#total_chq'+id_btn).val(new_btn);
+// $('#edin_id'+idv+id_btn).append($safe_id);
+
+// return;
+// }
+// $('.toast').toast('show');
+// // });
  
  </script>
  
