@@ -16,7 +16,9 @@ use App\Models\Oborot;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\InterfacesSomoni;
 use App\Repositories\AddRequest;
+use App\Repositories\RepositoryRashod;
 use Illuminate\Support\Facades\DB;
+
 class WornouController extends Controller
 {
     /**
@@ -25,9 +27,11 @@ class WornouController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $addRepository;
-    public function __construct(AddRequest $addRepository)
+    private $RepositoryRashod;
+    public function __construct(AddRequest $addRepository,RepositoryRashod $RepositoryRashod)
     {
         $this->addRepository = $addRepository;
+        $this->RepositoryRashod = $RepositoryRashod;
     }
 
     public function index()
@@ -52,7 +56,8 @@ class WornouController extends Controller
                   }else{
                    $kodeOper++;
                     }
-            return  view('fonds.fondwornou.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort'));
+                    $arrayResult= $this->RepositoryRashod->SelectRashod(2,0);
+            return  view('fonds.fondwornou.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult'));
     }
 
 
