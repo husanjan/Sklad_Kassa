@@ -15,6 +15,7 @@ use App\Models\FondMoney;
 use App\Http\Controllers\Fonds\WornouController;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\AddRequest;
+use App\Repositories\RepositoryRashod;
 use Illuminate\Support\Facades\DB;
 class CanceledController extends Controller
 {
@@ -24,9 +25,11 @@ class CanceledController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $addRepository;
-    public function __construct(AddRequest $addRepository)
+    private $RepositoryRashod;
+    public function __construct(AddRequest $addRepository,RepositoryRashod $RepositoryRashod)
     {
         $this->addRepository = $addRepository;
+        $this->RepositoryRashod = $RepositoryRashod;
     }
     public function index()
     {
@@ -44,7 +47,8 @@ class CanceledController extends Controller
                      }else{
                       $kodeOper++;
                        }
-          return  view('fonds.fondcancled.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper'));
+                       $arrayResult=$this->RepositoryRashod->SelectRashod(3,0);
+          return  view('fonds.fondcancled.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','arrayResult'));
     }
 
     /**
@@ -66,36 +70,60 @@ class CanceledController extends Controller
     public function store(Request $request)
     {
         //
-        DB::beginTransaction();
+       // DB::beginTransaction();
          
+        if(isset($request['id']))
+        {
+            $arrayResult= $this->RepositoryRashod->InsertRashodBotilshudaToOstatki($request);
+             print_r($arrayResult);
+             
+               if($arrayResult)
+               {
+                return redirect()->route('fondcanceled.index')->with('success','Фонд расход успешно создан!');
+               }
+              
+          exit;
+        }    
+
+
              //$this->addRepository->addRequests($request);
              $money= $this->addRepository->addRequests($request);
-             echo "<pre>";
-                       print_r($money);
-                       echo "</pre>";
+            //  echo "<pre>";
+            //            print_r($money);
+            //            echo "</pre>";
+            //            exit;
              if(is_array($money))
              {
-               
+ 
+             $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
+               $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,0);
+            //    echo "<pre>";
+            //    print_r($detailsFond);
+            //               echo "</pre>";
+                          exit;
+
+        return redirect()->route('fondcanceled.index')->with('success','Фонд Приход успешно создан!');
+        }
                 
-                try{
-                   foreach ($money as $key => $value) {
-                       # code...
+            //     try{
+            //        foreach ($money as $key => $value) {
+            //            # code...
                     
-                   FondMoney::create($money[$key]);
+            //        FondMoney::create($money[$key]);
      
-               }
-                   DB::Commit();
+            //    }
+            //        DB::Commit();
                  
-                 return redirect()->route('fondcanceled.index')->with('success','Ботилшуда успешно создан!');
-                 } catch (\Illuminate\Database\QueryException $e) {
-                   DB::rollback();
-                   return response(['message'=>'FAILURE'], 500);
-               return redirect()->route('fondcanceled.index')->with('danger','Ботилшуда не успешно!');
-                 }
+            //      return redirect()->route('fondcanceled.index')->with('success','Ботилшуда успешно создан!');
+            //      } catch (\Illuminate\Database\QueryException $e) {
+            //        DB::rollback();
+            //        return response(['message'=>'FAILURE'], 500);
+            //    return redirect()->route('fondcanceled.index')->with('danger','Ботилшуда не успешно!');
+            //      }
                
-              return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
+            //   return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
              
-             }
+            //  }
 
       //return redirect()->route('fondcanceled.index')->with('success','Ботилшуда фонд успешно создан!');
 

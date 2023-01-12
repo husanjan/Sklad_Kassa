@@ -80,27 +80,47 @@ class WornouController extends Controller
     public function store(Request $request)
     {
         //
-        DB::beginTransaction();
+       
         $inputs = $request->all();
           
+
+           
+        if(isset($request['id']))
+        {
+            $arrayResult= $this->RepositoryRashod->InsertRashodFarsudaToOstatki($request);
+            // print_r($arrayResult);
+            if($arrayResult)
+            {
+             return redirect()->route('fondwornou.index')->with('success','Фонд расход успешно создан!');
+            }
+          exit;
+        }  
+
            $blogs =  $this->addRepository->addRequestsOborot($request,2);
            
      
          // 
                   
-          $arr= $this->addRepository->addRequests($request);
+          $money= $this->addRepository->addRequests($request);
+      
+       
         //   echo "<pre>";
-        //   print_r($arr);
+        //   print_r($detailsFond);
         //   echo "</pre>";
         //    exit;
-        if(is_array($arr) AND is_array($blogs) AND $request->src==7)
+            DB::beginTransaction();
+        if(is_array($money) AND is_array($blogs) AND $request->src==4)
           {
-            
+              //prihod korshoyam ostatki
+         $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
+    
+         $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,0);
+              //prihod korshoyam ostatki  
              
              try{
-                foreach ($arr as $key => $value) {
+                foreach ($money as $key => $value) {
                     # code...
-                FondMoney::create($arr[$key]);
+                FondMoney::create($money[$key]);
                 Oborot::create($blogs[$key]);
             }
                 DB::Commit();
@@ -115,24 +135,30 @@ class WornouController extends Controller
               return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
           
           }
+          
           //korshoyam 
-          if(is_array($arr) AND $request->src==3 OR  $request->src==1)
-          {
-            try{
-                foreach ($arr as $key => $value) {
-                    # code...
+
+      
+
+        //   if(is_array($money) AND $request->src==3 AND )
+        //   {
+            
+        //     try{
+         
+        //         foreach ($money as $key => $value) {
+        //             # code...
                
-                    FondMoney::create($arr[$key]);
-            }
-                DB::Commit();
-                  response(['message'=>'ALL GOOD'], 200);
-               return redirect()->route('fondwornou.index')->with('success','Фарсуда Ба оборот рафт фонд успешно создан!');
-              } catch (\Illuminate\Database\QueryException $e) {
-                DB::rollback();
+        //             FondMoney::create($money[$key]);
+        //     }
+        //         DB::Commit();
+        //           response(['message'=>'ALL GOOD'], 200);
+        //        return redirect()->route('fondwornou.index')->with('success','Фарсуда Ба оборот рафт фонд успешно создан!');
+        //       } catch (\Illuminate\Database\QueryException $e) {
+        //         DB::rollback();
                
-                return redirect()->route('fondwornou.index')->with('danger','Фарсуда фонд   не успешно!');
-              }
-          }
+        //         return redirect()->route('fondwornou.index')->with('danger','Фарсуда фонд   не успешно!');
+        //       }
+        //   }
        // Start transaction!
  
          

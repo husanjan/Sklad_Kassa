@@ -44,6 +44,7 @@ class RepositoryRashod{
       endforeach;
         
       }
+      
       return  $arrayResult = array_map("unserialize", array_unique(array_map("serialize", $arrayResult)));
     }
 
@@ -74,6 +75,9 @@ class RepositoryRashod{
                      $detailFonds[$keys]['summa']+=$ostatks['summa'];
                    
                   }
+                  // echo "<pre>";
+                  // print_r($detailFonds[$keys]);
+                  // echo "</pre>";
                 ostatki_safe::create($detailFonds[$keys]);
              }
              if($detailFondsRazne[$keys]['naminal']=='razne')
@@ -92,9 +96,7 @@ class RepositoryRashod{
              }
          }
        // print_r($detals);
-        //  echo "<pre>";
-        //  print_r($detailFonds);
-        //  echo "</pre>";
+     
         
   }
     } //End Insert Prihod to ostatki
@@ -112,6 +114,7 @@ class RepositoryRashod{
                    //fond insert
                   $FondMoney = new FondMoney;
                   $FondMoney->date=$request['date'];
+                  $FondMoney->comment=$request['comment'];
                   $FondMoney->priznak=$request['priznak'];
                   $FondMoney->type=1;
                   $FondMoney->src=$request['src'];
@@ -125,7 +128,7 @@ class RepositoryRashod{
                   $FondMoney->cell_id = $request['sprCell'.$input];   
                   $FondMoney->kode_oper= $request['kode_operRashod'];   
                   $FondMoney->n_doc= $request['ndoc'];   
-                   $FondMoney->host = $request->ip();   
+                  $FondMoney->host = $request->ip();   
                   $FondMoney->user_id = Auth::id();   
                   $FondMoney->save();
                   //Oborot insert
@@ -147,6 +150,7 @@ class RepositoryRashod{
                  $Oborot->save();
                  //ostatki safe
                  $ostatki_safe = new ostatki_safe;
+                 $ostatki_safe->comment=$request['comment'];
                  $ostatki_safe->date=$request['date'];
                  $ostatki_safe->src=$request['src'];
                  $ostatki_safe->naminal=$request['naminal'.$input];
@@ -173,6 +177,134 @@ class RepositoryRashod{
       }    
       return true;
 
-    }
+    }   //end rashod 
+       //Rashod insert ostatki
+       public function InsertRashodFarsudaToOstatki($request)
+       {
+         foreach($request['id'] AS $input)
+         {
+             // print_r($input);
+             // exit;
+                     if($request['Summarashod'.$input][0]>0)
+                     {
+       
+                      //fond insert
+                     $FondMoney = new FondMoney;
+                     $FondMoney->date=$request['date'];
+                     $FondMoney->comment=$request['comment'];
+                     $FondMoney->priznak=$request['priznak'];
+                     $FondMoney->type=2;
+                     $FondMoney->src=$request['src'];
+                     $FondMoney->naminal=$request['naminal'.$input];
+                     $FondMoney->ed_id=2; 
+                     $FondMoney->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+                     $FondMoney->summa  = $request['Summarashod'.$input][0];   
+                     $FondMoney->safe_id= $request['safe'.$input];   
+                     $FondMoney->shkaf_id=$request['shkaf'.$input];   
+                     $FondMoney->qator_id=$request['sprQator'.$input];   
+                     $FondMoney->cell_id = $request['sprCell'.$input];   
+                     $FondMoney->kode_oper= $request['kode_operRashod'];   
+                     $FondMoney->n_doc=$request['ndoc'];   
+                     $FondMoney->host=$request->ip();   
+                     $FondMoney->user_id=Auth::id();   
+                     $FondMoney->save();
+                     //Oborot insert
+                     
+                    //ostatki safe
+                    $ostatki_safe = new ostatki_safe;
+                    $ostatki_safe->date=$request['date'];
+                    // $ostatki_safe->comment=$request['comment'];
+                    $ostatki_safe->src=$request['src'];
+                    $ostatki_safe->naminal=$request['naminal'.$input];
+                    $ostatki_safe->priznak=0;
+                    $ostatki_safe->ed_id=2; 
+                    $ostatki_safe->type=2;
+                    //$ostatki_safe->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+                    $ostatki_safe->summa  = $request['ostatkiResults'.$input]-$request['Summarashod'.$input][0];
+                    $ostatki_safe->safe_id= $request['safe'.$input];   
+                    $ostatki_safe->shkaf_id=$request['shkaf'.$input];   
+                    $ostatki_safe->qator_id=$request['sprQator'.$input];   
+                    $ostatki_safe->cell_id = $request['sprCell'.$input];   
+                    $ostatki_safe->typeFond=0;   
+                 //    $ostatki_safe->n_doc= $request['ndoc'];   
+                    $ostatki_safe->host =$request->ip();   
+                    $ostatki_safe->user_id =Auth::id();   
+                    $ostatki_safe=  $ostatki_safe->save();
+                  
+                 
+        }
+      
+                
+           
+             
+   
+         }    
+         
+         return true;
+   
+       }
+       //botilshuda rashod 
+       public function InsertRashodBotilshudaToOstatki($request)
+       {
+         foreach($request['id'] AS $input)
+         {
+             // print_r($input);
+             // exit;
+                     if($request['Summarashod'.$input][0]>0)
+                     {
+       
+                      //fond insert
+                     $FondMoney = new FondMoney;
+                     $FondMoney->date=$request['date'];
+                     $FondMoney->priznak=$request['priznak'];
+                     $FondMoney->comment=$request['comment'];
+                     $FondMoney->type=3;
+                     $FondMoney->src=Null;
+                     $FondMoney->naminal=$request['naminal'.$input];
+                     $FondMoney->ed_id=2; 
+                     $FondMoney->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+                     $FondMoney->summa  = $request['Summarashod'.$input][0];   
+                     $FondMoney->safe_id= $request['safe'.$input];   
+                     $FondMoney->shkaf_id=$request['shkaf'.$input];   
+                     $FondMoney->qator_id=$request['sprQator'.$input];   
+                     $FondMoney->cell_id = $request['sprCell'.$input];   
+                     $FondMoney->kode_oper= $request['kode_operRashod'];   
+                     $FondMoney->n_doc=$request['ndoc'];   
+                     $FondMoney->host=$request->ip();   
+                     $FondMoney->user_id=Auth::id();   
+                     $FondMoney->save();
+                     //Oborot insert
+                     
+                    //ostatki safe
+                    $ostatki_safe = new ostatki_safe;
+                    $ostatki_safe->date=$request['date'];
+                    $ostatki_safe->src=null;
+                    $ostatki_safe->naminal=$request['naminal'.$input];
+                    $ostatki_safe->priznak=0;
+                    $ostatki_safe->ed_id=2; 
+                    $ostatki_safe->type=3;
+                    //$ostatki_safe->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+                    $ostatki_safe->summa  = $request['ostatkiResults'.$input]-$request['Summarashod'.$input][0];
+                    $ostatki_safe->safe_id= $request['safe'.$input];   
+                    $ostatki_safe->shkaf_id=$request['shkaf'.$input];   
+                    $ostatki_safe->qator_id=$request['sprQator'.$input];   
+                    $ostatki_safe->cell_id = $request['sprCell'.$input];   
+                    $ostatki_safe->typeFond=0;   
+                 //    $ostatki_safe->n_doc= $request['ndoc'];   
+                    $ostatki_safe->host =$request->ip();   
+                    $ostatki_safe->user_id =Auth::id();   
+                    $ostatki_safe=  $ostatki_safe->save();
+                 
+        }
+      
+                
+           
+             
+   
+         }    
+         
+         return true;
+   
+       }
  
 }

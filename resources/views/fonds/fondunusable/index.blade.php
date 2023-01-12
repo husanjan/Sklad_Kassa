@@ -1180,7 +1180,7 @@
                $i=1;//Initialize variable
               @endphp
                 @foreach( $arrayResult AS  $ostatkiResults)
-         
+                @if($ostatkiResults->summa>0)
                 <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
                   <tr class="border-bottom" id="t{{$ostatkiResults->id}}">
                     <td> {{ $i}} </td>
@@ -1213,7 +1213,7 @@
                     <td ><label for="" id="sumr{{$ostatkiResults->id}}" class="{{$ostatkiResults->id}}"><input type="hidden" name="ostatkiResults{{$ostatkiResults->id}}" value="{{ $ostatkiResults->summa}}"> {{ $ostatkiResults->summa}}</label> сомони</td>
                     <td><input type="text" class="form-control col-md-4 summaR"  name="Summarashod{{$ostatkiResults->id}}[]" id="{{$ostatkiResults->id}}"></td>
                     
-                  </tr>
+                  </tr>@endif
                  
                 @endforeach
         </tbody>

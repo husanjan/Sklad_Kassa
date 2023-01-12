@@ -91,11 +91,7 @@ class UnusableController extends Controller
     {
 
         $inputs=$request->all();
-//        dd($inputs);
-//         echo "<pre>";
-//    print_r($inputs);
-//   echo "</pre>";   
-   
+ 
  
          $arrayRashod=[];
         //  print_r($inputs);
@@ -122,16 +118,17 @@ class UnusableController extends Controller
                 
         $money= $this->addRepository->addRequests($request);
 
-      
-         $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
-    
-              $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,0);
-               
-          $arrostat=$money;
+  
        
  
          if(is_array($oborots) AND is_array($money) AND $request->src==4)
          {
+                   //prihod korshoyam ostatki
+         $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
+    
+         $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,0);
+              //prihod korshoyam ostatki  
+          $arrostat=$money;
             // echo "<pre>";
             // print_r($money);
             //  echo "</pre>";
