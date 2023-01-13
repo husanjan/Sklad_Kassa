@@ -15,6 +15,7 @@ use App\Models\SprAccounts;
 use App\Models\FondCoins;
 use App\Models\oborots_coin;
 use App\Repositories\InterfacesSomoni;
+use App\Repositories\RepositoryRashod;
 use App\Repositories\AddRequest;
 use Illuminate\Support\Facades\DB;
 class Farsuda_tangaController extends Controller
@@ -25,9 +26,11 @@ class Farsuda_tangaController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $addRepository;
-    public function __construct(AddRequest $addRepository)
+    private $RepositoryRashod;
+    public function __construct(AddRequest $addRepository,RepositoryRashod $RepositoryRashod)
     {
         $this->addRepository = $addRepository;
+        $this->RepositoryRashod = $RepositoryRashod;
     }
     public function index()
     {
@@ -40,23 +43,23 @@ class Farsuda_tangaController extends Controller
         }else{
         $kodeOperObort++;
     }
-
- 
-           $safes = SprSafes::all();
-           $sprEds = SprEds::all();
-            $shkafs = SprShkafs::all();
-            $sprCells= SprCells::all();
-             $sprQators= SprQators::all();
-             $sprAccounts= SprAccounts::all();
-              $kodeOper= FondCoins::orderBy('kode_oper','DESC')->value('kode_oper');
-                       if($kodeOper<=0)
-                       {
-                        $kodeOper=1;
-                        }else{
-                         $kodeOper++;
-                          }
+//  SelectRashodTanga($type,$priznak)
+        $arrayResult= $this->RepositoryRashod->SelectRashodTanga(2,0);
+        $safes = SprSafes::all();
+        $sprEds = SprEds::all();
+        $shkafs = SprShkafs::all();
+        $sprCells= SprCells::all();
+        $sprQators= SprQators::all();
+        $sprAccounts= SprAccounts::all();
+        $kodeOper= FondCoins::orderBy('kode_oper','DESC')->value('kode_oper');
+        if($kodeOper<=0)
+          {
+          $kodeOper=1;
+          }else{
+        $kodeOper++;
+          }
          
-        return  view('fonds.farsuda_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort'));
+        return  view('fonds.farsuda_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult'));
       
     }
 
@@ -79,18 +82,32 @@ class Farsuda_tangaController extends Controller
     public function store(Request $request)
     {
        
-        
-        DB::beginTransaction();
+    //    / dd($request);
+        if(isset($request['id']))
+        {
+            $arrayResult= $this->RepositoryRashod->InsertRashodFarsudaToOstatkiTanga($request);
+            // print_r($arrayResult);
+            if($arrayResult)
+            {
+           //  return redirect()->route('farsuda_tanga.index')->with('success','Фонд расход успешно создан!');
+            }
+          exit;
+        } 
         $oborots = $this->addRepository->addRequestsOborottanga($request,2);
         $money= $this->addRepository->addRequestsTanga($request);
         // echo "<pre>";
         // print_r($money);
         // echo "</pre>";
          // exit;
-        if(is_array($money) AND is_array($oborots) AND $request->src==7)
+        
+       
+         DB::beginTransaction();
+        if(is_array($money) AND is_array($oborots) AND $request->src==4)
           {
-            
-             
+            $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
+    
+            $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,1);
+        
              try{
                 foreach ($money as $key => $value) {
                     # code...

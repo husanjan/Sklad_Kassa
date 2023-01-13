@@ -56,25 +56,27 @@
 
                       <div class="col-md-3  ">
                           <label for="date">Дата	</label>
-                          <input  type="datetime-local"readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"     name="date" class="form-control"    >
+                          <input  type="datetime-local"readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"  name="date" class="form-control"    >
 
-                          <input       id="valuepriznak"     name="priznak" type="hidden"    >
+                
+                          <input      value="0"    name="priznak" type="hidden">
                           <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}">
                           <input            name="farsuda" type="hidden"   value="1" >
+                            
+                          <input type="hidden" name="kode_oper_obor" value="{{$kodeOperObort }}">
+                          <input type="hidden"  name="src" value="4">
 
                       </div>
                       <div class="col-md-2  ">
 
-                          
-                      
-                          <input type="hidden" name="kode_oper_obor" value="{{$kodeOperObort }}">
+                   
                             
-                              <div id="src">
+                              {{-- <div id="src">
                               
                                   
                                   
                                  
-                              </div>
+                              </div> --}}
                           {{-- <select name="src"   id="accounted" class="form-control" required>
                               <option disabled selected value="">Выберите </option>
                               @foreach($sprAccounts AS $accounts)
@@ -190,8 +192,8 @@
 <div id="new_chqg1"></div>
 
 <div class="form-check form-switch  col-md-4 mt-4">
-    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomong" >
-    <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
+    {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomong" >
+    <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div> --}}
 
 </div>
 <div id="sumg1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
@@ -269,8 +271,8 @@
         <div id="new_chqc1"></div>
       
         <div class="form-check form-switch  col-md-4 mt-4">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomonc">
-            <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
+            {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomonc">
+            <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div> --}}
 
         </div>
         <div id="sumc1" class="col-md-3 offset-8 " style="margin-top:-10px;"></div>
@@ -361,8 +363,8 @@
 
         <div id="new_chq01"></div>
 <div class="form-check form-switch  col-md-4 mt-4">
-   <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon0">
-   <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
+   {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon0">
+   <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div> --}}
 
 </div>
 <div id="sum01" class="col-md-3 offset-8   " style="margin-top:-10px;"></div>
@@ -441,8 +443,8 @@
         </div>
            <div id="new_chq31"></div>
 <div class="form-check form-switch  col-md-4 mt-4">
-    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon3">
-    <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
+    {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon3">
+    <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div> --}}
 
 </div>
 <div id="sum31" class="col-md-3 offset-8   " style="margin-top:-10px;"></div>
@@ -518,8 +520,8 @@
         <div id="new_chq51"></div>
 
         <div class="form-check form-switch  col-md-4 mt-4">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon5">
-            <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
+            {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon5">
+            <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div> --}}
 
         </div>
         <div id="nepolniySomon5">   </div>
@@ -646,8 +648,8 @@
                                         <div id="new_chqh1"></div>
                                       
                                         <div class="form-check form-switch  col-md-4 mt-4">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonh" >
-                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
+                                            {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonh" >
+                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div> --}}
               
                                         </div>
                                         <div id="sumh1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
@@ -713,8 +715,8 @@
                                         <div id="new_chqj1"></div>
                                       
                                         <div class="form-check form-switch  col-md-4 mt-4">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonj" >
-                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
+                                            {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonj" >
+                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div> --}}
               
                                         </div>
                                         <div id="sumj1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
@@ -782,8 +784,8 @@
                                         <div id="new_chqk1"></div>
                                       
                                         <div class="form-check form-switch  col-md-4 mt-4">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonk" >
-                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
+                                            {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonk" >
+                                            <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div> --}}
               
                                         </div>
                                         <div id="sumk1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
@@ -806,13 +808,118 @@
   </div>
 </form>
   {{--  Расход Модал--}}
+  <form method="POST" action="{{route('korshoyam_tanga.store')}}">
+    @csrf
+    <input     value="1"   name="priznak" type="hidden">
+    <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}">
+    <input            name="farsuda" type="hidden"   value="1" >
+    <input type="hidden" name="src" value="4">
+  <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog  modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-3  ">
+                    <label for="date">Дата	</label>
+                    <input  type="datetime-local"readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"     name="date" class="form-control"    >
 
+                    <input     value="1"    name="priznak" type="hidden"    >
+                    <input            name="kode_operRashod" type="hidden"   value="{{$kodeOper}}">
+                    <input            name="KorshoyamRashod" type="hidden"   value="1" >
+
+                </div>
+             
+                    <input type="hidden" name="kode_oper_oborRashod" value="{{$kodeOperObort }}">
+           
+              
+                <div class="col-md-2">
+                    <label for="count01">Номер Документ	</label>
+                    <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
+                </div>
+ 
+         {{-- //Table ostatki  --}}
+         <table class="table mt-2">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Хранилище</th>
+                <th scope="col">Шкаф/Стилаж</th>
+                <th scope="col">Катор</th>
+                <th scope="col">Ячейка</th>
+                <th scope="col">Единиц</th>
+                <th scope="col">Наминал</th>
+                <th scope="col">Сумма</th>
+                <th scope="col">Сумма расход</th>
+              </tr>
+            </thead>
+            <tbody>
+               
+                @php
+               $i=1;//Initialize variable
+              @endphp
+                @foreach( $arrayResult AS  $ostatkiResults)
+                @if($ostatkiResults->summa>0)
+                <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
+                  <tr class="border-bottom" id="t{{$ostatkiResults->id}}">
+                    <td> {{ $i}} </td>
+                   
+                    <?php  $i++ ?>
+                    @foreach ($safes as $safe)
+                                 
+                    @if($ostatkiResults->safe_id===$safe->id) <td> <input type="hidden" name="safe{{$ostatkiResults->id}}" value="{{$safe->id}}">{{$safe->safe}}</td>  @endif
+                    @endforeach
+                    {{-- <td>{{ $ostatkiResults->safe_id }}</td> --}}
+            
+                    @foreach ( $shkafs as $shkaf )
+           
+                    @if($ostatkiResults->shkaf_id===$shkaf->id ) <td><input type="hidden" name="shkaf{{$ostatkiResults->id}}" value="{{$shkaf->id}}">{{ $shkaf->shkaf }}</td>  @endif
+                    @endforeach
+                    @foreach ( $sprQators as $sprQator )
+           
+                    @if($ostatkiResults->qator_id===$sprQator->id ) <td><input type="hidden" name="sprQator{{$ostatkiResults->id}}" value="{{$sprQator->id}}">{{ $sprQator->qator }}</td>  @endif
+                    @endforeach
+                    @foreach ( $sprCells as $sprCell )
+           
+                    @if($ostatkiResults->cell_id===$sprCell->id ) <td><input type="hidden" name="sprCell{{$ostatkiResults->id}}" value="{{$sprCell->id}}">{{ $sprCell->cell }}</td>  @endif
+                    @endforeach
+                    @foreach ($sprEds as $sprEd )
+           
+                    @if($ostatkiResults->ed_id===$sprEd->id ) <td><input type="hidden" name="sprEd{{$ostatkiResults->id}}" value="{{$sprEd->id}}" >{{ $sprEd->name }}</td>  @endif
+                    @endforeach
+              
+                    <td> {{ $ostatkiResults->naminal=='razne'?'Разные':$ostatkiResults->naminal}} <input type="hidden"  id="naminal{{$ostatkiResults->id}}"  name="naminal{{$ostatkiResults->id}}" value="{{$ostatkiResults->naminal}}"></td>
+                    <td ><label for="" id="sumr{{$ostatkiResults->id}}" class="{{$ostatkiResults->id}}"><input type="hidden" name="ostatkiResults{{$ostatkiResults->id}}" value="{{ $ostatkiResults->summa}}"> {{ $ostatkiResults->summa}}</label> сомони</td>
+                    <td><input type="text" class="form-control col-md-4 summaR"  name="Summarashod{{$ostatkiResults->id}}[]" id="{{$ostatkiResults->id}}"></td>
+                    
+                  </tr>@endif
+                 
+                @endforeach
+        </tbody>
+         </table>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыт</button>
+          <button type="submit" class="btn btn-primary" disabled>Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   </form>
 
       <div class="container">
           <div class="col-md-12">
               <div class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod"   id="priznak" value="0">Приход </button>
-                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod"  id="priznak" value="1">Расход</button>
+                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter"  id="priznak" value="1">Расход</button>
 
               </div>
           </div>
@@ -1063,6 +1170,7 @@ $('.toast').toast('show');
 
 
  </script>
+ <script src="js/FondRashod.js"></script>
   <script src="{{asset('js/AddRemoveButton.js')}}"></script>
 <script src="/js/Sprjs.js"></script>
 

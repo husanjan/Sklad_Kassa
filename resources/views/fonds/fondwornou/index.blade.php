@@ -58,13 +58,13 @@
                   <div class="row  offset-1">
 
                       <div class="col-md-3  ">
-                          <label for="date">Дата	</label>
-                          <input      type="datetime-local"      style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"  readonly="readonly" name="date"   aria-describedby="Data" class="form-control"   >
+                        <label for="date">Дата	</label>
+                        <input      type="datetime-local"      style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"  readonly="readonly" name="date"   aria-describedby="Data" class="form-control"   >
 
-                          <input      value="0"    name="priznak" type="hidden"    >
-                          <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}" >
-                          <input            name="farsuda" type="hidden"   value="2" >
-                             <input type="hidden" name="kode_oper_obor" value=" {{ $kodeOperObort }}">
+                        <input      value="0"    name="priznak" type="hidden"    >
+                        <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}" >
+                        <input            name="farsuda" type="hidden"   value="2" >
+                        <input type="hidden" name="kode_oper_obor" value=" {{ $kodeOperObort }}">
 
                       </div>
                       <input type="hidden" name="src" value="4">
@@ -1128,7 +1128,7 @@
     @csrf
     <input     value="1"   name="priznak" type="hidden">
     <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}">
-    <input            name="farsuda" type="hidden"   value="1" >
+    <input            name="farsuda" type="hidden"   value="2" >
     <input type="hidden" name="src" value="4">
   <!-- Modal -->
 <div class="modal fade" id="farsuda"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

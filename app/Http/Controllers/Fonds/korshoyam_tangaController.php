@@ -15,6 +15,7 @@ use App\Models\SprAccounts;
 use App\Models\FondCoins;
 use App\Models\oborots_coin;
 use App\Repositories\InterfacesSomoni;
+use App\Repositories\RepositoryRashod;
 use App\Repositories\AddRequest;
 use Illuminate\Support\Facades\DB;
 
@@ -26,10 +27,13 @@ class korshoyam_tangaController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $addRepository;
-    public function __construct(AddRequest $addRepository)
+    private $RepositoryRashod;
+    public function __construct(AddRequest $addRepository,RepositoryRashod $RepositoryRashod)
     {
         $this->addRepository = $addRepository;
+        $this->RepositoryRashod = $RepositoryRashod;
     }
+ 
     public function index()
     {
         //
@@ -41,7 +45,8 @@ class korshoyam_tangaController extends Controller
         }else{
         $kodeOperObort++;
     }
-
+                    //  SelectRashodTanga($type,$priznak)
+         $arrayResult= $this->RepositoryRashod->SelectRashodTanga(1,0);
  
            $safes = SprSafes::all();
            $sprEds = SprEds::all();
@@ -56,7 +61,7 @@ class korshoyam_tangaController extends Controller
                         }else{
                          $kodeOper++;
                           }
-                  return  view('fonds.korshoyam_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort'));
+                  return  view('fonds.korshoyam_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult'));
       
     }
 
@@ -79,24 +84,30 @@ class korshoyam_tangaController extends Controller
     public function store(Request $request)
     {
         //use App\Repositories\InterfacesSomoni;
+        if(isset($request['id']))
+        {
+            $arrayResult= $this->RepositoryRashod->InsertRashodKorshoyamToOstatkiTanga($request);
+    
+               if($arrayResult)
+               {
+            return redirect()->route('korshoyam_tanga.index')->with('success','Фонд расход успешно создан!');
+               }
+              
+       exit;
         
+        }
         DB::beginTransaction();
         $oborots = $this->addRepository->addRequestsOborottanga($request,1);
         $money= $this->addRepository->addRequestsTanga($request);
-    //     echo "<pre>";
-    //    print_r($money);
-    //    echo "</pre>";
-        // use App\Models\FondCoins;
-        // use App\Models\oborots_coin;
-    //        echo "<pre>";
-    //    print_r($money);
-    //    echo "</pre>";
-    //    //FondCoins::create($money[0]);
-    //    oborots_coin::create($oborots[0]);
-        if(is_array($oborots) AND is_array($money) AND $request->src==7)
+   
+        if(is_array($oborots) AND is_array($money) AND $request->src==4)
         {
           
-           
+                     //prihod korshoyam ostatki
+         $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
+    
+         $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,1);
+         print_r($arrayResult);
            try{
               foreach ($money as $key => $value) {
                   # code...

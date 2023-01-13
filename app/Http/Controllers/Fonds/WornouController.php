@@ -113,7 +113,7 @@ class WornouController extends Controller
           {
               //prihod korshoyam ostatki
          $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
-    
+        //  ($detailsFond,$typeFond)
          $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,0);
               //prihod korshoyam ostatki  
              

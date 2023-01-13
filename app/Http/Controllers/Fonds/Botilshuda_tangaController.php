@@ -15,6 +15,7 @@ use App\Models\SprAccounts;
 use App\Models\FondCoins;
 use App\Models\oborots_coin;
 use App\Repositories\InterfacesSomoni;
+use App\Repositories\RepositoryRashod;
 use App\Repositories\AddRequest;
 use Illuminate\Support\Facades\DB;
 
@@ -26,9 +27,11 @@ class Botilshuda_tangaController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $addRepository;
-    public function __construct(AddRequest $addRepository)
+    private $RepositoryRashod;
+    public function __construct(AddRequest $addRepository,RepositoryRashod $RepositoryRashod)
     {
         $this->addRepository = $addRepository;
+        $this->RepositoryRashod = $RepositoryRashod;
     }
     public function index()
     {
@@ -55,7 +58,8 @@ class Botilshuda_tangaController extends Controller
                         }else{
                          $kodeOper++;
                           }
-                  return  view('fonds.botilshuda_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort'));
+                          $arrayResult=$this->RepositoryRashod->SelectRashodTanga(3,0);          
+                  return  view('fonds.botilshuda_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult'));
   
         //return view('fonds.botilshuda_tanga.index');
     }
@@ -79,34 +83,59 @@ class Botilshuda_tangaController extends Controller
     public function store(Request $request)
     {
         //
-        DB::beginTransaction();
-         
+      //  DB::beginTransaction();
+     
         //$this->addRepository->addRequests($request);
         //$money= $this->addRepository->addRequests($request);
+        if(isset($request['id']))
+        {
+            $arrayResult= $this->RepositoryRashod->InsertRashodBotilshudaToOstatkiTanga($request);
+             print_r($arrayResult);
+             
+               if($arrayResult)
+               {
+                return redirect()->route('botilshuda_tanga.index')->with('success','Фонд расход успешно создан!');
+               }
+              
+          exit;
+        }
+         
         $money= $this->addRepository->addRequestsTanga($request);
+     
         if(is_array($money))
         {
+
+        $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
+      
+          $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,1);
+                // print_r($detailsFond);
+       //   
+        return redirect()->route('botilshuda_tanga.index')->with('success','Фонд Ботилшуда Приход успешно создан!');
+              exit;  
+                }
+        // if(is_array($money))
+        // {
           
            
-           try{
-              foreach ($money as $key => $value) {
-                  # code...
+        //    try{
+        //       foreach ($money as $key => $value) {
+        //           # code...
                
-                  FondCoins::create($money[$key]);
+        //           FondCoins::create($money[$key]);
 
-          }
-              DB::Commit();
+        //   }
+        //       DB::Commit();
             
-            return redirect()->route('fondcanceled.index')->with('success','Ботилшуда успешно создан!');
-            } catch (\Illuminate\Database\QueryException $e) {
-              DB::rollback();
-              return response(['message'=>'FAILURE'], 500);
-          return redirect()->route('fondcanceled.index')->with('danger','Ботилшуда не успешно!');
-            }
+        //     return redirect()->route('fondcanceled.index')->with('success','Ботилшуда успешно создан!');
+        //     } catch (\Illuminate\Database\QueryException $e) {
+        //       DB::rollback();
+        //       return response(['message'=>'FAILURE'], 500);
+        //   return redirect()->route('fondcanceled.index')->with('danger','Ботилшуда не успешно!');
+        //     }
           
-         return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
+        //  return response(['message'=>'Not inserted Fond money table and oborots table'], 500);                    
         
-        }
+        // }
     }
 
     /**
