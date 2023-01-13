@@ -1300,7 +1300,7 @@
                 <center> <h4>  <a class="list-group-item-action" href="#korshoyam-Pul"> Коршоям</a></h4>   </center>
                     <div class="btn-group col-auto" role="group" aria-label="Basic example">
                         <button type="button"  onclick="this.form.reset();" class="btn btn-outline-primary"  data-Context="korshoyam" data-toggle="modal" data-target="#rashod"   id="priznaki" value="0">Приход </button>
-                        <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam"  data-toggle="modal" data-target="#rashod"  id="priznaki" value="1">Расход</button>
+                        <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam"  data-toggle="modal" data-target="#korshoyam"  id="priznaki" value="1">Расход</button>
       
                     </div>
                    
@@ -1323,7 +1323,7 @@
               
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod" data-Context="farsuda"   id="priznaki" value="0">Приход </button>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod" data-Context="farsuda" id="priznaki" value="1">Расход</button>
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#farsuda" data-Context="farsuda" id="priznaki" value="1">Расход</button>
       
                     </div>
                    
@@ -1342,7 +1342,7 @@
               
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Context="botilshuda" data-target="#rashod"   id="priznaki" value="0">Приход </button>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod"  data-Context="botilshuda"  id="priznaki" value="1">Расход</button>
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#botilshuda"  data-Context="botilshuda"  id="priznak" value="1">Расход</button>
       
                     </div>
                    
@@ -1447,7 +1447,46 @@
 
     </div>    
        {{-- // End Click Button Modalka Tanga  --}}
-      
+         {{-- //Modalka rashod Botilshu farsuda korshoyab anad tanga  --}}
+  {{-- //Korshoyam --}}
+     
+          <!-- Modal -->
+        <div class="modal fade" id="korshoyam"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+            @include('fonds.fondunusable.korshoyamRashod')
+           
+          </div>
+         
+
+{{-- korshoyam rashod --}}
+  {{-- //farsuda --}}
+     
+          <!-- Modal -->
+          <div class="modal fade" id="farsuda"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+            @include('fonds.fondwornou.FarsudaRashod')
+           
+          </div>
+         
+
+{{-- farsuda rashod --}}
+  {{-- //farsuda --}}
+     
+          <!-- Modal -->
+          <div class="modal fade" id="botilshuda"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+            @include('fonds.fondcancled.botilshudaRashod')
+           
+          </div>
+         
+
+{{-- farsuda rashod --}}
+
+   {{-- //end zModalka rashod Botilshu farsuda korshoyab anad tanga  --}}
+
+
+
+
             {{-- Modalka Tanga --}}
             <form      action="{{ route('oborotInsertTanga.post') }}" id="TangaSumbit" method="post">
                 <div class="modal fade  bd-example-modal-xl " id="ModalkaTangaOborot" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1919,9 +1958,7 @@
 
                         </tr>
                         @php($krcount=1)
-                        <?php
-                  
-                                ?>
+                
                         @foreach(json_decode($FondMoney->take(20),true) as $korshoyam)
                       
                         <?php 
@@ -3991,20 +4028,20 @@ $.ajax({
             
             if($(this).val()==0)
             {
-                $(id).html('<input type="hidden" name="src" value="7"> ');
+                $(id).html('<input type="hidden" name="src" value="4"> ');
                
                 // console.log($(this).val());
           
                 return
             }
-            if($(this).val()==1)
-            {
+            // if($(this).val()==1)
+            // {
               
-                $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" value="7" required=""><label class="btn btn-outline-secondary" for="option1">Оборот</label> <input type="radio" class="btn-check" name="src" id="option2" value="2" autocomplete="off" required=""><label class="btn btn-outline-secondary" for="option2">Фарсуда</label> </div>');
-                // console.log($(this).val());
+            //     $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" value="7" required=""><label class="btn btn-outline-secondary" for="option1">Оборот</label> <input type="radio" class="btn-check" name="src" id="option2" value="2" autocomplete="off" required=""><label class="btn btn-outline-secondary" for="option2">Фарсуда</label> </div>');
+            //     // console.log($(this).val());
               
-                           return 
-            }
+            //                return 
+            // }
           }
           if($(this).data('context')=='farsuda')
           {
@@ -4013,17 +4050,18 @@ $.ajax({
             $('#type').val(2)
             if($(this).val()==0)
             {
-                $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" required="" value="7"><label class="btn btn-outline-secondary" for="option1">Оборот</label> <input type="radio" required="" class="btn-check" name="src" id="option2" value="1" autocomplete="off"><label class="btn btn-outline-secondary" for="option2">Коршоям</label> </div>');
+                $(id).html('<input type="hidden" name="src" value="4"> ');
+                // $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" required="" value="7"><label class="btn btn-outline-secondary" for="option1">Оборот</label> <input type="radio" required="" class="btn-check" name="src" id="option2" value="1" autocomplete="off"><label class="btn btn-outline-secondary" for="option2">Коршоям</label> </div>');
                 
             }
-            if($(this).val()==1)
-            {
-                $(id).html('<input type="hidden" name="src" value="3">');
+            // if($(this).val()==1)
+            // {
+            //     $(id).html('<input type="hidden" name="src" value="3">');
                  
       
-                // console.log($(this).val());
-                return
-            }
+            //     // console.log($(this).val());
+            //     return
+            // }
           }
           if($(this).data('context')=='botilshuda')
           {
@@ -4038,13 +4076,13 @@ $.ajax({
                 // console.log($(this).val());
                 return
             }
-            if($(this).val()==1)
-            {
-                $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" required="" value="7"><label class="btn btn-outline-secondary" for="option1">Душанбе</label> <input type="radio" required="" class="btn-check" name="src" id="option2" value="1" autocomplete="off"><label class="btn btn-outline-secondary" for="option2">Нобудкуни</label> </div>');
+            // if($(this).val()==1)
+            // {
+            //     $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" required="" value="7"><label class="btn btn-outline-secondary" for="option1">Душанбе</label> <input type="radio" required="" class="btn-check" name="src" id="option2" value="1" autocomplete="off"><label class="btn btn-outline-secondary" for="option2">Нобудкуни</label> </div>');
                
-                // console.log($(this).val());
-                return
-            }
+            //     // console.log($(this).val());
+            //     return
+            // }
 
           }
 

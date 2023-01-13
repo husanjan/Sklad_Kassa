@@ -10,9 +10,13 @@ use App\Models\FondMoney;
 use App\Models\SprBank;
 use App\Models\SprEds;
 use App\Models\SprSafes;
+use App\Models\SprShkafs;
+use App\Models\sprQators;
+use App\Models\SprCells;
 use App\Models\oborots_coin;
 use App\Repositories\InterfacesSomoni;
 use App\Repositories\AddRequest;
+use App\Repositories\RepositoryRashod;
 use Illuminate\Support\Facades\DB;
 use App\Models\FondCoins;
 class HomeController extends Controller
@@ -25,12 +29,14 @@ class HomeController extends Controller
     private $blogRepository;
     private $addRepository;
     private $ArrayTable;
-    
-    public function __construct(InterfacesSomoni $blogRepository,AddRequest $addRepository)
+    private $RepositoryRashod;
+ 
+    public function __construct(InterfacesSomoni $blogRepository,AddRequest $addRepository,RepositoryRashod $RepositoryRashod)
     {
         $this->middleware('auth');
         $this->blogRepository = $blogRepository;
         $this->addRepository = $addRepository;
+        $this->RepositoryRashod = $RepositoryRashod;
     
     }
 
@@ -46,8 +52,12 @@ class HomeController extends Controller
            $sprEds= SprEds::all();
           $Oborot= new  Oborot();
           $OborotTanga= new  oborots_coin();
+          $shkafs = SprShkafs::all();
           $FondMoneys= new  FondMoney();
           $FondMoneysTanga= new  FondCoins();
+          $sprCells= SprCells::all();
+          $sprQators= SprQators::all();
+          $sprAccounts= SprAccounts::all();
            $kodeOper= $Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
 
            $kodeOpero= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
@@ -100,13 +110,17 @@ class HomeController extends Controller
           
               //  dd($request->all());
               //  exit;
+                   //  SelectRashodTanga($type,$priznak)
+              $korshoyamRashod= $this->RepositoryRashod->SelectRashod(1,0);
+              $farsudaRashod= $this->RepositoryRashod->SelectRashod(2,0);
+              $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,0);
             $sprAccounts= SprAccounts::all();
             if ($request->ajax()) {
             
               return view('oborot.pagination',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'))->render();
 
           }
-                return view('home',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'));
+                return view('home',compact('bik','sprAccounts','sprQators','sprCells','kodeOper','shkafs','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang','korshoyamRashod','farsudaRashod','botilshudaRas'));
     }
     public function fetch_data()
     {
@@ -327,9 +341,11 @@ public function FondInsert(Request $request)
   // echo "<pre>";
   // print_r($money);
   // echo "</pre>";
-  if(is_array($oborots) AND is_array($money) AND $request->src==7)
+  if(is_array($oborots) AND is_array($money) AND $request->src==4)
   {
+    $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
     
+    $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,0);
      
      try{
         foreach ($money as $key => $value) {
@@ -350,9 +366,10 @@ public function FondInsert(Request $request)
   
   }
 
-  if(is_array($money) AND $request->src==2 || $request->src==3)
+  if(is_array($money) AND $request->src==2)
   {
-    
+    $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
+    $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,0);
      
      try{
         foreach ($money as $key => $value) {

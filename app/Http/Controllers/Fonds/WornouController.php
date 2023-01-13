@@ -89,10 +89,16 @@ class WornouController extends Controller
         {
             $arrayResult= $this->RepositoryRashod->InsertRashodFarsudaToOstatki($request);
             // print_r($arrayResult);
-            if($arrayResult)
-            {
-             return redirect()->route('fondwornou.index')->with('success','Фонд расход успешно создан!');
-            }
+             if($arrayResult AND !$request->farsudai=='farsudai')
+               {
+                return redirect()->route('fondwornou.index')->with('success','Фонд расход успешно создан!');
+               }
+               if($request->farsudai=='farsudai')
+               {
+                return redirect()->route('home')->with('danger','Фарсуда фонд  не успешно!');
+               }
+          
+
           exit;
         }  
 

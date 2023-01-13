@@ -75,11 +75,16 @@ class CanceledController extends Controller
         if(isset($request['id']))
         {
             $arrayResult= $this->RepositoryRashod->InsertRashodBotilshudaToOstatki($request);
-             print_r($arrayResult);
+            //  print_r($arrayResult);
              
-               if($arrayResult)
+              
+               if($arrayResult AND !$request->botilshudar=='botilshudar')
                {
-                return redirect()->route('fondcanceled.index')->with('success','Фонд расход успешно создан!');
+                return redirect()->route('fondcanceled.index')->with('success','Фонд Ботилшуда расход успешно создан!');
+               }
+               if($request->botilshudar=='botilshudar')
+               {
+                return redirect()->route('home')->with('danger','Ботилшуда фонд  не успешно!');
                }
               
           exit;

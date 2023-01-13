@@ -99,10 +99,14 @@ class UnusableController extends Controller
         if(isset($request['id']))
         {
             $arrayResult= $this->RepositoryRashod->InsertRashodKorshoyamToOstatki($request);
-    
-               if($arrayResult)
+             
+               if($arrayResult AND !$request->acccounti=='korshoyam')
                {
                 return redirect()->route('fondunusable.index')->with('success','Фонд расход успешно создан!');
+               }
+               if($request->acccounti=='korshoyam')
+               {
+                return redirect()->route('home')->with('danger','Коршоям фонд  не успешно!');
                }
               
        
