@@ -88,9 +88,14 @@ class korshoyam_tangaController extends Controller
         {
             $arrayResult= $this->RepositoryRashod->InsertRashodKorshoyamToOstatkiTanga($request);
     
-               if($arrayResult)
+             
+               if($arrayResult AND !$request->acccounti=='korshoyam')
                {
-            return redirect()->route('korshoyam_tanga.index')->with('success','Фонд расход успешно создан!');
+                return redirect()->route('korshoyam_tanga.index')->with('success','Фонд расход успешно создан!');
+               }
+               if($request->acccounti=='korshoyam')
+               {
+                return redirect()->route('home')->with('danger','Коршоям танга фонд  не успешно!');
                }
               
        exit;
@@ -107,7 +112,7 @@ class korshoyam_tangaController extends Controller
          $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
     
          $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,1);
-         print_r($arrayResult);
+        //  print_r($arrayResult);
            try{
               foreach ($money as $key => $value) {
                   # code...
@@ -141,8 +146,8 @@ class korshoyam_tangaController extends Controller
           
               foreach ($money as $key => $value) {
                   # code...
-                FondCoins::create($money[$key]);
-              DB::Commit();
+            FondCoins::create($money[$key]);
+            DB::Commit();
               
           }
               

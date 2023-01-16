@@ -114,13 +114,18 @@ class HomeController extends Controller
               $korshoyamRashod= $this->RepositoryRashod->SelectRashod(1,0);
               $farsudaRashod= $this->RepositoryRashod->SelectRashod(2,0);
               $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,0);
+              //tanga 
+         
+             $korshoyamTanga= $this->RepositoryRashod->SelectRashodTanga(1,0);
+             $farsudaTanga= $this->RepositoryRashod->SelectRashodTanga(2,0);
+             $botilshudaTanga= $this->RepositoryRashod->SelectRashodTanga(3,0);
             $sprAccounts= SprAccounts::all();
             if ($request->ajax()) {
             
               return view('oborot.pagination',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'))->render();
 
           }
-                return view('home',compact('bik','sprAccounts','sprQators','sprCells','kodeOper','shkafs','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang','korshoyamRashod','farsudaRashod','botilshudaRas'));
+                return view('home',compact('botilshudaTanga','farsudaTanga','korshoyamTanga','bik','sprAccounts','sprQators','sprCells','kodeOper','shkafs','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang','korshoyamRashod','farsudaRashod','botilshudaRas'));
     }
     public function fetch_data()
     {
@@ -134,8 +139,8 @@ class HomeController extends Controller
     {
             $count=1;
                   $Oborot= new  Oborot();
-                  $sprAccounts= SprAccounts::all();
-                  $bik= SprBank::all();
+                $sprAccounts= SprAccounts::all();
+                $bik= SprBank::all();
                 $obor= $Oborot::where('date',  date("Y-m-d H:i:s", strtotime($request->date)))->get();
                 $obor->where('kod_oper', $request->id);
               // echo "ss<pre>";
@@ -615,9 +620,11 @@ public function InsertTanga(Request $request)
         // exit;
         // echo $request->src;
          
-        if(is_array($money) AND is_array($oborots) AND $request->src==7)
+        if(is_array($money) AND is_array($oborots) AND $request->src==4)
           {
-            
+            $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
+    
+         $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,1);
              
              try{
                 foreach ($money as $key => $value) {
@@ -639,8 +646,11 @@ public function InsertTanga(Request $request)
           
           }
           //korshoyam 
-          if(is_array($money) AND $request->src==2 || $request->src==3 || $request->src==1)
+        
+          if(is_array($money) AND $request->src==2)
            {
+            $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
+            $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,1);
             try{
                 foreach ($money as $key => $value) {
                     FondCoins::create($money[$key]);

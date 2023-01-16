@@ -48,6 +48,7 @@ class RepositoryRashod{
       
       return  $arrayResult = array_map("unserialize", array_unique(array_map("serialize", $arrayResult)));
     }
+ 
     public function SelectRashodTanga($type,$priznak)
     {
       $ostatki= ostatki_safe::distinct('cell_id')->select('cell_id','safe_id','shkaf_id','qator_id')->where('type',$type)->where('priznak',$priznak)->get();
@@ -248,7 +249,7 @@ class RepositoryRashod{
                      $FondMoney->comment=$request['comment'];
                      $FondMoney->priznak=$request['priznak'];
                      $FondMoney->type=2;
-                     $FondMoney->src=$request['src'];
+                     $FondMoney->src=3;
                      $FondMoney->naminal=$request['naminal'.$input];
                      $FondMoney->ed_id=2; 
                      $FondMoney->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
@@ -270,7 +271,7 @@ class RepositoryRashod{
                      $ostatki_safe = new ostatki_safe;
                      $ostatki_safe->date=$request['date'];
                      // $ostatki_safe->comment=$request['comment'];
-                     $ostatki_safe->src=$request['src'];
+                     $ostatki_safe->src=3;
                      $ostatki_safe->naminal=$request['naminal'.$input];
                      $ostatki_safe->priznak=1;
                      $ostatki_safe->ed_id=2; 
@@ -573,7 +574,7 @@ class RepositoryRashod{
                      $FondMoney->comment=$request['comment'];
                      $FondMoney->priznak=$request['priznak'];
                      $FondMoney->type=2;
-                     $FondMoney->src=$request['src'];
+                     $FondMoney->src=3;
                      $FondMoney->naminal=$request['naminal'.$input];
                      $FondMoney->ed_id=2; 
                      $FondMoney->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   

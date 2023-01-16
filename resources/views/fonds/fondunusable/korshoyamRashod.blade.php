@@ -57,7 +57,7 @@
             @if($ostatkiResults->summa>0)
             <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
               <tr class="border-bottom" id="t{{$ostatkiResults->id}}">
-                <td> {{ $i}} </td>
+                <td> {{$i}} </td>
                
                 <?php  $i++ ?>
                 @foreach ($safes as $safe)

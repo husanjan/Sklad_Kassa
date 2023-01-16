@@ -13,7 +13,7 @@ use App\Http\Controllers\Spr\SprQatorsController;
 use App\Http\Controllers\Spr\SprCellsController;
 use App\Http\Controllers\Fonds\FondEmissionsController;
 use App\Http\Controllers\Ajax\AjaxController;
-
+use App\Http\Controllers\OstatkiSafeController;
 
 
 /*
@@ -83,7 +83,8 @@ Route::group([ 'middleware' => ['auth', 'activity']], function() {
     Route::post('cellsTable',[SprCellsController::class, 'cellsTable'])->name('cellsTable.post');
     //Шкаф ажакс роуте
     Route::post('shkafTable',[SprQatorsController::class, 'shkafTable']) ->name('shkafTable.post');
-
+    //Создать Изменит Удалить роуте Фонд эмиссион
+    Route::resource('ostatkisafe',OstatkiSafeController::class);
 
 });
 

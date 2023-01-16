@@ -90,16 +90,24 @@ class Botilshuda_tangaController extends Controller
         if(isset($request['id']))
         {
             $arrayResult= $this->RepositoryRashod->InsertRashodBotilshudaToOstatkiTanga($request);
-             print_r($arrayResult);
+            //  print_r($arrayResult);
              
-               if($arrayResult)
+            //    if($arrayResult)
+            //    {
+            //     return redirect()->route('botilshuda_tanga.index')->with('success','Фонд расход успешно создан!');
+            //    }
+               if($arrayResult AND !$request->acccounti=='botilshuda')
                {
                 return redirect()->route('botilshuda_tanga.index')->with('success','Фонд расход успешно создан!');
+               }
+               if($request->acccounti=='botilshuda')
+               {
+                return redirect()->route('home')->with('danger','Фарсуда танга фонд  не успешно!');
                }
               
           exit;
         }
-         
+        //  ..
         $money= $this->addRepository->addRequestsTanga($request);
      
         if(is_array($money))

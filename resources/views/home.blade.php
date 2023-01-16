@@ -1386,7 +1386,7 @@
                 <center> <h4>  <a class="list-group-item-action" href="#korshoyam-Tanga">Танга Коршоям  </a></h4> </center>
                     <div class="btn-group col-auto" role="group" aria-label="Basic example">
                         <button type="button"  onclick="this.form.reset();" class="btn btn-outline-primary"  data-Type="Tanga" data-Context="korshoyam" data-toggle="modal" data-target="#rashodTanga"   id="priznaki" value="0">Приход </button>
-                        <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam" data-Type="Tanga"   data-toggle="modal" data-target="#rashodTanga"  id="priznaki" value="1">Расход</button>
+                        <button type="button" class="btn btn-outline-primary"  data-Context="korshoyam" data-Type="Tanga"   data-toggle="modal" data-target="#korshoyamtanga"  id="priznaki" value="1">Расход</button>
       
                     </div>
                    
@@ -1412,7 +1412,7 @@
       
                     <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashodTanga"  data-Type="Tanga" data-Context="farsuda"   id="priznaki" value="0">Приход </button>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashodTanga" data-Type="Tanga" data-Context="farsuda" id="priznaki" value="1">Расход</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#farsudatanga" data-Type="Tanga" data-Context="farsuda" id="priznaki" value="1">Расход</button>
 
                     </div>
            
@@ -1432,7 +1432,7 @@
                      
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Type="Tanga" data-Context="botilshuda" data-target="#rashodTanga"   id="priznaki" value="0">Приход </button>
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-Type="Tanga" data-target="#rashodTanga"  data-Context="botilshuda"  id="priznaki" value="1">Расход</button>
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-Type="Tanga" data-target="#botilshudatanga"  data-Context="botilshuda"  id="priznaki" value="1">Расход</button>
                                 
                         </div>
                        
@@ -1484,8 +1484,32 @@
 
    {{-- //end zModalka rashod Botilshu farsuda korshoyab anad tanga  --}}
 
+{{-- //Танга модалка расход  Коршоям Фарсуда Ботилшуда --}}
+      {{-- ..Коршоям расход танга --}}
+          <!-- Modal -->
+          <div class="modal fade" id="korshoyamtanga"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+            @include('fonds.korshoyam_tanga.indexRas')
+           
+          </div>
+           {{-- end..Коршоям расход танга --}}
+                 {{-- ..Фарсуда расход танга --}}
+          <!-- Modal -->
+          <div class="modal fade" id="farsudatanga"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+            @include('fonds.farsuda_tanga.indexRas')
+           
+          </div>
+           {{-- end..Коршоям расход танга --}}
+     <!-- Modal -->
+     <div class="modal fade" id="botilshudatanga"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+        @include('fonds.botilshuda_tanga.indexRas')
+       
+      </div>
+       {{-- end..Ботилшуда расход танга --}}
 
-
+{{-- //End Танга модалка расход  --}}
 
             {{-- Modalka Tanga --}}
             <form      action="{{ route('oborotInsertTanga.post') }}" id="TangaSumbit" method="post">
@@ -2927,12 +2951,7 @@
                                   
                                  
                               </div>
-                          {{-- <select name="src"   id="accounted" class="form-control" required>
-                              <option disabled selected value="">Выберите </option>
-                              @foreach($sprAccounts AS $accounts)
-                                  <option value="{{$accounts->id}}">{{$accounts->account}}</option>
-                              @endforeach
-                          </select> --}}
+                       
                           <div id="accounts"></div>
                           
                           <div id="srcHomeTanga" class=" mt-4">
@@ -3065,9 +3084,9 @@
 {{--                                              1 dirami --}}
                   {{-- //q one diram                               --}}
 <div class="row  mt-2" id="newq">
-    <input     id="nominalq1"  value="0.1"    type="hidden"  name="nominalq[]"     >
+    <input     id="nominalq1"  value="0.01"    type="hidden"  name="nominalq[]"     >
     <div class="col-md-2   ">
-        <label for="edin_id">Единиц	</label>
+        <label for="edin_id">Единиц</label>
         <select id="edin_idq1" class="form-select selectsd1 Somon edin_id" name="ed_idq[]"  >
             <option value="">Интихоб</option>
             @foreach($sprEds as $sprEd)

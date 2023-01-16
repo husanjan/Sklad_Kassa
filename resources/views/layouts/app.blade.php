@@ -277,7 +277,9 @@
                                 </a>
 
                             </li>
+                      
                         </ul>
+                        
                     </li>
                     {{-- <li class="nav-item has-treeview {{ request()->is('bank*')?'menu-open':'' }} {{ request()->is('oborot*')?'menu-open':'' }}"> --}}
                         {{-- <a href="{{ route('oborot_spr.index') }}" class="nav-link  ">
@@ -311,8 +313,40 @@
                             </li>
                         {{-- </ul> --}}
                     {{-- </li> --}}
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-folder-tree "></i>
+                            <p>Oстатки
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
 
+                        </a>
+                        <ul class="nav nav-treeview">
 
+                            <li class="nav-item has-treeview">
+                                <a href="{{ route('ostatkisafe.index') }}" class="nav-link">
+                                    <i class="fa    nav-icon"></i>
+                                    <p>Хранилище
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+
+                                </a>
+
+                            </li>
+                            
+                        
+                            <li class="nav-item has-treeview">
+                                <a href="{{ route('botilshuda_tanga.index') }}" class="nav-link">
+                                    <i class="fa    nav-icon"></i>
+                                    <p>Счет
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+
+                                </a>
+
+                            </li>
+                        </ul>
+                    </li>
 
 
            </ul>
@@ -323,7 +357,7 @@
         <!-- /.sidebar -->
     </aside>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper mb-4" style="height: auto;">
+    <div class="content-wrapper mb-4" style="height:auto;">
 
         <!-- Main content -->
         @yield('content')

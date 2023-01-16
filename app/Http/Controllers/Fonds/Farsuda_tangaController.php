@@ -87,9 +87,14 @@ class Farsuda_tangaController extends Controller
         {
             $arrayResult= $this->RepositoryRashod->InsertRashodFarsudaToOstatkiTanga($request);
             // print_r($arrayResult);
-            if($arrayResult)
+         
+            if($arrayResult AND !$request->acccounti=='farsuda')
             {
-           //  return redirect()->route('farsuda_tanga.index')->with('success','Фонд расход успешно создан!');
+             return redirect()->route('farsuda_tanga.index')->with('success','Фонд расход успешно создан!');
+            }
+            if($request->acccounti=='farsuda')
+            {
+             return redirect()->route('home')->with('danger','Фарсуда танга фонд  не успешно!');
             }
           exit;
         } 
