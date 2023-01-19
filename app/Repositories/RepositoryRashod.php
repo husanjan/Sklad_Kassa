@@ -34,7 +34,7 @@ class RepositoryRashod{
           foreach($ostatkNominalDistinct AS $distinctNaminal):
           
 
-             $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa')->where('naminal',$distinctNaminal['naminal'])->where('cell_id',$ostatks['cell_id'])->where('type',$type)->where('priznak',$priznak)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
+             $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$distinctNaminal['naminal'])->where('cell_id',$ostatks['cell_id'])->where('type',$type)->where('priznak',$priznak)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
 
    
          foreach( $ostatkiResult AS  $ostatkiResults):
@@ -67,7 +67,7 @@ class RepositoryRashod{
           foreach($ostatkNominalDistinct AS $distinctNaminal):
           
 
-             $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa')->where('naminal',$distinctNaminal['naminal'])->where('cell_id',$ostatks['cell_id'])->where('type',$type)->where('priznak',$priznak)->where('typeFond',1)->orderBy('id','desc')->limit(1)->get();
+             $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$distinctNaminal['naminal'])->where('cell_id',$ostatks['cell_id'])->where('type',$type)->where('priznak',$priznak)->where('typeFond',1)->orderBy('id','desc')->limit(1)->get();
 
    
          foreach( $ostatkiResult AS  $ostatkiResults):

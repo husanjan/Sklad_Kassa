@@ -87,7 +87,7 @@ use Illuminate\Support\Facades\DB;
                            $Somoni['kol']=array_values($count);
                            $Somoni['safe_id']=array_values($safe_id);
                            $Somoni['shkaf_id']=array_values($shaving);
-                           $Somoni['qator_id']=array_values($shaving);
+                           $Somoni['qator_id']=array_values($qator_id);
                            $Somoni['cell_id']=array_values($cells);
                            if(count(array_values($Somoni['ed_id']))===count(array_values($Somoni['kol']))   AND count(array_values($Somoni['safe_id']))==count(array_values($Somoni['cell_id'])) AND count(array_values($Somoni['shkaf_id']))===count(array_values($Somoni['qator_id'])))
                            {  
@@ -253,7 +253,7 @@ use Illuminate\Support\Facades\DB;
                            $Somoni['kol']=array_values($count);
                            $Somoni['safe_id']=array_values($safe_id);
                            $Somoni['shkaf_id']=array_values($shaving);
-                           $Somoni['qator_id']=array_values($shaving);
+                           $Somoni['qator_id']=array_values($qator_id);
                            $Somoni['cell_id']=array_values($cells);
                            if(count(array_values($Somoni['ed_id']))===count(array_values($Somoni['kol']))   AND count(array_values($Somoni['safe_id']))==count(array_values($Somoni['cell_id'])) AND count(array_values($Somoni['shkaf_id']))===count(array_values($Somoni['qator_id'])))
                            {  
@@ -317,7 +317,7 @@ use Illuminate\Support\Facades\DB;
                                $Somoni['kol']=array_values($count);
                                $Somoni['safe_id']=array_values($safe_id);
                                $Somoni['shkaf_id']=array_values($shaving);
-                               $Somoni['qator_id']=array_values($shaving);
+                               $Somoni['qator_id']=array_values($qator_id);
                                $Somoni['cell_id']=array_values($cells);
                                if(count(array_values($Somoni['ed_id']))===count(array_values($Somoni['kol']))   AND count(array_values($Somoni['safe_id']))==count(array_values($Somoni['cell_id'])) AND count(array_values($Somoni['shkaf_id']))===count(array_values($Somoni['qator_id'])))
                                {
