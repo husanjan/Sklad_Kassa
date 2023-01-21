@@ -111,7 +111,7 @@
    </form>
    <script>
     $(document).ready(function(){
-       //   name="naminal{{$ostatkiResults->id}}" 
+      
     
    $(".summaRBotT").keyup(function(){
     

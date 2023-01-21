@@ -108,7 +108,7 @@
 
    <script>
     $(document).ready(function(){
-       //   name="naminal{{$ostatkiResults->id}}" 
+   
     
    $(".summaRFarT").keyup(function(){
     

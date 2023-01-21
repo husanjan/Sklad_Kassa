@@ -109,7 +109,7 @@
 
    <script>
     $(document).ready(function(){
-       //   name="naminal{{$ostatkiResults->id}}" 
+ 
     
    $(".summaRKorT").keyup(function(){
     

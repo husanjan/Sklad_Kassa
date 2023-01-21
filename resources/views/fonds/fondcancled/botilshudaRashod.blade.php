@@ -112,7 +112,7 @@
 
    <script>
    $(document).ready(function(){
-    //   name="naminal{{$ostatkiResults->id}}" 
+   
  
 $(".summaRB").keyup(function(){
  

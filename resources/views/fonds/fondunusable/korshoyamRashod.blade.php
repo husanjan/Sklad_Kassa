@@ -53,8 +53,9 @@
             @php
            $i=1;//Initialize variable
           @endphp
+             @if($korshoyamRashod):
             @foreach($korshoyamRashod AS  $ostatkiResults)
-            @if($ostatkiResults->summa>0)
+            @if($ostatkiResults->summa>0 AND isset($ostatkiResults))
             <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
               <tr class="border-bottom" id="t{{$ostatkiResults->id}}">
                 <td> {{$i}} </td>
@@ -90,6 +91,7 @@
               </tr>@endif
              
             @endforeach
+            @endif
     </tbody>
      </table>
 
@@ -104,7 +106,7 @@
 </div>
 <script>
  $(document).ready(function(){
-    //   name="naminal{{$ostatkiResults->id}}" 
+ 
  
 $(".summaRKor").keyup(function(){
  

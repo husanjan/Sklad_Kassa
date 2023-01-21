@@ -190,7 +190,7 @@ class OstatkiSafeController extends Controller
                         endif;
                                        echo '<td>'.$AllOstatks->naminal.'</td>';
                                        echo '<td  id="summa'.$request->id_safe.'">'.$AllOstatks->summa.'</td>';     
-                   
+                   continue;
                 endif;  
                     //end to ryad nishon medihad
                    //end to yacheyka nishon medihad
@@ -223,7 +223,7 @@ class OstatkiSafeController extends Controller
                         endif;
                                        echo '<td>'.$AllOstatks->naminal.'</td>';
                                        echo '<td  id="summa'.$request->id_safe.'">'.$AllOstatks->summa.'</td>';     
-                   
+                                       continue;
                 endif;  
                     //to yacheyka nishon medihad
                 //badaz yaxheyka nishon mediham
@@ -256,13 +256,13 @@ class OstatkiSafeController extends Controller
                         endif;
                       echo '<td>'.$AllOstatks->naminal.'</td>';
                    echo '<td  id="summa'.$request->id_safe.'">'.$AllOstatks->summa.'</td>';     
-                   
+                   continue; 
                 endif;      
                   //end badaz yaxheyka nishon mediham
                 echo "</tr>";
             
             endforeach;
-     
+            return;
   
     }
 
