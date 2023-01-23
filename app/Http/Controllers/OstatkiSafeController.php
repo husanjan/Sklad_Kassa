@@ -40,11 +40,11 @@ class OstatkiSafeController extends Controller
         $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,0);
         //tanga 
    
-       $korshoyamTanga= $this->RepositoryRashod->SelectRashodTanga(1,0);
+       $AllOstatki= $this->RepositoryRashod->SelectRashodAll(1,0);
        $farsudaTanga= $this->RepositoryRashod->SelectRashodTanga(2,0);
        $botilshudaTanga= $this->RepositoryRashod->SelectRashodTanga(3,0);
         $SprSafes= SprSafes::all();
-       $AllOstatki= array_merge($korshoyamRashod,$farsudaRashod,$botilshudaRas,$korshoyamTanga,$farsudaTanga,$botilshudaTanga);
+      // $AllOstatki= array_merge($korshoyamRashod,$farsudaRashod,$botilshudaRas,$korshoyamTanga,$farsudaTanga,$botilshudaTanga);
         //exit;
         return   view('ostatki.safe.index',compact('SprSafes','AllOstatki','shkafs','sprQators','sprCells'));
     }
@@ -73,16 +73,17 @@ class OstatkiSafeController extends Controller
         $sprCells= SprCells::all();
         $sprQators= SprQators::all();
           //SelectRashod($type,$priznak)
-          $korshoyamRashod= $this->RepositoryRashod->SelectRashod(1,0);
-          $farsudaRashod= $this->RepositoryRashod->SelectRashod(2,0);
-          $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,0);
-          //tanga 
+        //   $korshoyamRashod= $this->RepositoryRashod->SelectRashod(1,0);
+        //   $farsudaRashod= $this->RepositoryRashod->SelectRashod(2,0);
+        //   $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,0);
+        //   //tanga 
      
-         $korshoyamTanga= $this->RepositoryRashod->SelectRashodTanga(1,0);
-         $farsudaTanga= $this->RepositoryRashod->SelectRashodTanga(2,0);
-         $botilshudaTanga= $this->RepositoryRashod->SelectRashodTanga(3,0);
+        //  $korshoyamTanga= $this->RepositoryRashod->SelectRashodTanga(1,0);
+        //  $farsudaTanga= $this->RepositoryRashod->SelectRashodTanga(2,0);
+        //  $botilshudaTanga= $this->RepositoryRashod->SelectRashodTanga(3,0);
           $SprSafes= SprSafes::all();
-         $AllOstatki= array_merge($korshoyamRashod,$farsudaRashod,$botilshudaRas,$korshoyamTanga,$farsudaTanga,$botilshudaTanga);
+        // $AllOstatki= array_merge($korshoyamRashod,$farsudaRashod,$botilshudaRas,$korshoyamTanga,$farsudaTanga,$botilshudaTanga);
+         $AllOstatki= $this->RepositoryRashod->SelectRashodAll(1,0);
           //exit;
           $count=1;
             $request->cell;

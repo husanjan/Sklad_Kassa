@@ -21,7 +21,7 @@
 
 
                                             <div class="row mb-3">
-                                                <label for="account" class="col-md-4 col-form-label text-md-end">{{ __('Дата') }}</label>
+                                                          <label for="account" class="col-md-4 col-form-label text-md-end">{{ __('Дата') }}</label>
                                                 <div class="col-md-3">
                                                     <input id="account" type="date" class="form-control" name="date" required  value="{{date('Y-m-d')}}"  autofocus>
                                                 </div>
@@ -41,7 +41,7 @@
                                                         <option value="">Интихоб</option>
                                                         @foreach($sprEds as $sprEd)
 
-                                                            <option value="{{$sprEd->kol}}|{{$sprEd->id}}" >{{$sprEd->name}}
+                                                            <option value="{{$sprEd->kol}}" >{{$sprEd->name}}
 
 
                                                             </option>

@@ -14,11 +14,13 @@ use App\Models\SprShkafs;
 use App\Models\sprQators;
 use App\Models\SprCells;
 use App\Models\oborots_coin;
+use App\Models\ostatki_safe;
 use App\Repositories\InterfacesSomoni;
 use App\Repositories\AddRequest;
 use App\Repositories\RepositoryRashod;
 use Illuminate\Support\Facades\DB;
 use App\Models\FondCoins;
+use App\Models\FondEmisions;
 class HomeController extends Controller
 {
     /**
@@ -120,7 +122,7 @@ class HomeController extends Controller
              $farsudaTanga= $this->RepositoryRashod->SelectRashodTanga(2,0);
              $botilshudaTanga= $this->RepositoryRashod->SelectRashodTanga(3,0);
             $sprAccounts= SprAccounts::all();
-            if ($request->ajax()) {
+            if($request->ajax()) {
             
               return view('oborot.pagination',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'))->render();
 
@@ -665,6 +667,58 @@ public function InsertTanga(Request $request)
               }
             }
           }
+
+
+
+      public function emissionAjaxR(Request $request)   
+      {
+
+        $FondEmisions= FondEmisions::where('naminal',$request->naminal)->where('serial',  $request->serial)->where('nn',  $request->number)->where('priznak',0)->get();
+        // 
+       // return $ostatkiResult;
+          
+        foreach($FondEmisions AS   $FondEmision)
+        {
+         
+     //  echo "<br>".$FondEmision['naminal'];
+        // echo "<br>".$FondEmision['serial'];
+        // echo "<br>".$FondEmision['safe_id'];
+        // echo "<br>".$FondEmision['shkaf_id'];
+        // echo "<br>".$FondEmision['qator_id'];
+            //echo "<br>".$FondEmision['summa'];
+        // $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$request->naminal['naminal'])->where('cell_id',$FondEmision['cell_id'])->where('priznak',0)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
+        //           echo "<pre>";
+        //           print_r($ostatkiResult);
+        //           echo "</pre>";
+        $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$request->naminal)->where('cell_id',$FondEmision['cell_id'])->where('priznak',0)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
+           foreach($ostatkiResult AS $ostatkiResults)
+           {
+            // echo $ostatkiResults['qator_id'];
+            // echo $ostatkiResults['naminal'];///
+            // echo $ostatkiResults['safe_id'];
+              // echo $ostatkiResults['summa'];
+               if($FondEmision['cell_id']==$ostatkiResults['cell_id'] && $FondEmision['qator_id']==$ostatkiResults['qator_id'] && $FondEmision['summa']<=$ostatkiResults['summa'])
+               {
+                         
+                 //  echo "fff";
+                      
+                     return 1;
+               } 
+           }
+         
+        }
+        echo '<div class="toast offset-md-9 fade show" >
+        <div class="toast fade mx-auto toast-danger toast-fixed show" id="basic-danger-example" role="alert" aria-live="assertive" aria-atomic="true" data-mdb-autohide="true" data-mdb-delay="2000" data-mdb-position="top-right" data-mdb-append-to-body="true" data-mdb-stacking="true" data-mdb-width="350px" data-mdb-color="danger" style="width: 350px; display: block; top: 10px; right: 10px; bottom: unset; left: unset; transform: unset;">
+            <div class="toast-header toast-danger bg-danger">
+                <strong class="me-auto ">ХАТО</strong>
+    
+    
+            </div>
+            <div class="toast-body ">Турги дароред!!</div>
+        </div>';
+        return;
+      // return;
+      }
 
 
 }

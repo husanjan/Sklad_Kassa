@@ -5,20 +5,37 @@
     <?php isset($_GET['page'])?$data=$_GET['page']:$data=1?>
                     <div class="row">
 
-                        <div class="col-lg-12 margin-tb">
+                        <div class="col-lg-2 margin-tb">
 
                             <div class="pull-left">
                                 <h2>Эмиссионный фонд </h2>
                             </div>
 
-                            <div class="pull-right">
-                                <a class="btn btn-success" href="{{ route('fondemission.create') }}"><i class="align-middle" data-feather="edit-3"></i> Создание нового счета</a>
-                            </div>
+                       
+                         
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a class="btn btn-primary" href="{{ route('fondemission.create',"id=0") }}"><i class="align-middle" data-feather="edit-3"></i>Приход  счета</a>
+                                <a class="btn btn-success" href="{{ route('fondemission.create',"id=1") }}"><i class="align-middle" data-feather="edit-3"></i>Расход  счета</a>
+                  
+                    
+                              </div>
 {{--                            <div class="pull-right">--}}
 {{--                                <a class="btn btn-success" href="{{ route('fondemission.show', $data) }}?page={{$data}}"><i class="align-middle" data-feather="edit-3"></i> Создание нового счета</a>--}}
 {{--                            <button class="btn btn-danger" id="pdf" onclick="ExportToExcel()">OK</button>--}}
 {{--                            </div>--}}
                         </div>
+                        <div class=" mt-4">
+
+                        
+                         
+                       
+                            
+{{--                            <div class="pull-right">--}}
+{{--                                <a class="btn btn-success" href="{{ route('fondemission.show', $data) }}?page={{$data}}"><i class="align-middle" data-feather="edit-3"></i> Создание нового счета</a>--}}
+{{--                            <button class="btn btn-danger" id="pdf" onclick="ExportToExcel()">OK</button>--}}
+{{--                            </div>--}}
+                        </div>
+                        
                     </div>
 
                     @if ($message = Session::get('success'))

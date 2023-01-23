@@ -82,9 +82,11 @@ Route::group([ 'middleware' => ['auth', 'activity']], function() {
     //Ячейка ажакс роуте
     Route::post('cellsTable',[SprCellsController::class, 'cellsTable'])->name('cellsTable.post');
     //Шкаф ажакс роуте
-    Route::post('shkafTable',[SprQatorsController::class, 'shkafTable']) ->name('shkafTable.post');
+    Route::post('shkafTable',[SprQatorsController::class, 'shkafTable'])->name('shkafTable.post');
     //Создать Изменит Удалить роуте Фонд эмиссион
     Route::resource('ostatkisafe',OstatkiSafeController::class);
+
+    Route::get('emissionAjaxR',[HomeController::class, 'emissionAjaxR'])->name('emissionAjaxR.post');
 
 });
 

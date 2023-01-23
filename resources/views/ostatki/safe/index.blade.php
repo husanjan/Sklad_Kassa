@@ -28,9 +28,9 @@
          
             <div class="tab-pane fade show {{ $SprSafe->safe==1? 'active':''}}"  id="nav-{{$SprSafe->id}}" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="row  mt-2" id="new{{$SprSafe->id}}">
-                  <div class="col-md-1">  <label for="shavingq1">Шкаф	</label>
-                        <select  id="{{$SprSafe->id}}" class="form-control shaving{{$SprSafe->id}}">
-                            <option selected value="">Выберите </option>
+                  <div class="col-md-1">  <label >Шкаф	</label>
+                        <select  id="{{$SprSafe->id}}"  data-shaving="shaving{{$SprSafe->id}}" class="form-control shaving{{$SprSafe->id}}">
+                            <option selected value="">Выберите</option>
                                 @foreach ($shkafs as $shkaf)
                                 @if($shkaf->safe_id==$SprSafe->id)
                                 <option  value="{{$shkaf->id}}">{{$shkaf->shkaf}}</option>
@@ -45,27 +45,27 @@
                     </div>
                     <div class="col-md-1   ">
                         <label for="">Ряд	</label>
-                        <select   id="{{$SprSafe->id}}" class="form-control  qator{{$SprSafe->id}}">
+                        <select   id="{{$SprSafe->id}}" data-qator="qator{{$SprSafe->id}}" class="form-control  qator{{$SprSafe->id}}">
                             <option selected value="">Выберите </option>
-                            @foreach ($sprQators as $sprQator)
+                            {{-- @foreach ($sprQators as $sprQator)
                             @if($sprQator->safe_id==$SprSafe->id)
                             <option  value="{{$sprQator->id}}">{{$sprQator->qator}}</option>
                             @endif
                           
-                            @endforeach
+                            @endforeach --}}
                       
                 
                         </select>
                     </div>
                     <div class="col-md-2">
                         <label for="cellsq">Ячейка</label>
-                        <select name="cellsq[]" id="{{$SprSafe->id}}" class="form-control   cells{{$SprSafe->id}}">
+                        <select name="cellsq[]" id="{{$SprSafe->id}}"  data-cells="cells{{$SprSafe->id}}" class="form-control   cells{{$SprSafe->id}}">
                             <option selected value="">Выберите </option>
-                            @foreach ($sprCells as $sprCell)
+                            {{-- @foreach ($sprCells as $sprCell)
                             @if($sprCell->safe_id==$SprSafe->id)
                             <option  value="{{$sprCell->id}}">{{$sprCell->cell}}</option>
                             @endif
-                            @endforeach
+                            @endforeach --}}
                 
                         </select>
                     </div>
@@ -191,20 +191,63 @@ result.forEach(function(message){
 
 
 // end  //Allsummma 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//end ajax send shaving
 // console.log(result);
     $('select').on('change', function() {
+   
       var Table1=null;
     //  alert($('.shaving'+ $(this).attr('id')).val());
     //  alert($('.qator'+ $(this).attr('id')).val());
     //  alert($('.cells'+ $(this).attr('id')).val());   
     //   alert($('.cells'+ $(this).attr('id')).val());
+
+    
       Table1=$("#table"+$(this).attr('id'));
       var idrr=$(this).attr('id');
   
       // alert($(this).attr('id'));
       $("#table"+$(this).attr('id')).html("");
-   
-      
+      var shaving=$('.shaving'+ $(this).attr('id')).val();
+       var qator= $('.qator'+ $(this).attr('id')).val();
+       var  cell=$('.cells'+ $(this).attr('id')).val();
+        var  safe=$(this).attr('id');
+        // alert(safe);
+        // alert(shaving);
+        // alert(qator);
+        // alert(cell);
+        if(shaving<1)
+        {
+         
+          qator=undefined;
+          shaving=undefined;
+          cell=undefined;
+        }
+        if(qator<1)
+        {
+         
+          qator=undefined;
+          cell=undefined;
+        }
+        if(cell<1)
+        {
+         
+         
+          cell=undefined;
+        }
        
        $.ajax({
           
@@ -212,7 +255,7 @@ result.forEach(function(message){
          type:"POST",
          data:{
              "_token":"{{csrf_token()}}",
-             id_safe:$(this).attr('id'),shaving:$('.shaving'+ $(this).attr('id')).val(),qator:$('.qator'+ $(this).attr('id')).val(),cell:$('.cells'+ $(this).attr('id')).val(),
+             id_safe:safe,shaving:shaving,qator:qator,cell:cell,
         
          },
         
@@ -240,7 +283,110 @@ result.forEach(function(message){
     
    });
 
-    
+   
+///shaving ajax send
+$(document).on('change','[data-shaving^="shaving"]',function (){
+
+// alert($(this).val());
+var id_number=$(this).val();
+
+
+
+var safe=$(this).attr('id');
+
+var qator=$(".qator"+safe);
+qator.html("");
+ 
+if(this.value>0)
+{
+
+
+
+qator.append('<option selected="" value="">Выберите</option>');
+
+$.ajax({
+ url: "{{route('qatorTable.post')}}",
+ type:"POST",
+ data:{
+     "_token": "{{ csrf_token() }}",
+     id_shkaf:this.value,safe_id:safe,
+
+ },
+ //safe_id
+ success:function(response){
+
+
+     for (const [key, value] of Object.entries(response)) {
+         var newMsgs='<option  value="'+value.id+'">'+value.qator+'</option>';
+
+          qator.append(newMsgs);
+        console.log(qator);
+     }
+
+ },
+});
+}else{
+
+$(".cells"+safe).html('<option selected="" value="">Выберите</option>');
+$(".qator"+safe).html('<option selected="" value="">Выберите</option>');
+
+}
+
+
+});
+
+
+$(document).on('change','[data-qator^="qator"]',function (){
+
+
+// var id_number=$(this).val();
+
+
+ 
+var safe=$(this).attr('id');
+
+var cell=$(".cells"+safe);
+cell.html("");
+
+
+if(this.value>0)
+{
+//вактин$("#safe_id option:selected").val();
+
+
+var shaving=$(".shaving"+safe+" option:selected").val();
+
+
+cell.append('<option selected="" value="">Выберите</option>');
+
+$.ajax({
+ url: "{{route('cellsTable.post')}}",
+ type:"POST",
+ data:{
+     "_token": "{{ csrf_token() }}",
+     id_shkaf:shaving,qator_id:this.value,safe_id:safe,
+
+ },
+ //safe_id
+ success:function(response){
+
+
+     for (const [key, value] of Object.entries(response)) {
+         var newMsgs='<option  value="'+value.id+'">'+value.cell+'</option>';
+
+         cell.append(newMsgs);
+     
+     }
+
+ },
+});
+}else{
+qator.html('<option selected="" value="">Выберите</option>');
+$(".cells"+safe).html('<option selected="" value="">Выберите</option>');
+}
+
+
+}); 
  
 });
  
