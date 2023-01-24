@@ -34,7 +34,7 @@
                                                             <option value="">Интихоб</option>
                                                             @foreach($sprEds as $sprEd)
     
-                                                                <option value="{{$sprEd->kol}}" >{{$sprEd->name}}
+                                                                <option value="{{$sprEd->id}}"  kol="{{$sprEd->kol}}">{{$sprEd->name}}
     
     
                                                                 </option>
@@ -69,7 +69,7 @@
                                             <div class="row mb-12">
                                                 <label for="Nomer" class="col-md-4 col-form-label text-md-end">{{ __('Номер') }}</label>
                                                 <div class="col-md-8">
-                                                    <input id="numbers" type="number" class="form-control" name="Nomer" maxlength="7"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+                                                    <input id="numbers" type="number" class="form-control" name="Nomer" maxlength="7" min="7" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
                                                     
                                                    
                                                 </div>
@@ -88,7 +88,7 @@
 
                                             <div class="row mb-0">
                                                 <div class="col-md-8 offset-md-4">
-                                                    <button type="submit" class="btn btn-primary" disabled>
+                                                    <button type="submit"  id="submit" class="btn btn-primary" disabled>
                                                         {{ __('Добавить') }}
                                                     </button>
                                                 </div>
@@ -116,21 +116,27 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-   
-        $("#numbers,#Serial,#naminal").keyup(function(){
+
+       
+        $('select').on('change', function() {
+            $(':input[type="submit"]').prop('disabled', true);
+        });
+        $("#numbers,#Serial,#naminal,#count").keyup(function(){
            
            var serial=$('#Serial').val();
            var naminal=$('#naminal').val();
            var number=$("#numbers").val();
            var count=$("#count").val(); 
-           var edin=$("#edin_id").val(); 
-           alert(edin);    
+          /// var edin=$("#edin_id").attr('kol');
+           var edin = $('#edin_id option:selected').attr('kol');
+        
         if(serial.length==2 && number.length==7 && naminal.length<=3 &&  naminal.length>0 &&  count.length>0)
         {
            
         
         var token = $('meta[name="csrf-token"]').attr('content');
-           $.ajax({
+           $.ajax({ 
+
             header:{
           'X-CSRF-TOKEN': token
         },
@@ -138,10 +144,12 @@
                     type:"GET",
                     data:{
                         "_token": "{{ csrf_token() }}",
-                        serial:serial,number:number,naminal:naminal,
+                        serial:serial,number:number,naminal:naminal,edin:parseFloat(edin),count:parseFloat(count),
 
                     },
                     success:function(response){
+                        // alert(response);
+                        // return;
                              if(parseFloat(response)==1)
                              {
                                 $("#alert").html("");

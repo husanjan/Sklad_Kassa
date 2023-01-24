@@ -100,6 +100,7 @@ class FondEmissionsController extends Controller
          
        //    dd($request->all());
        $summaOstatss=null;
+       
        $ostatkiResult= ostatki_safe::select('summa')->where('naminal',$request->naminal)->where('cell_id',$request->cell_id)->where('priznak',0)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
          if(empty($ostatkiResult)):
        $summaOstatss=json_decode($ostatkiResult,true)[0]['summa']; 
@@ -220,102 +221,126 @@ class FondEmissionsController extends Controller
      */
     public function edit(Request $request)
     {
+        DB::beginTransaction();
         $this->validate($request, [
-            'date' => 'required|date',
+           
             'naminal' => 'required',
             'Serial' => 'required',
-            'Nomer' => 'required',
+            'Nomer' => 'required|digits_between:7,7',
         ]);
        
         $request->request->remove('_token');
-        // dd($request);
-           $request->Nomer;
-           $account=[];
-           $account = $request->comment;
-           DB::beginTransaction();
-           try {
-         
-        
-       
-        $FondEmisions= FondEmisions::where('naminal',$request->naminal)->where('serial',  $request->Serial)->where('nn',  $request->Nomer)->where('priznak',0)->get();
-        // 
-       // return $ostatkiResult;
-       $ostatki_safe = new ostatki_safe;
-        foreach($FondEmisions AS   $FondEmision)
+    // dd($request->all());
+        $sum_dist=1000;
+        //$edin=20000;
+        if($request->ed_id==2)
         {
-         
-      
-        $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$request->naminal)->where('cell_id',$FondEmision['cell_id'])->where('priznak',0)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
-           foreach($ostatkiResult AS $ostatkiResults)
-           {
-       
-
-               if($FondEmision['cell_id']==$ostatkiResults['cell_id'] && $FondEmision['qator_id']==$ostatkiResults['qator_id'] && $FondEmision['summa']<=$ostatkiResults['summa'])
-               {
-                         
-             
-                
-                  
-               
-                       
-                    //   echo  date("Y-m-d H:i:s");
-                       
-                        $ostatki_safe->date = date("Y-m-d H:i:s");
-                        
-                        $ostatki_safe->naminal=$ostatkiResults['naminal'];
-                        $ostatki_safe->ed_id=$ostatkiResults['ed_id'];
-                        $ostatki_safe->priznak =0;
-                        $ostatki_safe->summa = $ostatkiResults['summa']-$FondEmision['summa'];
-                        $ostatki_safe->safe_id=$ostatkiResults['safe_id'];
-                        $ostatki_safe->shkaf_id=$ostatkiResults['shkaf_id'];
-                        $ostatki_safe->qator_id=$ostatkiResults['qator_id'];
-                        $ostatki_safe->cell_id=$ostatkiResults['cell_id'];
-                        $ostatki_safe->comment=$ostatkiResults['comment'];
-                        $ostatki_safe->typeFond=$ostatkiResults['typeFond'];
-                        $ostatki_safe->user_id=Auth::id();
-                        $ostatki_safe->host=$request->ip();
-                       $ostatki_safe->save();
-                               //   $account['naminal']=$ostatkiResults['naminal'];
-                        //   $account['priznak']=0;
-                        //   $account['ed_id']=$ostatkiResults['ed_id'];
-                        //   $account['summa']=$ostatkiResults['summa']-$FondEmision['summa'];
-                        //   $account['safe_id']=$ostatkiResults['safe_id'];
-                        //   $account['shkaf_id']=$ostatkiResults['shkaf_id'];
-                        //   $account['qator_id'] = $ostatkiResults['qator_id'];
-                        //   $account['cell_id'] = $ostatkiResults['cell_id'];
-                        //   $account['comment'] = $ostatkiResults['comment'];
-                        //   $account['typeFond'] = $ostatkiResults['typeFond'];
-                        //   $account['user_id'] =Auth::id();
-                        //   $account['host']=$request->ip();
-                     
-             FondEmisions::where('id',$FondEmision['id'])->update(['priznak'=>1]);
-                       
-                //print_r($ostatki_safe);
-               } 
-           }
-         
+            $edin=1000;
         }
+        if($request->ed_id==3)
+        {
+            $edin=20000;
+        }
+        $count= $edin*$request->count/$sum_dist;
+        //    echo   "<br>".$edin;
   
-       // ostatki_safe::create($account);
-        DB::commit();
-        // all good
- /// echo "hi";
+        // $number= $request->number;
+        $array=[];
+  
+       $number= $request->Nomer;
+        $account=[];
+       $account = $request->comment;
+                   $request->count;
+                  $request->Nomer;
+                  for($i=1; $i<=$count;$i++)
+                  {
+                       if($i==1)
+                          {
+                           $array[]=$number;
+                             ///  $FondEmisions= FondEmisions::where('naminal',$request->naminal)->where('serial',  $request->serial)->where('nn',  $request->number)->where('priznak',0)->get();
+                          }else{
+                           $array[]=$number+=$sum_dist;
+                          }
+               }
+  
+            // max($array);
+                 $validateCell=[];
+                $validateSumma=[];
+                $validateNomer=[];
+                $safe_id=[];
+                $shkaf_id=[];
+                $qator_id=[];
+                $ed_id=[];
+              
+               $FondEmisions= FondEmisions::where('naminal',$request->naminal)->where('serial',$request->Serial)->whereIn('nn',$array)->where('priznak',0)->get();
+               foreach($FondEmisions AS   $FondEmision)
+               {
+                
+                   if(max($array)<=$FondEmisions->max('nn'))
+                   {
+  
+                    if($FondEmision['priznak']==0)
+                    {
+                  
+                    // echo "<bt>".$FondEmision['nn'];
+                     $ed_id[]=$FondEmision['ed_id'];
+                    $validateSumma[]=$FondEmision['summa'];
+                     $safe_id[]=$FondEmision['safe_id'];
+                     $shkaf_id[]=$FondEmision['shkaf_id'];
+                     $qator_id[]=$FondEmision['qator_id'];
+                     $validateCell[]=$FondEmision['cell_id'];
+                    //  $validateCell[]=$FondEmision['cell_id'];
+                  
+                     $validateNomer[]=$FondEmision['nn'];
+                    }
+                  continue;
+                
+                   }
+                }
+                $validateCellunique = array_unique($validateCell);
+                $safe_id = array_unique($safe_id);
+                $shkaf_id = array_unique($shkaf_id);
+                $qator_id = array_unique($qator_id);
+                $ed_id = array_unique($ed_id);
+      
+    $ostatki_safe = new ostatki_safe;
+    $ostatkiResult= $ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$request->naminal)->whereIn('cell_id',$validateCellunique)->where('priznak',0)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
 
-    return redirect()->route('fondemission.index')->with('success','Эмиссионный фонд успешно!');
-    } catch (\Exception $e) {
-        DB::rollback();
-        echo "error";
-        // something went wrong
-       return redirect()->route('fondemission.index')->with('danger','Эмиссионный фонд не успешно!');
+    try {
+    foreach($ostatkiResult AS $ostatkiResults)
+    {
+      if(array_sum($validateSumma)<=$ostatkiResults['summa'] && in_array($ostatkiResults['cell_id'],$validateCellunique))
+      {
+      
+         $ostatki_safe->date = date("Y-m-d H:i:s");
+         $ostatki_safe->naminal=$request->naminal;
+         $ostatki_safe->ed_id=array_unique($safe_id)[0];
+         $ostatki_safe->priznak =0;
+         $ostatki_safe->summa=$ostatkiResults['summa']-array_sum($validateSumma);;
+         $ostatki_safe->safe_id=array_unique($safe_id)[0];
+         $ostatki_safe->shkaf_id=array_unique($shkaf_id)[0];
+         $ostatki_safe->qator_id=array_unique($shkaf_id)[0];
+         $ostatki_safe->cell_id=array_unique($validateCell)[0];
+         $ostatki_safe->comment=$request->comment;
+         $ostatki_safe->typeFond=0;
+         $ostatki_safe->user_id=Auth::id();
+         $ostatki_safe->host=$request->ip();
+        $ostatki_safe->save();
+        FondEmisions::whereIn('nn',$validateNomer)->where('serial',$request->Serial)->update(['priznak'=>1]);
+      }
     }
-  
+    DB::commit();
+    // all good
+      echo "hi";
 
-//        $qators = SprQators::find($id);
-//
-//        $shkaf = SprShkafs::all();
-//         $safes = SprSafes::all();
-//
-//        return view('spr.sprqators.edit', compact('shkaf','safes','qators'));
+   return redirect()->route('fondemission.index')->with('success','Эмиссионный фонд успешно!');
+} catch (\Exception $e) {
+    DB::rollback();
+    echo "error";
+    // something went wrong
+   return redirect()->route('fondemission.index')->with('danger','Эмиссионный фонд не успешно!');
+}
+ 
     }
 
     /**

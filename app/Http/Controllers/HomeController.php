@@ -673,51 +673,98 @@ public function InsertTanga(Request $request)
       public function emissionAjaxR(Request $request)   
       {
 
-        $FondEmisions= FondEmisions::where('naminal',$request->naminal)->where('serial',  $request->serial)->where('nn',  $request->number)->where('priznak',0)->get();
-        // 
-       // return $ostatkiResult;
-          
+
+        $sum_dist=1000;
+        $count=$request->edin*$request->count/$sum_dist;
+         $number= $request->number;
+         $array=[];
+     for($i=1; $i<=$count;$i++)
+     {
+          if($i==1)
+             {
+              $array[]= $num=$number;
+                ///  $FondEmisions= FondEmisions::where('naminal',$request->naminal)->where('serial',  $request->serial)->where('nn',  $request->number)->where('priznak',0)->get();
+             }else{
+              $array[]= $num=$number+=$sum_dist;
+             }
+  }
+  $validate=[];
+      // echo max($array);
+      //    exit;
+      $FondEmisions= FondEmisions::where('naminal',$request->naminal)->where('serial',$request->serial)->whereIn('nn',$array)->get();
+         
+          $validateCell=[];
+          $validateSumma=[];
+          //  echo   $FondEmisions->max('nn');
+          //     exit;
         foreach($FondEmisions AS   $FondEmision)
         {
-         
-     //  echo "<br>".$FondEmision['naminal'];
-        // echo "<br>".$FondEmision['serial'];
-        // echo "<br>".$FondEmision['safe_id'];
-        // echo "<br>".$FondEmision['shkaf_id'];
-        // echo "<br>".$FondEmision['qator_id'];
-            //echo "<br>".$FondEmision['summa'];
-        // $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$request->naminal['naminal'])->where('cell_id',$FondEmision['cell_id'])->where('priznak',0)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
-        //           echo "<pre>";
-        //           print_r($ostatkiResult);
-        //           echo "</pre>";
-        $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$request->naminal)->where('cell_id',$FondEmision['cell_id'])->where('priznak',0)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
-           foreach($ostatkiResult AS $ostatkiResults)
-           {
-            // echo $ostatkiResults['qator_id'];
-            // echo $ostatkiResults['naminal'];///
-            // echo $ostatkiResults['safe_id'];
-              // echo $ostatkiResults['summa'];
-               if($FondEmision['cell_id']==$ostatkiResults['cell_id'] && $FondEmision['qator_id']==$ostatkiResults['qator_id'] && $FondEmision['summa']<=$ostatkiResults['summa'])
+             if(max($array)<=$FondEmisions->max('nn'))
+             {
+
+            
+              if($FondEmision['priznak']==1)
+              {
+            
+              // echo "<bt>".$FondEmision['nn'];
+               $validate[]=$FondEmision['nn'];
+     
+              }
+              if($FondEmision['priznak']==0)
+              {
+            
+              // echo "<bt>".$FondEmision['nn'];
+               $validateCell[]=$FondEmision['cell_id'];
+               $validateSumma[]=$FondEmision['summa'];
+              }
+            continue;
+            }  
+    }
+    $validateCellunique = array_unique($validateCell);
+ 
+       $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$request->naminal)->whereIn('cell_id',$validateCellunique)->where('priznak',0)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
+   
+       if(count($validate)<1)
+       {
+          foreach($ostatkiResult AS $ostatkiResults)
+             {
+               if(array_sum($validateSumma)<=$ostatkiResults['summa'] && in_array($ostatkiResults['cell_id'],$validateCellunique))
                {
-                         
-                 //  echo "fff";
-                      
-                     return 1;
-               } 
-           }
+                return 1;
+               }
+             }
+             echo '<div class="toast  offset-md-9 position-fixed bottom-20 fade show" >
+             <div class="toast fade mx-auto toast-danger toast-fixed show" id="basic-danger-example" role="alert" aria-live="assertive" aria-atomic="true" data-mdb-autohide="true" data-mdb-delay="2000" data-mdb-position="top-right" data-mdb-append-to-body="true" data-mdb-stacking="true" data-mdb-width="350px" data-mdb-color="danger" style="width: 350px; display: block; top: 10px; right: 10px; bottom: unset; left: unset; transform: unset;">
+                 <div class="toast-header toast-danger bg-danger">
+                 
+                     <strong class="me-auto ">ХАТО</strong>
          
-        }
-        echo '<div class="toast offset-md-9 fade show" >
-        <div class="toast fade mx-auto toast-danger toast-fixed show" id="basic-danger-example" role="alert" aria-live="assertive" aria-atomic="true" data-mdb-autohide="true" data-mdb-delay="2000" data-mdb-position="top-right" data-mdb-append-to-body="true" data-mdb-stacking="true" data-mdb-width="350px" data-mdb-color="danger" style="width: 350px; display: block; top: 10px; right: 10px; bottom: unset; left: unset; transform: unset;">
-            <div class="toast-header toast-danger bg-danger">
-                <strong class="me-auto ">ХАТО</strong>
-    
-    
-            </div>
-            <div class="toast-body ">Турги дароред!!</div>
-        </div>';
-        return;
+         
+                 </div>
+                 <div class="toast-body ">Турги дароред!!</div>
+                 
+             </div>';
+             return;
+          }
+     
+   
+       
       // return;
+      echo '<div class="toast offset-md-9 fade show position-fixed bottom-20" aria-live="assertive" aria-atomic="true" >
+      <div class="  fade mx-auto toast-danger toast-fixed show" id="basic-danger-example" role="alert" aria-live="assertive" aria-atomic="true" data-mdb-autohide="true" data-mdb-delay="2000" data-mdb-position="top-right" data-mdb-append-to-body="true" data-mdb-stacking="true" data-mdb-width="350px" data-mdb-color="danger" style="width: 350px; display: block; top: 10px; right: 10px; bottom: unset; left: unset; transform: unset;">
+          <div class="toast-header toast-danger bg-danger">
+              <strong class="me-auto ">ХАТО</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div> <center><b>Ин номерхо расход шудааст!!</b><div class="toast-body" style="margin-top:-20px"><b>';
+   
+    foreach($validate As $validates):
+      echo  '<br><label>'.$request->serial.' '.$validates.'</label>';
+    endforeach;
+    
+          
+    echo   '</b></div></center></div>';
+    return;
+
       }
 
 
