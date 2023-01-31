@@ -336,8 +336,8 @@
                             
                         
                             <li class="nav-item has-treeview">
-                                <a href="{{ route('botilshuda_tanga.index') }}" class="nav-link">
-                                    <i class="fa    nav-icon"></i>
+                                <a href="{{ route('ostatkischets.index') }}" class="nav-link">
+                                    <i class="fa  nav-icon"></i>
                                     <p>Счет
                                         <i class="right fas fa-angle-left"></i>
                                     </p>

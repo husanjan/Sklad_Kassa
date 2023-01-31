@@ -1882,10 +1882,10 @@
                             <input type="hidden"  value="{{array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]}}">
                             <td> <b>{{  $count }}</b>  </td>
                  <td  > {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]))}} </td>
-                 @foreach($bik AS $biks)
+                 {{-- @foreach($bik AS $biks)
 
     
-         @if($biks->id===array_map(function($value){return   $value['bik'];},$oborots)[0])
+         @if($biks->id==array_map(function($value){return   $value['bik'];},$oborots)[0])
              <td class="col-md-2"  >
                  {{ $biks->full_name }} 
                 </td>
@@ -1893,7 +1893,7 @@
           <td></td>
           @endif
 
-     @endforeach
+     @endforeach --}}
                  @if(array_keys(array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]==0)
                  <td class="col-md-2 " > Приход </td>
                  @else
@@ -2542,10 +2542,10 @@
                     <input type="hidden" id="Tangapr{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}" value="{{array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$oborotsTanga)))[0]}}">
                     <td> <b>{{  $count }}</b>  </td>
          <td id="Tangada{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}"> {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborotsTanga)))[0]))}} </td>
-         @foreach($bik AS $biks)
+         {{-- @foreach($bik AS $biks)
 
     
-         @if($biks->id===array_map(function($value){return   $value['bik'];},$oborotsTanga)[0])
+         @if($biks->id==array_map(function($value){return   $value['bik'];},$oborotsTanga)[0])
              <td class="col-md-2" id="Tangabik{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}">
                  {{ $biks->full_name }} 
                 </td>
@@ -2553,7 +2553,7 @@
           <td></td>
           @endif
 
-     @endforeach
+     @endforeach --}}
      
          @if(array_keys(array_count_values(array_map(function($value){return   $value['priznak'];},$oborotsTanga)))[0]==0)
          <td class="col-md-2 " id="TangaPriznak{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}"> Приход </td>

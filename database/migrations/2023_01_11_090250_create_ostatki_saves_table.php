@@ -13,12 +13,12 @@ class CreateOstatkiSavesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ostatki_saves', function (Blueprint $table) {
+        Schema::create('ostatki_safes', function (Blueprint $table) {
             $table->id();
             $table->dateTime('date');
             $table->char('src')->comment('Откуда/Куда источник');
             $table->integer('naminal')->comment('������� ������');
-            $table->varchar('summa');
+            $table->char('summa',255);
             $table->integer('priznak')->comment('Приход/Расход	');
             $table->integer('type')->comment('1-коршоям/2-фарсуда/3-ботилшуда	');
             $table->unsignedBiginteger('ed_id')->comment('ID �������');

@@ -21,10 +21,10 @@
         <input type="hidden" id="pr{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}" value="{{array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]}}">
          <td><b>{{ $response->firstItem() + $loop->index; }}</b></td>   
 <td id="da{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}"> {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]))}} </td>
-@foreach($bik AS $biks)
+{{-- @foreach($bik AS $biks)
 
 
-@if($biks->id===array_map(function($value){return   $value['bik'];},$oborots)[0])
+@if($biks->id==array_map(function($value){return   $value['bik'];},$oborots)[0])
 <td class="col-md-2" id="bik{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}">
 {{ $biks->full_name }} 
 </td>
@@ -32,7 +32,7 @@
 <td></td>
 @endif
 
-@endforeach
+@endforeach --}}
 @if(array_keys(array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]==0)
 <td class="col-md-2 " id="priznak{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}"> Приход </td>
 @else

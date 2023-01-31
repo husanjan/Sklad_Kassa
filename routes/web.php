@@ -14,7 +14,7 @@ use App\Http\Controllers\Spr\SprCellsController;
 use App\Http\Controllers\Fonds\FondEmissionsController;
 use App\Http\Controllers\Ajax\AjaxController;
 use App\Http\Controllers\OstatkiSafeController;
-
+use App\Http\Controllers\OstatkiSchetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ Route::group([ 'middleware' => ['auth', 'activity']], function() {
     Route::post('shkafTable',[SprQatorsController::class, 'shkafTable'])->name('shkafTable.post');
     //Создать Изменит Удалить роуте Фонд эмиссион
     Route::resource('ostatkisafe',OstatkiSafeController::class);
-
+    Route::resource('ostatkischets', OstatkiSchetController::class);
     Route::get('emissionAjaxR',[HomeController::class, 'emissionAjaxR'])->name('emissionAjaxR.post');
 
 });

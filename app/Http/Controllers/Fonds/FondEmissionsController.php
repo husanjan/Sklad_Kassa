@@ -16,6 +16,7 @@ use App\Models\SprEds;
 use App\Models\FondEmisions;
 use App\Models\ostatki_safe;
 use Illuminate\Support\Facades\DB;
+
 class FondEmissionsController extends Controller
 {
     /**
@@ -25,14 +26,15 @@ class FondEmissionsController extends Controller
      */
     public function index(Request $request)
     {
+        
 
         // dd($ostatkiResult);
-            $safes = SprSafes::all();
+        $safes = SprSafes::all();
         $sprEds = SprEds::all();
         $shkafs = SprShkafs::all();
         $sprCells= SprCells::all();
         $sprQators= SprQators::all();
-         $FondEmisions = FondEmisions::orderBy('date','DESC')->paginate(50);
+        $FondEmisions = FondEmisions::where('priznak',0)->orderBy('date','DESC')->paginate(50);
          if($request->has('download'))
          {
              $pdf=Pdf::loadView('fonds.fondsemission.index',compact('safes','sprEds','shkafs','sprCells','FondEmisions','sprQators'));
@@ -316,27 +318,27 @@ class FondEmissionsController extends Controller
          $ostatki_safe->naminal=$request->naminal;
          $ostatki_safe->ed_id=array_unique($safe_id)[0];
          $ostatki_safe->priznak =0;
-         $ostatki_safe->summa=$ostatkiResults['summa']-array_sum($validateSumma);;
+         $ostatki_safe->summa=$ostatkiResults['summa']-array_sum($validateSumma);
          $ostatki_safe->safe_id=array_unique($safe_id)[0];
          $ostatki_safe->shkaf_id=array_unique($shkaf_id)[0];
          $ostatki_safe->qator_id=array_unique($shkaf_id)[0];
          $ostatki_safe->cell_id=array_unique($validateCell)[0];
-         $ostatki_safe->comment=$request->comment;
-         $ostatki_safe->typeFond=0;
+        //  $ostatki_safe->comment=$request->comment;
+            $ostatki_safe->typeFond=0;
          $ostatki_safe->user_id=Auth::id();
          $ostatki_safe->host=$request->ip();
-        $ostatki_safe->save();
-        FondEmisions::whereIn('nn',$validateNomer)->where('serial',$request->Serial)->update(['priznak'=>1]);
+         $ostatki_safe->save();
+        FondEmisions::whereIn('nn',$validateNomer)->where('serial',$request->Serial)->update(['priznak'=>1,'comment'=>$request->comment]);
       }
     }
     DB::commit();
     // all good
-      echo "hi";
+    //  echo "hi";
 
    return redirect()->route('fondemission.index')->with('success','Эмиссионный фонд успешно!');
 } catch (\Exception $e) {
     DB::rollback();
-    echo "error";
+   // echo "error";
     // something went wrong
    return redirect()->route('fondemission.index')->with('danger','Эмиссионный фонд не успешно!');
 }
