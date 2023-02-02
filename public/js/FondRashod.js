@@ -4,7 +4,11 @@ $(document).ready(function(){
 $(".summaR").keyup(function(){
 // console.log();
    //console.log(parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0);
-if(parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0)
+   const edin=1000;
+  // alert(parseFloat($(this).val())*edin)
+   var nominal=parseFloat($('#naminal'+$(this).attr('id')).val());
+   
+if(parseFloat($(this).val())/edin/nominal%1==0)
 {
 
 
@@ -16,7 +20,7 @@ function selectValidation(id_select) {
 $('.summaR').each(function() {
 
     var values= $('#sumr'+$(this).attr('id')).text();
-    if(parseFloat($(this).val())>0 && parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0)
+    if(parseFloat($(this).val())>0 && parseFloat($(this).val())/edin/nominal%1==0)
     {
     
 

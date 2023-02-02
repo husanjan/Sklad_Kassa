@@ -16,12 +16,11 @@
                     <input type="hidden" name="kod_oper" value="{{$kodeOper}}">
                     <input type="hidden" name="kode_oper" value="{{$kodOper}}">
                     <div class="row mb-3 mt-3">
-                         <div class="container">
-                             <div class="alert alert-danger alert-dismissible fade  " id="alerts">
-                              <center>   <strong >Введите правильную сумму   !!</strong> .</center>
-{{--                                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>--}}
-                             </div>
-                         </div>
+                        @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
                         <div class="col-md-3 offset-1">
 
                             <input    readonly="readonly" id="date" type="date"  value="<?php echo date('Y-m-d'); ?>" class="form-control" name="date"  >
@@ -42,7 +41,7 @@
                         </div>
                     </div>
                     <input type="hidden"  value="0"  name="priznak"  >
-                    <input type="hidden"  value="7"  name="account_id_in"  >
+                    <input type="hidden"  value="4"  name="account_id_in"  >
                     {{-- <div class="row  offset-1">
 
                         <div class="col-md-3  ">

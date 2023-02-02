@@ -161,11 +161,11 @@
 
 
                                    <div id="new_chq01"></div>
-                          <div class="form-check form-switch  col-md-4 mt-4">
+                          {{-- <div class="form-check form-switch  col-md-4 mt-4">
                               <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomon0" >
                               <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
-                          </div>
+                          </div> --}}
                           <div id="sum01" class="col-md-3 offset-8   "  style="margin-top:-10px;" >   </div>
                                <div  id="nepolniySomon0">
 
@@ -231,11 +231,11 @@
                               </div>
                           </div>
                              <div id="new_chq31"></div>
-                  <div class="form-check form-switch  col-md-4 mt-4">
+                  {{-- <div class="form-check form-switch  col-md-4 mt-4">
                       <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomon3" >
                       <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
-                  </div>
+                  </div> --}}
                   <div id="sum31" class="col-md-3 offset-8   "  style="margin-top:-10px;" >   </div>
                   <div  id="nepolniySomon3">    </div>
 
@@ -299,11 +299,11 @@
 
                           <div id="new_chq51"></div>
 
-                          <div class="form-check form-switch  col-md-4 mt-4">
+                          {{-- <div class="form-check form-switch  col-md-4 mt-4">
                               <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomon5" >
                               <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
-                          </div>
+                          </div> --}}
                           <div  id="nepolniySomon5">   </div>
                           <div id="sum51" class="col-md-4 offset-8" > </div>
 
@@ -367,11 +367,11 @@
 
                           <div id="new_chqt1"></div>
                           <div id="sumt1" class="col-md-3 offset-8   "  style="margin-top:-10px;" >   </div>
-                          <div class="form-check form-switch  col-md-4 mt-4">
+                          {{-- <div class="form-check form-switch  col-md-4 mt-4">
                               <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomont" >
                               <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
-                          </div>
+                          </div> --}}
                           <div  id="nepolniySomont">   </div>
                            
 
@@ -436,11 +436,11 @@
 
                           <div id="new_chqb1"></div>
                           <div id="sumb1" class="col-md-3 offset-8   "  style="margin-top:-10px;"  > </div>
-                          <div class="form-check form-switch  col-md-4 mt-4">
+                          {{-- <div class="form-check form-switch  col-md-4 mt-4">
                               <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonb" >
                               <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
-                          </div>
+                          </div> --}}
                           <div  id="nepolniySomonb">   </div>
                   
 
@@ -505,11 +505,11 @@
 
                           <div id="new_chqc1"></div>
                         
-                          <div class="form-check form-switch  col-md-4 mt-4">
+                          {{-- <div class="form-check form-switch  col-md-4 mt-4">
                               <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonc" >
                               <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
-                          </div>
+                          </div> --}}
                           <div id="sumc1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
                           <div  id="nepolniySomonc">   </div>
 
@@ -576,11 +576,11 @@
 
                           <div id="new_chqd1"></div>
                         
-                          <div class="form-check form-switch  col-md-4 mt-4">
+                          {{-- <div class="form-check form-switch  col-md-4 mt-4">
                               <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomond" >
                               <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
-                          </div>
+                          </div> --}}
                           <div id="sumd1" class="col-md-3 offset-8 "  style="margin-top:-10px;"> </div>
                           <div  id="nepolniySomond">   </div>
                       
@@ -645,11 +645,11 @@
 
                           <div id="new_chqe1"></div>
                         
-                          <div class="form-check form-switch  col-md-4 mt-4">
+                          {{-- <div class="form-check form-switch  col-md-4 mt-4">
                               <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomone" >
                               <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
-                          </div>
+                          </div> --}}
                           <div id="sume1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
                           <div  id="nepolniySomone">   </div>
                        
@@ -716,11 +716,11 @@
                            <div id="new_chqf1"></div>
                        
                         
-                           <div class="form-check form-switch  col-md-4 mt-4">
+                           {{-- <div class="form-check form-switch  col-md-4 mt-4">
                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonf" >
                                <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
  
-                           </div>
+                           </div> --}}
                            <div id="sumf1"  class="col-md-3 offset-8 "  style="margin-top:-15px;"> </div>
                            <div  id="nepolniySomonf">   </div>
                           
@@ -863,11 +863,11 @@
 
 <div id="new_chqg1"></div>
 
-<div class="form-check form-switch  col-md-4 mt-4">
+{{-- <div class="form-check form-switch  col-md-4 mt-4">
     <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomong" >
     <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
-</div>
+</div> --}}
 <div id="sumg1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
 <div  id="nepolniySomong">   </div> 
 {{-- End One diram --}}
@@ -931,11 +931,11 @@
               
                                         <div id="new_chqh1"></div>
                                       
-                                        <div class="form-check form-switch  col-md-4 mt-4">
+                                        {{-- <div class="form-check form-switch  col-md-4 mt-4">
                                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonh" >
                                             <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
               
-                                        </div>
+                                        </div> --}}
                                         <div id="sumh1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
                                         <div  id="nepolniySomonh">   </div>
                                     </div>
@@ -998,11 +998,11 @@
               
                                         <div id="new_chqj1"></div>
                                       
-                                        <div class="form-check form-switch  col-md-4 mt-4">
+                                        {{-- <div class="form-check form-switch  col-md-4 mt-4">
                                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonj" >
                                             <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
               
-                                        </div>
+                                        </div> --}}
                                         <div id="sumj1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
                                         <div  id="nepolniySomonj">   </div>
                                       </div>
@@ -1067,11 +1067,11 @@
               
                                         <div id="new_chqk1"></div>
                                       
-                                        <div class="form-check form-switch  col-md-4 mt-4">
+                                        {{-- <div class="form-check form-switch  col-md-4 mt-4">
                                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonk" >
                                             <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
               
-                                        </div>
+                                        </div> --}}
                                         <div id="sumk1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
                                         <div  id="nepolniySomonk">   </div>    
                                     </div>
@@ -1134,7 +1134,7 @@
                         </div>
                     </div>
                     <input type="hidden"  value="0"  name="priznak"  >
-                    <input type="hidden"  value="7"  name="account_id_in"  >
+                    <input type="hidden"  value="4"  name="account_id_in"  >
                      
                     <div class="row  offset-1 mt-2">
                         <div class="col-md-4  mt-2">
@@ -1151,7 +1151,7 @@
                         <div class="col-md-4 mt-2 ">
                             <div class="input-group">
                                 <span class="input-group-text">Сумма</span>
-                                <input   required   type="text" id="summas" class="form-control count  " aria-describedby="btnGroupAddon" name="summa[]"  >
+                                <input   required   type="text" id="summas" class="form-control    " aria-describedby="btnGroupAddon" name="summa[]"  >
 
                             </div>
 
@@ -1161,7 +1161,7 @@
 
 
                             <div class="col-md-4 mt-3">
-                                <button type="button" onclick="add()" class="btn btn-primary" id="adds" disabled> <i class="align-middle" data-feather="plus"></i></button>
+                                <button type="button" onclick='add()' class="btn btn-primary"   > <i class="align-middle" data-feather="plus"></i></button>
                                 <button onclick="remove()" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
 
                             </div>
@@ -1244,7 +1244,10 @@
                     <div class="modal-footer ">
                         <div class="row mb-0 ">
                             <div class="col-md-8 justify-content-center">
-                                <button type="submit" class="btn btn-facebook active addform" disabled>
+                                {{-- <button type="submit" class="btn btn-facebook active addform" disabled>
+                                    {{ __('Добавить') }}
+                                </button> --}}
+                                <button type="submit" class="btn btn-facebook active "  >
                                     {{ __('Добавить') }}
                                 </button>
                             </div>
@@ -1865,7 +1868,7 @@
                         <tbody><tr class="something">
                             <th  >#</th>
                             <th class="col-md-3">Дата</th>
-                            <th>Бик</th>
+                            {{-- <th>Бик</th> --}}
                             <th>Признак</th>
                             <th>Номер док</th>
                             <th>Номер счета</th>
@@ -1885,7 +1888,7 @@
                  {{-- @foreach($bik AS $biks)
 
     
-         @if($biks->id==array_map(function($value){return   $value['bik'];},$oborots)[0])
+         @if($biks->id===array_map(function($value){return   $value['bik'];},$oborots)[0]>0)
              <td class="col-md-2"  >
                  {{ $biks->full_name }} 
                 </td>
@@ -2545,7 +2548,7 @@
          {{-- @foreach($bik AS $biks)
 
     
-         @if($biks->id==array_map(function($value){return   $value['bik'];},$oborotsTanga)[0])
+         @if($biks->id===array_map(function($value){return   $value['bik'];},$oborotsTanga)[0]>0)
              <td class="col-md-2" id="Tangabik{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}">
                  {{ $biks->full_name }} 
                 </td>
@@ -3068,11 +3071,11 @@
               
                                         <div id="new_chqw1"></div>
                                       
-                                        <div class="form-check form-switch  col-md-4 mt-4">
+                                        {{-- <div class="form-check form-switch  col-md-4 mt-4">
                                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonw" >
                                             <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
               
-                                        </div>
+                                        </div> --}}
                                         <div id="sumw1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
                                         <div  id="nepolniySomonw">   </div>
                                       </div>
@@ -3139,11 +3142,11 @@
 
 <div id="new_chqq1"></div>
 
-<div class="form-check form-switch  col-md-4 mt-4">
+{{-- <div class="form-check form-switch  col-md-4 mt-4">
     <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonq" >
     <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
 
-</div>
+</div> --}}
 <div id="sumq1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
 <div  id="nepolniySomonq">   </div> 
 {{-- End One diram --}}
@@ -3210,11 +3213,11 @@
 
         <div id="new_chqy1"></div>
       
-        <div class="form-check form-switch  col-md-4 mt-4">
+        {{-- <div class="form-check form-switch  col-md-4 mt-4">
             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomony">
             <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
 
-        </div>
+        </div> --}}
         <div id="sumy1" class="col-md-3 offset-8 " style="margin-top:-10px;"></div>
         <div id="nepolniySomony">   </div>
 
@@ -3287,11 +3290,11 @@
 
   <div id="new_chq71"></div>
 
-  <div class="form-check form-switch  col-md-4 mt-4">
+  {{-- <div class="form-check form-switch  col-md-4 mt-4">
       <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomon7">
       <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
 
-  </div>
+  </div> --}}
   <div id="sum71" class="col-md-3 offset-8 " style="margin-top:-10px;"></div>
   <div id="nepolniySomon7">   </div>
 
@@ -3378,11 +3381,11 @@
 
 
         <div id="new_chqu1"></div>
-<div class="form-check form-switch  col-md-4 mt-4">
+{{-- <div class="form-check form-switch  col-md-4 mt-4">
    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomonu">
    <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
 
-</div>
+</div> --}}
 <div id="sumu1" class="col-md-3 offset-8   " style="margin-top:-10px;"></div>
     <div id="nepolniySomonu">
 
@@ -3456,11 +3459,11 @@
             </div>
         </div>
            <div id="new_chqi1"></div>
-<div class="form-check form-switch  col-md-4 mt-4">
+{{-- <div class="form-check form-switch  col-md-4 mt-4">
     <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomoni">
     <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
 
-</div>
+</div> --}}
 <div id="sumi1" class="col-md-3 offset-8   " style="margin-top:-10px;"></div>
 <div id="nepolniySomoni">    </div>
 
@@ -3533,11 +3536,11 @@
 
         <div id="new_chqo1"></div>
 
-        <div class="form-check form-switch  col-md-4 mt-4">
+        {{-- <div class="form-check form-switch  col-md-4 mt-4">
             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="nepolniySomono">
             <div class="form-check-label" for="flexSwitchCheckChecked">Неполный</div>
 
-        </div>
+        </div> --}}
         <div id="nepolniySomono">   </div>
         <div id="sumo1" class="col-md-4 offset-8"></div>
 
@@ -3661,11 +3664,11 @@
               
                                         <div id="new_chqp1"></div>
                                       
-                                        <div class="form-check form-switch  col-md-4 mt-4">
+                                        {{-- <div class="form-check form-switch  col-md-4 mt-4">
                                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomonp" >
                                             <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
               
-                                        </div>
+                                        </div> --}}
                                         <div id="sump1" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
                                         <div  id="nepolniySomonp">   </div>
                                     </div>
@@ -3732,11 +3735,11 @@
               
                                         <div id="new_chq41"></div>
                                       
-                                        <div class="form-check form-switch  col-md-4 mt-4">
+                                        {{-- <div class="form-check form-switch  col-md-4 mt-4">
                                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="nepolniySomon4" >
                                             <div class="form-check-label"  for="flexSwitchCheckChecked" >Неполный</div>
               
-                                        </div>
+                                        </div> --}}
                                         <div id="sum41" class="col-md-3 offset-8 "  style="margin-top:-10px;" > </div>
                                         <div  id="nepolniySomon4">   </div>    
                                     </div>

@@ -216,6 +216,16 @@
 
                             </li>
                             <li class="nav-item has-treeview">
+                                <a href="{{ route('fondEmissionsTanga.index') }}" class="nav-link">
+                                    <i class="fa    nav-icon"></i>
+                                    <p> Эмиссионный Танга
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+
+                                </a>
+
+                            </li>
+                            <li class="nav-item has-treeview">
                                 <a href="{{ route('fondunusable.index') }}" class="nav-link">
                                     <i class="fa    nav-icon"></i>
                                     <p>Коршоям

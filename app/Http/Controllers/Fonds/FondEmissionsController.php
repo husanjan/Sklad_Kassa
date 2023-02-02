@@ -34,6 +34,8 @@ class FondEmissionsController extends Controller
         $shkafs = SprShkafs::all();
         $sprCells= SprCells::all();
         $sprQators= SprQators::all();
+
+       
         $FondEmisions = FondEmisions::where('priznak',0)->orderBy('date','DESC')->paginate(50);
          if($request->has('download'))
          {

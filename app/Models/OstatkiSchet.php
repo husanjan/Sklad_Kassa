@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class OstatkiSchet extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $fillable = [
+
+        'date',
+        'priod',
+        'src',
+        'Prikhod',
+        'Raskhod',
+        'FondType',
+        'type',
+        'ostatok_start',
+        'ostatok_end',
+        'user_id',
+        'host',
+        
+        ];
 }

@@ -84,7 +84,38 @@ class RepositoryRashod{
       
       return  $arrayResult = array_map("unserialize", array_unique(array_map("serialize", $arrayResult)));
     }
+    public function AllSelectRashodTanga($priznak)
+    {
+      $ostatki= ostatki_safe::distinct('cell_id')->select('cell_id','safe_id','shkaf_id','qator_id')->where('priznak',$priznak)->get();
+      $arrayResult=[];
+      // echo "<pre>";
+      // print_r(json_decode($ostatki,true));
+      // echo "</pre>";         
+      // exit;  
+     
+      foreach($ostatki AS $ostatks)
+      {
+          $ostatkNominalDistinct= ostatki_safe::select('naminal')->where('cell_id', $ostatks['cell_id'])->groupBy('naminal')->get();
+          // echo "<pre>";
+          // print_r(json_decode($ostatkNominalDistinct,true));
+          // echo "</pre>"; 
+          foreach($ostatkNominalDistinct AS $distinctNaminal):
+          
 
+             $ostatkiResult= ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$distinctNaminal['naminal'])->where('cell_id',$ostatks['cell_id'])->where('priznak',$priznak)->where('typeFond',1)->orderBy('id','desc')->limit(1)->get();
+
+   
+         foreach( $ostatkiResult AS  $ostatkiResults):
+          $arrayResult[]=$ostatkiResults;
+    
+           
+           endforeach;
+      endforeach;
+        
+      }
+      
+      return  $arrayResult = array_map("unserialize", array_unique(array_map("serialize", $arrayResult)));
+    }
     public function SelectRashodAll($type,$priznak)
     {
       $ostatki= ostatki_safe::distinct('cell_id')->select('cell_id','safe_id','shkaf_id','qator_id')->where('priznak',$priznak)->get();

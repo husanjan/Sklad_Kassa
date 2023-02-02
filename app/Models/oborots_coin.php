@@ -12,7 +12,7 @@ class oborots_coin extends Model
         
         'date',
         'priznak',
-        'type',
+        // 'type',
         'src',
         'naminal',
          'summa',
