@@ -99,11 +99,11 @@ class FondEmisionsTanga extends Controller
            $All=($request->ed_id*$request->kol)/$edinCoutnt;
            $edi_id=$request->ed_id;
            $request->request->remove('_token');
-           $ostatkiResult= ostatki_safe::select('summa')->where('naminal',$request->naminal)->where('cell_id',$request->cell_id)->where('priznak',0)->where('typeFond',1)->orderBy('id','desc')->limit(1)->get();
-           if(empty($ostatkiResult)):
-         $summaOstatss=json_decode($ostatkiResult,true)[0]['summa']; 
+           $ostatkiResult= ostatki_safe::select('summa')->where('naminal',$request->naminal)->where('cell_id',$request->cell_id)->where('priznak',0)->orderBy('id','desc')->limit(1)->get();
+           if(json_decode($ostatkiResult,true)[0]['summa']):
+          $summaOstatss=json_decode($ostatkiResult,true)[0]['summa']; 
            endif;
-     
+               $summaOstatss;
           $accounts=8;
           $arrayOstat=[];
           $arrayOstat['date']=date("Y-m-d H:i:s");
@@ -115,7 +115,7 @@ class FondEmisionsTanga extends Controller
           $arrayOstat['shkaf_id']=$request->shkaf_id;
           $arrayOstat['qator_id']=$request->qator_id;
           $arrayOstat['cell_id']=$request->cell_id;
-          $arrayOstat['summa']=($edi_id*$request->kol)*($request->naminal+$summaOstatss);
+          $arrayOstat['summa']=($edi_id*$request->kol*$request->naminal)+$summaOstatss;
           $arrayOstat['comment']=$request->comment;
           $arrayOstat['typeFond']=1;
           $arrayOstat['user_id']=Auth::id();
@@ -125,7 +125,8 @@ class FondEmisionsTanga extends Controller
         
           DB::beginTransaction();
           try {
-          ostatki_safe::create($arrayOstat);
+         // ostatki_safe::create($arrayOstat);
+        //   $count=$request->kode_oper_oborRashod;
            for($i=1;$i<=$All;$i++):
             
                 if($i==1)
@@ -133,35 +134,37 @@ class FondEmisionsTanga extends Controller
                     $emiss = $request->all();
                   
                     $emiss['ed_id']=5;//$edi_id[1]
+                    $emiss['date']=$request->date.date(' H:i:s');//$edi_id[1]
                     $emiss['summa']=$sum_dist*$request->naminal;
                     $emiss['priznak']=0;//prihod
-                    $emiss['type']=$accounts; 
+                    $emiss['type']=0; 
                     $emiss['src']=$accounts; 
-                    $emiss['kode_oper']=1; 
+                    $emiss['kode_oper']=$request->kode_oper_oborRashod; 
                     $emiss['user_id'] = Auth::id();
                     $emiss['host'] = $request->ip();
            
   //
-                 FondCoins::create($emiss);
-                      echo "<pre>";
+                // FondCoins::create($emiss);
+                    //   echo "<pre>";
                       
-                      print_r($emiss);
-                      echo "</pre>";
+                    //   print_r($emiss);
+                    //   echo "</pre>";
                       continue;
                 }
                 $emis = $request->all();
              
                 $emis['ed_id']=5;//$edi_id[1]
-                $emis['type']=$accounts; 
+                $emis['date']=$request->date.date(' H:i:s');
+                $emis['type']=0; 
                 $emis['src']=$accounts; 
-                $emis['kode_oper']=1; 
+                $emis['kode_oper']=$request->kode_oper_oborRashod; 
                 $emis['summa']=$sum_dist*$request->naminal;
                 $emis['priznak']=0;//prihod
                 $emis['user_id'] = Auth::id();
                 $emis['host'] = $request->ip();        
           
   
-             FondCoins::create($emis);
+           //  FondCoins::create($emis);
         //   echo "<pre>";
                       
         //               print_r($emis);
@@ -170,11 +173,11 @@ class FondEmisionsTanga extends Controller
         endfor;
         DB::commit();
             
-      return redirect()->route('fondEmissionsTanga.index')->with('success','Эмиссионный фонд успешно создан!');
+     // return redirect()->route('fondEmissionsTanga.index')->with('success','Эмиссионный фонд успешно создан!');
      } catch (\Exception $e) {
          DB::rollback();
          echo "Error";
-  return redirect()->route('fondEmissionsTanga.index')->with('danger','Эмиссионный фонд  не успешно!');
+ // return redirect()->route('fondEmissionsTanga.create')->with('danger','Эмиссионный фонд  не успешно!');
      }  
        // 
  
@@ -195,7 +198,7 @@ class FondEmisionsTanga extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
         //
     }
@@ -206,9 +209,109 @@ class FondEmisionsTanga extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
         //
+        DB::beginTransaction();
+        try {
+        // dd($request->all());
+        foreach($request['id'] AS $input)
+        {
+            // print_r($input);
+            // exit;
+                    if($request['Summarashod'.$input][0]>0)
+                    {
+                  $request['Summarashod'.$input][0];
+                $FondMoney = new FondCoins;
+                $FondMoney->date=$request['date'];
+                $FondMoney->comment=$request['comment'];
+                $FondMoney->priznak=$request['priznak'];
+                $FondMoney->type=0;
+                $FondMoney->src=9;
+                $FondMoney->naminal=$request['naminal'.$input];
+                $FondMoney->ed_id=5; 
+                $FondMoney->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+                $FondMoney->summa=$request['Summarashod'.$input][0];   
+                $FondMoney->safe_id= $request['safe'.$input];   
+                $FondMoney->shkaf_id=$request['shkaf'.$input];   
+                $FondMoney->qator_id=$request['sprQator'.$input];   
+                $FondMoney->cell_id=$request['sprCell'.$input];   
+                $FondMoney->kode_oper= $request['kode_operRashod'];   
+                $FondMoney->n_doc= $request['ndoc'];   
+                $FondMoney->host = $request->ip();   
+                $FondMoney->user_id = Auth::id();   
+                $FondMoney->save();
+               //Oborot insert
+               $Oborot = new oborots_coin();
+               
+               $Oborot->kod_oper= $request['kode_oper_oborRashod'];   
+               $Oborot->naminal=$request['naminal'.$input];
+               $Oborot->summa=$request['Summarashod'.$input][0];   
+               $Oborot->priznak=0;
+               // $Oborot->type=1;
+           //    $Oborot->account_id_out=1;//korshoyam id
+               $Oborot->src=8;//istochnik oborot id
+               $Oborot->user_id = Auth::id();   
+               $Oborot->date=$request['date'];
+            
+               // $Oborot->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+               $Oborot->n_doc= $request['ndoc'];   
+               $Oborot->host=$request->ip();   
+              $Oborot->save();
+                    //ostatki safe
+                    $ostatki_safe = new ostatki_safe;
+                    $ostatki_safe->comment=$request['comment'];
+                    $ostatki_safe->date=$request['date'];
+                    $ostatki_safe->src=9;
+                    $ostatki_safe->naminal=$request['naminal'.$input];
+                    $ostatki_safe->priznak=1;
+                    $ostatki_safe->ed_id=5; 
+                    $ostatki_safe->type=1;
+                    //$ostatki_safe->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+                    $ostatki_safe->summa=$request['Summarashod'.$input][0];
+                    $ostatki_safe->safe_id= $request['safe'.$input];   
+                    $ostatki_safe->shkaf_id=$request['shkaf'.$input];   
+                    $ostatki_safe->qator_id=$request['sprQator'.$input];   
+                    $ostatki_safe->cell_id = $request['sprCell'.$input];   
+                    $ostatki_safe->typeFond=1;   
+                 //    $ostatki_safe->n_doc= $request['ndoc'];   
+                    $ostatki_safe->host = $request->ip();   
+                    $ostatki_safe->user_id = Auth::id();   
+                  
+                 $ostatki_safe->save();
+                           //ostatki safe rashod 
+                $ostatki_safe = new ostatki_safe;
+                $ostatki_safe->comment=$request['comment'];
+                $ostatki_safe->date=$request['date'];
+                $ostatki_safe->src=9;
+                $ostatki_safe->naminal=$request['naminal'.$input];
+                $ostatki_safe->priznak=0;
+                $ostatki_safe->ed_id=5; 
+                $ostatki_safe->type=1;
+                //$ostatki_safe->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+                $ostatki_safe->summa=$request['ostatkiResults'.$input]-$request['Summarashod'.$input][0];
+                $ostatki_safe->safe_id= $request['safe'.$input];   
+                $ostatki_safe->shkaf_id=$request['shkaf'.$input];   
+                $ostatki_safe->qator_id=$request['sprQator'.$input];   
+                $ostatki_safe->cell_id = $request['sprCell'.$input];   
+                $ostatki_safe->typeFond=1;   
+             //    $ostatki_safe->n_doc= $request['ndoc'];   
+                $ostatki_safe->host = $request->ip();   
+                $ostatki_safe->user_id = Auth::id();   
+                
+               $ostatki_safe->save();
+               
+                    }
+        }
+        DB::commit();
+            
+        return redirect()->route('fondEmissionsTanga.index')->with('success','Эмиссионный фонд  Расход успешно создан!');
+       } catch (\Exception $e) {
+           DB::rollback();
+          
+    return redirect()->route('fondEmissionsTanga.index')->with('danger','Эмиссионный фонд Расход  не успешно!');
+       }  
+      
     }
 
     /**
@@ -221,6 +324,7 @@ class FondEmisionsTanga extends Controller
     public function update(Request $request, $id)
     {
         //
+       
     }
 
     /**

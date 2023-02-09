@@ -24,9 +24,14 @@
                                         <form role="form"   autocomplete="off" action="{{route('fondemission.edit',1)}}"  method="PUT">
                                             @csrf
 
-
-                                            <div class="row mb-3">
-                                              
+                                            <div class="row mb-12">
+                                                <label for="n_doc" class="col-md-4 col-form-label text-md-end">{{ __('Номер  документ') }}</label>
+                                                <div class="col-md-8">
+                                                    <input   type="text" class="form-control" name="n_doc" required>
+                                                </div>
+                                            </div>  
+                                            <div class="row mb-3  mt-4">
+                                              <input type="hidden" name="kodeOper" value="{{$kodeOper}}">
                                                     <label for="edin_id" class="col-md-4 col-form-label text-md-end">{{ __('Един') }}</label>
                                                     <div class="col-md-3">
     

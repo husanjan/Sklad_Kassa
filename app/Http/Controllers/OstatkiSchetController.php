@@ -39,7 +39,7 @@ class OstatkiSchetController extends Controller
       //coins
       $FondkorshoamCoinsMonth = $this->Repositoryschet->AllSelectDay(1,2,2);
       $FondFarsudaCoinsMonth = $this->Repositoryschet->AllSelectDay(2,2,2);
-      $FondbotilshudaCoinsMonth = $this->Repositoryschet->AllSelectDay(3,2,2);
+      $FondbotilshudaCoinsMonth = $this->Repositoryschet->AllSelectDay(8,2,2);
       $FondbOborotCoinsMonth = $this->Repositoryschet->AllSelectDay(4,2,2);
       $FondbOborotCoinsMonth = $this->Repositoryschet->AllSelectDay(7,2,2);
       $FoindMonthCoins=array_merge(json_decode($FondkorshoamCoinsMonth,true),json_decode($FondFarsudaCoinsMonth,true),json_decode($FondbotilshudaCoinsMonth,true),json_decode($FondbOborotCoinsMonth,true));
@@ -57,7 +57,7 @@ class OstatkiSchetController extends Controller
             //coins
             $FondkorshoamCoinsday= $this->Repositoryschet->AllSelectDay(1,2,1);
             $FondFarsudaCoinsday= $this->Repositoryschet->AllSelectDay(2,2,1);
-            $FondbotilshudaCoinsday= $this->Repositoryschet->AllSelectDay(3,2,1);
+            $FondbotilshudaCoinsday= $this->Repositoryschet->AllSelectDay(8,2,1);
             $FondbOborotCoinsday = $this->Repositoryschet->AllSelectDay(4,2,1);
  
    $FoindDayMoney=array_merge(json_decode($FondkorshoamMoneyday,true),json_decode($FondFarsudaMoneyDay,true),json_decode($FondbotilshudaMoneyDay,true),json_decode($FondbOborotMoneyDay,true),json_decode($FondbFondemssionMoneyday,true));
@@ -69,7 +69,7 @@ class OstatkiSchetController extends Controller
             // print_r($FoindDayCoins);
             // echo "</pre>";
         
-        return   view('ostatki.schet.index',compact('FoindDayMoney','FoindDayCoins','FoindMonthMoney','FoindMonthCoins','SprAccounts'));
+       return   view('ostatki.schet.index',compact('FoindDayMoney','FoindDayCoins','FoindMonthMoney','FoindMonthCoins','SprAccounts'));
     }
 
     /**
@@ -108,7 +108,7 @@ class OstatkiSchetController extends Controller
          $this->Repositoryschet->ToDateFond($request,3);
          $this->Repositoryschet->ToDateFondCoins($request,1);
          $this->Repositoryschet->ToDateFondCoins($request,2);
-         $this->Repositoryschet->ToDateFondCoins($request,3);
+         $this->Repositoryschet->ToDateFondCoins($request,0);
         $obor= $this->Repositoryschet->OborotMoney($request,4);
         // $this->Repositoryschet->OborotCoins($request,4);
         //   //echo "<pre>";

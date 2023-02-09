@@ -24,7 +24,7 @@
                                                     <input id="account" type="date" class="form-control" name="date" required  value="{{date('Y-m-d')}}"  autofocus>
                                                 </div>
 
-                                                <input type="hidden" value="{{$kodeOper}}">
+                                                <input type="hidden"  name="kode_oper_oborRashod" value="{{$kodeOper}}">
                                                 
                                         </div>
 

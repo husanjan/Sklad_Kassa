@@ -37,7 +37,7 @@
 
 {{--                    <--Таблица Эмиссонный --}}
   {{--  Расход Модал--}}
-  <form method="POST" action="{{route('fondEmissionsTanga.store')}}">
+  <form method="PATCH" action="{{route('fondEmissionsTanga.edit',1)}}">
     @csrf
     <input     value="1"   name="priznak" type="hidden">
     <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}">
@@ -90,13 +90,13 @@
             </thead>
             <tbody>
                
-            
+                <?php $pos=1 ?>
                 @foreach( $arrayResult AS  $ostatkiResults)
                 @if($ostatkiResults->summa>0)
                 <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
                   <tr class="border-bottom" id="t{{$ostatkiResults->id}}">
                  
-                   
+           <td> <?php print $pos++ ?></td>
                   
                     @foreach ($safes as $safe)
                                  

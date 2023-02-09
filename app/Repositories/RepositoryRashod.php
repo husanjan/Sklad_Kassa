@@ -529,6 +529,7 @@ class RepositoryRashod{
      } //End Insert Prihod to ostatki
      public function InsertRashodKorshoyamToOstatkiTanga($request)
     {
+        
       foreach($request['id'] AS $input)
       {
           // print_r($input);

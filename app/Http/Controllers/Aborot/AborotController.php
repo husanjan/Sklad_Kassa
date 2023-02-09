@@ -32,8 +32,7 @@ class AborotController extends Controller
 
            $bik= SprBank::all();
             $Oborot= new  Oborot();
-           $kodeOper= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
-
+        
 
              $obor= $Oborot::orderBy('date','DESC')->paginate(50);
              $kodOper= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
@@ -43,6 +42,8 @@ class AborotController extends Controller
                         }else{
                          $kodOper++;
                           }
+                          $kodeOper= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
+
            if($kodeOper<=0)
                {
                    $kodeOper=1;
