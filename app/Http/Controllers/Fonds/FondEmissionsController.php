@@ -35,7 +35,7 @@ class FondEmissionsController extends Controller
         $shkafs = SprShkafs::all();
         $sprCells= SprCells::all();
         $sprQators= SprQators::all();
-
+        $response = Oborot::orderBy('date','DESC')->paginate(2);
        
         $FondEmisions = FondEmisions::where('priznak',0)->orderBy('date','DESC')->paginate(50);
          if($request->has('download'))
@@ -102,7 +102,7 @@ if($kodeOper<=0)
 
       $sum_dist=1000;
          $number = $request->nn;
-      //$number = $request->nn;
+   
         //  $edi_id= explode('|',$request->ed_id);
          $edi_id=$request->ed_id;
         //  var_dump($request->ed_id);
@@ -115,7 +115,7 @@ if($kodeOper<=0)
        $summaOstatss=null;
        
        $ostatkiResult= ostatki_safe::select('summa')->where('naminal',$request->naminal)->where('cell_id',$request->cell_id)->where('priznak',0)->orderBy('id','desc')->limit(1)->get();
-         if(json_decode($ostatkiResult,true)[0]['summa']):
+         if(isset(json_decode($ostatkiResult,true)[0]['summa'])):
         $summaOstatss=json_decode($ostatkiResult,true)[0]['summa']; 
          endif;
              $summaOstatss;
@@ -126,7 +126,7 @@ if($kodeOper<=0)
           $count_sum= $edi_id*$request->kol;
           $edi=$count_sum/$sum_dist;
           $arrayOstat=[];
-               $arrayOstat['date']=date("Y-m-d H:i:s");
+               $arrayOstat['date']=$request->date.date(' H:i:s');
                $arrayOstat['naminal']=$request->naminal;
                $arrayOstat['ed_id']=2;
                $arrayOstat['priznak']=0;
@@ -147,13 +147,14 @@ if($kodeOper<=0)
             // // // exit;
             DB::beginTransaction();
             try {
-             ostatki_safe::create($arrayOstat);
+         ostatki_safe::create($arrayOstat);
                 for($i=1; $i<=$edi;$i++)
                 {
                     if($i==1)
                     {
                     $emiss = $request->all();
                     $emiss['nn']=$number;
+                    $emiss['date']=$request->date.date(' H:i:s');
                     $emiss['ed_id']=2;//$edi_id[1]
                     $emiss['summa']=$sum_dist*$request->naminal;
                     $emiss['priznak']=0;//prihod
@@ -166,6 +167,7 @@ if($kodeOper<=0)
                       continue;
                 }
                     $emis = $request->all();
+                    $emis['date']=$request->date.date(' H:i:s');
                     $emis['nn']=$number+=$sum_dist;
                     $emis['ed_id']=2;//$edi_id[1]
                     $emis['summa']=$sum_dist*$request->naminal;
@@ -175,16 +177,16 @@ if($kodeOper<=0)
                 //    echo "<pre>";
                 //    print_r($emis);
                 //    echo "</pre>";
-            FondEmisions::create($emis);
+          FondEmisions::create($emis);
                 }
             
                 DB::commit();
             
-          return redirect()->route('fondemission.index')->with('success','Эмиссионный фонд успешно создан!');
+    return redirect()->route('fondemission.index')->with('success','Эмиссионный фонд успешно создан!');
             } catch (\Exception $e) {
                 DB::rollback();
                 echo "Error";
-   return redirect()->route('fondemission.index')->with('danger','Эмиссионный фонд  не успешно!');
+    return redirect()->route('fondemission.index')->with('danger','Эмиссионный фонд  не успешно!');
             }
             exit;
            

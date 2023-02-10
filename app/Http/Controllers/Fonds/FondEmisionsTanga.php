@@ -100,7 +100,7 @@ class FondEmisionsTanga extends Controller
            $edi_id=$request->ed_id;
            $request->request->remove('_token');
            $ostatkiResult= ostatki_safe::select('summa')->where('naminal',$request->naminal)->where('cell_id',$request->cell_id)->where('priznak',0)->orderBy('id','desc')->limit(1)->get();
-           if(json_decode($ostatkiResult,true)[0]['summa']):
+           if(isset(json_decode($ostatkiResult,true)[0]['summa'])):
           $summaOstatss=json_decode($ostatkiResult,true)[0]['summa']; 
            endif;
                $summaOstatss;
@@ -121,11 +121,14 @@ class FondEmisionsTanga extends Controller
           $arrayOstat['user_id']=Auth::id();
           $arrayOstat['host']=$request->ip();
 
-         
+//           echo "<pre>";
+                      
+//           print_r($arrayOstat);
+// echo "</pre>";
         
           DB::beginTransaction();
           try {
-         // ostatki_safe::create($arrayOstat);
+       ostatki_safe::create($arrayOstat);
         //   $count=$request->kode_oper_oborRashod;
            for($i=1;$i<=$All;$i++):
             
@@ -144,7 +147,7 @@ class FondEmisionsTanga extends Controller
                     $emiss['host'] = $request->ip();
            
   //
-                // FondCoins::create($emiss);
+                 FondCoins::create($emiss);
                     //   echo "<pre>";
                       
                     //   print_r($emiss);
@@ -164,7 +167,7 @@ class FondEmisionsTanga extends Controller
                 $emis['host'] = $request->ip();        
           
   
-           //  FondCoins::create($emis);
+     FondCoins::create($emis);
         //   echo "<pre>";
                       
         //               print_r($emis);
@@ -173,7 +176,7 @@ class FondEmisionsTanga extends Controller
         endfor;
         DB::commit();
             
-     // return redirect()->route('fondEmissionsTanga.index')->with('success','Эмиссионный фонд успешно создан!');
+     return redirect()->route('fondEmissionsTanga.index')->with('success','Эмиссионный фонд успешно создан!');
      } catch (\Exception $e) {
          DB::rollback();
          echo "Error";
@@ -259,26 +262,25 @@ class FondEmisionsTanga extends Controller
                $Oborot->host=$request->ip();   
               $Oborot->save();
                     //ostatki safe
-                    $ostatki_safe = new ostatki_safe;
-                    $ostatki_safe->comment=$request['comment'];
-                    $ostatki_safe->date=$request['date'];
-                    $ostatki_safe->src=9;
-                    $ostatki_safe->naminal=$request['naminal'.$input];
-                    $ostatki_safe->priznak=1;
-                    $ostatki_safe->ed_id=5; 
-                    $ostatki_safe->type=1;
+                $ostatki_safe = new ostatki_safe;
+                $ostatki_safe->comment=$request['comment'];
+                $ostatki_safe->date=$request['date'];
+                $ostatki_safe->src=9;
+                $ostatki_safe->naminal=$request['naminal'.$input];
+                $ostatki_safe->priznak=1;
+                $ostatki_safe->ed_id=5; 
+                $ostatki_safe->type=1;
                     //$ostatki_safe->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
-                    $ostatki_safe->summa=$request['Summarashod'.$input][0];
-                    $ostatki_safe->safe_id= $request['safe'.$input];   
-                    $ostatki_safe->shkaf_id=$request['shkaf'.$input];   
-                    $ostatki_safe->qator_id=$request['sprQator'.$input];   
-                    $ostatki_safe->cell_id = $request['sprCell'.$input];   
-                    $ostatki_safe->typeFond=1;   
+                $ostatki_safe->summa=$request['Summarashod'.$input][0];
+                $ostatki_safe->safe_id= $request['safe'.$input];   
+                $ostatki_safe->shkaf_id=$request['shkaf'.$input];   
+                $ostatki_safe->qator_id=$request['sprQator'.$input];   
+                $ostatki_safe->cell_id = $request['sprCell'.$input];   
+                $ostatki_safe->typeFond=1;   
                  //    $ostatki_safe->n_doc= $request['ndoc'];   
-                    $ostatki_safe->host = $request->ip();   
-                    $ostatki_safe->user_id = Auth::id();   
-                  
-                 $ostatki_safe->save();
+                $ostatki_safe->host = $request->ip();   
+                $ostatki_safe->user_id = Auth::id();   
+                $ostatki_safe->save();
                            //ostatki safe rashod 
                 $ostatki_safe = new ostatki_safe;
                 $ostatki_safe->comment=$request['comment'];

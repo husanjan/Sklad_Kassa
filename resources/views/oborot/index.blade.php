@@ -218,20 +218,23 @@
     </div>
 
 
-    <div class="col-12 col-lg-8 d-flex  justify-content-center offset-2">
+    {{-- <div class="col-12 col-lg-8 d-flex  justify-content-center offset-2">
 
         <div class="card ">
             <div class="card-body">
     <table class="table ">
         <tr>
             <th>#</th>
+            <th>Код операции</th>
             <th>БИК</th>
             <th>Номер документы</th>
             <th>Номер счета </th>
+            <th>Признак</th>
             <th>Номинал</th>
+       
             <th>Сумма</th>
-            <th>Код операции</th>
-            <th>Коментарии</th>
+      
+       
             <th> </th>
 
         </tr>
@@ -239,6 +242,7 @@
                 @foreach($obor AS $oborot)
             <tr>
                    <td></td>
+                   <td>{{ $oborot->kod_oper}}</td>
                    <td>
                        @foreach($bik AS $biks)
                            @if($oborot->bik==$biks->id)
@@ -256,49 +260,312 @@
                                {{$sprAccount->account}}   <br> {{$sprAccount->name}}
                            @endif
                        @endforeach --}}
-
+{{-- 
                    </td>
                    <td>
                        @foreach($sprAccounts AS $sprAccount)
-                           @if($oborot->account_id_in==$sprAccount->id)
+                           @if($oborot->account_id_out==$sprAccount->id)
                                {{$sprAccount->account}}   <br> {{$sprAccount->name}}
                            @endif
                        @endforeach
                    </td>
-                   <td>{{$oborot->nominal}}</td>
-                   <td>{{$oborot->summa}}</td>
                    <td>
 
-                       @if($oborot->priznak===1)
-                       {{"Расход"}} 
-                       @endif
-                           @if($oborot->priznak==0)
-                            {{"Приход"}}
-                           @endif
-                    </td>
-                   <td>{{$oborot->comment}}</td>
+                    @if($oborot->priznak===1)
+                    {{"Расход"}} 
+                    @endif
+                        @if($oborot->priznak==0)
+                         {{"Приход"}}
+                        @endif
+                 </td>
+                   <td>{{$oborot->nominal}}</td>
+                   <td>{{$oborot->summa}}</td> --}}
+            
+         
 
 
-             <td>
+             {{-- <td>
 
 
                  {!! Form::open(['method' => 'DELETE','route' => ['oborot_spr.destroy', $oborot->id],'style'=>'display:inline']) !!}
                  {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
                  {!! Form::close() !!}
-                </td>
-            </tr>
+                </td> --}}
+            {{-- </tr>
         @endforeach
 
     </table>
             </div>
         </div>
+    </div> --}}
+    
+{{-- modal Ajax Table Oborot   --}}
+<div class="modal fade" id="AjaxTableOborot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Детализация</h5>
+
+            </div>
+
+
+
+
+
+            <div class="row mb-3 mt-2">
+
+                <div class="col-md-3 offset-1  ">
+                    <label for="dates">Дата	</label>
+                    <input     id="dates" disabled type="text" aria-describedby="Data" class="form-control"   >
+                </div>
+                <div class="col-md-4 offset-1">
+                    <label for="biks">БИК	</label>
+                    <select   id="biks" aria-describedby="bik"class="form-control was-validated"disabled >
+
+                        <option id="bik"  selected value="">  </option>
+
+
+
+                    </select>
+                </div>
+            </div>
+            <div class="row  offset-1">
+
+                <div class="col-md-3  ">
+                    <label for="priznak">Признак	</label>
+                    <select id="priznak" required   class="form-control" disabled >
+
+                        <option  id="priznaks"> </option>
+
+                    </select>
+                </div>
+                <div class="col-md-4  ">
+                    <label for="schet11">Номер счета 1	</label>
+                    <select name="account_id_out" id="schet11"  required  class="form-control schet1" disabled="">
+                        <option disabled selected  id="schet1" >Выберите счетов</option>
+
+                    </select>
+                </div>
+                <div class="col-md-4  ">
+                    <div >
+                        <label for="schet21">Номер счета 2	</label>
+
+                        <select name="" iid="schet21" class="form-control"  disabled  >
+                            <option disabled selected id="schet2">Выберите счетов</option>
+
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+                <div id="ajaxoborot">
+
+                </div>
+
+
+
+                <input type="hidden" value="1" id="total_chq">
+
+            <div id="new_chq" >
+
+            </div>
+            <div class="row  offset-lg-10 mt-2 ">
+
+
+                <div class="col-md-5 mt-3">
+                    <button type="button"   class="btn btn-light active" id="adds" disabled><div id="countsum"></div> </button>
+
+                </div>
+            </div>
+
+            <br>
+
+
+
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer ">
+                <div class="row mb-0 ">
+                    <div class="col-md-8 justify-content-center">
+
+                    </div>
+                </div>
+                <button type="button" class="btn btn-light offset-11" data-dismiss="modal">Закрыт</button>
+
+            </div>
+
+
+
+        </div>
     </div>
+</div>
+{{-- modal Ajax Table Oborot   end --}}
+    <div class="col-12 col-lg-8 d-flex  justify-content-center offset-2">
+     
+   
+
+        {{--        Oborot table --}}
+                <div   id="oborot-Pul">
+        
+                    <div class="card ">
+                        <div class="card-body">
+                            <h4>Оборот</h4>
+        
+                            <br>
+        {{--                    Oborot table limit 20 //--}}
+                            <table class="table col-md-auto">
+                                <tbody><tr class="something">
+                                    <th  >#</th>
+                                    <th class="col-md-3">Дата</th>
+                                    {{-- <th>Бик</th> --}}
+                                    <th>Признак</th>
+                                    <th>Номер док</th>
+                                    <th>Номер счета</th>
+                                    <th>Сумма</th>
+                                </tr>
+                                @php($count=0)
+                                @foreach(json_decode($response->groupBy('kod_oper')->take(20),true) AS  $oborots   )
+        
+                                    @php($count++)
+        
+        
+        
+                                <tr>
+                                    <input type="hidden"  value="{{array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]}}">
+                                    <td> <b>{{  $count }}</b>  </td>
+                         <td  > {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]))}} </td>
+                         {{-- @foreach($bik AS $biks)
+        
+            
+                 @if($biks->id===array_map(function($value){return   $value['bik'];},$oborots)[0]>0)
+                     <td class="col-md-2"  >
+                         {{ $biks->full_name }} 
+                        </td>
+                  @else
+                  <td></td>
+                  @endif
+        
+             @endforeach --}}
+                         @if(array_keys(array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]==0)
+                         <td class="col-md-2 " > Приход </td>
+                         @else
+                             <td  > Расход</td>
+                           
+                         @endif
+                       
+                                    <td>{{array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$oborots)))[0]}} </td>
+                                    @foreach($sprAccounts AS $sprAccount)
+        
+                                   
+                                        @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   ($value['account_id_out']>0)?$value['account_id_out']:'';},$oborots)))[0])
+                                            <td class="col-md-2">{{ $sprAccount->account }} </td>
+                                          @endif
+                                          @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   ($value['account_id_out']<0)?$value['account_id_out']:'';},$oborots)))[0])
+                                          <td class="col-md-2"  >   </td>
+                                        @endif
+                                    @endforeach
+                                    <td class="col-md-4 ">
+        
+                                        <a class=" link-primary       Oborot_id"  href="#" data-toggle="modal" data-target="#AjaxTableOborot"   id="{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}">
+                                <i class="text-dark fa fa-eye"></i>     {{   array_sum(array_map(function($value){return   $value['summa'];}, $oborots)) }}  </a></td>
+        
+        
+                                </tr>
+        
+                                @endforeach
+        
+                                </tbody>
+                            </table>
+                            <div  >
+                                <table class="mt-4 offset-lg-10"><tbody><tr>
+                                        <td>
+                                       <a href="#?type_id=oborot_pul">
+                                        <button class="btn btn-secondary "data-toggle="modal"  data-target=".Oborot_detal" id="oborot_pul">Подробонее</button>
+                                       </a>
+                                        </td>
+        
+                                    </tr></tbody></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <input type="hidden" id="podrobnee">
+        {{-- detal Oborot --}} 
+         
+        {{-- //style="display: block; padding-right: 17px;" --}}
+        <div class="modal fade Oborot_detal show" tabindex="-1" role="dialog"       aria-labelledby="myLargeModalLabel" aria-hidden="true"  >
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="card-body">
+                    <h4>Оборот</h4>
+                </div>
+                <section class="oborot_pul">
+                @include('oborot.pagination')
+                </section>  
+         
+                <div class="modal-footer flex-row">
+                             
+                      
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыт</button>
+                  
+                  </div>
+            </div>
+          </div>
+        </div>
+    </div>     
+        {{-- detal Oborot --}}
+                {{--        Oborot table end --}}
 @endsection
 
 <script src='{{asset('js/ajax.min.js')}}'></script>
 <script src="{{asset('js/OborotJs.js')}}"></script>
 <script>
+    $(document).ready(function() {
+    //Oborots 
+$(".Oborot_id").click(function(){
+
+
+  
+var  id=$(this).attr('id');
     
+var accounted1= $(`#ac${id}`).text();
+var accounted2= $(`#acn${id}`).text();
+var date=$(`#da${id}`).text();
+var priznak=$(`#priznak${id}`).text();
+
+  
+   $("#priznaks").text(priznak);
+  
+var bik=$(`#bik${id}`).text();
+ 
+$('#bik').text(bik);
+$('#schet1').text( 'Оборот' );
+$('#schet2').text(accounted2);
+$("#dates").val(date);
+
+$.ajax({
+   url: "{{route('OborotTable.post')}}",
+   type:"POST",
+   data:{
+       "_token": "{{ csrf_token() }}",
+       id:id,date:date,
+
+   },
+   success:function(response){
+
+
+
+
+     // console.log(response);
+      $('#ajaxoborot').html(response);
+   },
+});
+
+
+});
+    });
     $(document).on('click','#safe_check',function(){
 
     if($(this).prop('checked'))

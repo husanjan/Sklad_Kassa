@@ -17,6 +17,7 @@ class SprAccounts extends Model
         'comment',
         'user_id',
         'host',
+        'type',
     ];
 
 }

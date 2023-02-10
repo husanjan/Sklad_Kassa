@@ -69,7 +69,7 @@ class Repositoryschet{
             $startDate=$request->startDate;
             $EndDate=$request->EndDate;
             $typeDate=2;
-            $FondEmisionsRashod=$this->FondEmisions->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('priznak',1)->get()->sum('summa');
+            $FondEmisionsRashod=$this->FondEmisions->whereBetween('updated_at',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('priznak',1)->get()->sum('summa');
             $FondEmisionsPrihod=$this->FondEmisions->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->sum('summa');
         
         endif;  
@@ -79,7 +79,7 @@ class Repositoryschet{
             $endsum= $this->AllOstatkischetFond(7,$request->startDate,1);
            
               $typeDate=1;
-            $FondEmisionsRashod=$this->FondEmisions->where('date','>=',$request->dayType.date('H:i:s'))->where('priznak',1)->sum('summa');
+            $FondEmisionsRashod=$this->FondEmisions->where('updated_at','>=',$request->dayType.date('H:i:s'))->where('priznak',1)->sum('summa');
             $FondEmisionsPrihod=$this->FondEmisions->where('date','>=',$request->dayType.date('H:i:s'))->sum('summa');
             $startDate=$request->dayType;
             $EndDate=$request->dayType;
@@ -137,7 +137,7 @@ class Repositoryschet{
             $Rashod=$this->FondMoney->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('type',$src)->where('priznak',1)->get()->sum('summa');
         endif; 
         if($request->dayType):
-            $endsum=$this->AllOstatkischetFonds($src,$request->dayType,1,1);
+         echo    $endsum=$this->AllOstatkischetFonds($src,$request->dayType,1,1);
            $typeDate=1;
             $Rashod=$this->FondMoney->whereDate('date','>=',$request->dayType." 00:00:00")->where('type',$src)->where('priznak',1)->sum('summa');
             $Prihod=$this->FondMoney->whereDate('date','>=',$request->dayType." 00:00:00")->where('type',$src)->where('priznak',0)->sum('summa');
@@ -328,17 +328,17 @@ class Repositoryschet{
 
     public function InsertOstatkiSchet()
     {
-            //   echo "<pre>";
-            //   print_r($this->Fond);
-            //   echo "</pre>";
-        if(is_array($this->Fond)):
-                foreach($this->Fond AS $fond):
-              OstatkiSchet::create($fond);   
-            endforeach;
-        endif;
-        if(!is_array($this->Fond)):
-           return  404;
-        endif;
+              echo "<pre>";
+              print_r($this->Fond);
+              echo "</pre>";
+        // if(is_array($this->Fond)):
+        //         foreach($this->Fond AS $fond):
+        //       OstatkiSchet::create($fond);   
+        //     endforeach;
+        // endif;
+        // if(!is_array($this->Fond)):
+        //    return  404;
+        // endif;
              
          
 

@@ -54,11 +54,11 @@ class AborotController extends Controller
 
             $sprAccounts= SprAccounts::all();
 
+            $response = Oborot::orderBy('date','DESC')->paginate(20);
 
 
 
-
-        return  view('oborot.index',compact('bik','sprAccounts','kodeOper','obor','safes','kodOper'));
+        return  view('oborot.index',compact('bik','sprAccounts','kodeOper','obor','safes','kodOper','response'));
     }
 
     /**
