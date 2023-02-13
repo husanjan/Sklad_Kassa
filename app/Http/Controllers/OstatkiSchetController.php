@@ -113,6 +113,7 @@ class OstatkiSchetController extends Controller
         //  $this->Repositoryschet->OborotCoins($request,4);
         //   //echo "<pre>";
           $arrAll=$this->Repositoryschet->InsertOstatkiSchet();
+       
         print_r($arrAll);
         //  echo "</pre>";
         if($arrAll==404):
