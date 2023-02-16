@@ -12,26 +12,28 @@ $(document).ready(function(){
         // console.log($(this).val());
     const edin=1000;
     // // alert(parseFloat($(this).val())*edin)
-       
+    
     var nominal=parseFloat($('#naminal'+$(this).attr('id')).val());
    
       if($(this).val())
      {
+       // console.log();
         //  && $('#sumr'+id).text()>=$(this).val()
-  
-            if(!parseFloat($(this).val())/edin/nominal%1==0) 
-            {
-          //  console.log(parseFloat($(this).val())/edin/nominal%1==0);
+        arrayValidate[$(this).attr('id')] = (parseFloat($(this).val())/edin)%nominal==0;
+            // if(!(parseFloat($(this).val())/edin)%nominal==0) 
+            // {
+          
 
-          arrayValidate[$(this).attr('id')] = parseFloat($(this).val())/edin/nominal%1==0;
-            // arrayValidate.push(parseFloat($(this).val())/edin/nominal%1==0);
-              return;
-            }
+      
+            // // arrayValidate.push(parseFloat($(this).val())/edin/nominal%1==0);
+            //   return;
+            // }
     } 
          
       
    
        });
+ 
      return arrayValidate;
  }
  function CheckedValidate(array)
@@ -54,18 +56,20 @@ $(".summaR").keyup(function(){
 
    //console.log(parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0);
    const edin=1000;
+   
   // alert(parseFloat($(this).val())*edin)
    var nominal=parseFloat($('#naminal'+$(this).attr('id')).val());
-    //   console.log(validate().length);
+   validate();  
     
     let id=$(this).attr("id");
-    if(parseFloat($(this).val())>=parseInt($('#sumr'+id).text()))
+    // console.log(parseInt($('#sumr'+id).text()));
+    if(parseFloat($(this).val())>parseInt($('#sumr'+id).text()))
     {
         $(':input[type="submit"]').prop('disabled', true);
         $('#t'+id).addClass('border-danger');
         return;
     }
-        //   console.log($('#sumr'+id).text()>=parseFloat($(this).val()));    
+      
        if(validate().length<1)
        {
         $('#t'+ id).removeClass('border-danger');
@@ -75,9 +79,10 @@ $(".summaR").keyup(function(){
      validate().forEach(function(item,index){
         if(item==false)
         {
-            // console.log(index);
+          console.log(item);
             $('#t'+index).addClass('border-danger');
             $(':input[type="submit"]').prop('disabled',true);
+            return 
         }
         if(item==true)
         {
@@ -88,6 +93,7 @@ $(".summaR").keyup(function(){
      }); 
  
         var checkeddArray=CheckedValidate(validate());
+        // console.log('ddd'+checkeddArray);
         if(checkeddArray)
         {
             $(':input[type="submit"]').prop('disabled',false);

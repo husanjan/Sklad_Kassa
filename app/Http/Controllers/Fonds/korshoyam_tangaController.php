@@ -86,7 +86,8 @@ class korshoyam_tangaController extends Controller
         //use App\Repositories\InterfacesSomoni;
         if(isset($request['id']))
         {
-            $arrayResult= $this->RepositoryRashod->InsertRashodKorshoyamToOstatkiTanga($request);
+            //priznak prihod 0 rashod 1
+            $arrayResult= $this->RepositoryRashod->InsertRashodKorshoyamToOstatkiTanga($request,0);
     
              
                if($arrayResult AND !$request->acccounti=='korshoyam')
@@ -116,16 +117,20 @@ class korshoyam_tangaController extends Controller
            try{
               foreach ($money as $key => $value) {
                   # code...
+                //   echo "<pre>";
+                 
+                //   print_r($money[$key]);
+                //   echo "<//pre>";
              FondCoins::create($money[$key]);
               oborots_coin::create($oborots[$key]);
           }
               DB::Commit();
            
-          return redirect()->route('korshoyam_tanga.index')->with('success','Фарсуда фонд успешно создан!');
+      return redirect()->route('korshoyam_tanga.index')->with('success','Коршоям фонд успешно создан!');
             } catch (\Illuminate\Database\QueryException $e) {
               DB::rollback();
               return response(['message'=>'FAILURE'], 500);
-              return redirect()->route('korshoyam_tanga.index')->with('danger','Фарсуда фонд  не успешно!');
+         return redirect()->route('korshoyam_tanga.index')->with('danger','Коршоям фонд  не успешно!');
             }
           
 

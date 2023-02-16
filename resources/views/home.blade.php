@@ -1866,16 +1866,16 @@
 {{--                    Oborot table limit 20 //--}}
                     <table class="table col-md-auto">
                         <tbody><tr class="something">
-                            <th  >#</th>
+                            <th>#</th>
                             <th class="col-md-3">Дата</th>
-                            {{-- <th>Бик</th> --}}
+                            <th>Бик</th>
                             <th>Признак</th>
                             <th>Номер док</th>
                             <th>Номер счета</th>
                             <th>Сумма</th>
                         </tr>
                         @php($count=0)
-                        @foreach(json_decode($response->groupBy('kod_oper')->take(20),true) AS  $oborots   )
+                        @foreach(json_decode($response->groupBy('kod_oper')->take(20),true) AS  $oborots)
 
                             @php($count++)
 
@@ -1883,20 +1883,25 @@
 
                         <tr>
                             <input type="hidden"  value="{{array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]}}">
-                            <td> <b>{{  $count }}</b>  </td>
-                 <td  > {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]))}} </td>
-                 {{-- @foreach($bik AS $biks)
+                            <td> <b>{{$count }}</b>  </td>
+                      <td> {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]))}} </td>
+                 @foreach($bik AS $biks)
 
     
-         @if($biks->id===array_map(function($value){return   $value['bik'];},$oborots)[0]>0)
+         @if($biks->id===array_keys(array_count_values(array_map(function($value){return   ($value['Bik']>0)?$value['Bik']:'';},$oborots)))[0])
              <td class="col-md-2"  >
                  {{ $biks->full_name }} 
                 </td>
-          @else
-          <td></td>
+        
           @endif
 
-     @endforeach --}}
+     @endforeach
+     @if(array_keys(array_count_values(array_map(function($value){return   ($value['Bik']>0)?$value['Bik']:'Bik';},$oborots)))[0]=='Bik')
+     <td class="col-md-2"  >
+         
+        </td>
+
+  @endif
                  @if(array_keys(array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]==0)
                  <td class="col-md-2 " > Приход </td>
                  @else
@@ -1908,11 +1913,18 @@
                             @foreach($sprAccounts AS $sprAccount)
 
 
-                                @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   $value['account_id_in'];},$oborots)))[0])
+                                @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   ($value['account_id_out']>0)?$value['account_id_out']:'';},$oborots)))[0])
                                     <td class="col-md-2"  >
-                                        {{ $sprAccount->account }} </td>
+                                        {{ $sprAccount->account }}
+                                     </td>
                                 @endif
+                              
                             @endforeach
+                            @if(array_keys(array_count_values(array_map(function($value){return   ($value['account_id_out']>0)?$value['account_id_out']:'account';},$oborots)))[0]==='account')
+                                    <td class="col-md-2"  >
+                                   
+                                     </td>
+                                @endif
                             <td class="col-md-4 ">
 
                                 <a class=" link-primary       Oborot_id"  href="#" data-toggle="modal" data-target="#AjaxTableOborot"   id="{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborots)))[0]}}">
@@ -2004,7 +2016,7 @@
 
                                  @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$korshoyam)))[0])
                                     <td class="col-md-2" id="kornfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">
-                                        {{$sprAccounti->name  }} </td>
+                                        {{$sprAccounti->account  }} </td>
                                 @endif
                             @endforeach
                             @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyam)))[0]==0)
@@ -2015,9 +2027,9 @@
                             @endif
                            
                        
-                                  <td class="col-md-4 ">
+                                  <td class="col-md-4">
 
-                                <a class=" link-primary       Fond_id "  href="#" data-toggle="modal" data-target="#Fonds"   data-id="kor"  id="{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['type'];},$korshoyam)))[0]}}">
+                                <a class=" link-primary       Fond_id"  href="#" data-toggle="modal" data-target="#Fonds"   data-id="kor"  id="{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['type'];},$korshoyam)))[0]}}">
                                 <i class="text-dark fa fa-eye"></i>   {{   array_sum(array_map(function($value){return   $value['summa'];}, $korshoyam)) }}  </a></td>
                                
                                 
@@ -2047,8 +2059,8 @@
           <div class="card-body">
               <h4>Коршоям</h4>
           </div>
-          <section class="oborot_pul">
-          @include('oborot.pagination')
+          <section class="korshoyam_pul">
+          @include('fonds.fondunusable.pagination')
           </section>  
    
           <div class="modal-footer flex-row">
@@ -2108,7 +2120,7 @@
 
                                  @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$farsud)))[0])
                                     <td class="col-md-2" id="farnfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsud)))[0]}}">
-                                        {{$sprAccounti->name  }} </td>
+                                        {{$sprAccounti->account  }} </td>
                                 @endif
                             @endforeach
                             @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$farsud)))[0]==0)
@@ -2188,11 +2200,14 @@
                                             @foreach($sprAccounts AS $sprAccounti)
 
 
-                             @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$korshoyam)))[0])
+                             @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   ($value['src']>0)?$value['src']:'';},$korshoyam)))[0])
                                 <td class="col-md-2" id="botlnfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">
-                                    {{$sprAccounti->name  }} </td>
+                                    {{$sprAccounti->account}} </td>
                             @endif
                         @endforeach
+                        @if(array_keys( array_count_values(array_map(function($value){return   ($value['src']>0)?$value['src']:'botil';},$korshoyam)))[0]=='botil')
+                        <td></td>
+                        @endif
                         @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyam)))[0]==0)
                         <td  id="botl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">Приход</td>
                         @endif
@@ -2343,7 +2358,7 @@
                 <div id="ajaxoborot">
 
                 </div>
-
+               <div id="summOB"></div>
 
 
                 <input type="hidden" value="1" id="total_chq">
@@ -2410,7 +2425,7 @@
 
             <div class="row mb-3 mt-2">
 
-                <div class="col-md-3 offset-1  ">
+                <div class="col-md-3 offset-1">
                     <label for="dates">Дата	</label>
                     <input     id="Tangadates" disabled type="text" aria-describedby="Data" class="form-control"   >
                 </div>
@@ -2571,13 +2586,13 @@
 
                         @if($sprAccount->id===array_keys(array_count_values(array_map(function($value){return   $value['src'];},$oborotsTanga)))[0])
                             <td class="col-md-2" id="Tangaacn{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}">
-                                {{ $sprAccount->name }} </td>
+                                {{ $sprAccount->account }} </td>
                         @endif
                     @endforeach
                     <td class="col-md-4 ">
 
                         <a class=" link-primary   Oborot_idTanga"  href="#" data-toggle="modal" data-target="#AjaxTableOborotTanga"   id="{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['kod_oper'];},$oborotsTanga)))[0]}}">
-                <i class="text-dark fa fa-eye"></i>     {{   array_sum(array_map(function($value){return   $value['summa'];}, $oborotsTanga)) }}  </a></td>
+                <i class="text-dark fa fa-eye"></i>     {{array_sum(array_map(function($value){return   $value['summa'];}, $oborotsTanga)) }}  </a></td>
 
 
                 </tr>
@@ -2655,7 +2670,7 @@
 
                          @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$korshoyamTanga)))[0])
                             <td class="col-md-2" id="Tangakornfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyamTanga)))[0]}}">
-                                {{$sprAccounti->name  }} </td>
+                                {{$sprAccounti->account  }} </td>
                         @endif
                     @endforeach
                     @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyamTanga)))[0]==0)
@@ -2738,7 +2753,7 @@
 
                          @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$farsudTanga)))[0])
                             <td class="col-md-2" id="Tangafarnfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}">
-                                {{$sprAccounti->name  }} </td>
+                                {{$sprAccounti->account  }} </td>
                         @endif
                     @endforeach
                     @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$farsudTanga)))[0]==0)
@@ -2808,14 +2823,14 @@
                
                       <td> <b>{{  $btcount++ }}</b>  </td>
               
-                <td  id="Tangabotld{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">{{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$BotilshudaTanga)))[0]))}}</td>
+                <td  id="Tangabotl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">{{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$BotilshudaTanga)))[0]))}}</td>
                 <td  id="Tangabotlfdoc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}"> {{   array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$BotilshudaTanga)))[0]}} </td>
                                     @foreach($sprAccounts AS $sprAccounti)
 
 
                      @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$BotilshudaTanga)))[0])
                         <td class="col-md-2" id="Tangabotlnfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">
-                    {{$sprAccounti->name  }} </td>
+                    {{$sprAccounti->account  }} </td>
                     @endif
                 @endforeach
                 @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$BotilshudaTanga)))[0]==0)
@@ -3841,22 +3856,28 @@ $(".Oborot_id").click(function(){
 
 
 var  id=$(this).attr('id');
+var  val=$(this).text();
     
-var accounted1= $(`#ac${id}`).text();
-var accounted2= $(`#acn${id}`).text();
-var date=$(`#da${id}`).text();
-var priznak=$(`#priznak${id}`).text();
+var accounted1= $(`#acOB${id}`).text();
+
+var accounted2= $(`#acnOB${id}`).text();
+ 
+ 
+var date=$(`#daOB${id}`).text();
+var priznak=$(`#priznakOB${id}`).text();
 
   
    $("#priznaks").text(priznak);
   
-var bik=$(`#bik${id}`).text();
- 
+var bik=$(`#bikOB${id}`).text();
+
 $('#bik').text(bik);
-$('#schet1').text( 'Оборот' );
+$('#schet1').text( '10101' );
 $('#schet2').text(accounted2);
 $("#dates").val(date);
 
+//   console.log(accounted2);
+$("#summOB").html(' <div class="row  offset-lg-7 mt-2 "> <div class="   "> <button type="button"   class="btn btn-light active" id="adds" disabled><div id="countsum">Сумма: <b>'+val.trim()+'</b></div> </button></div></div>');
 $.ajax({
    url: "{{route('OborotTable.post')}}",
    type:"POST",

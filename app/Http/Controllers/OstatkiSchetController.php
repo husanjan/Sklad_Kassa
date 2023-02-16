@@ -102,26 +102,26 @@ class OstatkiSchetController extends Controller
     //   print_r(json_decode($pr,true)[0] );
     //   echo "</pre>";
     // //  exit;
-         $this->Repositoryschet->ToDateFondEmisions($request);
-        //  $this->Repositoryschet->ToDateFond($request,1);
-        //  $this->Repositoryschet->ToDateFond($request,2);
-        //  $this->Repositoryschet->ToDateFond($request,3);
-        //  $this->Repositoryschet->ToDateFondCoins($request,1);
-        //  $this->Repositoryschet->ToDateFondCoins($request,2);
-        //  $this->Repositoryschet->ToDateFondCoins($request,0);
-        // $obor= $this->Repositoryschet->OborotMoney($request,4);
-        //  $this->Repositoryschet->OborotCoins($request,4);
-        //   //echo "<pre>";
+        $this->Repositoryschet->ToDateFondEmisions($request);
+         $this->Repositoryschet->ToDateFond($request,1);
+         $this->Repositoryschet->ToDateFond($request,2);
+          $this->Repositoryschet->ToDateFond($request,3);
+         $this->Repositoryschet->ToDateFondCoins($request,1);
+         $this->Repositoryschet->ToDateFondCoins($request,2);
+      
+         $this->Repositoryschet->ToDateFondCoins($request,0);
+         $obor= $this->Repositoryschet->OborotMoney($request,4);
+        $this->Repositoryschet->OborotCoins($request,4);
+           //echo "<pre>";
           $arrAll=$this->Repositoryschet->InsertOstatkiSchet();
        
-        print_r($arrAll);
+          print_r($arrAll);
         //  echo "</pre>";
         if($arrAll==404):
  
           //  return redirect()->route('ostatkischets.index');
         endif;
-       // retur
-   // return redirect()->route('ostatkischets.index');
+   return redirect()->route('ostatkischets.index');
         
             // OstatkiSchet::create($arrAll);   
         //  dd($request->all());

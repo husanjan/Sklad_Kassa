@@ -175,9 +175,9 @@ class RepositoryRashod{
                      $detailFonds[$keys]['summa']+=$ostatks['summa'];
                    
                   }
-                  echo "<pre>";
-                  print_r($detailFonds[$keys]);
-                  echo "</pre>";
+                  // echo "<pre>";
+                  // print_r($detailFonds[$keys]);
+                  // echo "</pre>";
                 ostatki_safe::create($detailFonds[$keys]);
              }
              if($detailFondsRazne[$keys]['naminal']=='razne')
@@ -201,7 +201,7 @@ class RepositoryRashod{
   }
     } //End Insert Prihod to ostatki
     //Rashod insert ostatki
-    public function InsertRashodKorshoyamToOstatki($request)
+    public function InsertRashodKorshoyamToOstatki($request,$priznak)
     {
       foreach($request['id'] AS $input)
       {
@@ -237,7 +237,7 @@ class RepositoryRashod{
                   $Oborot->kod_oper= $request['kode_oper_oborRashod'];   
                   $Oborot->nominal=$request['naminal'.$input];
                   $Oborot->summa  = $request['Summarashod'.$input][0];   
-                  $Oborot->priznak=$request['priznak'];
+                  $Oborot->priznak=$priznak;
                   // $Oborot->type=1;
                   $Oborot->account_id_out=1;//korshoyam id
                   $Oborot->account_id_in=$request['src'];//istochnik oborot id
@@ -527,7 +527,7 @@ class RepositoryRashod{
          
    }
      } //End Insert Prihod to ostatki
-     public function InsertRashodKorshoyamToOstatkiTanga($request)
+     public function InsertRashodKorshoyamToOstatkiTanga($request,$priznak)
     {
         
       foreach($request['id'] AS $input)
@@ -564,7 +564,7 @@ class RepositoryRashod{
                   $Oborot->kod_oper= $request['kode_oper_oborRashod'];   
                   $Oborot->naminal=$request['naminal'.$input];
                   $Oborot->summa  = $request['Summarashod'.$input][0];   
-                  $Oborot->priznak=$request['priznak'];
+                  $Oborot->priznak=$priznak;
                   // $Oborot->type=1;
               //    $Oborot->account_id_out=1;//korshoyam id
                   $Oborot->src=$request['src'];//istochnik oborot id

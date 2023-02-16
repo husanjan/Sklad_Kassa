@@ -216,7 +216,7 @@ class HomeController extends Controller
                   }
 
                     }
-                 echo '   <div class="row  offset-lg-7 mt-2 ">
+                   '   <div class="row  offset-lg-7 mt-2 ">
 
 
                                        <div class="   ">

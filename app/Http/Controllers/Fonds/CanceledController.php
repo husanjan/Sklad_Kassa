@@ -102,11 +102,18 @@ class CanceledController extends Controller
  
              $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
                $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,0);
-            //    echo "<pre>";
-            //    print_r($detailsFond);
-            //               echo "</pre>";
-                          exit;
-
+      
+                      
+                          foreach ($money as $key => $value) {
+                            //            # code...
+                                    
+                            // echo "<pre>";
+                            // print_r($money[$key]);
+                            // echo "</pre>";
+                                 FondMoney::create($money[$key]);
+                     
+                               }
+                            //    exit;
         return redirect()->route('fondcanceled.index')->with('success','Фонд Приход успешно создан!');
         }
                 

@@ -97,8 +97,9 @@ class UnusableController extends Controller
         //  print_r($inputs);
         //  exit;
         if(isset($request['id']))
-        {
-            $arrayResult= $this->RepositoryRashod->InsertRashodKorshoyamToOstatki($request);
+        {   
+             //priznak   prihod 0/ rashod 1
+            $arrayResult= $this->RepositoryRashod->InsertRashodKorshoyamToOstatki($request,0);
              
                if($arrayResult AND !$request->acccounti=='korshoyam')
                {
@@ -108,7 +109,7 @@ class UnusableController extends Controller
                {
                 return redirect()->route('home')->with('danger','Коршоям фонд  не успешно!');
                }
-              
+              exit;
        
         
         }

@@ -69,14 +69,18 @@ class Repositoryschet{
             // $startDate=$request->startDate;
           //  $EndDate=$request->EndDate;
             $typeDate=2;
-             $EndDate= date('Y-m-d', strtotime($request->EndDate.date(' H:i:s')));
-             $startDate= date('Y-m-d', strtotime($request->startDate.date(' H:i:s')));
+            // $EndDate=$request->EndDate;
+            // $startDate=$request->startDate;
+            //  $EndDate= date('Y-m-d', strtotime($request->EndDate.date(' H:i:s')));
+            //  $startDate= date('Y-m-d', strtotime($request->startDate.date(' H:i:s')));
             // $rashod=$this->FondEmisions->whereBetween('updated_at',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('priznak',1)->get()->sum('summa');
             // $prihod=$this->FondEmisions->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->sum('summa');
-            $prihod=   json_decode($this->FondEmisions::where('priznak',0)->whereBetween('date',[$startDate, $EndDate])->sum('summa'),true);
-            $rashod=json_decode($this->FondEmisions::where('priznak',1)->whereBetween('updated_at',[$startDate, $EndDate])->sum('summa'),true);
+            $startDate = Carbon::createFromFormat('Y-m-d', $request->startDate)->startOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
+            $prihod=   json_decode($this->FondEmisions::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->sum('summa'),true);
+            $rashod=json_decode($this->FondEmisions::where('priznak',1)->whereBetween('updated_at',[$startDate, $endDate])->sum('summa'),true);
             $prihod=$prihod+$rashod;
-        
+            $EndDate= $request->EndDate;
         endif;  
         // print_r([$request->startDate,$request->EndDate]);
         if($request->dayType):
@@ -91,17 +95,19 @@ class Repositoryschet{
             // $startDate=$request->dayType;
         
             // echo "<pre>";
-            $dateTime= date('Y-m-d', strtotime($request->dayType.date(' H:i:s')));
-                $prihod=   json_decode($this->FondEmisions::where('priznak',0)->where('date','>=',$dateTime)->sum('summa'),true);
-           $rashod=json_decode($this->FondEmisions::where('priznak',1)->where('updated_at','>=',$dateTime)->sum('summa'),true);
+            // $dateTime= date('Y-m-d', strtotime($request->dayType));
+            $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+                $prihod=json_decode($this->FondEmisions::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->sum('summa'),true);
+           $rashod=json_decode($this->FondEmisions::where('priznak',1)->whereBetween('updated_at',[$startDate, $endDate])->sum('summa'),true);
             // echo "</pre>";
-            $EndDate= $dateTime;
+            $EndDate= $request->dayType;
             $prihod=$prihod+$rashod;
         endif;  
    
          
         if($prihod>0 || $endsum>0 ):
-        $this->Fond[7]['date']=date('Y-m-d');
+        $this->Fond[7]['date']=date('Y-m-d H:i:s');
         $this->Fond[7]['src']=7;
         $this->Fond[7]['priod']=$EndDate;
         $this->Fond[7]['ostatok_start']=$endsum;
@@ -141,36 +147,45 @@ class Repositoryschet{
       
         if($request->startDate &&$request->EndDate):
             // AllOstatkischetFonds($src,$date,$type,$FondType)
-            $endsum=$this->AllOstatkischetFonds($src,$request->startDate,2,1);
-           
-            $EndDate= date('Y-m-d', strtotime($request->EndDate.date(' H:i:s')));
-            $startDate= date('Y-m-d', strtotime($request->startDate.date(' H:i:s')));
+            $endsum=$this->AllOstatkischetFonds($src,$request->EndDate,2,1);
+     
+            // $EndDate= date('Y-m-d', strtotime($request->EndDate.date(' H:i:s')));
+    // echo     $startDate= date('Y-m-d', strtotime($request->startDate.date(' H:i:s')));
+         
+          $startDate = Carbon::createFromFormat('Y-m-d', $request->startDate)->startOfDay();
+          $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
             $typeDate=2;
-            $prihod=   json_decode($this->FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $EndDate])->where('type',$src)->sum('summa'),true);
-            $rashod=json_decode($this->FondMoney::where('priznak',1)->whereBetween('updated_at',[$startDate, $EndDate])->where('type',$src)->sum('summa'),true);
-            $prihod=$prihod+$rashod;
+            $endDate=$request->EndDate;
+            $prihod=   json_decode($this->FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->orderBy('id', 'DESC')->sum('summa'),true);
+            $rashod=json_decode($this->FondMoney::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->orderBy('id', 'DESC')->sum('summa'),true);
+      //      $prihod=$prihod+$rashod;
             
             // $Prihod=$this->FondMoney->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('type',$src)->where('priznak',0)->get()->sum('summa');
             // $Rashod=$this->FondMoney->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('type',$src)->where('priznak',1)->get()->sum('summa');
-       
+            $EndDate= $request->EndDate;
         endif; 
+       
         if($request->dayType):
               $endsum=$this->AllOstatkischetFonds($src,$request->dayType,1,1);
            $typeDate=1;
             // $Rashod=$this->FondMoney->whereDate('date','>=',$request->dayType." 00:00:00")->where('type',$src)->where('priznak',1)->sum('summa');
             // $Prihod=$this->FondMoney->whereDate('date','>=',$request->dayType." 00:00:00")->where('type',$src)->where('priznak',0)->sum('summa');
        
-            $dateTime= date('Y-m-d', strtotime($request->dayType.date(' H:i:s')));
-            $prihod=   json_decode($this->FondMoney::where('priznak',0)->where('date','>=',$dateTime)->where('type',$src)->sum('summa'),true);
-       $rashod=json_decode($this->FondMoney::where('priznak',1)->where('updated_at','>=',$dateTime)->where('type',$src)->sum('summa'),true);
+            $dateTime= date('Y-m-d', strtotime($request->dayType));
+             $request->dayType;
+         $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
+       $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+     $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+     $prihod=json_decode($this->FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->sum('summa'),true);
+       $rashod=json_decode($this->FondMoney::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->sum('summa'),true);
         // echo "</pre>";
-        $EndDate= $dateTime;
-        $prihod=$prihod+$rashod;
-        
+        $EndDate= $request->dayType;
+       // $prihod=$prihod+$rashod;
+    //    echo "<br>".$request->dayType;
         endif; 
        
         if($prihod>0 || $endsum>0 AND $rashod<=$prihod):
-         $this->Fond[$src]['date']=date('Y-m-d');
+         $this->Fond[$src]['date']=date('Y-m-d H:i:s');
          $this->Fond[$src]['src']=$src;
          $this->Fond[$src]['priod']=$EndDate;
          $this->Fond[$src]['ostatok_start']=$endsum;
@@ -204,13 +219,15 @@ class Repositoryschet{
             // $Rashod=$this->FondCoins->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('type',$src)->where('priznak',1)->get()->sum('summa');
         
 
-            $EndDate= date('Y-m-d', strtotime($request->EndDate.date(' H:i:s')));
-            $startDate= date('Y-m-d', strtotime($request->startDate.date(' H:i:s')));
+            //   $EndDate=$request->EndDate;
+            //   $startDate=$request->startDate;
+              $startDate = Carbon::createFromFormat('Y-m-d', $request->startDate)->startOfDay();
+              $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
             $typeDate=2;
-            $Prihod=json_decode($this->FondCoins::where('priznak',0)->whereBetween('date',[$startDate, $EndDate])->where('type',$src)->sum('summa'),true);
-            $Rashod=json_decode($this->FondCoins::where('priznak',1)->whereBetween('updated_at',[$startDate, $EndDate])->where('type',$src)->sum('summa'),true);
-            $Rashod=$Prihod+$Rashod;
-        
+            $Prihod=json_decode($this->FondCoins::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->sum('summa'),true);
+            $Rashod=json_decode($this->FondCoins::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->sum('summa'),true);
+            // $Rashod=$Prihod;
+            $EndDate=$request->EndDate;
         
         endif; 
         if($request->dayType ):
@@ -223,12 +240,14 @@ class Repositoryschet{
             $typeDate=1;
             // $Rashod=$this->FondCoins->whereDate('date','>=',$request->dayType.date('H:i:s'))->where('type',$src)->where('priznak',1)->sum('summa');
             // $Prihod=$this->FondCoins->whereDate('date','>=',$request->dayType.date('H:i:s'))->where('type',$src)->where('priznak',0)->sum('summa');
-            $dateTime= date('Y-m-d', strtotime($request->dayType.date(' H:i:s')));
-            $Prihod=   json_decode($this->FondCoins::where('priznak',0)->where('date','>=',$dateTime)->where('type',$src)->sum('summa'),true);
-             $Rashod=json_decode($this->FondCoins::where('priznak',1)->where('updated_at','>=',$dateTime)->where('type',$src)->sum('summa'),true);
+            $dateTime= date('Y-m-d', strtotime($request->dayType));
+            $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+            $Prihod=json_decode($this->FondCoins::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->sum('summa'),true);
+            $Rashod=json_decode($this->FondCoins::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->sum('summa'),true);
         // echo "</pre>";
-        $EndDate= $dateTime;
-        $Prihod=$Rashod+$Prihod;
+        $EndDate=$request->dayType;
+        // $Prihod=$Rashod+$Prihod;
   
         endif; 
        
@@ -242,7 +261,7 @@ class Repositoryschet{
             if($src==0):
                 $schetId=9;
             endif; 
-         $this->Fond[$src.'2']['date']=date('Y-m-d');
+         $this->Fond[$src.'2']['date']=date('Y-m-d  H:i:s');
          $this->Fond[$src.'2']['src']=$schetId;
          $this->Fond[$src.'2']['priod']=$EndDate;
          $this->Fond[$src.'2']['ostatok_start']= $endsum;
@@ -261,8 +280,7 @@ class Repositoryschet{
            $endsum=0;
        
         if($request->startDate && $request->EndDate):
-            $startDate=$request->startDate;
-            $EndDate=$request->EndDate;
+        
             $typeDate=2;
             // AllOstatkischetFonds($src,$date,$type,$FondType)
             $endsum=$this->AllOstatkischetFonds($src,$request->startDate,2,1);  
@@ -275,14 +293,19 @@ class Repositoryschet{
             // $Prihod=$this->Oborot->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('account_id_in',$src)->where('priznak',0)->get()->sum('summa');
             // $Rashod=$this->Oborot->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('account_id_in',$src)->where('priznak',1)->get()->sum('summa');
       
-      
-            $EndDate= date('Y-m-d', strtotime($request->EndDate.date(' H:i:s')));
-            $startDate= date('Y-m-d', strtotime($request->startDate.date(' H:i:s')));
+            // $EndDate=$request->EndDate;
+            // $startDate=$request->startDate;
+            // $EndDate= date('Y-m-d', strtotime($request->EndDate.date(' H:i:s')));
+            // $startDate= date('Y-m-d', strtotime($request->startDate.date(' H:i:s')));
             $typeDate=2;
-            $Prihod=json_decode($this->Oborot::where('priznak',0)->whereBetween('date',[$startDate,$EndDate])->where('account_id_in',$src)->sum('summa'),true);
-            $Rashod=json_decode($this->Oborot::where('priznak',1)->whereBetween('date',[$startDate,$EndDate])->where('account_id_in',$src)->sum('summa'),true);
-            $Rashod=$Prihod+$Rashod;
-      
+            // $startDate=$request->startDate;
+            // $EndDate=$request->EndDate;
+            $startDate = Carbon::createFromFormat('Y-m-d', $request->startDate)->startOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
+            $Prihod=json_decode($this->Oborot::where('priznak',0)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
+            $Rashod=json_decode($this->Oborot::where('priznak',1)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
+            // $Rashod=$Prihod+$Rashod;
+            $EndDate= $request->endDate;
         endif; 
      
         if($request->dayType):
@@ -299,19 +322,22 @@ class Repositoryschet{
        
             //  $EndDate=$request->dayType;
 
-             $dateTime= date('Y-m-d', strtotime($request->dayType.date(' H:i:s')));
-            $Prihod=   json_decode($this->Oborot::where('priznak',0)->where('date','>=',$dateTime)->where('account_id_in',$src)->sum('summa'),true);
-            $Rashod=json_decode($this->Oborot::where('priznak',1)->where('date','>=',$dateTime)->where('account_id_in',$src)->sum('summa'),true);
+            //  $dateTime= date('Y-m-d', strtotime($request->dayType));
+
+             $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
+             $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+            $Prihod= json_decode($this->Oborot::where('priznak',0)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
+            $Rashod=json_decode($this->Oborot::where('priznak',1)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
          // echo "</pre>";
-         $EndDate= $dateTime;
-         $Prihod=$Rashod+$Prihod;
+         $EndDate= $request->dayType;
+        // $Prihod=$Rashod+$Prihod;
    
         
         endif; 
         // AND  у$Rashod<=$Prihod
         
         if($Prihod>0 ||  $endsum>0):
-         $this->Fond[$src]['date']=date('Y-m-d');
+         $this->Fond[$src]['date']=date('Y-m-d H:i:s');
          $this->Fond[$src]['src']=$src;
          $this->Fond[$src]['priod']=$EndDate;
          $this->Fond[$src]['ostatok_start']=$endsum;
@@ -342,17 +368,21 @@ class Repositoryschet{
             $typeDate=2;
             // $Prihod=$this->oborots_coin->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('src',$src)->where('priznak',0)->get()->sum('summa');
             // $Rashod=$this->oborots_coin->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('src',$src)->where('priznak',1)->get()->sum('summa');
-            $EndDate= date('Y-m-d', strtotime($request->EndDate.date(' H:i:s')));
-            $startDate= date('Y-m-d', strtotime($request->startDate.date(' H:i:s')));
-      
-            $Prihod=json_decode($this->oborots_coin::where('priznak',0)->whereBetween('date',[$startDate,$EndDate])->where('src',$src)->sum('summa'),true);
-            $Rashod=json_decode($this->oborots_coin::where('priznak',1)->whereBetween('date',[$startDate,$EndDate])->where('src',$src)->sum('summa'),true);
+            // $EndDate= date('Y-m-d', strtotime($request->EndDate.date(' H:i:s')));
+            // $startDate= date('Y-m-d', strtotime($request->startDate.date(' H:i:s')));
+            // $EndDate=$request->EndDate;
+            // $startDate=$request->startDate;
+            
+            $startDate = Carbon::createFromFormat('Y-m-d', $request->startDate)->startOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
+            $Prihod=json_decode($this->oborots_coin::where('priznak',0)->whereBetween('date',[$startDate,$endDate])->where('src',$src)->sum('summa'),true);
+            $Rashod=json_decode($this->oborots_coin::where('priznak',1)->whereBetween('date',[$startDate,$endDate])->where('src',$src)->sum('summa'),true);
             $Rashod=$Prihod+$Rashod;
        
         endif; 
         if($request->dayType):
             $endsum=$this->AllOstatkischetFonds($src,$request->dayType,1,2);  
-            $pr=OstatkiSchet::whereDate('priod','<',$request->dayType)->where('type',1)->orderBy('id', 'DESC')->where('src',$src)->where('FondType',2)->limit(1)->get();
+            //$pr=OstatkiSchet::whereDate('priod','<',$request->dayType.date(' H:i:s'))->where('type',1)->orderBy('id', 'DESC')->where('src',$src)->where('FondType',2)->limit(1)->get();
     
             // if(isset(json_decode($pr,true)[0]['ostatok_end']))
             // {
@@ -364,9 +394,12 @@ class Repositoryschet{
             // $Rashod=$this->oborots_coin->whereDate('date','>=',$request->dayType.date('H:i:s'))->where('src',$src)->where('priznak',1)->sum('summa');
        
             // $EndDate=$request->dayType;
-            $dateTime= date('Y-m-d', strtotime($request->dayType.date(' H:i:s')));
-            $Prihod=   json_decode($this->oborots_coin::where('priznak',0)->where('date','>=',$dateTime)->where('account_id_in',$src)->sum('summa'),true);
-            $Rashod=json_decode($this->oborots_coin::where('priznak',1)->where('date','>=',$dateTime)->where('account_id_in',$src)->sum('summa'),true);
+            $dateTime= date('Y-m-d', strtotime($request->dayType));
+               
+            $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+            $Prihod=   json_decode($this->oborots_coin::where('priznak',0)->whereBetween('date',[$startDate,$endDate])->where('src',$src)->sum('summa'),true);
+            $Rashod=json_decode($this->oborots_coin::where('priznak',1)->whereBetween('date',[$startDate,$endDate])->where('src',$src)->sum('summa'),true);
          // echo "</pre>";
          $EndDate= $dateTime;
          $Prihod=$Rashod+$Prihod;
@@ -374,7 +407,7 @@ class Repositoryschet{
         endif; 
      
         if($Prihod>0 ||  $endsum>0 AND $Rashod<=$Prihod):
-         $this->Fond[$src.'4']['date']=date('Y-m-d H:i:s');
+         $this->Fond[$src.'4']['date']=date('Y-m-d');
          $this->Fond[$src.'4']['src']=8;
          $this->Fond[$src.'4']['priod']=$EndDate;
          $this->Fond[$src.'4']['ostatok_start']= $endsum;
@@ -395,17 +428,17 @@ class Repositoryschet{
 
     public function InsertOstatkiSchet()
     {
-              echo "<pre>";
-              print_r($this->Fond);
-              echo "</pre>";
-        // if(is_array($this->Fond)):
-        //         foreach($this->Fond AS $fond):
-        //       OstatkiSchet::create($fond);   
-        //     endforeach;
-        // endif;
-        // if(!is_array($this->Fond)):
-        //    return  404;
-        // endif;
+            //   echo "<pre>";
+            //   print_r($this->Fond);
+            //   echo "</pre>";
+        if(is_array($this->Fond)):
+                foreach($this->Fond AS $fond):
+              OstatkiSchet::create($fond);   
+            endforeach;
+        endif;
+        if(!is_array($this->Fond)):
+           return  404;
+        endif;
              
          
 
