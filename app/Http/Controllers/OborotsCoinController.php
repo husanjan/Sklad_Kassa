@@ -77,7 +77,7 @@ class OborotsCoinController extends Controller
     public function store(Request $request)
     {
         //
-            //dd($request->all());
+            dd($request->all());
         $this->addRepository->AddInsertOborotTanga($request);
         return redirect()->route('oborot_tanga.index')->with('success','Оборот Танга  успешно создан!');
     }

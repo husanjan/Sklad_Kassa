@@ -1,9 +1,85 @@
-
-function adds()
+function  sumcounts()
 {
-    alert('f');
-}
+    var arr=document.querySelectorAll('.count');
+    var total=0;
+    // for(var i=0;i<=arr.length;i++)
+    // {
 
+    //     // if(parseIN(arr[i].value)){
+
+    //     //     total+=parseFloat(arr[i].value);
+    //     // }
+
+    //     $('#countsum').html("<b> Общие сумма:"+ total+" сомони</b>");
+    // }
+ 
+    $('.count').each(function(element,index){
+        //if statement here 
+        // use $(this) to reference the current div in the loop
+        //you can try something like...
+                   if(parseInt(index.value))
+                   {
+                    total+=parseInt(index.value);
+                   }
+        
+                   $('#countsum').html("<b> Общие сумма:"+ total+" сомони</b>");    
+    
+    
+     });
+    // Array.from(arr).forEach((element, index) => {
+    //     // conditional logic here.. access element
+    //     // console.log(element.value);
+    //     total+=parseFloat(element.value);
+    //   });
+      
+}
+function addOborot(id){
+  
+    var  new_btn=parseInt($('#total_oborot').val())+1;
+
+    if(new_btn<=13){
+        
+       
+        
+        
+       
+        
+      var selection=  ' <select   class="form-select" id="summa'+new_btn+'h"   name="nominal[]" autofocus required>'+
+        '<option value="">Интихоб</option> <option value="0.01">1 дирам </option> <option value="0.05">5 дирам</option><option value="20">20 дирам</option><option value="50">50 дирам</option><option value="1">1 сомони</option><option value="3">3 сомони</option><option value="5">5 сомони</option><option value="10">10 сомони</option> <option value="20">20 сомони</option><option value="50">50 сомони</option><option value="100">100 сомони</option><option value="200">200 сомони</option><option value="500">500 сомони</option>   </select>'
+        
+       var new_input='<div class="row offset-1 mt-2" id="new_'+new_btn+'">  <div class="col-md-4  ">     <div class="input-group"> <span class="input-group-text">Номинал '+new_btn+'</span>  '+selection+'</div></div> <div class="col-md-4 "> <div class="input-group"> <span class="input-group-text">Сумма</span><input   required   type="text"  class="form-control count" name="summa[]"      id="summa'+new_btn+'" > </div></div> </div>';
+ 
+         if(id==9898)
+         {
+            new_input='<div class="row offset-1 mt-2" id="new_'+new_btn+'">     <div class="col-md-4 "> <div class="input-group"> <span class="input-group-text">Сумма</span><input   required   type="text"  class="form-control count" name="summa[]"      id="summa'+new_btn+'" > </div></div> </div>';
+  
+         }
+             $('#new_oborot').append(new_input);
+        $('#total_oborot').val(new_btn);
+        //(false);
+
+        arrinput.push({id:'summa'+new_btn,index:new_btn});
+
+        sumcounts();
+
+    }
+}
+function removeOborot(){
+    
+    var last_chq_no = $('#total_oborot').val();
+
+    if(last_chq_no>1){
+
+        $('#new_'+last_chq_no).remove();
+        $($(this).attr('id')).remove();
+
+        $('#total_oborot').val(last_chq_no-1);
+        $('#countsum').html("");
+        disabledTrue();
+        sumcounts();
+
+    }
+}
 function disabledFalse(status=true)
 {
     if(status)
@@ -30,21 +106,7 @@ function disabledTrue()
 var arrinput= [{id:'summas',index:1}];
 
 
-function  sumcounts()
-{
-    var arr=document.querySelectorAll('.count');
-    var total=0;
-    for(var i=0;i<=arr.length;i++)
-    {
 
-        if(parseFloat(arr[i].value)){
-
-            total+=parseFloat(arr[i].value);
-        }
-
-        $('#countsum').html("<b> Общие сумма:"+ total+" сомони</b>");
-    }
-}
 
 function add(id)
 {
@@ -121,7 +183,7 @@ $(document).on('keyup','.count,.nomcou',function (){
     {
         NomOfAll=nominal*10;
     }
-    console.log(NomOfAll);
+    // console.log(NomOfAll);
     if($(this).val()>0 && nomininc()==countinc()){
         var summ=parseFloat($(this).val());
 

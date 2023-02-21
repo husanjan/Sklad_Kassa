@@ -123,12 +123,12 @@
                                     @endforeach
 
                                 </td>
-                             <td id="delete">
+                             {{-- <td id="delete">
 
                                     {!! Form::open(['method' => 'DELETE','route' => ['fondemission.destroy', $fondEmisions->id],'style'=>'display:inline']) !!}
                                     {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
                                     {!! Form::close() !!}
-                                </td>
+                                </td> --}}
                         </tr>
                         @endforeach
                         @endif

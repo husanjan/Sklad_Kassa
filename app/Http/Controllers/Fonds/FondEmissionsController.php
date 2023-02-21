@@ -37,7 +37,7 @@ class FondEmissionsController extends Controller
         $sprQators= SprQators::all();
         $response = Oborot::orderBy('date','DESC')->paginate(2);
        
-        $FondEmisions = FondEmisions::where('priznak',0)->orderBy('date','DESC')->paginate(50);
+        $FondEmisions = FondEmisions::where('priznak',0)->orderBy('date','DESC')->orderBy('nn','DESC')->paginate(50);
          if($request->has('download'))
          {
              $pdf=Pdf::loadView('fonds.fondsemission.index',compact('safes','sprEds','shkafs','sprCells','FondEmisions','sprQators'));

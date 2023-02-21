@@ -59,7 +59,24 @@
                                             <div class="row mb-12 mt-2">
                                                 <label for="nomil" class="col-md-4 col-form-label text-md-end">{{ __('Номинал') }}</label>
                                                 <div class="col-md-8">
-                                                    <input id="naminal" type="text" class="form-control" name="naminal">
+                                                    {{-- <input id="naminal" type="text" class="form-control" name="naminal"> --}}
+                                                    <select id="naminal" class="form-select" name="naminal" autofocus >
+                                                        <option value="">Интихоб</option>
+                                                        <option value="0.01">1 дирам </option>
+                                                        <option value="0.05">5 дирам</option>
+                                                        <option value="20">20 дирам</option>
+                                                        <option value="50">50 дирам</option>
+                                                        <option value="1">1 сомони</option>
+                                                        <option value="3">3 сомони</option>
+                                                        <option value="5">5 сомони</option>
+                                                        <option value="10">10 сомони</option>
+                                                        <option value="20">20 сомони</option>
+                                                        <option value="50">50 сомони</option>
+                                                        <option value="100">100 сомони</option>
+                                                        <option value="200">200 сомони</option>
+                                                        <option value="500">500 сомони</option>
+                                                    
+                                                     </select>
                                                 </div>
                                             </div>    
                                             <div class="row mb-12  mt-2">
@@ -126,7 +143,8 @@
         $('select').on('change', function() {
             $(':input[type="submit"]').prop('disabled', true);
         });
-        $("#numbers,#Serial,#naminal,#count").keyup(function(){
+        // $("#count,#nomil,#edin_id").on("keyup change",function(){
+        $("#numbers,#Serial,#naminal,#count,#edin_id").on("keyup change",function(){
            
            var serial=$('#Serial').val();
            var naminal=$('#naminal').val();

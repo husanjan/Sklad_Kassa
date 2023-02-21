@@ -81,18 +81,18 @@ class FondEmisionsTanga extends Controller
     {
         //
         $this->validate($request, [
-            'date' => 'required|date',
+            'date' => 'required',
             'safe_id' => 'required',
             'shkaf_id' => 'required',
             'qator_id' => 'required',
             'cell_id' => 'required|integer',
-            'naminal' => 'required|integer',
+            'naminal' => 'required',
             'ed_id' => 'required',
             'kol' => 'required',
       
 
         ]);
-        
+  
            $sum_dist=1000;
           $edinCoutnt=1000;
           $summaOstatss=null;
@@ -125,7 +125,6 @@ class FondEmisionsTanga extends Controller
                       
 //           print_r($arrayOstat);
 // echo "</pre>";
-        
           DB::beginTransaction();
           try {
        ostatki_safe::create($arrayOstat);

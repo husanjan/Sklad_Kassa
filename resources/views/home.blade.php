@@ -1140,7 +1140,24 @@
                         <div class="col-md-4  mt-2">
                             <div class="input-group">
                                 <span class="input-group-text">Номинал</span>
-                                <input   required   type="text" id="summash" class="form-control nomcou " aria-describedby="btnGroupAddon" name="nominal[]"  >
+                                 
+                                <select   class="form-select" id="oborot"   name="nominal[]" autofocus  required>
+                                    <option value="">Интихоб</option>
+                                    <option value="0.01">1 дирам </option>
+                                    <option value="0.05">5 дирам</option>
+                                    <option value="20">20 дирам</option>
+                                    <option value="50">50 дирам</option>
+                                    <option value="1">1 сомони</option>
+                                    <option value="3">3 сомони</option>
+                                    <option value="5">5 сомони</option>
+                                    <option value="10">10 сомони</option>
+                                    <option value="20">20 сомони</option>
+                                    <option value="50">50 сомони</option>
+                                    <option value="100">100 сомони</option>
+                                    <option value="200">200 сомони</option>
+                                    <option value="500">500 сомони</option>
+                                
+                                 </select>
 
                             </div>
 
@@ -1151,7 +1168,7 @@
                         <div class="col-md-4 mt-2 ">
                             <div class="input-group">
                                 <span class="input-group-text">Сумма</span>
-                                <input   required   type="text" id="summas" class="form-control    " aria-describedby="btnGroupAddon" name="summa[]"  >
+                                <input   required   type="text" id="summas" class="form-control   count" aria-describedby="btnGroupAddon" name="summa[]"  >
 
                             </div>
 
@@ -1161,13 +1178,13 @@
 
 
                             <div class="col-md-4 mt-3">
-                                <button type="button" onclick='add()' class="btn btn-primary"   > <i class="align-middle" data-feather="plus"></i></button>
-                                <button onclick="remove()" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
+                                <button type="button" onclick='addOborot()' class="btn btn-primary"   > <i class="align-middle" data-feather="plus"></i></button>
+                                <button onclick="removeOborot()" type="button"  class="btn btn-bitbucket active"><i class="align-middle" data-feather="trash-2"></i></button>
 
                             </div>
-                        <input type="hidden" value="1" id="total_chq">
+                        <input type="hidden" value="1" id="total_oborot">
                     </div>
-                    <div id="new_chq" >
+                    <div id="new_oborot" >
 
                     </div>
                       {{-- <div class="row offset-1 mt-2" >
@@ -1182,7 +1199,7 @@
 
 
                             <div class="col-md-2 ">
-                                <label for="safe_id51">Хранилище</label>
+                                <label for="safe_id51">Хранилищеee</label>
                                 <select name="safe_id"   id="safe_id51" class="form-control selects51 Somon">
                                     <option   selected value="">Выберите</option>
                                     @foreach($safes as $safe)
@@ -3812,8 +3829,11 @@
  
 <script>
  
-
+ 
 $(document).ready(function() {
+
+
+   
     //Id detalizasiya type 
       $('#oborot_pul,#korshoyam_pul,#farsuda_pul,#botilshuda_pul').on('click',function()
       {

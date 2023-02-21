@@ -30,7 +30,24 @@
                                             <div class="row mb-12">
                                                 <label for="nomil" class="col-md-4 col-form-label text-md-end">{{ __('Номинал') }}</label>
                                                 <div class="col-md-8">
-                                                    <input id="nomil" type="text" class="form-control" name="naminal" placeholder=" ">
+                                                    {{-- <input id="nomil" type="text" class="form-control" name="naminal" placeholder=" "> --}}
+                                                    <select id="nomil" class="form-select" name="naminal" autofocus >
+                                                        <option value="">Интихоб</option>
+                                                        <option value="0.01">1 дирам </option>
+                                                        <option value="0.05">5 дирам</option>
+                                                        <option value="20">20 дирам</option>
+                                                        <option value="50">50 дирам</option>
+                                                        <option value="1">1 сомони</option>
+                                                        <option value="3">3 сомони</option>
+                                                        <option value="5">5 сомони</option>
+                                                        <option value="10">10 сомони</option>
+                                                        <option value="20">20 сомони</option>
+                                                        <option value="50">50 сомони</option>
+                                                        <option value="100">100 сомони</option>
+                                                        <option value="200">200 сомони</option>
+                                                        <option value="500">500 сомони</option>
+                                                    
+                                                     </select>
                                                 </div>
                                             </div>         <br>
                                             <div class="row mb-3">
@@ -158,8 +175,8 @@
         {
            $("#count").val("");
         });
-
-      $("#count,#nomil").keyup(function(){
+        // $("#count,#nomil").on("keyup change", function(){
+      $("#count,#nomil,#edin_id").on("keyup change",function(){
             var sum=100;
           var   nominal= $("#nomil").val();
           var   edins= $("#edin_id").val();
@@ -185,7 +202,7 @@
                     },
                     success:function(response){
 
-
+                        // $("#count,#nomil").on("keyup change", function(){
                         for (const [key, value] of Object.entries(response)) {
                             var newMsgs='<option  value="'+value.id+'">'+value.shkaf+'</option>';
 
