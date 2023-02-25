@@ -39,10 +39,12 @@ class OstatkiSchetController extends Controller
       //coins
       $FondkorshoamCoinsMonth = $this->Repositoryschet->AllSelectDay(1,2,2);
       $FondFarsudaCoinsMonth = $this->Repositoryschet->AllSelectDay(2,2,2);
+      $FondEmssionCoinsMonth = $this->Repositoryschet->AllSelectDay(9,2,2);
       $FondbotilshudaCoinsMonth = $this->Repositoryschet->AllSelectDay(8,2,2);
       $FondbOborotCoinsMonth = $this->Repositoryschet->AllSelectDay(4,2,2);
+
       $FondbOborotCoinsMonth = $this->Repositoryschet->AllSelectDay(7,2,2);
-      $FoindMonthCoins=array_merge(json_decode($FondkorshoamCoinsMonth,true),json_decode($FondFarsudaCoinsMonth,true),json_decode($FondbotilshudaCoinsMonth,true),json_decode($FondbOborotCoinsMonth,true));
+      $FoindMonthCoins=array_merge(json_decode($FondkorshoamCoinsMonth,true),json_decode($FondFarsudaCoinsMonth,true),json_decode($FondbotilshudaCoinsMonth,true),json_decode($FondbOborotCoinsMonth,true),json_decode($FondEmssionCoinsMonth,true));
      
       //   //coins
     //   end  // month
@@ -57,19 +59,29 @@ class OstatkiSchetController extends Controller
             //coins
             $FondkorshoamCoinsday= $this->Repositoryschet->AllSelectDay(1,2,1);
             $FondFarsudaCoinsday= $this->Repositoryschet->AllSelectDay(2,2,1);
+            $FondEmssionCoinsDay = $this->Repositoryschet->AllSelectDay(9,2,1);
             $FondbotilshudaCoinsday= $this->Repositoryschet->AllSelectDay(8,2,1);
             $FondbOborotCoinsday = $this->Repositoryschet->AllSelectDay(4,2,1);
  
    $FoindDayMoney=array_merge(json_decode($FondkorshoamMoneyday,true),json_decode($FondFarsudaMoneyDay,true),json_decode($FondbotilshudaMoneyDay,true),json_decode($FondbOborotMoneyDay,true),json_decode($FondbFondemssionMoneyday,true));
-   $FoindDayCoins=array_merge(json_decode($FondkorshoamCoinsday,true),json_decode($FondFarsudaCoinsday,true),json_decode($FondbotilshudaCoinsday,true),json_decode($FondbOborotCoinsday,true));
-     
+   $FoindDayCoins=array_merge(json_decode($FondkorshoamCoinsday,true),json_decode($FondFarsudaCoinsday,true),json_decode($FondbotilshudaCoinsday,true),json_decode($FondbOborotCoinsday,true),json_decode($FondEmssionCoinsDay,true));
+  
+  $this->Repositoryschet->DateFilter(2);
             //   //coins
-            // echo "<pre>";
-          
-            // print_r($FoindDayCoins);
-            // echo "</pre>";
-        
-       return   view('ostatki.schet.index',compact('FoindDayMoney','FoindDayCoins','FoindMonthMoney','FoindMonthCoins','SprAccounts'));
+    
+  
+        $DateFilterDay =array_unique( array_column(json_decode($this->Repositoryschet->DateFilter(1),true), 'date'));
+        $DateFilterMonth = array_unique( array_column(json_decode($this->Repositoryschet->DateFilter(2),true), 'date'));
+              
+        $kodeOper= OstatkiSchet::orderBy('kode_oper','DESC')->value('kode_oper');
+        if($kodeOper<1)
+        {
+            $kodeOper=1;
+        }else{
+        $kodeOper++;
+    }
+ 
+        return   view('ostatki.schet.index',compact('FoindDayMoney','FoindDayCoins','FoindMonthMoney','FoindMonthCoins','SprAccounts','DateFilterDay','DateFilterMonth','kodeOper'));
     }
 
     /**
@@ -77,9 +89,18 @@ class OstatkiSchetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request $request)
+    { 
+  
+        $DateFilter =array_unique( array_column(json_decode($this->Repositoryschet->DateFilter($request->id),true), 'date','kode_oper'));
+    //    echo "<pre>";
+    //        print_r($DateFilter);
+    //    echo "</pre>";
+  
+  
+     
+   
+        return   view('ostatki.schet.indexDate',compact('DateFilter'));
     }
 
     /**
@@ -95,7 +116,7 @@ class OstatkiSchetController extends Controller
     public function store(Request $request)
     {
         //
-     
+        
        
         //   $pr=OstatkiSchet::whereDate('priod','<',$request->startDate)->where('type',1)->orderBy('id', 'DESC')->where('src',1)->where('FondType',1)->limit(1)->get();
     //   echo "<pre>";
@@ -104,24 +125,24 @@ class OstatkiSchetController extends Controller
     // //  exit;
         $this->Repositoryschet->ToDateFondEmisions($request);
          $this->Repositoryschet->ToDateFond($request,1);
-         $this->Repositoryschet->ToDateFond($request,2);
+           $this->Repositoryschet->ToDateFond($request,2);
           $this->Repositoryschet->ToDateFond($request,3);
          $this->Repositoryschet->ToDateFondCoins($request,1);
          $this->Repositoryschet->ToDateFondCoins($request,2);
       
-         $this->Repositoryschet->ToDateFondCoins($request,0);
+           $this->Repositoryschet->ToDateFondCoins($request,0);
          $obor= $this->Repositoryschet->OborotMoney($request,4);
         $this->Repositoryschet->OborotCoins($request,4);
            //echo "<pre>";
-          $arrAll=$this->Repositoryschet->InsertOstatkiSchet();
+       $arrAll=$this->Repositoryschet->InsertOstatkiSchet();
        
-          print_r($arrAll);
-        //  echo "</pre>";
-        if($arrAll==404):
+            // print_r($arrAll);
+        // //  echo "</pre>";
+        // if($arrAll==404):
  
-          //  return redirect()->route('ostatkischets.index');
-        endif;
-   return redirect()->route('ostatkischets.index');
+        //   //  return redirect()->route('ostatkischets.index');
+        // endif;
+    return redirect()->route('ostatkischets.index');
         
             // OstatkiSchet::create($arrAll);   
         //  dd($request->all());
@@ -133,9 +154,11 @@ class OstatkiSchetController extends Controller
      * @param  \App\Models\OstatkiSchet  $ostatkiSchet
      * @return \Illuminate\Http\Response
      */
-    public function show(OstatkiSchet $ostatkiSchet)
+    public function show(Request $request)
     {
         //
+      
+
     }
 
     /**
@@ -144,9 +167,11 @@ class OstatkiSchetController extends Controller
      * @param  \App\Models\OstatkiSchet  $ostatkiSchet
      * @return \Illuminate\Http\Response
      */
-    public function edit(OstatkiSchet $ostatkiSchet)
+    public function edit(Request $request)
     {
         //
+                    
+                 
     }
 
     /**
@@ -156,9 +181,97 @@ class OstatkiSchetController extends Controller
      * @param  \App\Models\OstatkiSchet  $ostatkiSchet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OstatkiSchet $ostatkiSchet)
+    public function update(Request $request)
     {
-        //
+        //SchetDetal        //AllSelectDay($src,$typefond=1 Money/2 Coins	,$type=1-Дневной/2-На Месяц	)
+        $SprAccounts=SprAccounts::all();
+        echo '<table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th width="30">Счет</th>
+            <th  >Дата</th>
+            <th>Остаток  на начало</th>
+            <th>Приход</th>
+            <th>Расход</th>
+           <th>Остаток на конец</th>
+        
+          </tr>
+        </thead>
+        <tbody>';
+        $detal= $this->Repositoryschet->SchetDetal($request->kode_oper);
+        echo '
+        <tr>
+          <td><b>Бумага</b></td>
+         </tr>';
+         foreach( $detal AS  $detals):
+     
+            // $detals['period'];
+            // $detals['src'];
+            // $detals['Prikhod'];
+            // $detals['Raskhod'];
+            // $detals['FondType'];
+            // $detals['type'];
+            // $detals['ostatok_end'];
+         if( $detals['FondType']==1):
+     
+          echo   '<tr>  
+         <td> <b># </b>  </td>';
+            
+         foreach(   $SprAccounts AS $SprAccount):
+            if($SprAccount['id']==  $detals['src']):
+              echo'<td>'.$SprAccount['account'].'</td>';
+            endif;
+          
+         endforeach;
+       echo '<td>'.$detals['date'].'</td>
+   
+         <td>'.$detals['date'].'</td>
+         <td>'.$detals['Prikhod'].'</td>
+         <td>'.$detals['Raskhod'].'</td>
+         <td>'.$detals['ostatok_end'].'</td></tr>';
+        endif;
+    
+      
+             
+         endforeach;  
+         echo '
+         <tr>
+           <td><b>Монета</b></td>
+          </tr>';
+          foreach( $detal AS  $detals):
+      
+             // $detals['period'];
+             // $detals['src'];
+             // $detals['Prikhod'];
+             // $detals['Raskhod'];
+             // $detals['FondType'];
+             // $detals['type'];
+             // $detals['ostatok_end'];
+          if( $detals['FondType']==2):
+      
+            echo   '<tr>  
+            <td> <b># </b>  </td>';
+               
+            foreach(   $SprAccounts AS $SprAccount):
+               if($SprAccount['id']==  $detals['src']):
+                 echo'<td>'.$SprAccount['account'].'</td>';
+               endif;
+             
+            endforeach;
+          echo '<td>'.$detals['date'].'</td>
+      
+            <td>'.$detals['date'].'</td>
+            <td>'.$detals['Prikhod'].'</td>
+            <td>'.$detals['Raskhod'].'</td>
+            <td>'.$detals['ostatok_end'].'</td></tr>';
+           endif;
+       
+         
+                
+            endforeach;  
+         echo   '  </tbody>
+         </table>  ';
     }
 
     /**
@@ -167,8 +280,11 @@ class OstatkiSchetController extends Controller
      * @param  \App\Models\OstatkiSchet  $ostatkiSchet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OstatkiSchet $ostatkiSchet)
+    public function destroy($id)
     {
         //
+        OstatkiSchet::where('kode_oper',$id)->delete();
+        return redirect()->route('ostatkischets.index')
+            ->with('success','Эмиссионный фонд удалена!');
     }
 }

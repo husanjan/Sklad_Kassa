@@ -41,7 +41,8 @@
           @csrf  
           <input type='date' class="form-control"  name="dayType" required /> 
       
-        
+          <input type="hidden" value="{{$kodeOper}}" name="kodeOper">
+    
      
       </div>
       <div class="modal-footer">
@@ -71,6 +72,7 @@
             <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
              <div class='input-group date' id='datetimepicker5'>
                 <input type='date' class="form-control"  name="startDate" required /> 
+                <input type="hidden" value="{{$kodeOper}}" name="kodeOper">
     
                 </span>
              </div>
@@ -96,6 +98,9 @@
 </div>
 
 </div>
+
+
+ 
  <div class="row">
 
   <div class="col-12 col-lg-6  mt-2"  >
@@ -103,7 +108,11 @@
     <div class="card ">
         <div class="card-body">
             <h4>Дневной</h4>
-  
+           <div class="d-flex justify-content-end"> <div class="btn-group">
+           <!-- Button trigger modal -->
+           <a href="ostatkischets/create?id=1" class="link-primary">Архив</a>
+          
+          </div></div>
             <br>
             <table class="table">
               <thead>
@@ -222,7 +231,17 @@
   <div class="card ">
       <div class="card-body">
           <h4>Ежемесячно</h4>
- 
+          <div class="d-flex justify-content-end">  
+            <div class="btn-group">
+              <a href="ostatkischets/create?id=2" class="link-primary">Архив</a>
+              <ul class="dropdown-menu">
+                @foreach ( $DateFilterDay as   $DateFilterDays)
+                  
+            <li> <a class="dropdown-item " >{{$DateFilterDays}}</a></li>
+                @endforeach
+              </ul>
+            </div>
+          </div>
           <br>
           <table class="table">
             <thead>
@@ -283,7 +302,7 @@
                  
            $arrayCoin2=[];
            ?>
-           @foreach ($SprAccounts->where('type',0) as  $SprAccountMonthMoney)
+           @foreach ($SprAccounts->where('type',1) as  $SprAccountMonthMoney)
         
          <tr>  
            

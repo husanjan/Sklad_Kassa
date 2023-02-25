@@ -21,6 +21,7 @@ class OstatkiSchet extends Model
         'ostatok_end',
         'user_id',
         'host',
+        'kode_oper',
         
         ];
 }

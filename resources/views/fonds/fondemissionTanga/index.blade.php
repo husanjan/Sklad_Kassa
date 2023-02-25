@@ -72,6 +72,7 @@
                     <label for="count01">Номер Документ	</label>
                     <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
                 </div>
+       
  
          {{-- //Table ostatki  --}}
          <table class="table mt-2">
