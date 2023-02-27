@@ -1245,8 +1245,132 @@
   {{--  Расход Модал--}}
 
 
+   {{--        Oborot table end --}}
+        {{--        Fond table Коршоям --}}
+        <div class="col-12 col-lg-6 " id="korshoyam-Pul">
+
+            <div class="card  ">
+                <div class="card-body">
+                    <h4>Коршоям</h4>
+
+                    <br>
+                    <table class="table col-md-auto">
+                        <tbody><tr>
+                            <th>#</th>
+                            <th>Дата</th>
+                            <th>Номер док</th>
+                            <th>Номер счет</th>
+                            <th>Признак</th>
+                            <th>Сумма</th>
+                             
 
 
+                        </tr>
+                        @php($krcount=1)
+                
+                        @foreach(json_decode($FondMoney->take(20),true) as $korshoyam)
+                      
+                        <?php 
+
+    //print_r(array_map(function($value){return   $value['summa'];}, $korshoyam));
+?>
+                           @if(array_keys( array_count_values(array_map(function($value){return   $value['type'];},$korshoyam)))[0]==1 || array_keys( array_count_values(array_map(function($value){return   $value['src'];},$korshoyam)))[0]==1)
+                        <tr zippy="mdoclist_1" id="mdoclist_1">
+                           
+                                  <td> <b>{{  $krcount++ }}</b>  </td>
+                          
+                            <td  id="kord{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">{{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$korshoyam)))[0]))}}</td>
+                            <td  id="korfdoc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}"> {{   array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$korshoyam)))[0]}} </td>
+                                                @foreach($sprAccounts AS $sprAccounti)
+
+
+                                 @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$korshoyam)))[0])
+                                    <td class="col-md-2" id="kornfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">
+                                        {{$sprAccounti->account  }} </td>
+                                @endif
+                            @endforeach
+                            @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyam)))[0]==0)
+                            <td  id="kor{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">Приход</td>
+                            @endif
+                            @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyam)))[0]==1)
+                            <td  id="kor{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">Расход</td>
+                            @endif
+                           
+                       
+                                  <td class="col-md-4">
+
+                                <a class=" link-primary       Fond_id"  href="#" data-toggle="modal" data-target="#Fonds"   data-id="kor"  id="{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['type'];},$korshoyam)))[0]}}">
+                                <i class="text-dark fa fa-eye"></i>   {{   array_sum(array_map(function($value){return   $value['summa'];}, $korshoyam)) }}  </a></td>
+                               
+                                
+                                 </tr>
+                                 @endif
+                         @endforeach
+
+                        </tbody>
+                    </table>
+                    <div class="mt-4 offset-lg-10"><table><tbody><tr>
+                                <td valign="middle">
+                                         <button class="btn btn-secondary "data-toggle="modal"  data-target=".korshoyam_detal" id="korshoyam_pul">Подробонее</button>
+                                </td>
+
+                            </tr></tbody></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--         Fond Коршоям table end --}}
+{{--modal 1 Коршоям Детализация--}}
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="Fonds" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Детализация
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3 mt-2">
+
+                    <div class="col-md-3     offset-1 ">
+                        <label for="dates">Дата	</label>
+                        <input     id="fdate" disabled type="text" aria-describedby="Data" class="form-control"   >
+                    </div>
+                   
+                    <div class="col-md-3">
+                        <label for="fn_doc">Номер документ	</label>
+                        <input     id="fn_doc" disabled type="text" aria-describedby="Data" class="form-control"   >
+                    </div>
+                    <div class="col-md-2 ">
+                  
+                        <label for="fschyot1">Счет 	</label>
+                        <select name="account_id_out" id="fschyot1"  required  class="form-control schet1" disabled="">
+                            <option   selected  id="fschyot" >Выберите счетов</option>
+    
+                        </select>
+                    </div>
+                    <div class="col-md-2 ">
+                        <label for="fpriznak">Признак	</label>
+                        <input     id="fpriznak" disabled type="text" aria-describedby="Data" class="form-control"   >
+                    </div>
+                </div>
+                
+                <div id="fondAjax">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыт</button>
+                {{-- <button type="button" class="btn btn-secondary" >Печать</button> --}}
+            </div>
+        </div>
+    </div>
+</div>
+{{--modal1 end Коршоям Детализация--}}
 @endsection
 
  
@@ -1264,6 +1388,51 @@
 {{-- end this sccript   count all Sum   --}}
 {{-- this sccript count all Safe  safeshkaf    --}}
 <script>
+     $(document).ready(function() {
+     //Safe ajax
+     $(".Fond_id").click(function(){
+            console.log("dd");
+            $('#fpriznak').val('');
+       
+             var  kode_opers=$(this).attr('id');
+             var  data=$(this).data('id');
+             var  id_type=$(this).attr('value');
+             var cnt=`#${data}nfc${kode_opers}`;
+              
+             //var id_accounted=$().text();
+            var id_accounted=$(`#${data}nfc${kode_opers}`).text();
+            var priznak=$(`#${data}${kode_opers}`).text();
+            var date=$(`#${data}d${kode_opers}`).text();
+            var doc=$(`#${data}fdoc${kode_opers}`).text();
+            $('#fn_doc').val(doc);
+            $('#fdate').val(date);
+            $('#fpriznak').val(priznak);
+            $('#fschyot').text(String(id_accounted));
+        
+     
+
+                
+             $.ajax({
+                url: "{{route('FondTable.post')}}",
+                method:"POST",
+                dataType: 'html', 
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                    id:kode_opers,id_type:id_type,
+
+                },
+                success:function(fondDatas){
+
+
+              
+                  
+                   $('#fondAjax').html(fondDatas);
+                },
+            });
+
+    
+    });
+});
     $(document).on('change','[id^=safe_id]',function (){
     
 

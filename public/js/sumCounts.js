@@ -64,7 +64,7 @@ function  SumEdinCount(row_id,nominal,id)
    });
    //<label id="countSums" onfocus="myFunction(this)">'+sumedins.reduce(getSum, 0)*nominal+'</label>
        
-   return   '<div class="alert alert-primary  mt-2"> Cумма '+sumedins.reduce(getSum, 0)*nominal+'       Cомони </div></div> <input type="hidden" readonly="readonly" class="form-control" name="summacounts'+id+'" id="countSums"  value="'+sumedins.reduce(getSum, 0)*nominal+'">';
+   return   '<div class="alert alert-primary  mt-2"> Cумма '+sumedins.reduce(getSum, 0)*nominal+'       Cомони </div></div> <input type="hidden" readonly="readonly" class="form-control" name="summacounts'+id+'" id="countSums" data-nominal="'+nominal+'"  value="'+sumedins.reduce(getSum, 0)*nominal+'">';
 
 }
  
@@ -75,7 +75,8 @@ function add(accumulator, a) {
   var arrays=[];
 
   $(document).on("keyup",'input[id^=count]', function(){
-   
+     var   typeFond= $("input[name='farsuda']").val();
+    
     var sum=0;
   var     id_number=$(this).attr("id").substr(-2);
  
@@ -86,11 +87,11 @@ function add(accumulator, a) {
       var   edins= $("#edin_id"+id_number).val();
       var edin_id='[id^=edin_id'+ id_number.substr(-2,1)+']';
       var count_id='[id^=count'+ id_number.substr(-2,1)+']';
-         console.log(nominal);
+        //  console.log(nominal);
 
      
      var AllSum= SumEdinCount('[id^=new'+id_number.substr(-2,1)+']',nominal,id_number.substr(-2,1));
-
+    
       
     $("#sum"+id_number.substr(-2,1)+"1").html(AllSum);
     $('[id^=countSums]').each(function(ind,obj){
@@ -100,16 +101,33 @@ function add(accumulator, a) {
            // sumCounts.push(obj.value);
           obj.value;
           arrays.push();
-        
+        //   alert($(obj).data('nominal'));
+       
           sum+=parseFloat(obj.value);
               
              
         }
      
-      
+       
         
     });
-    
+    $.ajax({
+        url: "FondAjaxSum",
+        type:"GET",
+        data:{
+            "_token": "{{csrf_token()}}",
+            typeFond:typeFond,sum:sum,
+     
+        },
+        success:function(response){
+     
+         
+     
+     
+          // console.log(response);
+        //    $('#ajaxoborot').html(response);
+        },
+     });
     var htmlSum='<div class="alert alert-primary  mt-2"><div class="btn-group" role="group" aria-label="Basic example"> Общие сумма  '+sum+' Cомони  </div></div>';
                
     $("#AllSumma").html(htmlSum);

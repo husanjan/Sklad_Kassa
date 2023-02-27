@@ -6,6 +6,7 @@ use App\Models\SprAccounts;
 use App\Models\OstatkiSchet;
 use Illuminate\Http\Request;
 use App\Repositories\Repositoryschet;
+use App\Models\FondMoney;
 use Carbon\Carbon;
 class OstatkiSchetController extends Controller
 {
@@ -91,8 +92,8 @@ class OstatkiSchetController extends Controller
      */
     public function create(Request $request)
     { 
-  
-        $DateFilter =array_unique( array_column(json_decode($this->Repositoryschet->DateFilter($request->id),true), 'date','kode_oper'));
+     $id=$request->id;
+        $DateFilter =array_unique( array_column(json_decode($this->Repositoryschet->DateFilter($id),true), 'date','kode_oper'));
     //    echo "<pre>";
     //        print_r($DateFilter);
     //    echo "</pre>";
@@ -100,7 +101,7 @@ class OstatkiSchetController extends Controller
   
      
    
-        return   view('ostatki.schet.indexDate',compact('DateFilter'));
+        return   view('ostatki.schet.indexDate',compact('DateFilter','id'));
     }
 
     /**
@@ -123,6 +124,24 @@ class OstatkiSchetController extends Controller
     //   print_r(json_decode($pr,true)[0] );
     //   echo "</pre>";
     // //  exit;
+        $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
+          //  $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+            echo  $endDate;
+      $typeDate=2;
+ 
+    
+  
+      $rashod=json_decode(FondMoney::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',1)->sum('summa'),true);
+      $prihod=json_decode(FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',1)->sum('summa'),true);
+  echo    "<br>". $rashod;
+  echo    "<br>". $prihod;
+    echo "<pre>";
+    
+    print_r($rashod);
+    print_r($prihod);
+    echo "</pre>";
+  
         $this->Repositoryschet->ToDateFondEmisions($request);
          $this->Repositoryschet->ToDateFond($request,1);
            $this->Repositoryschet->ToDateFond($request,2);
@@ -136,13 +155,13 @@ class OstatkiSchetController extends Controller
            //echo "<pre>";
        $arrAll=$this->Repositoryschet->InsertOstatkiSchet();
        
-            // print_r($arrAll);
+         print_r($arrAll);
         // //  echo "</pre>";
         // if($arrAll==404):
  
-        //   //  return redirect()->route('ostatkischets.index');
+       // return redirect()->route('ostatkischets.index');
         // endif;
-    return redirect()->route('ostatkischets.index');
+   return redirect()->route('ostatkischets.index');
         
             // OstatkiSchet::create($arrAll);   
         //  dd($request->all());
@@ -200,12 +219,13 @@ class OstatkiSchetController extends Controller
         </thead>
         <tbody>';
         $detal= $this->Repositoryschet->SchetDetal($request->kode_oper);
+        
         echo '
         <tr>
           <td><b>Бумага</b></td>
          </tr>';
-         foreach( $detal AS  $detals):
-     
+         foreach($detal AS  $detals):
+      
             // $detals['period'];
             // $detals['src'];
             // $detals['Prikhod'];
@@ -219,14 +239,14 @@ class OstatkiSchetController extends Controller
          <td> <b># </b>  </td>';
             
          foreach(   $SprAccounts AS $SprAccount):
-            if($SprAccount['id']==  $detals['src']):
+            if($SprAccount['id']==$detals['src']):
               echo'<td>'.$SprAccount['account'].'</td>';
             endif;
           
          endforeach;
        echo '<td>'.$detals['date'].'</td>
    
-         <td>'.$detals['date'].'</td>
+         <td>'.$detals['ostatok_start'].'</td>
          <td>'.$detals['Prikhod'].'</td>
          <td>'.$detals['Raskhod'].'</td>
          <td>'.$detals['ostatok_end'].'</td></tr>';

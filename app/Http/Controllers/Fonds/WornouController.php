@@ -57,7 +57,9 @@ class WornouController extends Controller
                    $kodeOper++;
                     }
                     $arrayResult= $this->RepositoryRashod->SelectRashod(2,0);
-            return  view('fonds.fondwornou.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult'));
+                    $FondMoneys= new  FondMoney();
+                    $FondMoney= $FondMoneys::orderBy('date','DESC')->get()->groupBy('kode_oper');
+            return  view('fonds.fondwornou.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','FondMoney'));
     }
 
 

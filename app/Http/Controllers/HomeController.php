@@ -21,6 +21,7 @@ use App\Repositories\RepositoryRashod;
 use Illuminate\Support\Facades\DB;
 use App\Models\FondCoins;
 use App\Models\FondEmisions;
+use App\Models\OstatkiSchet;
 class HomeController extends Controller
 {
     /**
@@ -44,9 +45,21 @@ class HomeController extends Controller
 
     /**
      * Show the application dashboard.
-     *
+     *  
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function FondAjaxSum(Request $request)
+    {
+
+      //return   $request->sum;  DB::raw("DATE_FORMAT(date, '%d-%m-%Y')
+ 
+    //   $prihod=   json_decode($this->FondEmisions::where('priznak',0)->whew('date',[$startDate, $endDate])->sum('summa'),true);
+    // where('date','>=',date('Y-m-d H:i:s'))->
+      echo "<pre>";
+   
+      echo     $pr=OstatkiSchet::where('type',1)->where('src',4)->orderBy('id', 'DESC')->limit(1)->get();
+      echo "</pre>";
+    }
     public function index(Request $request)
     {
         

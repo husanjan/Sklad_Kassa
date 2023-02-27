@@ -68,7 +68,9 @@ class UnusableController extends Controller
                         //   print_r($arrayResult);
                         //   echo "</pre>";
                         //  exit;
-                  return  view('fonds.fondunusable.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult'));
+                        $FondMoneys= new  FondMoney();
+                        $FondMoney= $FondMoneys::orderBy('date','DESC')->get()->groupBy('kode_oper');
+                  return  view('fonds.fondunusable.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','FondMoney'));
     }
 
     /**

@@ -89,6 +89,7 @@ Route::group([ 'middleware' => ['auth', 'activity']], function() {
     Route::resource('ostatkischets', OstatkiSchetController::class);
     Route::resource('fondEmissionsTanga', FondEmisionsTanga::class);
     Route::get('emissionAjaxR',[HomeController::class, 'emissionAjaxR'])->name('emissionAjaxR.post');
+    Route::get('FondAjaxSum',[HomeController::class, 'FondAjaxSum'])->name('FondAjaxSum.post');
 
 });
 

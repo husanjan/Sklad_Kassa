@@ -43,8 +43,10 @@
             @php 
              $count=1;
             @endphp
-            
+        
             @foreach ($DateFilter as $DateFilters=>$Date )
+          
+            
             <tr>
                 <th >{{ $count++ }}</th>
                 <th scope="row">{{ $Date }}</th>
@@ -57,6 +59,7 @@
                                     {!! Form::close() !!}
             </td>  
               </tr>
+            
             @endforeach
        
          

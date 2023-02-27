@@ -45,12 +45,13 @@ class Repositoryschet{
   public function DateFilter($FondType)
   {
    // return   OstatkiSchet::select( DB::raw("DATE_FORMAT(date, '%d-%m-%Y') as date"),'kode_oper')->where('FondType',$FondType)->distinct()->orderBy('date', 'DESC')->get();
-    return   OstatkiSchet::select('kode_oper','date')->where('FondType',$FondType)->distinct()->orderBy('date', 'DESC')->get();
+   
+    return   OstatkiSchet::select('kode_oper','date')->where('FondType','=',$FondType)->orderBy('date', 'DESC')->get();
   }
   public function SchetDetal($id)
   {
    // return   OstatkiSchet::select( DB::raw("DATE_FORMAT(date, '%d-%m-%Y') as date"),'kode_oper')->where('FondType',$FondType)->distinct()->orderBy('date', 'DESC')->get();
-    return   OstatkiSchet::where('kode_oper',1)->get();
+    return   OstatkiSchet::where('kode_oper',$id)->get();
   }
   private function AllOstatkischetFond($src,$date,$type)
   {
@@ -167,8 +168,10 @@ class Repositoryschet{
           $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
             $typeDate=2;
             $endDate=$request->EndDate;
-            $prihod=   json_decode($this->FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->orderBy('id', 'DESC')->sum('summa'),true);
-            $rashod=json_decode($this->FondMoney::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->orderBy('id', 'DESC')->sum('summa'),true);
+            $prihod=json_decode($this->FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->orderBy('id', 'DESC')->sum('summa'),true);
+            $rashod=json_decode($this->FondMoney::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->orderBy('id', 'DESC')->get(),true);
+
+           print_r( $rashod);
       //      $prihod=$prihod+$rashod;
             
             // $Prihod=$this->FondMoney->whereBetween('date',[$request->startDate.date('H:i:s'),$request->EndDate.date('H:i:s')])->where('type',$src)->where('priznak',0)->get()->sum('summa');
@@ -194,7 +197,7 @@ class Repositoryschet{
        // $prihod=$prihod+$rashod;
     //    echo "<br>".$request->dayType;
         endif; 
-       
+       echo $rashod-$prihod;
         if($prihod>0 || $endsum>0):
          $this->Fond[$src]['date']=date('Y-m-d H:i:s');
          $this->Fond[$src]['src']=$src;
@@ -450,7 +453,7 @@ class Repositoryschet{
                     // echo "<pre>";
                     // print_r($fond);
                     // echo "</pre>";
-         OstatkiSchet::create($fond);   
+       OstatkiSchet::create($fond);   
             endforeach;
         endif;
         if(!is_array($this->Fond)):
