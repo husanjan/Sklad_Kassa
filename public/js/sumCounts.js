@@ -76,7 +76,9 @@ function add(accumulator, a) {
 
   $(document).on("keyup",'input[id^=count]', function(){
      var   typeFond= $("input[name='farsuda']").val();
-    
+     ///type money 0/ coin 1    data-type
+     var   Type= $(this).data('type');
+      alert(Type)
     var sum=0;
   var     id_number=$(this).attr("id").substr(-2);
  
@@ -124,7 +126,7 @@ function add(accumulator, a) {
          
      
      
-          // console.log(response);
+          console.log(response);
         //    $('#ajaxoborot').html(response);
         },
      });

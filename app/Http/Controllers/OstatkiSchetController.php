@@ -127,35 +127,35 @@ class OstatkiSchetController extends Controller
         $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
           //  $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
             $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
-            echo  $endDate;
+            
       $typeDate=2;
  
     
   
       $rashod=json_decode(FondMoney::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',1)->sum('summa'),true);
       $prihod=json_decode(FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',1)->sum('summa'),true);
-  echo    "<br>". $rashod;
-  echo    "<br>". $prihod;
-    echo "<pre>";
+  // echo    "<br>". $rashod;
+  // echo    "<br>". $prihod;
+  //   echo "<pre>";
     
-    print_r($rashod);
-    print_r($prihod);
-    echo "</pre>";
+    // print_r($rashod);
+    // print_r($prihod);
+    // echo "</pre>";
   
-        $this->Repositoryschet->ToDateFondEmisions($request);
-         $this->Repositoryschet->ToDateFond($request,1);
-           $this->Repositoryschet->ToDateFond($request,2);
-          $this->Repositoryschet->ToDateFond($request,3);
-         $this->Repositoryschet->ToDateFondCoins($request,1);
-         $this->Repositoryschet->ToDateFondCoins($request,2);
+        // $this->Repositoryschet->ToDateFondEmisions($request);
+        //  $this->Repositoryschet->ToDateFond($request,1);
+        //    $this->Repositoryschet->ToDateFond($request,2);
+        //   $this->Repositoryschet->ToDateFond($request,3);
+        //  $this->Repositoryschet->ToDateFondCoins($request,1);
+        //  $this->Repositoryschet->ToDateFondCoins($request,2);
       
-           $this->Repositoryschet->ToDateFondCoins($request,0);
-         $obor= $this->Repositoryschet->OborotMoney($request,4);
+        //    $this->Repositoryschet->ToDateFondCoins($request,0);
+           $obor= $this->Repositoryschet->OborotMoney($request,4);
         $this->Repositoryschet->OborotCoins($request,4);
            //echo "<pre>";
-       $arrAll=$this->Repositoryschet->InsertOstatkiSchet();
+         $arrAll=$this->Repositoryschet->InsertOstatkiSchet();
        
-         print_r($arrAll);
+      // print_r($arrAll);
         // //  echo "</pre>";
         // if($arrAll==404):
  

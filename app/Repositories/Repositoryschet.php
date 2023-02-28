@@ -319,7 +319,7 @@ class Repositoryschet{
             // $EndDate=$request->EndDate;
             $startDate = Carbon::createFromFormat('Y-m-d', $request->startDate)->startOfDay();
             $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
-            $Prihod=json_decode($this->Oborot::where('priznak',0)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
+               $Prihod=json_decode($this->Oborot::where('priznak',0)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
             $Rashod=json_decode($this->Oborot::where('priznak',1)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
             // $Rashod=$Prihod+$Rashod;
             $EndDate=$request->EndDate;
@@ -342,9 +342,9 @@ class Repositoryschet{
             //  $dateTime= date('Y-m-d', strtotime($request->dayType));
 
              $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
-             $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
-            $Prihod= json_decode($this->Oborot::where('priznak',0)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
-            $Rashod=json_decode($this->Oborot::where('priznak',1)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
+              $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+                     $Prihod= json_decode($this->Oborot::where('priznak',0)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
+                    $Rashod=json_decode($this->Oborot::where('priznak',1)->whereBetween('date',[$startDate,$endDate])->where('account_id_in',$src)->sum('summa'),true);
          // echo "</pre>";
          $EndDate=$request->dayType;
         // $Prihod=$Rashod+$Prihod;
