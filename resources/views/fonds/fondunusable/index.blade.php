@@ -39,6 +39,7 @@
                         <div class="toast-body ">Турги дароред!!</div>
                     </div>
                 </div>
+                
             </div>
       <div class="modal-dialog modal-dialog-top  modal-xl" role="document">
 

@@ -77,8 +77,8 @@ function add(accumulator, a) {
   $(document).on("keyup",'input[id^=count]', function(){
      var   typeFond= $("input[name='farsuda']").val();
      ///type money 0/ coin 1    data-type
-     var   Type= $(this).data('type');
-      alert(Type)
+ 
+     
     var sum=0;
   var     id_number=$(this).attr("id").substr(-2);
  
@@ -113,20 +113,31 @@ function add(accumulator, a) {
        
         
     });
+    var   Type= $(this).data('type');
+ 
     $.ajax({
         url: "FondAjaxSum",
         type:"GET",
         data:{
             "_token": "{{csrf_token()}}",
-            typeFond:typeFond,sum:sum,
+            typeFond:typeFond,sum:sum,Type:Type,
      
         },
         success:function(response){
      
-         
+        if(response==0)
+        {
+            $('.toast').toast('show');
+            $("#submits").prop('disabled', true);
+
+        }    
+        if(response==1)
+        {
+            $('.toast').toast('hide');
+            $("#submits").prop('disabled', false);
+        }    
      
-     
-          console.log(response);
+          //console.log(response);
         //    $('#ajaxoborot').html(response);
         },
      });

@@ -57,30 +57,42 @@ class HomeController extends Controller
     //   $prihod=   json_decode($this->FondEmisions::where('priznak',0)->whew('date',[$startDate, $endDate])->sum('summa'),true);
     // where('date','>=',date('Y-m-d H:i:s'))->
        // "<pre>";
-         $startDate = Carbon::createFromFormat('Y-m-d',date('Y-m-d'))->startOfDay();
+       if($request->Type==0)
+       {
+          if($request->typeFond):
+          $startDate = Carbon::createFromFormat('Y-m-d',date('Y-m-d'))->startOfDay();
            $pr1= OstatkiSchet::where('type',1)->where('src',4)->orderBy('id', 'DESC')->limit(1)->get('ostatok_end');
-             "<br>".$pr2= Oborot::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',0)->sum('summa');
-        $pr3= Oborot::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',1)->sum('summa');
+          "<br>".$pr2= Oborot::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',0)->sum('summa');
+           $pr3= Oborot::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',1)->sum('summa');
+           $pr=0;
+      
+           if(isset(json_decode($pr1,true)[0]))
+           {
+              $pr=abs(json_decode($pr1,true)[0]['ostatok_end']);
+           }
+            //echo abs(json_decode($pr1,true)[0]);
+              
+                if($request->sum<=abs($pr+$pr2-$pr3) ):
+                    
+                  return 1;    
+                endif;
+          endif;
+                return 0; 
+                  //   $positive = abs(); // = 123
+            //   echo "</pre>";
+            }
+
+
+
+
+
+       }
+      
     //    echo $request->sum;
         //  $startDate = Carbon::createFromFormat('Y-m-d', $request->startDate)->startOfDay();
         //  $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
         //  $prihod=   json_decode($this->FondEmisions::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->sum('summa'),true);
-        $pr=0;
-      
-        if(isset(json_decode($pr1,true)[0]))
-        {
-           $pr=abs(json_decode($pr1,true)[0]['ostatok_end']);
-        }
-         //echo abs(json_decode($pr1,true)[0]);
-           
-             if($request->sum<=abs($pr+$pr2-$pr3) ):
-                 
-               return 1;    
-             endif;
-             return 0; 
-               //   $positive = abs(); // = 123
-         //   echo "</pre>";
-    }
+    
     public function index(Request $request)
     {
         
