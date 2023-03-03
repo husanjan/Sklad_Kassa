@@ -149,7 +149,7 @@
     </div>
     <div class="col-md-1  ">
         <label for="countcg1">Кол-во	</label>
-        <input      style="width: 05rem;" id="countg1"   type="text"  name="countg[] " class="form-control Somon count">
+        <input      style="width: 05rem;" id="countg1" data-type="1"  type="text"  name="countg[] " class="form-control Somon count">
 
     </div>
     <div class="col-md-1 ">
@@ -228,7 +228,7 @@
             </div>
             <div class="col-md-1  ">
                 <label for="countc1">Кол-во	</label>
-                <input style="width: 05rem;" id="countc1" type="text" name="countc[]" class="form-control Somon count">
+                <input style="width: 05rem;" id="countc1" data-type="1" type="text" name="countc[]" class="form-control Somon count">
 
             </div>
             <div class="col-md-1 ">
@@ -317,7 +317,7 @@
              </div>
              <div class="col-md-1  ">
                  <label for="count01">Кол-во	</label>
-                 <input style="width: 05rem;" id="count01" type="text" name="count0[]" class="form-control  Somon  count">
+                 <input style="width: 05rem;" id="count01" data-type="1" type="text" name="count0[]" class="form-control  Somon  count">
 
              </div>
              <div class="col-md-2 ">
@@ -403,7 +403,7 @@
             </div>
             <div class="col-md-1  ">
                 <label for="count31">Кол-во	</label>
-                <input style="width: 05rem;" id="count31" type="text" name="count3[]" class="form-control Somon count">
+                <input style="width: 05rem;" id="count31"  data-type="1" type="text" name="count3[]" class="form-control Somon count">
 
             </div>
             <div class="col-md-1 ">
@@ -476,7 +476,7 @@
             </div>
             <div class="col-md-1  ">
                 <label for="count51">Кол-во	</label>
-                <input style="width: 05rem;" id="count51" type="text" name="count5[]" class="form-control Somon count">
+                <input style="width: 05rem;" id="count51" data-type="1" type="text" name="count5[]" class="form-control Somon count">
 
             </div>
             <div class="col-md-1 ">
@@ -605,7 +605,7 @@
                                             </div>
                                             <div class="col-md-1  ">
                                                 <label for="counth1">Кол-во	</label>
-                                                <input      style="width: 05rem;" id="counth1"   type="text"  name="counth[] " class="form-control Somon count">
+                                                <input      style="width: 05rem;" id="counth1" data-type="1"  type="text"  name="counth[] " class="form-control Somon count">
               
                                             </div>
                                             <div class="col-md-1 ">
@@ -672,7 +672,7 @@
                                             </div>
                                             <div class="col-md-1  ">
                                                 <label for="countcj1">Кол-во	</label>
-                                                <input      style="width: 05rem;" id="countj1"   type="text"  name="countj[] " class="form-control Somon count">
+                                                <input      style="width: 05rem;" id="countj1" data-type="1"   type="text"  name="countj[] " class="form-control Somon count">
               
                                             </div>
                                             <div class="col-md-1 ">
@@ -741,7 +741,7 @@
                                             </div>
                                             <div class="col-md-1  ">
                                                 <label for="countce1">Кол-во	</label>
-                                                <input      style="width: 05rem;" id="countk1"   type="text"  name="countk[] " class="form-control Somon count">
+                                                <input      style="width: 05rem;" id="countk1"  data-type="1" type="text"  name="countk[] " class="form-control Somon count">
               
                                             </div>
                                             <div class="col-md-1 ">
@@ -1139,7 +1139,7 @@ var select_edin='<select id="edin_id'+idv+new_btn+'"  class="form-select Somon s
 var select_edin= $(select_edin).append($edin_id);
 var edinLabel='<label for="edin_id'+idv+new_btn+'">Единиц	</label>';
 var edins=$(edi).append(edinLabel,select_edin);
-var counts= '  <div class="col-md-1  "><label for="count'+idv+new_btn+'">Кол-во	</label><input      style="width: 05rem;" id="count'+idv+new_btn+'"   type="text"  name="count'+idv+'[]" class="form-control Somon  count"></div>';
+var counts= '  <div class="col-md-1  "><label for="count'+idv+new_btn+'">Кол-во	</label><input      style="width: 05rem;" id="count'+idv+new_btn+'" data-type="1"   type="text"  name="count'+idv+'[]" class="form-control Somon  count"></div>';
   // ..Хранилище тег
 var saf='<div class="col-md-2 "></div>';
 var safeLabel='<label for="safe_id0'+new_btn+'">Хранилище</label>';

@@ -1361,7 +1361,7 @@
                     <center> <h4>  <a class="list-group-item-action" href="#botilshuda-Pul"> Ботилшуда</a></h4>   </center>
               
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Context="botilshuda" data-target="#rashod"   id="priznaki" value="0">Приход </button>
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Context="botilshudaP" data-target="#botilshudaP"   id="priznaki" value="0">Приход </button>
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#botilshuda"  data-Context="botilshuda"  id="priznak" value="1">Расход</button>
       
                     </div>
@@ -1451,7 +1451,7 @@
                         <center> <h4>  <a class="list-group-item-action" href="#korshoyam-Tanga">Танга Ботилшуда</a></h4> </center>
                      
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Type="Tanga" data-Context="botilshuda" data-target="#rashodTanga"   id="priznaki" value="0">Приход </button>
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal"  data-Type="Tanga" data-Context="botilshudaPrihod" data-target="#botilshudaPrihod"   id="priznaki" value="0">Приход </button>
                             <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-Type="Tanga" data-target="#botilshudatanga"  data-Context="botilshuda"  id="priznaki" value="1">Расход</button>
                                 
                         </div>
@@ -1491,7 +1491,12 @@
 
 {{-- farsuda rashod --}}
   {{-- //farsuda --}}
-     
+     {{-- //Prihod   --}}
+     <div class="modal fade" id="botilshudaP"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+        @include('fonds.fondcancled.botilshudaPrihod')
+       
+      </div>
           <!-- Modal -->
           <div class="modal fade" id="botilshuda"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             
@@ -1521,6 +1526,12 @@
            
           </div>
            {{-- end..Коршоям расход танга --}}
+              <!-- Modal -->
+          <div class="modal fade" id="botilshudaPrihod"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+            @include('fonds.botilshuda_tanga.FarsudaRashod')
+           
+          </div>
      <!-- Modal -->
      <div class="modal fade" id="botilshudatanga"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             
@@ -3038,9 +3049,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#FiveSTanga" role="tab" aria-controls="FiveS" aria-selected="false">5 сомони <i  class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="5Somon"></i></a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="nav-link" id="razne-tab" data-toggle="tab" href="#razneTanga" role="tab" aria-controls="razne" aria-selected="false">Разные <i class="d-none fa-sharp fa-solid fa-circle-exclamation text-danger" id="rrazne"></i></a>
-                                    </li>
+                                    </li> --}}
                                   </ul>
                                   <div class="tab-content" id="myTabContent">
                                     {{-- //Twenty 20 diram tanga  --}}
@@ -3865,7 +3876,7 @@ $(document).ready(function() {
                 
                 $('.'+id).html(data);
             }).fail(function () {
-                alert('Articles could not be loaded.');
+                // alert('Articles could not be loaded.');
             });
         }
   
@@ -4013,7 +4024,7 @@ $.ajax({
 
                 //fondes korshoyam farsuda botilshuda
         $(".Fond_id").click(function(){
-            console.log("dd");
+         
             $('#fpriznak').val('');
        
              var  kode_opers=$(this).attr('id');
@@ -4062,7 +4073,8 @@ $.ajax({
 
  <script>
    $(document).on('click','#priznaki',function(){
-   
+    $('#textpriznakTanga').html('');
+    $('#textpriznak').html('');
     document.getElementById("TangaSumbit").reset();
     document.getElementById("submit").reset();
     $('[id^=sum]').html('');
@@ -4072,9 +4084,9 @@ $.ajax({
    
           //console.log($(this).data('context'));
           var textpriznak='#textpriznak';
-          $(textpriznak).html("");
+          //$(textpriznak).html("");
           $('#type').val('');
-          
+                 $("#textpriznak").html(" ");
            var id='#srcHome';
            $('#valuepriznak').val($(this).val());
            $('#valuepriznakTanga').val($(this).val());
@@ -4082,12 +4094,61 @@ $.ajax({
            {
             id='#srcHomeTanga';
               textpriznak='#textpriznakTanga';
-           }
-          if($(this).data('context')=='korshoyam')
+               if($(this).data('context')=='korshoyam')
           {
+
          
             $('#type').val(1)
-            $(textpriznak).html('Коршоям/'+$(this).text()+'<input name="farsuda" type="hidden"  value="1" >');
+            $(textpriznak).html('Коршоям/'+$(this).text()+'<div id="probel"> <input name="farsuda" type="hidden"  value="1" ></div>');
+            
+            if($(this).val()==0)
+            {
+                $(id).html('<input type="hidden" name="src" value="4"> ');
+               
+                // console.log($(this).val());
+          
+                return
+            }
+        }
+              if($(this).data('context')=='farsuda')
+          {
+         
+            $(textpriznak).html('Фарсуда/'+$(this).text()+' <input name="farsuda" id="farsudaT"   type="hidden"  value="2" >');
+            $('#type').val(2)
+            if($(this).val()==0)
+            {
+                $(id).html('<input type="hidden" name="src" value="4">');
+                // $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" required="" value="7"><label class="btn btn-outline-secondary" for="option1">Оборот</label> <input type="radio" required="" class="btn-check" name="src" id="option2" value="1" autocomplete="off"><label class="btn btn-outline-secondary" for="option2">Коршоям</label> </div>');
+                
+            }
+
+
+        
+        }
+        if($(this).data('context')=='botilshuda')
+          {
+            
+            $(textpriznak).html('Ботилшуда/'+$(this).text()+'<input name="farsuda" id="botilshudaT" type="hidden"  value="3">');
+            $('#type').val(3)
+            if($(this).val()==0)
+            {
+                $(id).html('<input type="hidden" name="src" value="2">');
+              
+        
+                // console.log($(this).val());
+                return
+            }
+        }
+          return;     
+       }
+         
+        //    alert(textpriznak);
+          if($(this).data('context')=='korshoyam')
+          {
+
+         
+            $('#type').val(1)
+            $(textpriznak).html('Коршоям/'+$(this).text()+'<div id="probel"> <input name="farsuda" type="hidden"  value="1" ></div>');
             
             if($(this).val()==0)
             {
@@ -4109,11 +4170,11 @@ $.ajax({
           if($(this).data('context')=='farsuda')
           {
          
-            $(textpriznak).html('Фарсуда /'+$(this).text()+' <input name="farsuda" type="hidden"  value="2" >');
+            $(textpriznak).html('Фарсуда /'+$(this).text()+'<div id="probel"> <input name="farsuda"   type="hidden"  value="2" ></div>');
             $('#type').val(2)
             if($(this).val()==0)
             {
-                $(id).html('<input type="hidden" name="src" value="4"> ');
+                $(id).html('<input type="hidden" name="src" value="4">');
                 // $(id).html('<div class="btn-group"> <input type="radio" class="btn-check" name="src" id="option1" autocomplete="off" required="" value="7"><label class="btn btn-outline-secondary" for="option1">Оборот</label> <input type="radio" required="" class="btn-check" name="src" id="option2" value="1" autocomplete="off"><label class="btn btn-outline-secondary" for="option2">Коршоям</label> </div>');
                 
             }
@@ -4129,7 +4190,7 @@ $.ajax({
           if($(this).data('context')=='botilshuda')
           {
             
-            $(textpriznak).html('Ботилшуда / '+$(this).text()+'<input name="farsuda" type="hidden"  value="3">');
+            $(textpriznak).html('Ботилшуда/'+$(this).text()+'<div id="probel"><input name="farsuda" type="hidden"  value="3"></div>');
             $('#type').val(3)
             if($(this).val()==0)
             {

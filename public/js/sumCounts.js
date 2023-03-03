@@ -75,12 +75,32 @@ function add(accumulator, a) {
   var arrays=[];
 
   $(document).on("keyup",'input[id^=count]', function(){
-     var   typeFond= $("input[name='farsuda']").val();
+    var   typeFond=0;
+  var  typeFondF= $("input[id='farsudaT']").val();
+  var   typeFondBOTIL= $("input[id='botilshudaT']").val();
+            if(typeFondF==2)
+            {
+                typeFond=typeFondF;
+            }
+            if(typeFondBOTIL==3)
+            {
+                typeFond=typeFondBOTIL;
+            }
+        if(typeFond<1)
+        {
+            typeFond= $("input[name='farsuda']").val();
+        }
+        // alert(typeFond);
+      
+        //  typeFond= $("input[id='farsudaT']").val();
      ///type money 0/ coin 1    data-type
- 
-     
-    var sum=0;
-  var     id_number=$(this).attr("id").substr(-2);
+    //    console.log( $("input[name='farsuda']").val())
+    //    $("input[name='farsuda']").each(function(){
+    //     console.log($(this).val());
+    //          });
+
+  var sum=0;
+  var  id_number=$(this).attr("id").substr(-2);
  
       var   nominal= $('#'+'nominal'+id_number.substr(-2,1)+"1").val();
       $('#'+id_number.substr(-2,1)+'Somon').addClass("d-none");
@@ -90,7 +110,7 @@ function add(accumulator, a) {
       var edin_id='[id^=edin_id'+ id_number.substr(-2,1)+']';
       var count_id='[id^=count'+ id_number.substr(-2,1)+']';
         //  console.log(nominal);
-
+        //  alert(typeFond)
      
      var AllSum= SumEdinCount('[id^=new'+id_number.substr(-2,1)+']',nominal,id_number.substr(-2,1));
     
@@ -103,7 +123,7 @@ function add(accumulator, a) {
            // sumCounts.push(obj.value);
           obj.value;
           arrays.push();
-        //   alert($(obj).data('nominal'));
+        
        
           sum+=parseFloat(obj.value);
               
@@ -114,7 +134,11 @@ function add(accumulator, a) {
         
     });
     var   Type= $(this).data('type');
- 
+    var htmlSum='<div class="alert alert-primary  mt-2"><div class="btn-group" role="group" aria-label="Basic example"> Общие сумма  '+sum+' Cомони  </div></div>';
+               
+    $("#AllSumma").html(htmlSum);
+    
+          $("#AllSummaTangaD").html(htmlSum);
     $.ajax({
         url: "FondAjaxSum",
         type:"GET",
@@ -124,27 +148,28 @@ function add(accumulator, a) {
      
         },
         success:function(response){
-     
-        if(response==0)
+      alert(response);
+        //return response;
+        if(response=='show')
         {
-            $('.toast').toast('show');
+          
             $("#submits").prop('disabled', true);
-
+         //   return;
+          
         }    
-        if(response==1)
+      
+        if(response=='hide')
         {
-            $('.toast').toast('hide');
+        
             $("#submits").prop('disabled', false);
+            //return;
         }    
-     
+        $('.toast').toast(response);
+        return;
           //console.log(response);
         //    $('#ajaxoborot').html(response);
         },
      });
-    var htmlSum='<div class="alert alert-primary  mt-2"><div class="btn-group" role="group" aria-label="Basic example"> Общие сумма  '+sum+' Cомони  </div></div>';
-               
-    $("#AllSumma").html(htmlSum);
-    
-          $("#AllSummaTangaD").html(htmlSum);
+   
   
   });

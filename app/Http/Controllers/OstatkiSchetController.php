@@ -38,15 +38,19 @@ class OstatkiSchetController extends Controller
       $FoindMonthMoney = array_merge(json_decode($FondkorshoamMoneyMonth,true),json_decode($FondFarsudaMoneyMonth,true),json_decode($FondbotilshudaMoneyMonth,true),json_decode($FondbOborotMoneyMonth,true),json_decode($FondbEmissionMoneyMonth,true));
      
       //coins
-      $FondkorshoamCoinsMonth = $this->Repositoryschet->AllSelectDay(1,2,2);
-      $FondFarsudaCoinsMonth = $this->Repositoryschet->AllSelectDay(2,2,2);
+      $FondkorshoamCoinsMonth = $this->Repositoryschet->AllSelectDay(11,2,2);
+      $FondFarsudaCoinsMonth = $this->Repositoryschet->AllSelectDay(10,2,2);
       $FondEmssionCoinsMonth = $this->Repositoryschet->AllSelectDay(9,2,2);
       $FondbotilshudaCoinsMonth = $this->Repositoryschet->AllSelectDay(8,2,2);
       $FondbOborotCoinsMonth = $this->Repositoryschet->AllSelectDay(4,2,2);
 
-      $FondbOborotCoinsMonth = $this->Repositoryschet->AllSelectDay(7,2,2);
+      // $FondbOborotCoinsMonth = $this->Repositoryschet->AllSelectDay(8,2,2);
       $FoindMonthCoins=array_merge(json_decode($FondkorshoamCoinsMonth,true),json_decode($FondFarsudaCoinsMonth,true),json_decode($FondbotilshudaCoinsMonth,true),json_decode($FondbOborotCoinsMonth,true),json_decode($FondEmssionCoinsMonth,true));
-     
+      // echo "<pre>";
+      
+      // print_r($FoindMonthCoins);
+      // echo "</pre>";
+      // exit;
       //   //coins
     //   end  // month
     //  day/
@@ -58,8 +62,8 @@ class OstatkiSchetController extends Controller
             $FondbFondemssionMoneyday= $this->Repositoryschet->AllSelectDay(7,1,1);
       
             //coins
-            $FondkorshoamCoinsday= $this->Repositoryschet->AllSelectDay(1,2,1);
-            $FondFarsudaCoinsday= $this->Repositoryschet->AllSelectDay(2,2,1);
+            $FondkorshoamCoinsday= $this->Repositoryschet->AllSelectDay(11,2,1);
+            $FondFarsudaCoinsday= $this->Repositoryschet->AllSelectDay(10,2,1);
             $FondEmssionCoinsDay = $this->Repositoryschet->AllSelectDay(9,2,1);
             $FondbotilshudaCoinsday= $this->Repositoryschet->AllSelectDay(8,2,1);
             $FondbOborotCoinsday = $this->Repositoryschet->AllSelectDay(4,2,1);
@@ -124,16 +128,16 @@ class OstatkiSchetController extends Controller
     //   print_r(json_decode($pr,true)[0] );
     //   echo "</pre>";
     // //  exit;
-        $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
-          //  $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
-            $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+      //   $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
+      //     //  $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+      //       $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
             
-      $typeDate=2;
+      // $typeDate=2;
  
     
   
-      $rashod=json_decode(FondMoney::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',1)->sum('summa'),true);
-      $prihod=json_decode(FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',1)->sum('summa'),true);
+      // $rashod=json_decode(FondMoney::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',1)->sum('summa'),true);
+      // $prihod=json_decode(FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',1)->sum('summa'),true);
   // echo    "<br>". $rashod;
   // echo    "<br>". $prihod;
   //   echo "<pre>";
@@ -142,24 +146,22 @@ class OstatkiSchetController extends Controller
     // print_r($prihod);
     // echo "</pre>";
   
-        // $this->Repositoryschet->ToDateFondEmisions($request);
-        //  $this->Repositoryschet->ToDateFond($request,1);
-        //    $this->Repositoryschet->ToDateFond($request,2);
-        //   $this->Repositoryschet->ToDateFond($request,3);
-        //  $this->Repositoryschet->ToDateFondCoins($request,1);
-        //  $this->Repositoryschet->ToDateFondCoins($request,2);
-      
-        //    $this->Repositoryschet->ToDateFondCoins($request,0);
-           $obor= $this->Repositoryschet->OborotMoney($request,4);
-        $this->Repositoryschet->OborotCoins($request,4);
+        $this->Repositoryschet->ToDateFondEmisions($request);
+         $this->Repositoryschet->ToDateFond($request,1);
+           $this->Repositoryschet->ToDateFond($request,2);
+          $this->Repositoryschet->ToDateFond($request,3);
+         $this->Repositoryschet->ToDateFondCoins($request,1);
+         $this->Repositoryschet->ToDateFondCoins($request,2);
+        $this->Repositoryschet->ToDateFondCoins($request,0);
+        $obor= $this->Repositoryschet->OborotMoney($request,4);
+        $this->Repositoryschet->OborotCoins($request,7);
            //echo "<pre>";
          $arrAll=$this->Repositoryschet->InsertOstatkiSchet();
        
-      // print_r($arrAll);
+         print_r($arrAll);
         // //  echo "</pre>";
         // if($arrAll==404):
- 
-       // return redirect()->route('ostatkischets.index');
+  // return redirect()->route('ostatkischets.index');
         // endif;
    return redirect()->route('ostatkischets.index');
         

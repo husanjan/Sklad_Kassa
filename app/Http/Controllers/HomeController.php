@@ -57,12 +57,34 @@ class HomeController extends Controller
     //   $prihod=   json_decode($this->FondEmisions::where('priznak',0)->whew('date',[$startDate, $endDate])->sum('summa'),true);
     // where('date','>=',date('Y-m-d H:i:s'))->
        // "<pre>";
-       if($request->Type==0)
+       $startDate = Carbon::createFromFormat('Y-m-d',date('Y-m-d'))->startOfDay();
+      
+      /// $pr1=OstatkiSchet::whereDate('priod','<',)->where('type',1)->orderBy('id', 'DESC')->where('src',$request->Type)->limit(1)->get();
+      
+     //  $pr1= OstatkiSchet::where('type',1)->where('src',4)->orderBy('date', 'DESC')->limit(1)->get('ostatok_end');
+      //  $pr2= Oborot::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',0)->sum('summa');
+      //   $pr3= Oborot::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',1)->sum('summa');
+  
+      // echo $request->Type;
+          //  echo "<pre>";
+        
+          //   print_r(json_decode($pr1,true)[0]['ostatok_end']);
+          //  echo "</pre>";
+          
+          // if(isset(json_decode($pr1,true)[0]['ostatok_end']))
+          // {
+          //    $pr=abs(json_decode($pr1,true)[0]['ostatok_end']);
+          // }
+
+          // echo  $pr;
+          //   exit;
+       if($request->Type==0  AND $request->sum>0)
        {
-          if($request->typeFond):
-          $startDate = Carbon::createFromFormat('Y-m-d',date('Y-m-d'))->startOfDay();
-           $pr1= OstatkiSchet::where('type',1)->where('src',4)->orderBy('id', 'DESC')->limit(1)->get('ostatok_end');
-          "<br>".$pr2= Oborot::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',0)->sum('summa');
+          if($request->typeFond==1 OR $request->typeFond==2):
+ 
+            $pr1=OstatkiSchet::whereDate('priod','<',date('Y-m-d'))->where('type',1)->orderBy('id', 'DESC')->where('src',4)->where('FondType',1)->limit(1)->get();
+          //  $pr1= OstatkiSchet::where('type',1)->where('src',4)->orderBy('id', 'DESC')->limit(1)->get('ostatok_end');
+          $pr2= Oborot::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',0)->sum('summa');
            $pr3= Oborot::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',1)->sum('summa');
            $pr=0;
       
@@ -72,22 +94,92 @@ class HomeController extends Controller
            }
             //echo abs(json_decode($pr1,true)[0]);
               
-                if($request->sum<=abs($pr+$pr2-$pr3) ):
+                if($request->sum<=abs($pr+$pr2-$pr3)):
                     
-                  return 1;    
+                  return 1;
+              
                 endif;
-          endif;
-                return 0; 
+                return 0;
+                endif;
+            
                   //   $positive = abs(); // = 123
             //   echo "</pre>";
+            if($request->typeFond==3)
+            {
+              $pfarsuda=OstatkiSchet::whereDate('priod','<',date('Y-m-d'))->where('type',1)->orderBy('id', 'DESC')->where('src',4)->where('FondType',1)->limit(1)->get();
+              $prihodFarsuda=json_decode(FondMoney::where('priznak',0)->whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('type',2)->sum('summa'),true);
+              $rashodFarsuda=json_decode(FondMoney::where('priznak',1)->whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('type',2)->sum('summa'),true);
+          //   $pfarsuda= OstatkiSchet::where('type',1)->where('src',2)->orderBy('id', 'DESC')->limit(1)->get('ostatok_end');
+             $pfarsuda1=0;
+             if(isset(json_decode($pfarsuda,true)[0]))
+             {
+                $pfarsuda1=abs(json_decode($pfarsuda,true)[0]['ostatok_end']);
+             }
+    
+            if($request->sum<=abs($pfarsuda1+$prihodFarsuda-$rashodFarsuda)):
+                    
+              return     abs($pfarsuda1+$prihodFarsuda-$rashodFarsuda);    
+            endif;
+             }
+             return 0;
             }
-
-
-
-
+              //  coins
+             
+              if($request->Type==1 AND $request->sum>0)
+              {
+              ///  return $request->typeFond;   
+                
+          //      /// $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
+          
+          if($request->typeFond==1 OR $request->typeFond==2):
+         
+            //   $prihodFarsuda=json_decode(oborots_coin::where('priznak',0)->whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->sum('summa'),true);
+              // $pt1= OstatkiSchet::where('type',1)->where('src',8)->orderBy('id', 'DESC')->limit(1)->get('ostatok_end');
+              $pr1=OstatkiSchet::whereDate('priod','<',date('Y-m-d'))->where('type',1)->orderBy('id', 'DESC')->where('src',8)->where('FondType',2)->limit(1)->get();
+              $pr2= oborots_coin::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',0)->sum('summa');
+              $pr3= oborots_coin::whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('priznak',1)->sum('summa');
+              
+               $pt=0;
+                if(isset(json_decode($pr1,true)[0]))
+           {
+               $pt=abs(json_decode($pr1,true)[0]['ostatok_end']);
+           }
+            
+          if($request->sum<=abs($pt+$pr2-$pr3)):
+          
+            return 1;
+          endif;
+               
+           // if($request->typeFond==3):
+          //   @endif
+        //   $prihodFarsuda=json_decode(FondMoney::where('priznak',0)->whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('type',2)->sum('summa'),true);
+        //   $rashodFarsuda=json_decode(FondMoney::where('priznak',1)->whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('type',2)->sum('summa'),true);
+        //  $pfarsuda= OstatkiSchet::where('type',1)->where('src',2)->orderBy('id', 'DESC')->limit(1)->get('ostatok_end');
+        //  $pfarsuda1=0;
+          endif; 
+          if($request->typeFond==3)
+          {
+            
+            $ostat= OstatkiSchet::where('type',1)->where('src',10)->orderBy('id', 'DESC')->limit(1)->get('ostatok_end');
+            $Farsuda=json_decode(FondCoins::where('priznak',0)->whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('type',2)->sum('summa'),true);
+            $rashodF=json_decode(FondCoins::where('priznak',1)->whereBetween('date',[$startDate, date('Y-m-d H:i:s')])->where('type',2)->sum('summa'),true);
+            if(isset(json_decode($ostat,true)[0]))
+            {
+                $ostatk=abs(json_decode($ostat,true)[0]['ostatok_end']);
+            }
+               
+               if($request->sum<=abs($ostatk+$Farsuda-$rashodF)):
+          
+                return 1;
+              endif;
+          }
+            }else{
+              return 0;
+            }
+         
 
        }
-      
+       
     //    echo $request->sum;
         //  $startDate = Carbon::createFromFormat('Y-m-d', $request->startDate)->startOfDay();
         //  $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
