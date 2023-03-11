@@ -2,10 +2,10 @@
 
 @section('content')
 
-   
+<div class="container-fluid">
                     <div class="row">
 
-                        <div class="col-lg-2 margin-tb">
+                        <div class="col-lg-2 margin-tb ml-2">
 
                             <div class="pull-left">
                                 <h2>Фонд эмиссионный танга</h2>
@@ -142,63 +142,64 @@
     </div>
   </div>
    </form>
-            <div class="container">
+           
+               <div class="card col-md-8 ml-2">
                 <table class="table mt-2">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Хранилище</th>
-                        <th scope="col">Шкаф/Стилаж</th>
-                        <th scope="col">Катор</th>
-                        <th scope="col">Ячейка</th>
-                        <th scope="col">Единиц</th>
-                        <th scope="col">Наминал</th>
-                        <th scope="col">Сумма</th>
-            
-                      </tr>
-                    </thead>
-                    <tbody>
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Хранилище</th>
+                      <th scope="col">Шкаф/Стилаж</th>
+                      <th scope="col">Катор</th>
+                      <th scope="col">Ячейка</th>
+                      <th scope="col">Единиц</th>
+                      <th scope="col">Наминал</th>
+                      <th scope="col">Сумма</th>
+          
+                    </tr>
+                  </thead>
+                  <tbody>
+                     
+                      <?php $pos=1 ?>
+                      @foreach( $arrayResult AS  $ostatkiResults)
+                      @if($ostatkiResults->summa>0)
+                      <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
+                        <tr class="border-bottom" id="t{{$ostatkiResults->id}}">
                        
-                        <?php $pos=1 ?>
-                        @foreach( $arrayResult AS  $ostatkiResults)
-                        @if($ostatkiResults->summa>0)
-                        <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
-                          <tr class="border-bottom" id="t{{$ostatkiResults->id}}">
-                         
-                   <td> <?php print $pos++ ?></td>
-                          
-                            @foreach ($safes as $safe)
-                                         
-                            @if($ostatkiResults->safe_id===$safe->id) <td> <input type="hidden" name="safe{{$ostatkiResults->id}}" value="{{$safe->id}}">{{$safe->safe}}</td>  @endif
-                            @endforeach
-                            {{-- <td>{{ $ostatkiResults->safe_id }}</td> --}}
+                 <td> <?php print $pos++ ?></td>
+                        
+                          @foreach ($safes as $safe)
+                                       
+                          @if($ostatkiResults->safe_id===$safe->id) <td> <input type="hidden" name="safe{{$ostatkiResults->id}}" value="{{$safe->id}}">{{$safe->safe}}</td>  @endif
+                          @endforeach
+                          {{-- <td>{{ $ostatkiResults->safe_id }}</td> --}}
+                  
+                          @foreach ( $shkafs as $shkaf )
+                 
+                          @if($ostatkiResults->shkaf_id===$shkaf->id ) <td><input type="hidden" name="shkaf{{$ostatkiResults->id}}" value="{{$shkaf->id}}">{{ $shkaf->shkaf }}</td>  @endif
+                          @endforeach
+                          @foreach ( $sprQators as $sprQator )
+                 
+                          @if($ostatkiResults->qator_id===$sprQator->id ) <td><input type="hidden" name="sprQator{{$ostatkiResults->id}}" value="{{$sprQator->id}}">{{ $sprQator->qator }}</td>  @endif
+                          @endforeach
+                          @foreach ( $sprCells as $sprCell )
+                 
+                          @if($ostatkiResults->cell_id===$sprCell->id ) <td><input type="hidden" name="sprCell{{$ostatkiResults->id}}" value="{{$sprCell->id}}">{{ $sprCell->cell }}</td>  @endif
+                          @endforeach
+                          @foreach ($sprEds as $sprEd )
+                 
+                          @if($ostatkiResults->ed_id===$sprEd->id ) <td><input type="hidden" name="sprEd{{$ostatkiResults->id}}" value="{{$sprEd->id}}" >{{ $sprEd->name }}</td>  @endif
+                          @endforeach
                     
-                            @foreach ( $shkafs as $shkaf )
-                   
-                            @if($ostatkiResults->shkaf_id===$shkaf->id ) <td><input type="hidden" name="shkaf{{$ostatkiResults->id}}" value="{{$shkaf->id}}">{{ $shkaf->shkaf }}</td>  @endif
-                            @endforeach
-                            @foreach ( $sprQators as $sprQator )
-                   
-                            @if($ostatkiResults->qator_id===$sprQator->id ) <td><input type="hidden" name="sprQator{{$ostatkiResults->id}}" value="{{$sprQator->id}}">{{ $sprQator->qator }}</td>  @endif
-                            @endforeach
-                            @foreach ( $sprCells as $sprCell )
-                   
-                            @if($ostatkiResults->cell_id===$sprCell->id ) <td><input type="hidden" name="sprCell{{$ostatkiResults->id}}" value="{{$sprCell->id}}">{{ $sprCell->cell }}</td>  @endif
-                            @endforeach
-                            @foreach ($sprEds as $sprEd )
-                   
-                            @if($ostatkiResults->ed_id===$sprEd->id ) <td><input type="hidden" name="sprEd{{$ostatkiResults->id}}" value="{{$sprEd->id}}" >{{ $sprEd->name }}</td>  @endif
-                            @endforeach
-                      
-                            <td> {{ $ostatkiResults->naminal=='razne'?'Разные':$ostatkiResults->naminal}} <input type="hidden"  id="naminal{{$ostatkiResults->id}}"  name="naminal{{$ostatkiResults->id}}" value="{{$ostatkiResults->naminal}}"></td>
-                            <td ><label for="" id="sumr{{$ostatkiResults->id}}" class="{{$ostatkiResults->id}}"><input type="hidden" name="ostatkiResults{{$ostatkiResults->id}}" value="{{ $ostatkiResults->summa}}"> {{ $ostatkiResults->summa}}</label> сомони</td>
+                          <td> {{ $ostatkiResults->naminal=='razne'?'Разные':$ostatkiResults->naminal}} <input type="hidden"  id="naminal{{$ostatkiResults->id}}"  name="naminal{{$ostatkiResults->id}}" value="{{$ostatkiResults->naminal}}"></td>
+                          <td ><label for="" id="sumr{{$ostatkiResults->id}}" class="{{$ostatkiResults->id}}"><input type="hidden" name="ostatkiResults{{$ostatkiResults->id}}" value="{{ $ostatkiResults->summa}}"> {{ $ostatkiResults->summa}}</label> сомони</td>
+                        
                           
-                            
-                          </tr>@endif
-                         
-                        @endforeach
-                </tbody>
-                 </table>     
+                        </tr>@endif
+                       
+                      @endforeach
+              </tbody>
+               </table>  </div>   
             </div>     
 
 @endsection

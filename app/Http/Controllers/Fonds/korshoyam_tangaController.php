@@ -46,6 +46,7 @@ class korshoyam_tangaController extends Controller
         $kodeOperObort++;
     }
                     //  SelectRashodTanga($type,$priznak)
+        $FondMoneyTang=FondCoins::orderBy('date','DESC')->get()->groupBy('kode_oper');
          $arrayResult= $this->RepositoryRashod->SelectRashodTanga(1,0);
  
            $safes = SprSafes::all();
@@ -61,7 +62,7 @@ class korshoyam_tangaController extends Controller
                         }else{
                          $kodeOper++;
                           }
-                  return  view('fonds.korshoyam_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult'));
+                  return  view('fonds.korshoyam_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','FondMoneyTang'));
       
     }
 

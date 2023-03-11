@@ -118,7 +118,7 @@ class HomeController extends Controller
     
             if($request->sum<=abs($pfarsuda1+$prihodFarsuda-$rashodFarsuda)):
                     
-              return     abs($pfarsuda1+$prihodFarsuda-$rashodFarsuda);    
+              return     1;    
             endif;
              }
              return 0;
@@ -749,7 +749,7 @@ public function oborotInsertTanga(Request $request)
 }
 public function InsertTanga(Request $request)
 {
-                //   dd($request->all());
+             //    dd($request->all());
        DB::beginTransaction();
        $oborots = $this->addRepository->ModaladdRequestsOborottanga($request,$request->farsuda);
         $money= $this->addRepository->ModaladdRequestsTanga($request);

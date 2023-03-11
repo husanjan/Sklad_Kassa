@@ -901,18 +901,89 @@
   </div>
    </form>
 
-      <div class="container">
-          <div class="col-md-12">
+   
+          <div class="col-md-12 ml-3">
               <div class="btn-group" role="group" aria-label="Basic example">
                   
                   <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod" id="priznak" value="0">Приход </button>
                   <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#farsudaTanga"  id="priznak" value="1">Расход</button>
 
               </div>
-          </div>
+        
       </div>
 
+      <div class="card col-md-6 ml-4">
+        <div class="card-body">
+            <h4>Танга Фарсуда</h4>
 
+            <br>
+            <table class="table col-md-auto">
+                <tbody><tr>
+                    <th>#</th>
+                    <th>Дата</th>
+                    <th>Номер док</th>
+                    <th>Номер счет</th>
+                    <th>Признак</th>
+                    <th>Сумма</th>
+                     
+
+
+                </tr>
+                @php($frcount=1)
+                <?php
+                //         echo "<pre>";
+                //         print_r(json_decode($FondMoney,true));
+                //         echo "</pre>";
+                //  // echo   array_sum(array_map(function($value){return   $value['summa'];}, json_decode($FondMoney,true)[0][0]));
+                //         exit;
+                        ?>
+                @foreach(json_decode($FondMoneyTang->take(20),true) as $farsudTanga)
+              
+                <?php 
+
+//print_r(array_map(function($value){return   $value['summa'];}, $korshoyam));
+?>
+                   @if(array_keys( array_count_values(array_map(function($value){return   $value['type'];},$farsudTanga)))[0]==2 || array_keys( array_count_values(array_map(function($value){return   $value['src'];},$farsudTanga)))[0]==2)
+                <tr zippy="mdoclist_1" id="mdoclist_1">
+                   
+                          <td> <b>{{  $frcount++ }}</b>  </td>
+                  
+                    <td  id="Tangafard{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}">{{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$farsudTanga)))[0]))}}</td>
+                    <td  id="Tangafarfdoc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}"> {{   array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$farsudTanga)))[0]}} </td>
+                                        @foreach($sprAccounts AS $sprAccounti)
+
+
+                         @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$farsudTanga)))[0])
+                            <td class="col-md-2" id="Tangafarnfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}">
+                                {{$sprAccounti->account  }} </td>
+                        @endif
+                    @endforeach
+                    @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$farsudTanga)))[0]==0)
+                    <td  id="Tangafar{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}">Приход</td>
+                    @endif
+                    @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$farsudTanga)))[0]==1)
+                    <td  id="Tangafar{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}}">Расход</td>
+                    @endif
+                   
+               
+                          <td class="col-md-4 ">
+
+                        <a class=" link-primary       Fond_idTanga "  href="#" data-toggle="modal" data-target="#FondsTanga" data-id="Tangafar"   id="{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$farsudTanga)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['type'];},$farsudTanga)))[0]}}">
+                        <i class="text-dark fa fa-eye"></i>   {{   array_sum(array_map(function($value){return   $value['summa'];}, $farsudTanga)) }} </a></td>
+                   
+                         </tr>
+                         @endif
+                 @endforeach
+
+                </tbody>
+            </table>
+            <div class="mt-4 offset-lg-10"><table><tbody><tr>
+                        {{-- <td valign="middle"><button class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg " data-target="#exampleModalLong">Подробонее</button></td> --}}
+
+                    </tr></tbody></table>
+            </div>
+        </div>
+    </div>
 
 
 @endsection

@@ -20,8 +20,9 @@ function  sumcounts()
                    if(parseInt(index.value))
                    {
                     total+=parseInt(index.value);
+                    console.log(index.value);
                    }
-        
+                //   alert(total);
                    $('#countsum').html("<b> Общие сумма:"+ total+" сомони</b>");    
     
     

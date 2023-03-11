@@ -31,7 +31,7 @@
                                                 <label for="nomil" class="col-md-4 col-form-label text-md-end">{{ __('Номинал') }}</label>
                                                 <div class="col-md-8">
                                                     {{-- <input id="nomil" type="text" class="form-control" name="naminal" placeholder=" "> --}}
-                                                    <select id="nomil" class="form-select" name="naminal" autofocus >
+                                                    <select id="nomil" class="form-select" name="naminal" autofocus>
                                                         <option value="">Интихоб</option>
                                                         <option value="0.01">1 дирам </option>
                                                         <option value="0.05">5 дирам</option>
@@ -58,7 +58,7 @@
                                                         <option value="">Интихоб</option>
                                                         @foreach($sprEds as $sprEd)
 
-                                                            <option value="{{$sprEd->kol}}" >{{$sprEd->name}}
+                                                            <option value="{{$sprEd->kol}}|{{$sprEd->id}}" >{{$sprEd->name}}
 
 
                                                             </option>
@@ -86,7 +86,7 @@
                                             <div class="row mb-12">
                                                 <label for="Серия" class="col-md-4 col-form-label text-md-end">{{ __('Серия') }}</label>
                                                 <div class="col-md-8">
-                                                    <input id="Серия" type="text" class="form-control"  name="serial" required>
+                                                    <input id="Серия" type="text" class="form-control"  name="serial"  pattern="[A-Za-z]+" >
                                                 </div>
                                             </div>         <br>
                                             <div class="row mb-12">
@@ -98,7 +98,7 @@
                                             <div class="row mb-3">
                                                 <label for="safe_id" class="col-md-4 col-form-label text-md-end">{{ __('Хранилище') }}</label>
                                                 <div class="col-md-3">
-                                                    <select id="safe_id" class="form-select" name="safe_id" autofocus>
+                                                    <select id="safe_id" class="form-select" name="safe_id" autofocus required>
                                                         <option value="">Интихоб</option>
                                                         @foreach($safes as $safe)
                                                             <option value="{{$safe->id}}">{{$safe->safe}}</option>
@@ -109,7 +109,7 @@
                                             <div class="row mb-3">
                                                 <label for="shkaf_id" class="col-md-4 col-form-label text-md-end">{{ __('Шкаф/Стляж') }}</label>
                                                 <div class="col-md-3">
-                                                    <select id="shaving" class="form-select" name="shkaf_id" autofocus>
+                                                    <select id="shaving" class="form-select" name="shkaf_id" autofocus required>
                                                         <option value="">Интихоб</option>
 
                                                     </select>
@@ -118,7 +118,7 @@
                                             <div class="row mb-3">
                                                 <label for="qator_id" class="col-md-4 col-form-label text-md-end">{{ __('Ряд') }}</label>
                                                 <div class="col-md-3">
-                                                    <select id="qator_id" class="form-select" name="qator_id" autofocus>
+                                                    <select id="qator_id" class="form-select" name="qator_id" autofocus required>
                                                         <option value="">Интихоб</option>
 
                                                     </select>
@@ -127,7 +127,7 @@
                                             <div class="row mb-3">
                                                 <label for="cell_id" class="col-md-4 col-form-label text-md-end">{{ __('Ячейка') }}</label>
                                                 <div class="col-md-3">
-                                                    <select id="cells" class="form-select" name="cell_id" autofocus>
+                                                    <select id="cells" class="form-select" name="cell_id" autofocus required>
                                                         <option value="">Интихоб</option>
 
                                                     </select>
@@ -168,6 +168,11 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
+        $('#username').keyup(function() {
+                if (this.value.match(/[^a-zA-Z0-9 ]/g)) {
+                    this.value = this.value.replace(/[^a-zA-Z0-9 ]/g, '');
+                }
+            }); 
         $('form').submit(function (){
             $(this).find("button[type='submit']").prop('disabled',true);
         });
@@ -177,11 +182,15 @@
         });
         // $("#count,#nomil").on("keyup change", function(){
       $("#count,#nomil,#edin_id").on("keyup change",function(){
+
             var sum=100;
           var   nominal= $("#nomil").val();
           var   edins= $("#edin_id").val();
-
-         $("#sum").html('<div class="alert alert-primary  mt-2">Сумма '+edins.split('|')[0]*nominal*this.value+' Сомони</div>');
+          var   count= $("#count").val();
+                    //   alert(nominal);
+                //  alert(edins.split('|')[0]);
+                    
+         $("#sum").html('<div class="alert alert-primary  mt-2">Сумма '+edins.split('|')[0]*nominal*count+' Сомони</div>');
       });
         var shaving=$("#shaving");
         //аджакс Запрос таблица Шкаф

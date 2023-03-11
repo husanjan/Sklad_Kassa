@@ -11,6 +11,7 @@ class OstatkiSchet extends Model
     protected $fillable = [
 
         'date',
+        'date_end',
         'priznak',
         'priod',
         'src',

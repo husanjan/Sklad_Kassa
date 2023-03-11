@@ -148,23 +148,22 @@ function add(accumulator, a) {
      
         },
         success:function(response){
-      alert(response);
-        //return response;
-        if(response=='show')
+       console.log(response);
+        if(response==0)
         {
-          
             $("#submits").prop('disabled', true);
+            $('.toast').toast('show');
+       
          //   return;
           
         }    
-      
-        if(response=='hide')
+        if(response==1)
         {
-        
             $("#submits").prop('disabled', false);
+            $('.toast').toast('hide');
+          
             //return;
         }    
-        $('.toast').toast(response);
         return;
           //console.log(response);
         //    $('#ajaxoborot').html(response);

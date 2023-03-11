@@ -47,9 +47,16 @@ class SprBankController extends Controller
     public function store(Request $request)
     {
         //
-      $request->validate(self::BANK_Validator);
+       
+      $request->validate([
+        'BIK'=>'required|numeric',
+        'full_name'=>'required',
+        'short_name'=>'required',
+
+    ]);
+    
         $request->request->remove('_token');
-   ;
+    
         $cells = $request->all();
 
         $cells['user_id'] = Auth::id();
@@ -59,7 +66,7 @@ class SprBankController extends Controller
 
 
 
-        return redirect()->route('bank_spr.index')->with('success','Счет успешно создан!');
+         return redirect()->route('bank_spr.index')->with('success','Счет успешно создан!');
     }
 
     /**

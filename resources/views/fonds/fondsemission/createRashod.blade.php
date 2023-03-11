@@ -82,8 +82,8 @@
                                             <div class="row mb-12  mt-2">
                                                 <label for="count" class="col-md-4 col-form-label text-md-end">{{ __('Серия') }}</label>
                                                 <div class="col-md-8 ">
-                                                    <input id="Serial" type="text" lang="en" class="form-control" name="Serial" required>
-                                                
+                                                    <input id="Serial" type="text" pattern="[A-Za-z]+" class="form-control" name="Serial" required>
+                                                 
                                                 </div>
 
                                             </div>         

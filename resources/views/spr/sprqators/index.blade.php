@@ -3,6 +3,7 @@
 @section('content')
 
 
+  <div class="container-fluid">
     <div class="modal fade  bd-example-modal-lg " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -18,7 +19,7 @@
                             <div class="row mb-3">
                                 <label for="safe_id" class="col-md-4 col-form-label text-md-end">{{ __('Номер хранилище') }}</label>
                                 <div class="col-md-3">
-                                    <select id="safe_id" class="form-select" name="safe_id" autofocus>
+                                    <select id="safe_id" class="form-select" name="safe_id" autofocus required>
                                         <option value="">Интихоб</option>
                                         @foreach($safes as $safe)
                                             <option value="{{ $safe->id }}">{{ $safe->safe }}</option>
@@ -30,7 +31,7 @@
                             <div class="row mb-3">
                                 <label for="shkaf_id" class="col-md-4 col-form-label text-md-end">{{ __('Номер шкафа/стилажа') }}</label>
                                 <div class="col-md-3">
-                                    <select   class="form-select" name="shkaf_id" id="shaving">
+                                    <select   class="form-select" name="shkaf_id" id="shaving" required>
                                         <option value="">Интихоб</option>
 
 
@@ -41,7 +42,7 @@
                             <div class="row mb-3">
                                 <label for="qator" class="col-md-4 col-form-label text-md-end">{{ __('Номер ряда') }}</label>
                                 <div class="col-md-3">
-                                    <input id="qator" type="text" class="form-control" name="qator" placeholder="Номер pяда">
+                                    <input id="qator" type="text" class="form-control" name="qator" placeholder="Номер pяда" required>
                                 </div>
                             </div>
 
@@ -60,7 +61,7 @@
                     <div class="modal-footer ">
                         <div class="row mb-0 ">
                             <div class="col-md-8 justify-content-center">
-                                <button type="submit" class="btn btn-facebook active">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Добавить') }}
                                 </button>
                             </div>
@@ -77,7 +78,7 @@
 
 
     <div class="row">
-                        <div class="col-lg-12 margin-tb">
+                        <div class="col-lg-12 margin-tb ml-2">
                             <div class="pull-left">
                                 <h2>Справочник Рядов</h2>
                             </div>
@@ -95,45 +96,48 @@
                         </div>
                     @endif
 
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>No</th>
-                            <th>Номер хранилище</th>
-                            <th>Номер шкафа/стилажа</th>
-                            <th>Номер ряда</th>
-                            <th>Коментарии</th>
-                            <th width="280px">Действие</th>
-                        </tr>
-                        @foreach ($qators as $qator)
-                        @php($count++)
+                      <div class="card col-md-6 ml-2">
+                        <table class="table table-bordered">
                             <tr>
-                                <td><b>{{  $count }}</b></td>
-                                <td>
-                                    @foreach($safes as $safe)
-                                        @if($qator->safe_id == $safe->id)
-                                            {{ $safe->safe }}
-                                        @endif
-                                    @endforeach
-                                </td>
-                                <td>
-                                    @foreach($shkafs as $shkaf)
-                                        @if($qator->shkaf_id == $shkaf->id)
-                                            {{ $shkaf->shkaf }}
-                                        @endif
-                                    @endforeach
-                                </td>
-                                <td>{{ $qator->qator }}</td>
-                                <td>{{ $qator->comment }}</td>
-                                <td>
-                                    <a class="btn btn-facebook active" href="{{ route('sprqators.edit', $qator->id) }}">
-                                        <i class="align-middle" data-feather="edit"></i> Изменить</a>
-                                    {!! Form::open(['method' => 'DELETE','route' => ['sprqators.destroy', $qator->id],'style'=>'display:inline']) !!}
-                                    {!! Form::submit('Удалить', ['class' => 'btn btn-instagram active']) !!}
-                                    {!! Form::close() !!}
-                                </td>
+                                <th>No</th>
+                                <th>Номер хранилище</th>
+                                <th>Номер шкафа/стилажа</th>
+                                <th>Номер ряда</th>
+                                {{-- <th>Коментарии</th> --}}
+                                <th width="280px">Действие</th>
                             </tr>
-                        @endforeach
-                    </table>
+                            @foreach ($qators as $qator)
+                            @php($count++)
+                                <tr>
+                                    <td><b>{{  $count }}</b></td>
+                                    <td>
+                                        @foreach($safes as $safe)
+                                            @if($qator->safe_id == $safe->id)
+                                                {{ $safe->safe }}
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach($shkafs as $shkaf)
+                                            @if($qator->shkaf_id == $shkaf->id)
+                                                {{ $shkaf->shkaf }}
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td>{{ $qator->qator }}</td>
+                                    {{-- <td>{{ $qator->comment }}</td> --}}
+                                    <td>
+                                        <a class="btn btn-success" href="{{ route('sprqators.edit', $qator->id) }}">
+                                            <i class="align-middle" data-feather="edit"></i> Изменить</a>
+                                        {!! Form::open(['method' => 'DELETE','route' => ['sprqators.destroy', $qator->id],'style'=>'display:inline']) !!}
+                                        {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                      </div>
+  </div>
 @endsection
 
 

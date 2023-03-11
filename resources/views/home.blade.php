@@ -1965,7 +1965,7 @@
 
                         </tbody>
                     </table>
-                    <div  >
+                    <div>
                         <table class="mt-4 offset-lg-10"><tbody><tr>
                                 <td>
                                <a href="#?type_id=oborot_pul">
@@ -2240,7 +2240,7 @@
                         <td  id="botl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">Приход</td>
                         @endif
                         @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyam)))[0]==1)
-                        <td  id="botl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">Расход</td>
+                        <td  id="botl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">Приход</td>
                         @endif
                        
                    

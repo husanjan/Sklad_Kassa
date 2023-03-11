@@ -28,6 +28,7 @@ class AddRequest{
                   $request->ndoc,$request->summacountsq,$request->comment,Auth::id(),$request->ip());
                 //  end diram one
       }
+    
      //Nepolnone 
      $addOneNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonqs,array_values($request->nominalq)[0],1,1,$request->shavingnepolniySomonqs,
      $request->qator_idnepolniySomonqs,$request->cellsnepolniySomonqs,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
@@ -71,6 +72,7 @@ class AddRequest{
                      $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
                             $request->ndoc,$request->summacountsw,$request->comment,Auth::id(),$request->ip());
       }  
+      
            //                     neplone
 $addTwentyNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonws,array_values($request->nominalw)[0],1,1,$request->shavingnepolniySomonws,
 $request->qator_idnepolniySomonws,$request->cellsnepolniySomonws,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
@@ -113,9 +115,10 @@ $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouw,$request->comme
   {  
   $this->blogRepository->allInsertDB($request->ed_idu,$request->countu,$request->safe_idu,$request->shavingu,$request->qator_idu,
   $request->cellsu,$request->nominalu,
-       $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+       $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
               $request->ndoc,$request->summcouu,$request->comment,Auth::id(),$request->ip());
-  }            
+  }          
+    
   //1 nepolnoe 
   $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonus,array_values($request->nominalu)[0],1,1,$request->shavingnepolniySomonus,
   $request->qator_idnepolniySomonus,$request->cellsnepolniySomonus,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,
@@ -127,7 +130,7 @@ $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouw,$request->comme
      {  
      $this->blogRepository->allInsertDB($request->ed_idi,$request->counti,$request->safe_idi,$request->shavingi,$request->qator_idi,
      $request->cellsi,$request->nominali,
-          $request->date,$request->priznak,$request->kode_oper_obor,$request->farsuda,$request->src,
+          $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
                  $request->ndoc,$request->summacountsi,$request->comment,Auth::id(),$request->ip() );
      }
        
@@ -147,6 +150,7 @@ $request->ndoc,$request->kode_oper,Auth::id(),$request->summcouw,$request->comme
           $request->date,$request->priznak,$request->kode_oper,$request->farsuda,$request->src,
                  $request->ndoc,$request->summacountso,$request->comment,Auth::id(),$request->ip());
      }
+     
                //5 nepolnoe 
   $addTwentyFiveNeplan= $this->blogRepository->AddInsertnepol($request->safe_idnepolniySomonos,array_values($request->nominalo)[0],1,1,$request->shavingnepolniySomonos,
   $request->qator_idnepolniySomonos,$request->cellsnepolniySomonos,$request->ip(),$request->date,$request->priznak,$request->farsuda,$request->src,

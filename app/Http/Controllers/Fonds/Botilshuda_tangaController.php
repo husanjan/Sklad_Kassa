@@ -51,6 +51,7 @@ class Botilshuda_tangaController extends Controller
             $sprCells= SprCells::all();
              $sprQators= SprQators::all();
              $sprAccounts= SprAccounts::all();
+             $FondMoneyTang=FondCoins::orderBy('date','DESC')->get()->groupBy('kode_oper');
               $kodeOper= FondCoins::orderBy('kode_oper','DESC')->value('kode_oper');
                        if($kodeOper<=0)
                        {
@@ -58,8 +59,9 @@ class Botilshuda_tangaController extends Controller
                         }else{
                          $kodeOper++;
                           }
-                          $arrayResult=$this->RepositoryRashod->SelectRashodTanga(3,0);          
-                  return  view('fonds.botilshuda_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult'));
+                          $arrayResult=$this->RepositoryRashod->SelectRashodTanga(3,0);
+                          $farsudaTanga= $this->RepositoryRashod->SelectRashodTanga(2,0);          
+                  return  view('fonds.botilshuda_tanga.index',compact('FondMoneyTang','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','farsudaTanga'));
   
         //return view('fonds.botilshuda_tanga.index');
     }

@@ -117,7 +117,7 @@ class Repositoryschet{
         endif;  
    
          
-        if($prihod>0 || $endsum>0 ):
+       // if($prihod>0 || $endsum>0 ):
         $this->Fond[7]['date']=date('Y-m-d H:i:s');
         $this->Fond[7]['src']=7;
         $this->Fond[7]['kode_oper']=$request->kodeOper;
@@ -130,7 +130,7 @@ class Repositoryschet{
         $this->Fond[7]['FondType']=1;
         $this->Fond[7]['user_id']= Auth::id();
         $this->Fond[7]['host']=$request->ip();
-        endif;  
+      //  endif;  
         //    $this->arraySchet['priod']=1;
          // $FondEmisions->where('priznak',0)->sum('summa');
          
@@ -199,7 +199,7 @@ class Repositoryschet{
     //    echo "<br>".$request->dayType;
         endif; 
     //    echo $rashod-$prihod;
-        if($prihod>0 || $endsum>0):
+       // if($prihod>0 || $endsum>0):
          $this->Fond[$src]['date']=date('Y-m-d H:i:s');
          $this->Fond[$src]['src']=$src;
          $this->Fond[$src]['kode_oper']=$request->kodeOper;
@@ -213,7 +213,7 @@ class Repositoryschet{
          $this->Fond[$src]['user_id']=Auth::id();
          $this->Fond[$src]['host']=$request->ip();
           
-        endif; 
+       //endif; 
         
     }
     public function ToDateFondCoins($request,$src)
@@ -268,7 +268,7 @@ class Repositoryschet{
   
         endif; 
        
-        if($Prihod>0 ||  $endsum>0 AND $Rashod<=$Prihod):
+      //  if($Prihod>0 ||  $endsum>0 AND $Rashod<=$Prihod):
             if($src==1):
                 $schetId=11; 
             endif;    
@@ -290,7 +290,7 @@ class Repositoryschet{
          $this->Fond[$src.'2']['type']=$typeDate;
          $this->Fond[$src.'2']['user_id']=Auth::id();
          $this->Fond[$src.'2']['host']=$request->ip();
-        endif; 
+       // endif; 
         
     }
     public  function OborotMoney($request,$src)
@@ -354,7 +354,7 @@ class Repositoryschet{
         endif; 
         // AND  у$Rashod<=$Prihod
         
-        if($Prihod>0 ||  $endsum>0):
+      //  if($Prihod>0 ||  $endsum>0):
          $this->Fond[$src]['date']=date('Y-m-d H:i:s');
          $this->Fond[$src]['src']=$src;
          $this->Fond[$src]['kode_oper']=$request->kodeOper;
@@ -367,7 +367,7 @@ class Repositoryschet{
          $this->Fond[$src]['type']=$typeDate;
          $this->Fond[$src]['user_id']= Auth::id();
          $this->Fond[$src]['host']=$request->ip();
-        endif;
+     //   endif;
           
     }
     public  function OborotCoins($request,$src)
@@ -396,7 +396,7 @@ class Repositoryschet{
             $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
             $Prihod=json_decode($this->oborots_coin::where('priznak',0)->whereBetween('date',[$startDate,$endDate])->sum('summa'),true);
             $Rashod=json_decode($this->oborots_coin::where('priznak',1)->whereBetween('date',[$startDate,$endDate])->sum('summa'),true);
-         $endDate= $endDate;
+            $endDate= date('Y-m-d', strtotime($request->dayType));
        
         endif; 
         if($request->dayType):
@@ -413,19 +413,20 @@ class Repositoryschet{
             // $Rashod=$this->oborots_coin->whereDate('date','>=',$request->dayType.date('H:i:s'))->where('src',$src)->where('priznak',1)->sum('summa');
        
             // $EndDate=$request->dayType;
-            $dateTime= date('Y-m-d', strtotime($request->dayType));
+          
                
-            $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
+         
             $endDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->endOfDay();
+            $startDate = Carbon::createFromFormat('Y-m-d', $request->dayType)->startOfDay();
             $Prihod=   json_decode($this->oborots_coin::where('priznak',0)->whereBetween('date',[$startDate,$endDate])->sum('summa'),true);
             $Rashod=json_decode($this->oborots_coin::where('priznak',1)->whereBetween('date',[$startDate,$endDate])->sum('summa'),true);
          // echo "</pre>";
-         $endDate= $dateTime;
+         $endDate= date('Y-m-d', strtotime($request->dayType));
           $Prihod=$Rashod+$Prihod;
         
         endif; 
      
-        if($Prihod>0 ||  $endsum>0):
+       // if($Prihod>0 ||  $endsum>0):
          $this->Fond[$src.'4']['date']=date('Y-m-d');
          $this->Fond[$src.'4']['src']=8;
          $this->Fond[$src.'4']['priod']= $endDate;
@@ -438,7 +439,7 @@ class Repositoryschet{
          $this->Fond[$src.'4']['type']=$typeDate;
          $this->Fond[$src.'4']['user_id']=Auth::id();
          $this->Fond[$src.'4']['host']=$request->ip();
-        endif; 
+       // endif; 
         
         
     }

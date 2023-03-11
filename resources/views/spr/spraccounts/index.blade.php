@@ -3,7 +3,8 @@
 @section('content')
 
 
-    <!-- Button trigger modal -->
+ <div class="container-fluid">
+       <!-- Button trigger modal -->
 
 
     <!-- Modal -->
@@ -21,14 +22,14 @@
                         <div class="row mb-3">
                             <label for="account" class="col-md-4 col-form-label text-md-end">{{ __('Номер счета') }}</label>
                             <div class="col-md-3">
-                                <input id="account" type="text" class="form-control" name="account" placeholder="Номер счета" autofocus>
+                                <input id="account" type="text" class="form-control" name="account" placeholder="Номер счета" autofocus required>
                             </div>
                         </div>
 
                         <div class="row mb-12">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Описание счета') }}</label>
                             <div class="col-md-8">
-                                <input id="name" type="text" class="form-control" name="name" placeholder="Имя счета">
+                                <input id="name" type="text" class="form-control" name="name" placeholder="Имя счета" required>
                             </div>
                         </div>
                         <br>
@@ -47,7 +48,7 @@
                 <div class="modal-footer ">
                     <div class="row mb-0 ">
                         <div class="col-md-8 justify-content-center">
-                            <button type="submit" class="btn btn-facebook active">
+                            <button type="submit" class="btn btn-success ">
                                 {{ __('Добавить') }}
                             </button>
                         </div>
@@ -61,8 +62,8 @@
             </div>
         </div>
     </div>
-                    <div class="row">
-                        <div class="col-lg-12 margin-tb">
+                    <div class="row ml-4">
+                        <div class="col-lg-12 ">
                             <div class="pull-left">
                                 <h2>Справочник счетов</h2>
                             </div>
@@ -80,13 +81,14 @@
                         </div>
                     @endif
                     @php($count=0)
-                    <table class="table table-bordered mt-4">
+                   <div class="card col-md-6 ml-5">
+                    <table class="table table-bordered mt-4 ">
                         <tr>
                             <th>No</th>
                             <th>Номер счета</th>
                             <th>Описание счета</th>
-                            <th>Коментарии к счету</th>
-                            <th width="280px">Действие</th>
+                            {{-- <th>Коментарии к счету</th> --}}
+                            <th ></th>
                         </tr>
                         @foreach ($accounts as $account)
                         @php($count++)
@@ -95,8 +97,8 @@
 
                                 <td>{{ $account->account }}</td>
                                 <td>{{ $account->name }}</td>
-                                <td>{{ $account->comment }}</td>
-                                <td>
+                                {{-- <td>{{ $account->comment }}</td> --}}
+                                <td width="">
                                     <a class="btn btn-primary active" href="{{ route('spraccounts.edit', $account->id) }}"> <i class="align-middle" data-feather="edit"></i> Изменить</a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['spraccounts.destroy', $account->id],'style'=>'display:inline']) !!}
                                     {!! Form::submit('Удалить', ['class' => 'btn btn-danger active']) !!}
@@ -105,6 +107,8 @@
                             </tr>
                         @endforeach
                     </table>
+                   </div>
+ </div>
 
 
 @endsection

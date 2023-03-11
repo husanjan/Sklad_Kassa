@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+   <div class="container-fluid">
     <div class="modal fade  bd-example-modal-lg " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -13,10 +14,10 @@
                     <div class="row mb-3 mt-2">
                         <label for="safe_id" class="col-md-4 col-form-label text-md-end">{{ __('Номер хранилище') }}</label>
                         <div class="col-md-3">
-                            <select id="safe_id" class="form-select" name="safe_id" autofocus>
+                            <select id="safe_id" class="form-select" name="safe_id" autofocus required>
                                 <option value="">Интихоб</option>
                                 @foreach($safes as $safe)
-                                    <option value="{{ $safe->id }}">{{ $safe->safe }}</option>
+                                    <option value="{{ $safe->id }}">{{$safe->safe}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -25,7 +26,7 @@
                     <div class="row mb-3">
                         <label for="shkaf" class="col-md-4 col-form-label text-md-end">{{ __('Номер Шкафа/Ряда') }}</label>
                         <div class="col-md-3">
-                            <input id="shkaf" type="text" class="form-control" name="shkaf" placeholder="Номер Шкафа/Ряда">
+                            <input id="shkaf" type="text" class="form-control" name="shkaf" placeholder="Номер Шкафа/Ряда" required>
                         </div>
                     </div>
 
@@ -45,7 +46,7 @@
                     <div class="modal-footer ">
                         <div class="row mb-0 ">
                             <div class="col-md-8 justify-content-center">
-                                <button type="submit" class="btn btn-facebook active">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Добавить') }}
                                 </button>
                             </div>
@@ -61,7 +62,7 @@
     </div>
 
   <div class="row">
-     <div class="col-lg-12 margin-tb">
+     <div class="col-lg-12 margin-tb ml-2">
        <div class="pull-left">
           <h2>Справочник/Шкафов</h2>
            </div>
@@ -79,12 +80,13 @@
                         </div>
                     @endif
                     @php($count=0)
+                  <div class="card col-md-6">
                     <table class="table  col-md-12">
                         <tr>
                             <th>No</th>
                             <th>Номер хранилище</th>
                             <th>Номер шкафа/стилажа</th>
-                            <th>Коментарии</th>
+                            {{-- <th>Коментарии</th> --}}
                             <th width="280px">Действие</th>
                         </tr>
                         @foreach ($shkafs as $shkaf)
@@ -99,9 +101,9 @@
                                     @endforeach
                                 </td>
                                 <td>{{ $shkaf->shkaf }}</td>
-                                <td>{{ $shkaf->comment }}</td>
+                                {{-- <td>{{ $shkaf->comment }}</td> --}}
                                 <td>
-                                    <a class="btn   btn-d" href="{{ route('sprshkafs.edit', $shkaf->id) }}"> <i class="align-middle" data-feather="edit"></i>  Изменить</a>
+                                    <a class="btn   btn-primary" href="{{ route('sprshkafs.edit', $shkaf->id) }}"> <i class="align-middle" data-feather="edit"></i>  Изменить</a>
                                     {!! Form::open(['method' => 'DELETE','route' => ['sprshkafs.destroy', $shkaf->id],'style'=>'display:inline']) !!}
 
                                     {{Form::button('<i class="far fa-trash-alt icon-size"></i>', ['type' =>'submit', 'class' => 'btn btn-danger'])}}
@@ -110,6 +112,8 @@
                             </tr>
                         @endforeach
                     </table>
+                  </div>
+   </div>
 @endsection
 
 

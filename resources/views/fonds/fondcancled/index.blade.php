@@ -25,6 +25,14 @@
     <p>{{ $message }}</p>
 </div>
 @endif
+
+<!-- Modal -->
+<div class="modal fade" id="rashodBotilshuda"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+    @include('fonds.fondcancled.botilshudaRashod')
+   
+  </div>
+ 
 <form method="POST" action="{{ route('fondcanceled.store') }}" id="submit" >
     @csrf
   <div class="modal fade " id="rashod" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1224,18 +1232,105 @@
   </div>
    </form>
 
-      <div class="container">
-          <div class="col-md-12">
+       
+          <div class="ml-4">
               <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod"   id="priznak" value="0">Приход </button>
-                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Botilshuda"  value="1">Расход</button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rashodBotilshuda"   id="priznak" value="0">Приход </button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Botilshuda"  value="1">Расход</button>
 
               </div>
           </div>
-      </div>
+ 
 
 
+<div class="card col-md-6 ml-4">
+      {{--        Fond table Ботилшуда --}}
+      <div class="" id="botilshuda-Pul">
 
+        <div class=" ">
+            <div class="card-body">
+                <h4>Ботилшуда</h4>
+
+                <br>
+                <table class="table col-md-auto">
+                    <tbody><tr>
+                        <th>#</th>
+                        <th>Дата</th>
+                        <th>Номер док</th>
+                        <th>Номер счет</th>
+                        <th>Признак</th>
+                        <th>Сумма</th>
+                         
+
+
+                    </tr>
+                    @php($btcount=1)
+                    <?php
+                    //         echo "<pre>";
+                    //         print_r(json_decode($FondMoney,true));
+                    //         echo "</pre>";
+                    //  // echo   array_sum(array_map(function($value){return   $value['summa'];}, json_decode($FondMoney,true)[0][0]));
+                    //         exit;
+                            ?>
+                    @foreach(json_decode($FondMoney->take(20),true) as $korshoyam)
+                   
+                    <?php 
+
+//print_r(array_map(function($value){return   $value['summa'];}, $korshoyam));
+?>
+                       @if(array_keys( array_count_values(array_map(function($value){return   $value['type'];},$korshoyam)))[0]==3 || array_keys( array_count_values(array_map(function($value){return   $value['src'];},$korshoyam)))[0]==3)
+                    <tr zippy="mdoclist_1" id="mdoclist_1">
+                       
+                              <td> <b>{{  $btcount++ }}</b>  </td>
+                      
+                        <td  id="botld{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">{{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$korshoyam)))[0]))}}</td>
+                        <td  id="botlfdoc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}"> {{   array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$korshoyam)))[0]}} </td>
+                                            @foreach($sprAccounts AS $sprAccounti)
+
+
+                             @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   ($value['src']>0)?$value['src']:'';},$korshoyam)))[0])
+                                <td class="col-md-2" id="botlnfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">
+                                    {{$sprAccounti->account}} </td>
+                            @endif
+                        @endforeach
+                        @if(array_keys( array_count_values(array_map(function($value){return   ($value['src']>0)?$value['src']:'botil';},$korshoyam)))[0]=='botil')
+                        <td></td>
+                        @endif
+                        @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyam)))[0]==0)
+                        <td  id="botl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">Приход</td>
+                        @endif
+                        @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$korshoyam)))[0]==1)
+                        <td  id="botl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}}">Приход</td>
+                        @endif
+                       
+                   
+                              <td class="col-md-4 ">
+
+                            <a class=" link-primary       Fond_id "  href="#" data-toggle="modal" data-target="#Fonds"  data-id="botl"  id="{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$korshoyam)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['type'];},$korshoyam)))[0]}}">
+                            <i class="text-dark fa fa-eye"></i>  {{   array_sum(array_map(function($value){return   $value['summa'];}, $korshoyam)) }} </a></td>
+                       
+                             </tr>
+                             @endif
+                     @endforeach
+
+                    </tbody>
+                </table>
+                <div class="mt-4 offset-lg-10"><table><tbody><tr>
+                            {{-- <td valign="middle">
+                                
+                                <button class="btn btn-secondary "data-toggle="modal"  data-target=".botilshuda_detal" id="botilshuda_pul">Подробонее</button>
+                            </td> --}}
+
+                        </tr></tbody></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--         Fond Ботилшуда table end --}}
+    </div>
+</div>
+{{--modal 1 Коршоям Детализация--}}
+</div>
 
 @endsection
 

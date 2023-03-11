@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+
+
+<div class="container-fluid">
+    
 <form role="form was-validated"    action="{{ route('oborot_spr.store') }}" method="post">
     <div class="modal fade  bd-example-modal-lg " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -222,11 +226,11 @@
 </div>
 @endif
     <div class="row">
-        <div class="col-lg-12 margin-tb ">
+        <div class="col-lg-12 margin-tb ml-2 ">
             <div class="pull-left">
                 <h2>Оборот</h2>
             </div>
-            <div class="pull-right offset-2">
+            <div class="pull-right ">
                 <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModalCenter">
                     <i class="align-middle" data-feather="plus"></i> Создание нового оборот
                 </button>
@@ -391,7 +395,7 @@
 
 
                 <div class="col-md-5 mt-3">
-                    <button type="button"   class="btn btn-light active" id="adds" disabled><div id="countsum"></div> </button>
+                    <button type="button"   class="btn btn-success active" id="adds" disabled><div id="countsum"></div> </button>
 
                 </div>
             </div>
@@ -419,24 +423,24 @@
     </div>
 </div>
 {{-- modal Ajax Table Oborot   end --}}
-    <div class="col-12 col-lg-8 d-flex  justify-content-center offset-2">
+    <div class="col-md-8 ml-2">
      
    
 
         {{--        Oborot table --}}
                 <div   id="oborot-Pul">
         
-                    <div class="card ">
+                    <div class="card col-md-8">
                         <div class="card-body">
                             <h4>Оборот</h4>
         
                             <br>
         {{--                    Oborot table limit 20 //--}}
-                            <table class="table col-md-auto">
+                            <table class="table ">
                                 <tbody><tr class="something">
                                     <th  >#</th>
                                     <th class="col-md-3">Дата</th>
-                                    {{-- <th>Бик</th> --}}
+                                    <th>Бик</th>
                                     <th>Признак</th>
                                     <th>Номер док</th>
                                     <th>Номер счета</th>
@@ -452,19 +456,24 @@
                                 <tr>
                                     <input type="hidden"  value="{{array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]}}">
                                     <td> <b>{{  $count }}</b>  </td>
-                         <td  > {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]))}} </td>
-                         {{-- @foreach($bik AS $biks)
+                         <td > {{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$oborots)))[0]))}} </td>
+                         @foreach($bik AS $biks)
         
             
-                 @if($biks->id===array_map(function($value){return   $value['bik'];},$oborots)[0]>0)
-                     <td class="col-md-2"  >
-                         {{ $biks->full_name }} 
-                        </td>
-                  @else
-                  <td></td>
-                  @endif
+                         @if($biks->id===array_keys(array_count_values(array_map(function($value){return   ($value['Bik']>0)?$value['Bik']:'';},$oborots)))[0])
+                         <td class="col-md-2"  >
+                             {{ $biks->full_name }} 
+                            </td>
+                    
+                      @endif
         
-             @endforeach --}}
+             @endforeach
+             @if(array_keys(array_count_values(array_map(function($value){return   ($value['Bik']>0)?$value['Bik']:'Bik';},$oborots)))[0]=='Bik')
+             <td class="col-md-2"  >
+                 
+                </td>
+        
+          @endif
                          @if(array_keys(array_count_values(array_map(function($value){return   $value['priznak'];},$oborots)))[0]==0)
                          <td class="col-md-2 " > Приход </td>
                          @else
@@ -499,9 +508,9 @@
                             <div  >
                                 <table class="mt-4 offset-lg-10"><tbody><tr>
                                         <td>
-                                       <a href="#?type_id=oborot_pul">
+                                       {{-- <a href="#?type_id=oborot_pul">
                                         <button class="btn btn-secondary "data-toggle="modal"  data-target=".Oborot_detal" id="oborot_pul">Подробонее</button>
-                                       </a>
+                                       </a> --}}
                                         </td>
         
                                     </tr></tbody></table>
@@ -535,6 +544,7 @@
     </div>     
         {{-- detal Oborot --}}
                 {{--        Oborot table end --}}
+</div>
 @endsection
 
 <script src='{{asset('js/ajax.min.js')}}'></script>

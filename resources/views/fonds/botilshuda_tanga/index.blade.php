@@ -915,18 +915,93 @@
     </div>
   </div>
    </form>
-
-      <div class="container">
-          <div class="col-md-12">
+   <div class="modal fade" id="botilshudaPrihod"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+    @include('fonds.botilshuda_tanga.FarsudaRashod')
+   
+  </div>
+    
+          <div class="col-md-12 ml-4">
               <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#rashod"   id="priznak" value="0">Приход </button>
+                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#botilshudaPrihod"   id="priznak" value="0">Приход </button>
                   <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#BotilshudaTanga"  id="priznak" value="1">Расход</button>
 
-              </div>
+            
           </div>
       </div>
 
-
+      <div class="card  col-md-6 ml-4">
+        <div class="card-body">
+            <h4>Танга Ботилшуда</h4>
+    
+            <br>
+            <table class="table col-md-auto">
+                <tbody><tr>
+                    <th>#</th>
+                    <th>Дата</th>
+                    <th>Номер док</th>
+                    <th>Номер счет</th>
+                    <th>Признак</th>
+                    <th>Сумма</th>
+                     
+    
+    
+                </tr>
+                @php($btcount=1)
+                <?php
+                //         echo "<pre>";
+                //         print_r(json_decode($FondMoney,true));
+                //         echo "</pre>";
+                //  // echo   array_sum(array_map(function($value){return   $value['summa'];}, json_decode($FondMoney,true)[0][0]));
+                //         exit;
+                        ?>
+                @foreach(json_decode($FondMoneyTang->take(20),true) as $BotilshudaTanga)
+               
+                <?php 
+    
+    //print_r(array_map(function($value){return   $value['summa'];}, $korshoyam));
+    ?>
+                   @if(array_keys( array_count_values(array_map(function($value){return   $value['type'];},$BotilshudaTanga)))[0]==3 || array_keys( array_count_values(array_map(function($value){return   $value['src'];},$BotilshudaTanga)))[0]==3)
+                <tr zippy="mdoclist_1" id="mdoclist_1">
+                   
+                          <td> <b>{{  $btcount++ }}</b>  </td>
+                  
+                    <td  id="Tangabotl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">{{date("d-m-Y H:i:s", strtotime(  array_keys( array_count_values(array_map(function($value){return   $value['date'];},$BotilshudaTanga)))[0]))}}</td>
+                    <td  id="Tangabotlfdoc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}"> {{   array_keys( array_count_values(array_map(function($value){return   $value['n_doc'];},$BotilshudaTanga)))[0]}} </td>
+                                        @foreach($sprAccounts AS $sprAccounti)
+    
+    
+                         @if($sprAccounti->id==array_keys( array_count_values(array_map(function($value){return   $value['src'];},$BotilshudaTanga)))[0])
+                            <td class="col-md-2" id="Tangabotlnfc{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">
+                        {{$sprAccounti->account  }} </td>
+                        @endif
+                    @endforeach
+                    @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$BotilshudaTanga)))[0]==0)
+                    <td  id="botl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">Приход</td>
+                    @endif
+                    @if(array_keys( array_count_values(array_map(function($value){return   $value['priznak'];},$BotilshudaTanga)))[0]==1)
+                    <td  id="Tangabotl{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}}">Расход</td>
+                    @endif
+                   
+               
+                          <td class="col-md-4 ">
+    
+                        <a class=" link-primary       Fond_idTanga"  href="#" data-toggle="modal" data-target="#FondsTanga"  data-id="Tangabotl"  id="{{array_keys(array_count_values(array_map(function($value){return   $value['kode_oper'];},$BotilshudaTanga)))[0]}} "  value="{{array_keys(array_count_values(array_map(function($value){return   $value['type'];},$BotilshudaTanga)))[0]}}">
+                        <i class="text-dark fa fa-eye"></i>  {{   array_sum(array_map(function($value){return   $value['summa'];}, $BotilshudaTanga)) }} </a></td>
+                   
+                         </tr>
+                         @endif
+                 @endforeach
+    
+                </tbody>
+            </table>
+            <div class="mt-4 offset-lg-10"><table><tbody><tr>
+                        {{-- <td valign="middle"><button class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg " data-target="#exampleModalLong">Подробонее</button></td> --}}
+    
+                    </tr></tbody></table>
+            </div>
+        </div>
+    </div>
 
 
 @endsection

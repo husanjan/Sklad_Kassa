@@ -94,7 +94,7 @@ if($kodeOper<=0)
             'cell_id' => 'required|integer',
             'naminal' => 'required|integer',
             'nn' => 'required|min:7|max:7',
-            'ed_id' => 'required',
+            'ed_id'=>'required',
             'kol' => 'required',
             'serial' => 'required|min:2|max:2',
 
@@ -103,15 +103,15 @@ if($kodeOper<=0)
       $sum_dist=1000;
          $number = $request->nn;
    
-        //  $edi_id= explode('|',$request->ed_id);
-         $edi_id=$request->ed_id;
+         $edi_id= explode('|',$request->ed_id);
+        //  $edi_id=$request->ed_id;
         //  var_dump($request->ed_id);
         //$number+$sum_dist;
           //id and type post
-          // echo   $edi_id[0];//sum
+        //   echo   $edi_id[1];//sum
           //  $edi_id[1];//id edin
          
-    //    dd($request->all());
+      ///dd($request->all());
        $summaOstatss=null;
        
        $ostatkiResult= ostatki_safe::select('summa')->where('naminal',$request->naminal)->where('cell_id',$request->cell_id)->where('priznak',0)->orderBy('id','desc')->limit(1)->get();
@@ -123,18 +123,18 @@ if($kodeOper<=0)
       
     // echo $request->kol;
           $request->request->remove('_token');
-          $count_sum= $edi_id*$request->kol;
+          $count_sum= $edi_id[0]*$request->kol;
           $edi=$count_sum/$sum_dist;
           $arrayOstat=[];
                $arrayOstat['date']=$request->date.date(' H:i:s');
                $arrayOstat['naminal']=$request->naminal;
-               $arrayOstat['ed_id']=2;
+               $arrayOstat['ed_id']= $edi_id[1];
                $arrayOstat['priznak']=0;
                $arrayOstat['safe_id']=$request->safe_id;
                $arrayOstat['shkaf_id']=$request->shkaf_id;
                $arrayOstat['qator_id']=$request->qator_id;
                $arrayOstat['cell_id']=$request->cell_id;
-               $arrayOstat['summa']=($edi_id*$request->kol*$request->naminal)+$summaOstatss;
+               $arrayOstat['summa']=($edi_id[0]*$request->kol*$request->naminal)+$summaOstatss;
    
                $arrayOstat['comment']=$request->comment;
                $arrayOstat['typeFond']=0;
@@ -155,7 +155,7 @@ if($kodeOper<=0)
                     $emiss = $request->all();
                     $emiss['nn']=$number;
                     $emiss['date']=$request->date.date(' H:i:s');
-                    $emiss['ed_id']=2;//$edi_id[1]
+                    $emiss['ed_id']= $edi_id[1];//$edi_id[1]
                     $emiss['summa']=$sum_dist*$request->naminal;
                     $emiss['priznak']=0;//prihod
   
@@ -169,7 +169,7 @@ if($kodeOper<=0)
                     $emis = $request->all();
                     $emis['date']=$request->date.date(' H:i:s');
                     $emis['nn']=$number+=$sum_dist;
-                    $emis['ed_id']=2;//$edi_id[1]
+                    $emis['ed_id']=$edi_id[1];//$edi_id[1]
                     $emis['summa']=$sum_dist*$request->naminal;
                     $emis['priznak']=0;//prihod
                     $emis['user_id'] = Auth::id();

@@ -85,7 +85,7 @@ class OstatkiSchetController extends Controller
         }else{
         $kodeOper++;
     }
- 
+      
         return   view('ostatki.schet.index',compact('FoindDayMoney','FoindDayCoins','FoindMonthMoney','FoindMonthCoins','SprAccounts','DateFilterDay','DateFilterMonth','kodeOper'));
     }
 
@@ -157,13 +157,13 @@ class OstatkiSchetController extends Controller
         $this->Repositoryschet->OborotCoins($request,7);
            //echo "<pre>";
          $arrAll=$this->Repositoryschet->InsertOstatkiSchet();
-       
-         print_r($arrAll);
+      // 
+       // print_r($arrAll);
         // //  echo "</pre>";
         // if($arrAll==404):
-  // return redirect()->route('ostatkischets.index');
+  return redirect()->route('ostatkischets.index');
         // endif;
-   return redirect()->route('ostatkischets.index');
+  // return redirect()->route('ostatkischets.index');
         
             // OstatkiSchet::create($arrAll);   
         //  dd($request->all());

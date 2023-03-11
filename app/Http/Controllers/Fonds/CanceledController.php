@@ -9,6 +9,7 @@ use App\Models\SprShkafs;
 use App\Models\SprCells;
 use App\Models\SprQators;
 use App\Models\SprEds;
+use App\Models\Oborot;
 use App\Models\FondEmisions;
 use App\Models\SprAccounts;
 use App\Models\FondMoney;
@@ -34,6 +35,10 @@ class CanceledController extends Controller
     public function index()
     {
         //
+
+
+
+        
         $safes = SprSafes::all();
         $sprEds = SprEds::all();
          $shkafs = SprShkafs::all();
@@ -41,14 +46,26 @@ class CanceledController extends Controller
           $sprQators= SprQators::all();
           $sprAccounts= SprAccounts::all();
            $kodeOper= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
+           $FondMoney=FondMoney::orderBy('date','DESC')->get()->groupBy('kode_oper');
                     if($kodeOper<=0)
                     {
                      $kodeOper=1;
                      }else{
                       $kodeOper++;
                        }
+                       $kodeOperObort= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
+                       if($kodeOperObort<=0)
+                       {
+                           $kodeOperObort=1;
+                       }else{
+                       $kodeOperObort++;
+                   }
+
+                  
                        $arrayResult=$this->RepositoryRashod->SelectRashod(3,0);
-          return  view('fonds.fondcancled.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','arrayResult'));
+                   
+                       $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,0);
+          return  view('fonds.fondcancled.index',compact('FondMoney','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','arrayResult','kodeOperObort','botilshudaRas'));
     }
 
     /**
