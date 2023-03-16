@@ -255,18 +255,30 @@ class HomeController extends Controller
               $farsudaRashod= $this->RepositoryRashod->SelectRashod(2,0);
               $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,0);
               //tanga 
+              
+              //   // print_r( json_decode($json,true));
          
+
              $korshoyamTanga= $this->RepositoryRashod->SelectRashodTanga(1,0);
              $farsudaTanga= $this->RepositoryRashod->SelectRashodTanga(2,0);
              $botilshudaTanga= $this->RepositoryRashod->SelectRashodTanga(3,0);
             $sprAccounts= SprAccounts::all();
+            //all summa
+            $allsumkorshoyam=array_sum(array_column(json_decode(json_encode($korshoyamRashod),true), 'summa'));
+            $allsumfarsuda=array_sum(array_column(json_decode(json_encode($farsudaRashod),true), 'summa'));
+            $allsumbotilshuda=array_sum(array_column(json_decode(json_encode($botilshudaRas),true), 'summa'));
+            $allsumkorshoyamTanga=array_sum(array_column(json_decode(json_encode($korshoyamTanga),true), 'summa'));
+            $allsumfarsudaTanga=array_sum(array_column(json_decode(json_encode($farsudaTanga),true), 'summa'));
+            $allsumbotilshudaTanga=array_sum(array_column(json_decode(json_encode($botilshudaTanga),true), 'summa'));
+            //End summa
             if($request->ajax()) {
             
               return view('oborot.pagination',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'))->render();
 
           }
-                return view('home',compact('botilshudaTanga','farsudaTanga','korshoyamTanga','bik','sprAccounts','sprQators','sprCells','kodeOper','shkafs','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang','korshoyamRashod','farsudaRashod','botilshudaRas'));
+                return view('home',compact('allsumbotilshudaTanga','allsumfarsudaTanga','allsumkorshoyamTanga','allsumbotilshuda','allsumbotilshuda','allsumfarsuda','allsumkorshoyam','botilshudaTanga','farsudaTanga','korshoyamTanga','bik','sprAccounts','sprQators','sprCells','kodeOper','shkafs','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang','korshoyamRashod','farsudaRashod','botilshudaRas'));
     }
+
     public function fetch_data()
     {
       $bik= SprBank::all();

@@ -1158,9 +1158,11 @@
               
                 <div class="col-md-2">
                     <label for="count01">Номер Документ	</label>
+                  
                     <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
+                   
                 </div>
- 
+                <label for="" class="offset-md-9 mt-4">  <span class="badge badge-light text-black "><h6><b>Общие сумма :  {{ $allsumkorshoyam }}</b></h6></span> </label>
          {{-- //Table ostatki  --}}
          <table class="table mt-2">
             <thead>
@@ -1194,21 +1196,21 @@
                     @endforeach
                     {{-- <td>{{ $ostatkiResults->safe_id }}</td> --}}
             
-                    @foreach ( $shkafs as $shkaf )
+                    @foreach ( $shkafs as $shkaf)
            
-                    @if($ostatkiResults->shkaf_id===$shkaf->id ) <td><input type="hidden" name="shkaf{{$ostatkiResults->id}}" value="{{$shkaf->id}}">{{ $shkaf->shkaf }}</td>  @endif
+                    @if($ostatkiResults->shkaf_id===$shkaf->id) <td><input type="hidden" name="shkaf{{$ostatkiResults->id}}" value="{{$shkaf->id}}">{{ $shkaf->shkaf }}</td>  @endif
                     @endforeach
-                    @foreach ( $sprQators as $sprQator )
+                    @foreach ( $sprQators as $sprQator)
            
-                    @if($ostatkiResults->qator_id===$sprQator->id ) <td><input type="hidden" name="sprQator{{$ostatkiResults->id}}" value="{{$sprQator->id}}">{{ $sprQator->qator }}</td>  @endif
+                    @if($ostatkiResults->qator_id===$sprQator->id) <td><input type="hidden" name="sprQator{{$ostatkiResults->id}}" value="{{$sprQator->id}}">{{ $sprQator->qator }}</td>  @endif
                     @endforeach
                     @foreach ( $sprCells as $sprCell )
            
-                    @if($ostatkiResults->cell_id===$sprCell->id ) <td><input type="hidden" name="sprCell{{$ostatkiResults->id}}" value="{{$sprCell->id}}">{{ $sprCell->cell }}</td>  @endif
+                    @if($ostatkiResults->cell_id===$sprCell->id) <td><input type="hidden" name="sprCell{{$ostatkiResults->id}}" value="{{$sprCell->id}}">{{ $sprCell->cell }}</td>  @endif
                     @endforeach
                     @foreach ($sprEds as $sprEd )
            
-                    @if($ostatkiResults->ed_id===$sprEd->id ) <td><input type="hidden" name="sprEd{{$ostatkiResults->id}}" value="{{$sprEd->id}}" >{{ $sprEd->name }}</td>  @endif
+                    @if($ostatkiResults->ed_id===$sprEd->id) <td><input type="hidden" name="sprEd{{$ostatkiResults->id}}" value="{{$sprEd->id}}" >{{ $sprEd->name }}</td>  @endif
                     @endforeach
               
                     <td> {{ $ostatkiResults->naminal=='razne'?'Разные':$ostatkiResults->naminal}} <input type="hidden"  id="naminal{{$ostatkiResults->id}}"  name="naminal{{$ostatkiResults->id}}" value="{{$ostatkiResults->naminal}}"></td>

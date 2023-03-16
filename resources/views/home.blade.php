@@ -1143,7 +1143,7 @@
                                  
                                 <select   class="form-select" id="oborot"   name="nominal[]" autofocus  required>
                                     <option value="">Интихоб</option>
-                                    <option value="0.01">1 дирам </option>
+                                    <option value="0.01">1 дирам</option>
                                     <option value="0.05">5 дирам</option>
                                     <option value="20">20 дирам</option>
                                     <option value="50">50 дирам</option>
@@ -1168,7 +1168,7 @@
                         <div class="col-md-4 mt-2 ">
                             <div class="input-group">
                                 <span class="input-group-text">Сумма</span>
-                                <input   required   type="text" id="summas" class="form-control   count" aria-describedby="btnGroupAddon" name="summa[]"  >
+                                <input   required   type="text" id="summas" class="form-control   countOborot" aria-describedby="btnGroupAddon" name="summa[]"  >
 
                             </div>
 
@@ -1237,7 +1237,7 @@
                     </div>
 
                         <div class="col-md-5 mt-3">
-                            <button type="button"   class="btn btn-light active" id="adds" disabled><div id="countsum"></div> </button>
+                            <button type="button"   class="btn btn-light active" id="adds" disabled><div id="countsumOborot"></div> </button>
 
                         </div>
                     </div>
@@ -1264,7 +1264,7 @@
                                 {{-- <button type="submit" class="btn btn-facebook active addform" disabled>
                                     {{ __('Добавить') }}
                                 </button> --}}
-                                <button type="submit" class="btn btn-facebook active "  >
+                                <button type="submit" class="btn btn-primary "  >
                                     {{ __('Добавить') }}
                                 </button>
                             </div>

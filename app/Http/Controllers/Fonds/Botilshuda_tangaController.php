@@ -60,8 +60,12 @@ class Botilshuda_tangaController extends Controller
                          $kodeOper++;
                           }
                           $arrayResult=$this->RepositoryRashod->SelectRashodTanga(3,0);
-                          $farsudaTanga= $this->RepositoryRashod->SelectRashodTanga(2,0);          
-                  return  view('fonds.botilshuda_tanga.index',compact('FondMoneyTang','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','farsudaTanga'));
+                          $farsudaTanga= $this->RepositoryRashod->SelectRashodTanga(2,0);         
+                          
+                          $json =json_encode($arrayResult,true);
+                          //   // print_r( json_decode($json,true));
+                      $allsum=array_sum(array_column(json_decode($json,true), 'summa'));     
+                  return  view('fonds.botilshuda_tanga.index',compact('allsum','FondMoneyTang','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','farsudaTanga'));
   
         //return view('fonds.botilshuda_tanga.index');
     }

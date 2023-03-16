@@ -12,18 +12,19 @@ function  sumcounts()
 
     //     $('#countsum').html("<b> Общие сумма:"+ total+" сомони</b>");
     // }
+    //   alert$(%('#oborot').val())
  
-    $('.count').each(function(element,index){
+    $('.countOborot').each(function(element,index){
         //if statement here 
         // use $(this) to reference the current div in the loop
         //you can try something like...
                    if(parseInt(index.value))
                    {
                     total+=parseInt(index.value);
-                    console.log(index.value);
+                    // console.log(index.value);
                    }
                 //   alert(total);
-                   $('#countsum').html("<b> Общие сумма:"+ total+" сомони</b>");    
+                 //  $('#countsum').html("<b> Общие сумма:"+ total+" сомони</b>");    
     
     
      });
@@ -45,10 +46,10 @@ function addOborot(id){
         
        
         
-      var selection=  ' <select   class="form-select" id="summa'+new_btn+'h"   name="nominal[]" autofocus required>'+
+      var selection=  '<select   class="form-select" id="summa'+new_btn+'h"   name="nominal[]" autofocus required>'+
         '<option value="">Интихоб</option> <option value="0.01">1 дирам </option> <option value="0.05">5 дирам</option><option value="20">20 дирам</option><option value="50">50 дирам</option><option value="1">1 сомони</option><option value="3">3 сомони</option><option value="5">5 сомони</option><option value="10">10 сомони</option> <option value="20">20 сомони</option><option value="50">50 сомони</option><option value="100">100 сомони</option><option value="200">200 сомони</option><option value="500">500 сомони</option>   </select>'
         
-       var new_input='<div class="row offset-1 mt-2" id="new_'+new_btn+'">  <div class="col-md-4  ">     <div class="input-group"> <span class="input-group-text">Номинал '+new_btn+'</span>  '+selection+'</div></div> <div class="col-md-4 "> <div class="input-group"> <span class="input-group-text">Сумма</span><input   required   type="text"  class="form-control count" name="summa[]"      id="summa'+new_btn+'" > </div></div> </div>';
+       var new_input='<div class="row offset-1 mt-2" id="new_'+new_btn+'">  <div class="col-md-4  ">     <div class="input-group"> <span class="input-group-text">Номинал '+new_btn+'</span>  '+selection+'</div></div> <div class="col-md-4 "> <div class="input-group"> <span class="input-group-text">Сумма</span><input   required   type="text"  class="form-control countOborot" name="summa[]"      id="summa'+new_btn+'" > </div></div> </div>';
  
          if(id==9898)
          {
@@ -167,11 +168,26 @@ function countinc()
 
 }
    var numsum=0;
-$(document).on('keyup','.count,.nomcou',function (){
- 
-
+$(document).on('keyup','.countOborot,.nomcou',function (){
+  var   total=0;
+    $('.countOborot').each(function(element,index){
+        //if statement here 
+        // use $(this) to reference the current div in the loop
+        //you can try something like...
+                   if(parseInt(index.value))
+                   {
+                    total+=parseInt(index.value);
+                            
+                   }
+                //   alert(total);
+             
+    
+    
+     });
+    //    console.log(total);
+     $("#countsumOborot").html("<b> Общие сумма:"+ total+" сомони</b>");    
   var  classes = $('form-control').find('is_invalid').val();
-   
+     // alert($(this).val());
     
     var  id = $(this).attr('id');
     $("#"+id.slice(0,-1)).val("");
@@ -184,6 +200,16 @@ $(document).on('keyup','.count,.nomcou',function (){
     {
         NomOfAll=nominal*10;
     }
+    //   alert($('#oborot').val())
+   // countinc();
+        var check=$(this).val()%$('#oborot').val()==0;
+        if(check==false)
+        {
+        
+            return;
+        }
+ 
+
     // console.log(NomOfAll);
     if($(this).val()>0 && nomininc()==countinc()){
         var summ=parseFloat($(this).val());

@@ -124,10 +124,10 @@
                                             @endif
                                         @endforeach
                                     </td>
-                                    <td>{{ $qator->qator }}</td>
+                                    <td>{{$qator->qator}}</td>
                                     {{-- <td>{{ $qator->comment }}</td> --}}
                                     <td>
-                                        <a class="btn btn-success" href="{{ route('sprqators.edit', $qator->id) }}">
+                                        <a class="btn btn-primary" href="{{ route('sprqators.edit', $qator->id) }}">
                                             <i class="align-middle" data-feather="edit"></i> Изменить</a>
                                         {!! Form::open(['method' => 'DELETE','route' => ['sprqators.destroy', $qator->id],'style'=>'display:inline']) !!}
                                         {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}

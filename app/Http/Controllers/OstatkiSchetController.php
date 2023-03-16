@@ -148,7 +148,7 @@ class OstatkiSchetController extends Controller
   
         $this->Repositoryschet->ToDateFondEmisions($request);
          $this->Repositoryschet->ToDateFond($request,1);
-           $this->Repositoryschet->ToDateFond($request,2);
+        $this->Repositoryschet->ToDateFond($request,2);
           $this->Repositoryschet->ToDateFond($request,3);
          $this->Repositoryschet->ToDateFondCoins($request,1);
          $this->Repositoryschet->ToDateFondCoins($request,2);
@@ -158,10 +158,10 @@ class OstatkiSchetController extends Controller
            //echo "<pre>";
          $arrAll=$this->Repositoryschet->InsertOstatkiSchet();
       // 
-       // print_r($arrAll);
+      // print_r($arrAll);
         // //  echo "</pre>";
         // if($arrAll==404):
-  return redirect()->route('ostatkischets.index');
+    return redirect()->route('ostatkischets.index');
         // endif;
   // return redirect()->route('ostatkischets.index');
         

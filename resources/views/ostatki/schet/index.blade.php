@@ -273,6 +273,7 @@
            <td> <b># </b>  </td>
          
            <td>{{ $SprAccount->account}}</td>
+   
            @foreach ($FoindMonthMoney as $FoindMonthMoneys)
        
                
@@ -291,14 +292,22 @@
                          @endif                
                @endforeach   
                @if(!in_array($SprAccount->id,$arrayday2))
-               {{-- @if(isset($FoindMonthMoney[0]['priod']))   <td>{{ date('Y-m-d', strtotime($FoindMonthMoney[0]['priod'])) }}</td>  @endif --}}
-        
+               {{-- @if(isset($FoindDayMoney[0]['priod']))   <td>{{ date('Y-m-d', strtotime($FoindDayMoney[0]['priod'])) }}</td>  @endif --}}
                <td>0</td>
                <td>0</td>
                <td>0</td>
                <td>0</td>
                <td>0</td>
                @endif
+               {{-- @if(!in_array($SprAccount->id,$arrayday2)) --}}
+               {{-- @if(isset($FoindMonthMoney[0]['priod']))   <td>{{ date('Y-m-d', strtotime($FoindMonthMoney[0]['priod'])) }}</td>  @endif --}}
+        
+               {{-- <td>0</td>
+               <td>0</td>
+               <td>0</td>
+               <td>0</td>
+               <td>0</td> --}}
+               {{-- @endif --}}
              </tr>
            @endforeach
            <tr>
@@ -314,27 +323,42 @@
            
        <td> <b># </b>  </td>
        <td>{{ $SprAccountMonthMoney->account}}</td>
-       @foreach ($FoindMonthMoney as $FoindMonthMoneys)
-       @if(!in_array($SprAccountMonthMoney->id,$arrayCoin2))
-           @if($SprAccountMonthMoney->id==$arrayCoin2)
+     
+       @foreach ($FoindMonthCoins AS $FoindMonthC)
+       {{-- {{ dd($FoindMonthCoinss) }}  --}}
+       {{-- @if(!in_array($SprAccountMonthMoney->id,$arrayCoin2)) --}}
+     @php
+      // echo "<pre>";
+      //   print_r($FoindMonthC);
+      //   echo "</pre>";
+     @endphp
+           @if($SprAccountMonthMoney->id==$FoindMonthC['src'])
        @php
        $arrayCoin2[]=$SprAccountMonthMoney->id;
        @endphp  
      
-       <td  >{{date('Y-m-d', strtotime($FoindMonthMoneys['priod']))}}</td>
-       <td>{{ $FoindMonthMoneys['ostatok_start']}}</td>
-       <td>{{ $FoindMonthMoneys['Prikhod']}}</td>
-       <td>{{ $FoindMonthMoneys['Raskhod']}}</td>
+       <td  >{{date('Y-m-d', strtotime($FoindMonthC['priod']))}}</td>
+       <td>{{ $FoindMonthC['ostatok_start']}}</td>
+       <td>{{ $FoindMonthC['Prikhod']}}</td>
+       <td>{{ $FoindMonthC['Raskhod']}}</td>
 
-       <td>{{ $FoindMonthMoneys['ostatok_end']}}</td>
-       @continue
-       @endif
+       <td>{{ $FoindMonthC['ostatok_end']}}</td>
+       {{-- @continue --}}
+       {{-- @endif --}}
        @endif
 
 @endforeach   
  
-               @if(!in_array($SprAccountMonthMoney->id,$arrayCoin2))
+               {{-- @if(!in_array($SprAccountMonthMoney->id,$arrayCoin2)) --}}
                {{-- @if(isset($FoindMonthMoney[0]['priod']))   <td>{{ date('Y-m-d', strtotime($FoindMonthMoney[0]['priod'])) }}</td>  @endif --}}
+               {{-- <td>0</td>
+               <td>0</td>
+               <td>0</td>
+               <td>0</td>
+               <td>0</td> --}}
+               {{-- @endif --}}
+               @if(!in_array($SprAccountMonthMoney->id,$arrayCoin2))
+               {{-- @if(isset($FoindDayMoney[0]['priod']))   <td>{{ date('Y-m-d', strtotime($FoindDayMoney[0]['priod'])) }}</td>  @endif --}}
                <td>0</td>
                <td>0</td>
                <td>0</td>

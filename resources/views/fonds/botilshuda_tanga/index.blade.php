@@ -817,15 +817,15 @@
     <div class="modal-dialog  modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Ботилшуда/Расход</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-md-3  ">
-                    <label for="date">Дата	</label>
+                <div class="col-md-3">
+                    <label for="date">Дата</label>
                     <input  type="datetime-local"readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"     name="date" class="form-control"    >
 
                     <input     value="1"    name="priznak" type="hidden"    >
@@ -843,6 +843,7 @@
                     <label for="count01">Номер Документ	</label>
                     <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
                 </div>
+                <label for="" class="offset-md-9 mt-4">  <span class="badge badge-light text-black "><h6><b>Общие сумма :{{$allsum }}</b></h6></span> </label>
  
          {{-- //Table ostatki  --}}
          <table class="table mt-2">

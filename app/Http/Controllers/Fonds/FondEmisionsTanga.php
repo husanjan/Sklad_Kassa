@@ -45,7 +45,10 @@ class FondEmisionsTanga extends Controller
             }else{
             $kodeOperObort++;
             }
-          return  view('fonds.fondemissionTanga.index',compact('arrayResult','safes','sprEds','shkafs','sprCells','sprQators','kodeOper','kodeOperObort'));
+            $json =json_encode($arrayResult,true);
+            //   // print_r( json_decode($json,true));
+        $allsum=array_sum(array_column(json_decode($json,true), 'summa'));
+          return  view('fonds.fondemissionTanga.index',compact('allsum','arrayResult','safes','sprEds','shkafs','sprCells','sprQators','kodeOper','kodeOperObort'));
     }
 
     /**
@@ -109,6 +112,7 @@ class FondEmisionsTanga extends Controller
           $arrayOstat['date']=date("Y-m-d H:i:s");
           $arrayOstat['naminal']=$request->naminal;
           $arrayOstat['ed_id']=5;
+          $arrayOstat['type']=0;
           
           $arrayOstat['priznak']=0;
           $arrayOstat['safe_id']=$request->safe_id;
@@ -288,7 +292,7 @@ class FondEmisionsTanga extends Controller
                 $ostatki_safe->naminal=$request['naminal'.$input];
                 $ostatki_safe->priznak=0;
                 $ostatki_safe->ed_id=5; 
-                $ostatki_safe->type=1;
+                $ostatki_safe->type=0;
                 //$ostatki_safe->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
                 $ostatki_safe->summa=$request['ostatkiResults'.$input]-$request['Summarashod'.$input][0];
                 $ostatki_safe->safe_id= $request['safe'.$input];   

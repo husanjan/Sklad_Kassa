@@ -35,6 +35,7 @@
                     <label for="count01">Номер Документ	</label>
                     <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
                 </div>
+                <label for="" class="offset-md-9 mt-4">  <span class="badge badge-light text-black "><h6><b>Общие сумма : </b>{{$allsumkorshoyamTanga}}</h6></span> </label>
  
          {{-- //Table ostatki  --}}
          <table class="table mt-2">
@@ -56,6 +57,7 @@
                 @php
                $i=1;//Initialize variable
               @endphp
+              
                 @foreach( $korshoyamTanga AS  $ostatkiResults)
                 @if($ostatkiResults->summa>0)
                 <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">

@@ -65,7 +65,10 @@ class CanceledController extends Controller
                        $arrayResult=$this->RepositoryRashod->SelectRashod(3,0);
                    
                        $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,0);
-          return  view('fonds.fondcancled.index',compact('FondMoney','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','arrayResult','kodeOperObort','botilshudaRas'));
+                       $json =json_encode($arrayResult,true);
+                       //   // print_r( json_decode($json,true));
+                   $allsum=  array_sum(array_column(json_decode($json,true), 'summa'));
+          return  view('fonds.fondcancled.index',compact('allsum','FondMoney','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','arrayResult','kodeOperObort','botilshudaRas'));
     }
 
     /**

@@ -64,13 +64,15 @@ class UnusableController extends Controller
                           }
                         //   ($type=1,$priznak=1)
                      $arrayResult= $this->RepositoryRashod->SelectRashod(1,0);
-                        //   echo "<pre>";
-                        //   print_r($arrayResult);
-                        //   echo "</pre>";
-                        //  exit;
+                  //      echo "<pre>";
+                        $json =json_encode($arrayResult,true);
+                   //   // print_r( json_decode($json,true));
+               $allsumkorshoyam=  array_sum(array_column(json_decode($json,true), 'summa'));
+                 //  echo "</pre>";
+                  
                         $FondMoneys= new  FondMoney();
                         $FondMoney= $FondMoneys::orderBy('date','DESC')->get()->groupBy('kode_oper');
-                  return  view('fonds.fondunusable.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','FondMoney'));
+                  return  view('fonds.fondunusable.index',compact('allsumkorshoyam','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','FondMoney'));
     }
 
     /**

@@ -85,7 +85,7 @@
                             <div class="input-group">
                                 <span class="input-group-text">Номинал</span>
                                 {{-- <input   required   type="text" id="summash" class="form-control nomcou " aria-describedby="btnGroupAddon" name="nominal[]"  > --}}
-                                <select   class="form-select" id="summash"   name="nominal[]" autofocus >
+                                <select   class="form-select nomcou" id="summash"   name="nominal[]" autofocus >
                                     <option value="">Интихоб</option>
                                     <option value="0.01">1 дирам </option>
                                     <option value="0.05">5 дирам</option>
@@ -112,7 +112,7 @@
                             <div class="input-group">
                                 <span class="input-group-text">Сумма</span>
                             
-                                <input   required   type="text" id="summas" class="form-control   count" aria-describedby="btnGroupAddon" name="summa[]"  >
+                                <input   required   type="text" id="summas" class="form-control    countOborot" aria-describedby="btnGroupAddon" name="summa[]"  >
 
                             </div>
 
@@ -181,7 +181,7 @@
                     </div>
 
                         <div class="col-md-5 mt-3">
-                            <button type="button"   class="btn btn-light active" id="adds" disabled><div id="countsum"></div> </button>
+                            <button type="button"   class="btn btn-light active" id="adds" disabled><div id="countsumOborot"></div> </button>
 
                         </div>
                     </div>

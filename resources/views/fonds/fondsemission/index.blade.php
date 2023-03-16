@@ -52,6 +52,7 @@
        
    <div id="tab" class="card col-md-6 ml-2">
     <a class="   offset-md-10" target="_blank"   href="{{ route('fondemission.show', date('d-m-Y').time()) }}?page={{$data}}"  > Просмотр_PDF</a>
+    <label for="" class="offset-md-9 mt-4">  <span class="badge badge-light text-black "><h6><b>Общие сумма : </b>{{ $FondEmisionSumma }}</h6></span> </label>
     {!! $FondEmisions->links() !!}
     <table class="table table-bordered  "  id="tab">
 

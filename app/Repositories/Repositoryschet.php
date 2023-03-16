@@ -167,8 +167,8 @@ class Repositoryschet{
           $startDate = Carbon::createFromFormat('Y-m-d', $request->startDate)->startOfDay();
           $endDate = Carbon::createFromFormat('Y-m-d', $request->EndDate)->endOfDay();
             $typeDate=2;
-            $endDate=$request->EndDate;
-            $prihod=json_decode($this->FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->orderBy('id', 'DESC')->sum('summa'),true);
+       
+             $prihod=json_decode($this->FondMoney::where('priznak',0)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->orderBy('id', 'DESC')->sum('summa'),true);
             $rashod=json_decode($this->FondMoney::where('priznak',1)->whereBetween('date',[$startDate, $endDate])->where('type',$src)->orderBy('id', 'DESC')->sum('summa'),true);
 
      
@@ -452,10 +452,10 @@ class Repositoryschet{
             
         if(is_array($this->Fond)):
                 foreach($this->Fond AS $fond):
-                    // echo "<pre>";    
-                    // print_r($fond);
-                    // echo "</pre>";
-               OstatkiSchet::create($fond);   
+                    echo "<pre>";    
+                    print_r($fond);
+                    echo "</pre>";
+              OstatkiSchet::create($fond);   
             endforeach;
         endif;
         if(!is_array($this->Fond)):

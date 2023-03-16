@@ -62,7 +62,10 @@ class korshoyam_tangaController extends Controller
                         }else{
                          $kodeOper++;
                           }
-                  return  view('fonds.korshoyam_tanga.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','FondMoneyTang'));
+                          $json =json_encode($arrayResult,true);
+                          //   // print_r( json_decode($json,true));
+                      $allsum=array_sum(array_column(json_decode($json,true), 'summa'));                  
+                  return  view('fonds.korshoyam_tanga.index',compact('allsum','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','FondMoneyTang'));
       
     }
 

@@ -57,9 +57,12 @@ class WornouController extends Controller
                    $kodeOper++;
                     }
                     $arrayResult= $this->RepositoryRashod->SelectRashod(2,0);
+                    $json =json_encode($arrayResult,true);
+                    //   // print_r( json_decode($json,true));
+                $allsum=array_sum(array_column(json_decode($json,true), 'summa'));
                     $FondMoneys= new  FondMoney();
-                    $FondMoney= $FondMoneys::orderBy('date','DESC')->get()->groupBy('kode_oper');
-            return  view('fonds.fondwornou.index',compact('safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','FondMoney'));
+        $FondMoney= $FondMoneys::orderBy('date','DESC')->get()->groupBy('kode_oper');
+            return  view('fonds.fondwornou.index',compact('allsum','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','kodeOperObort','arrayResult','FondMoney'));
     }
 
 

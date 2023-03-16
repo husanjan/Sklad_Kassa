@@ -39,9 +39,10 @@
                                                     <select id="nomil" class="form-select" name="naminal" autofocus >
                                                         <option value="">Интихоб</option>
                                                         <option value="0.01" >1  дирам</option>
-                                                        <option value="0.05" >05  дирам</option>
+                                                        <option value="0.05" >5  дирам</option>
                                                         <option value="0.10" >10  дирам</option>
                                                     
+                                                        <option value="0.20" >20  дирам</option>
                                                         <option value="0.25" >25  дирам</option>
                                                         <option value="0.50" >50  дирам</option>
                                                         <option value="1" >1 сомони  </option>

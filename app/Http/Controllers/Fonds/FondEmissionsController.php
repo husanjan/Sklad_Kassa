@@ -38,13 +38,15 @@ class FondEmissionsController extends Controller
         $response = Oborot::orderBy('date','DESC')->paginate(2);
        
         $FondEmisions = FondEmisions::where('priznak',0)->orderBy('date','DESC')->orderBy('nn','DESC')->paginate(50);
+     $FondEmisionSumma=   FondEmisions::where('priznak',0)->orderBy('date','DESC')->sum('summa');
+ 
          if($request->has('download'))
          {
              $pdf=Pdf::loadView('fonds.fondsemission.index',compact('safes','sprEds','shkafs','sprCells','FondEmisions','sprQators'));
              return $pdf->download('invoice.pdf');
 
          }
-          return  view('fonds.fondsemission.index',compact('safes','sprEds','shkafs','sprCells','FondEmisions','sprQators'));
+          return  view('fonds.fondsemission.index',compact('safes','sprEds','shkafs','sprCells','FondEmisions','sprQators','FondEmisionSumma'));
        // return view('spr.sprqators.index', compact('qators', 'shkafs', 'safes'));
     }
 
