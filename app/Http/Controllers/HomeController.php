@@ -20,9 +20,11 @@ use App\Repositories\AddRequest;
 use App\Repositories\RepositoryRashod;
 use Illuminate\Support\Facades\DB;
 use App\Models\FondCoins;
+use App\Models\Kode_Oper;
 use App\Models\FondEmisions;
 use App\Models\OstatkiSchet;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     /**
@@ -198,24 +200,33 @@ class HomeController extends Controller
           $sprCells= SprCells::all();
           $sprQators= SprQators::all();
           $sprAccounts= SprAccounts::all();
-           $kodeOper= $Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
+          //  $kodeOper= $Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
 
-           $kodeOpero= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
-           $kodeOperObort= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
+          //  $kodeOpero= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
+          //  $kodeOperObort= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
          
-           $kodeOperObortTanga= oborots_coin::orderBy('kod_oper','DESC')->value('kod_oper');
-           if($kodeOperObort<=0)
-           {
-               $kodeOperObort=1;
-           }else{
-           $kodeOperObort++;
-       }
-       if($kodeOperObortTanga<=0)
-       {
-           $kodeOperObortTanga=1;
-       }else{
-       $kodeOperObortTanga++;
-   }
+          //  $kodeOperObortTanga= oborots_coin::orderBy('kod_oper','DESC')->value('kod_oper');
+           $kodeOper= Kode_Oper::orderBy('kode_oper','DESC')->value('kode_oper');
+            if($kodeOper<=0)
+            {
+             $kodeOper=1;
+             }else{
+              $kodeOper++;
+
+               }
+               $kodeOperObort=$kodeOper;
+  //          if($kodeOperObort<=0)
+  //          {
+  //              $kodeOperObort=1;
+  //          }else{
+  //          $kodeOperObort++;
+  //      }
+  //      if($kodeOperObortTanga<=0)
+  //      {
+  //          $kodeOperObortTanga=1;
+  //      }else{
+       $kodeOperObortTanga=$kodeOper;
+  //  }
              $response= $Oborot::orderBy('date','DESC')->paginate(5);
 
              $OborTanga= $OborotTanga::orderBy('date','DESC')->get()->groupBy('kod_oper');
@@ -225,27 +236,27 @@ class HomeController extends Controller
              $FondMoneyTang= $FondMoneysTanga::orderBy('date','DESC')->get()->groupBy('kode_oper');
              $kodOperf= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
              $kodOperTanga= FondCoins::orderBy('kode_oper','DESC')->value('kode_oper');
-             if($kodOperTanga<=0)
-             {
-                  $kodOperTanga=1;
-             }else{
-               $kodOperTanga++;
-             }
+        //      if($kodOperTanga<=0)
+        //      {
+            $kodOperTanga=$kodeOper;
+        //      }else{
+        //        $kodOperTanga++;
+        //      }
 
 
-             if($kodOperf<=0)
-             {
-              $kodOperf=1;
-              }else{
-               $kodOperf++;
-                }
-                $safes = SprSafes::all();
-        if($kodeOpero<=0)
-          {
-               $kodeOpero=1;
-          }else{
-            $kodeOpero++;
-          }
+        //      if($kodOperf<=0)
+        //      {
+        //       $kodOperf=1;
+        //       }else{
+            $kodOperf=$kodeOper;
+        //         }
+               $safes = SprSafes::all();
+        // if($kodeOpero<=0)
+        //   {
+        //        $kodeOpero=1;
+        //   }else{
+                 $kodeOpero=$kodeOper;
+        //   }
          
           
               //  dd($request->all());
@@ -253,15 +264,15 @@ class HomeController extends Controller
                    //  SelectRashodTanga($type,$priznak)
               $korshoyamRashod= $this->RepositoryRashod->SelectRashod(1,0);
               $farsudaRashod= $this->RepositoryRashod->SelectRashod(2,0);
-              $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,0);
+              $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,1);
               //tanga 
               
               //   // print_r( json_decode($json,true));
-         
+              $botilsudaRas= $this->RepositoryRashod->SelectRashodTanga(3,0);
 
              $korshoyamTanga= $this->RepositoryRashod->SelectRashodTanga(1,0);
              $farsudaTanga= $this->RepositoryRashod->SelectRashodTanga(2,0);
-             $botilshudaTanga= $this->RepositoryRashod->SelectRashodTanga(3,0);
+             $botilshudaTanga= $this->RepositoryRashod->SelectRashodTanga(3,1);
             $sprAccounts= SprAccounts::all();
             //all summa
             $allsumkorshoyam=array_sum(array_column(json_decode(json_encode($korshoyamRashod),true), 'summa'));
@@ -276,7 +287,7 @@ class HomeController extends Controller
               return view('oborot.pagination',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'))->render();
 
           }
-                return view('home',compact('allsumbotilshudaTanga','allsumfarsudaTanga','allsumkorshoyamTanga','allsumbotilshuda','allsumbotilshuda','allsumfarsuda','allsumkorshoyam','botilshudaTanga','farsudaTanga','korshoyamTanga','bik','sprAccounts','sprQators','sprCells','kodeOper','shkafs','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang','korshoyamRashod','farsudaRashod','botilshudaRas'));
+                return view('home',compact('botilsudaRas','allsumbotilshudaTanga','allsumfarsudaTanga','allsumkorshoyamTanga','allsumbotilshuda','allsumbotilshuda','allsumfarsuda','allsumkorshoyam','botilshudaTanga','farsudaTanga','korshoyamTanga','bik','sprAccounts','sprQators','sprCells','kodeOper','shkafs','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang','korshoyamRashod','farsudaRashod','botilshudaRas'));
     }
 
     public function fetch_data()
@@ -481,13 +492,16 @@ public function oborotInsert(Request $request)
       $inf=$this->blogRepository->Tableoborot;
     //Oborot::create($inf);
       // echo "<pre>";
-      // print_r($inf);
+      // print_r($arr);
       // echo "</pre>";
-   
+      // exit;
+    
     return redirect()->route('home')->with('success','Счет успешно создан!');
 }
 public function FondInsert(Request $request)
 {
+  // dd( $request->all());
+  // exit;
   DB::beginTransaction();
   $oborots =  $this->addRepository->addRequestsOborot($request,1);
                 
@@ -500,6 +514,15 @@ public function FondInsert(Request $request)
   // echo "</pre>";
   if(is_array($oborots) AND is_array($money) AND $request->src==4)
   {
+    $kode_oper= new Kode_Oper;
+    $kode_oper->datetime=date("Y-m-d H:i:s");
+    $kode_oper->kode_oper=$request->kode_oper;
+    $kode_oper->Prikhod=4;
+    $kode_oper->Raskhod=$request->farsuda;
+    $kode_oper->Summa=$request->AllSumma;
+    $kode_oper->user_id=Auth::id();
+    $kode_oper->host=Auth::id();
+    $kode_oper->save();
     $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
     
     $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,0);

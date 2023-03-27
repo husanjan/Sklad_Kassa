@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\Models\FondMoney;
+use App\Models\Kode_Oper;
 use App\Models\Oborot;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\InterfacesSomoni;
@@ -141,10 +142,26 @@ use Illuminate\Support\Facades\DB;
 
       function OborotInserttoOborot($request)
       {
+ 
         //$request->request->remove('kode_oper');
          $account = $request->all();
+   
+    //      echo "<pre>";
+    //      print_r($account);
+    //      echo "</pre>";
+    // echo     array_sum($request->summa);
+    $kode_oper= new Kode_Oper;
+    $kode_oper->datetime=date("Y-m-d H:i:s");
+    $kode_oper->kode_oper=$request->kod_oper;
+    $kode_oper->Prikhod=4;
+    $kode_oper->Raskhod=0;
+    $kode_oper->Summa= array_sum($request->summa);
+    $kode_oper->user_id=Auth::id();
+    $kode_oper->host=Auth::id();
+    $kode_oper->save();  
+     
         //  $inc=$account['kod_oper'];
-         $date=date($account['date'].' '.'H:i:s.u ');
+         $date=date($account['date'].' '.'H:i:s.u');
           foreach ($request->nominal AS $nominal=>$value)
           {
             $account['nominal']=$value;
@@ -410,8 +427,8 @@ use Illuminate\Support\Facades\DB;
                         //Oborot Tanga function 
             public function    OborotTangaInsert($kode_oper,$summa,$bik,$n_doc,$priznak,$date,$src,$comment,$nominal,$ip,$userid)
             {
-              echo "<br>".$bik;
-                  $array_tanga['date']=date($date.' '.'H:i:s.u');
+              // echo "<br>".$bik;
+                  $array_tanga['date']=date($date.' '.'H:i:s');
                   $array_tanga['kod_oper']=$kode_oper;
                   $array_tanga['n_doc']=$n_doc;
                   $array_tanga['naminal']=$nominal;

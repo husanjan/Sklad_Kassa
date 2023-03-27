@@ -41,7 +41,7 @@ class OstatkiSchetController extends Controller
       $FondkorshoamCoinsMonth = $this->Repositoryschet->AllSelectDay(11,2,2);
       $FondFarsudaCoinsMonth = $this->Repositoryschet->AllSelectDay(10,2,2);
       $FondEmssionCoinsMonth = $this->Repositoryschet->AllSelectDay(9,2,2);
-      $FondbotilshudaCoinsMonth = $this->Repositoryschet->AllSelectDay(8,2,2);
+      $FondbotilshudaCoinsMonth = $this->Repositoryschet->AllSelectDay(12,2,2);
       $FondbOborotCoinsMonth = $this->Repositoryschet->AllSelectDay(4,2,2);
 
       // $FondbOborotCoinsMonth = $this->Repositoryschet->AllSelectDay(8,2,2);
@@ -65,7 +65,7 @@ class OstatkiSchetController extends Controller
             $FondkorshoamCoinsday= $this->Repositoryschet->AllSelectDay(11,2,1);
             $FondFarsudaCoinsday= $this->Repositoryschet->AllSelectDay(10,2,1);
             $FondEmssionCoinsDay = $this->Repositoryschet->AllSelectDay(9,2,1);
-            $FondbotilshudaCoinsday= $this->Repositoryschet->AllSelectDay(8,2,1);
+            $FondbotilshudaCoinsday= $this->Repositoryschet->AllSelectDay(12,2,1);
             $FondbOborotCoinsday = $this->Repositoryschet->AllSelectDay(4,2,1);
  
    $FoindDayMoney=array_merge(json_decode($FondkorshoamMoneyday,true),json_decode($FondFarsudaMoneyDay,true),json_decode($FondbotilshudaMoneyDay,true),json_decode($FondbOborotMoneyDay,true),json_decode($FondbFondemssionMoneyday,true));
@@ -153,6 +153,8 @@ class OstatkiSchetController extends Controller
          $this->Repositoryschet->ToDateFondCoins($request,1);
          $this->Repositoryschet->ToDateFondCoins($request,2);
         $this->Repositoryschet->ToDateFondCoins($request,0);
+        // $this->Repositoryschet->ToDateFondCoins($request,5);
+        // $this->Repositoryschet->ToDateFondCoins($request,6);
         $obor= $this->Repositoryschet->OborotMoney($request,4);
         $this->Repositoryschet->OborotCoins($request,7);
            //echo "<pre>";
@@ -283,7 +285,7 @@ class OstatkiSchetController extends Controller
             endforeach;
           echo '<td>'.$detals['date'].'</td>
       
-            <td>'.$detals['date'].'</td>
+            <td>'.$detals['ostatok_start'].'</td>
             <td>'.$detals['Prikhod'].'</td>
             <td>'.$detals['Raskhod'].'</td>
             <td>'.$detals['ostatok_end'].'</td></tr>';

@@ -13,6 +13,7 @@ use App\Models\Oborot;
 use App\Models\FondEmisions;
 use App\Models\SprAccounts;
 use App\Models\FondMoney;
+use App\Models\Kode_Oper;
 use App\Http\Controllers\Fonds\WornouController;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\AddRequest;
@@ -45,30 +46,37 @@ class CanceledController extends Controller
          $sprCells= SprCells::all();
           $sprQators= SprQators::all();
           $sprAccounts= SprAccounts::all();
-           $kodeOper= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
+          // $kodeOper= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
            $FondMoney=FondMoney::orderBy('date','DESC')->get()->groupBy('kode_oper');
-                    if($kodeOper<=0)
-                    {
-                     $kodeOper=1;
-                     }else{
-                      $kodeOper++;
-                       }
-                       $kodeOperObort= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
-                       if($kodeOperObort<=0)
-                       {
-                           $kodeOperObort=1;
-                       }else{
-                       $kodeOperObort++;
-                   }
+           $kodeOperObort= Kode_Oper::orderBy('kode_oper','DESC')->value('kode_oper');
+           if($kodeOperObort<=0)
+           {
+            $kodeOperObort=1;
+            }else{
+             $kodeOperObort++;
+       
+              }
+              $kodeOper= $kodeOperObort;
+                //     if($kodeOper<=0)
+                //     {
+                //      $kodeOper=1;
+                //      }else{
+                //       $kodeOper++;
+                //        }
+                //        $kodeOperObort= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
+                //        if($kodeOperObort<=0)
+                //        {
+                //            $kodeOperObort=1;
+                //        }else{
+                //        $kodeOperObort++;
+                //    }
 
                   
-                       $arrayResult=$this->RepositoryRashod->SelectRashod(3,0);
+                      // $arrayResult=$this->RepositoryRashod->SelectRashod(3,0);
                    
                        $botilshudaRas= $this->RepositoryRashod->SelectRashod(3,0);
-                       $json =json_encode($arrayResult,true);
-                       //   // print_r( json_decode($json,true));
-                   $allsum=  array_sum(array_column(json_decode($json,true), 'summa'));
-          return  view('fonds.fondcancled.index',compact('allsum','FondMoney','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','arrayResult','kodeOperObort','botilshudaRas'));
+                       $arrayResult= $this->RepositoryRashod->SelectRashod(2,0);
+          return  view('fonds.fondcancled.index',compact('FondMoney','safes','sprEds','shkafs','sprCells' ,'sprQators','sprAccounts','kodeOper','arrayResult','kodeOperObort','botilshudaRas'));
     }
 
     /**
@@ -91,20 +99,59 @@ class CanceledController extends Controller
     {
         //
        // DB::beginTransaction();
-         
+         // dd($request->all());
         if(isset($request['id']))
         {
+            $sumAll=0;
+            foreach($request['id'] AS $input)
+            {
+                        if($request['Summarashod'.$input][0]>0)
+                        {
+                          $sumAll+=$request['Summarashod'.$input][0];
+                         }
+            }
+            
             $arrayResult= $this->RepositoryRashod->InsertRashodBotilshudaToOstatki($request);
-            //  print_r($arrayResult);
-             
-              
+            // print_r($arrayResult);
+            // echo $sumAll;
+         
+            $kode_oper= new Kode_Oper;
+            $kode_oper->datetime=date("Y-m-d H:i:s");
+            $kode_oper->kode_oper=$request->kode_oper;
+            $kode_oper->Prikhod=$request->src;
+            $kode_oper->Raskhod=3;
+            $kode_oper->Summa=$sumAll;
+            $kode_oper->user_id=Auth::id();
+            $kode_oper->host=Auth::id();
+            $kode_oper->save();    
+          
+                
                if($arrayResult AND !$request->botilshudar=='botilshudar')
                {
-                return redirect()->route('fondcanceled.index')->with('success','Фонд Ботилшуда расход успешно создан!');
+              
+            
+
+                //   exit;
+
+           
+                // $kode_oper->save();      
+                foreach($request['id'] AS $input)
+                {
+                            if($request['Summarashod'.$input][0]>0)
+                            {
+                                $sumAll+=$request['Summarashod'.$input][0];
+                             }
+                }
+
+
+
+
+           return redirect()->route('fondcanceled.index')->with('success','Фонд Ботилшуда расход успешно создан!');
                }
                if($request->botilshudar=='botilshudar')
                {
-                return redirect()->route('home')->with('danger','Ботилшуда фонд  не успешно!');
+        //   return redirect()->route('home')->with('danger','Ботилшуда фонд  не успешно!');
+          return redirect()->route('fondcanceled.index')->with('success','Фонд Ботилшуда расход успешно создан!');
                }
               
           exit;

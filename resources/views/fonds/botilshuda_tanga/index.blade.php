@@ -834,7 +834,7 @@
                     <input          name="priznak" type="hidden" value="1"    >
                
                          
-                    <input            name="farsuda" type="hidden"   value="3" >
+                   
                 </div>
      
            
@@ -842,7 +842,18 @@
                 <div class="col-md-2">
                     <label for="count01">Номер Документ	</label>
                     <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
+                   
                 </div>
+               <div class="col-md-4 mt-4">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="src" id="btnradio1" autocomplete="off" value="5" required="">
+                    <label class="btn btn-outline-secondary" for="btnradio1">Душанбе</label>
+                  
+                    <input type="radio" class="btn-check" name="src" id="btnradio2" autocomplete="off" value="6" required="">
+                    <label class="btn btn-outline-secondary" for="btnradio2">Нобудкуни</label>
+         
+                  </div></div> 
+                 
                 <label for="" class="offset-md-9 mt-4">  <span class="badge badge-light text-black "><h6><b>Общие сумма :{{$allsum }}</b></h6></span> </label>
  
          {{-- //Table ostatki  --}}
@@ -865,7 +876,7 @@
                 @php
                $i=1;//Initialize variable
               @endphp
-                @foreach( $arrayResult AS  $ostatkiResults)
+                @foreach( $botilsudaRas AS  $ostatkiResults)
                 @if($ostatkiResults->summa>0)
                 <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
                   <tr class="border-bottom" id="t{{$ostatkiResults->id}}">
@@ -888,7 +899,7 @@
                     @endforeach
                     @foreach ( $sprCells as $sprCell )
            
-                    @if($ostatkiResults->cell_id===$sprCell->id ) <td><input type="hidden" name="sprCell{{$ostatkiResults->id}}" value="{{$sprCell->id}}">{{ $sprCell->cell }}</td>  @endif
+                    @if($ostatkiResults->cell_id===$sprCell->id) <td><input type="hidden" name="sprCell{{$ostatkiResults->id}}" value="{{$sprCell->id}}">{{ $sprCell->cell }}</td>  @endif
                     @endforeach
                     @foreach ($sprEds as $sprEd )
            

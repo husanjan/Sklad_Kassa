@@ -9,6 +9,7 @@ use App\Models\SprShkafs;
 use App\Models\SprCells;
 use App\Models\SprQators;
 use App\Models\oborots_coin;
+use App\Models\Kode_Oper;
 use App\Models\ostatki_safe;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -38,14 +39,26 @@ class FondEmisionsTanga extends Controller
         $sprQators= SprQators::all();
         $kodeOper= FondCoins::orderBy('kode_oper','DESC')->value('kode_oper');
         $kodeOper++;
-        $kodeOperObort= oborots_coin::orderBy('kod_oper','DESC')->value('kod_oper');
+        // $kodeOperObort= oborots_coin::orderBy('kod_oper','DESC')->value('kod_oper');
+
+        //     if($kodeOperObort<=0)
+        //     {
+        //     $kodeOperObort=1;
+        //     }else{
+        //     $kodeOperObort++;
+        //     }
+        
+            $kodeOperObort= Kode_Oper::orderBy('kode_oper','DESC')->value('kode_oper');
             if($kodeOperObort<=0)
             {
-            $kodeOperObort=1;
+                $kodeOperObort=1;
             }else{
-            $kodeOperObort++;
+                $kodeOperObort++;
             }
-            $json =json_encode($arrayResult,true);
+            $kodeOper=$kodeOperObort;
+
+
+            $json=json_encode($arrayResult,true);
             //   // print_r( json_decode($json,true));
         $allsum=array_sum(array_column(json_decode($json,true), 'summa'));
           return  view('fonds.fondemissionTanga.index',compact('allsum','arrayResult','safes','sprEds','shkafs','sprCells','sprQators','kodeOper','kodeOperObort'));
@@ -218,16 +231,24 @@ class FondEmisionsTanga extends Controller
     public function edit(Request $request)
     {
         //
+        
+
+
+        $request['kode_operRashod'];
+
+
+        
         DB::beginTransaction();
         try {
         // dd($request->all());
         foreach($request['id'] AS $input)
         {
+              $request['Summarashod'.$input][0];
             // print_r($input);
-            // exit;
+             // exit;
                     if($request['Summarashod'.$input][0]>0)
                     {
-                  $request['Summarashod'.$input][0];
+               //   $request['Summarashod'.$input][0];
                 $FondMoney = new FondCoins;
                 $FondMoney->date=$request['date'];
                 $FondMoney->comment=$request['comment'];
@@ -306,6 +327,16 @@ class FondEmisionsTanga extends Controller
                 
                $ostatki_safe->save();
                
+
+               $kode_oper= new Kode_Oper;
+               $kode_oper->datetime=date("Y-m-d H:i:s");
+               $kode_oper->kode_oper= $request['kode_operRashod'];
+               $kode_oper->Prikhod=8;
+               $kode_oper->Raskhod=9;
+               $kode_oper->Summa= $request['Summarashod'.$input][0];
+               $kode_oper->user_id=Auth::id();
+               $kode_oper->host=Auth::id();
+               $kode_oper->save();
                     }
         }
         DB::commit();

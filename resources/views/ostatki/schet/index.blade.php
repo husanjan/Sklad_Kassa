@@ -337,7 +337,7 @@
        $arrayCoin2[]=$SprAccountMonthMoney->id;
        @endphp  
      
-       <td  >{{date('Y-m-d', strtotime($FoindMonthC['priod']))}}</td>
+       <td  >  {{date('Y-m-d', strtotime($FoindMonthC['priod']))}}</td>
        <td>{{ $FoindMonthC['ostatok_start']}}</td>
        <td>{{ $FoindMonthC['Prikhod']}}</td>
        <td>{{ $FoindMonthC['Raskhod']}}</td>

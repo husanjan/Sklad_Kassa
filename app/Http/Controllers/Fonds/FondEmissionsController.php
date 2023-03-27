@@ -16,6 +16,7 @@ use App\Models\SprEds;
 use App\Models\FondEmisions;
 use App\Models\ostatki_safe;
 use App\Models\Oborot;
+use App\Models\Kode_Oper;
 use Illuminate\Support\Facades\DB;
 
 class FondEmissionsController extends Controller
@@ -31,7 +32,20 @@ class FondEmissionsController extends Controller
 
         // dd($ostatkiResult);
         $safes = SprSafes::all();
-        $sprEds = SprEds::all();
+        $Kode_Oper = Kode_Oper::all();
+
+       // dd($Kode_Oper);
+
+
+     
+        
+           
+
+
+
+
+
+        $sprEds=SprEds::all();
         $shkafs = SprShkafs::all();
         $sprCells= SprCells::all();
         $sprQators= SprQators::all();
@@ -64,14 +78,22 @@ class FondEmissionsController extends Controller
         $sprCells= SprCells::all();
         $sprQators= SprQators::all();
 //
-$kodeOper= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
-
+// $kodeOper= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
+$kodeOper= Kode_Oper::orderBy('kode_oper','DESC')->value('kode_oper');
 if($kodeOper<=0)
-    {
-        $kodeOper=1;
-    }else{
-    $kodeOper++;
-}
+{
+ $kodeOper=1;
+ }else{
+  $kodeOper++;
+   }
+
+ 
+// if($kodeOper<=0)
+//     {
+//         $kodeOper=1;
+//     }else{
+//     $kodeOper++;
+// }
     if($request->id==1):
         return view('fonds.fondsemission.createRashod',compact('shkafs','safes','sprQators','sprCells','sprEds','kodeOper'));
         return;
@@ -247,7 +269,8 @@ if($kodeOper<=0)
             'Nomer' => 'required|digits_between:7,7',
         ]);
        
-        $request->request->remove('_token');
+
+     
    // dd($request->all());
         $sum_dist=1000;
         //$edin=20000;
@@ -289,9 +312,10 @@ if($kodeOper<=0)
                 $shkaf_id=[];
                 $qator_id=[];
                 $ed_id=[];
-              
+            
+                
                $FondEmisions= FondEmisions::where('naminal',$request->naminal)->where('serial',$request->Serial)->whereIn('nn',$array)->where('priznak',0)->get();
-               foreach($FondEmisions AS   $FondEmision)
+               foreach($FondEmisions AS $FondEmision)
                {
                 
                    if(max($array)<=$FondEmisions->max('nn'))
@@ -320,10 +344,14 @@ if($kodeOper<=0)
                 $shkaf_id = array_unique($shkaf_id);
                 $qator_id = array_unique($qator_id);
                 $ed_id = array_unique($ed_id);
-      
-    $ostatki_safe = new ostatki_safe;
+              
+            $ostatki_safe = new ostatki_safe;
+
     $ostatkiResult= $ostatki_safe::select('cell_id','id','safe_id','shkaf_id','qator_id','ed_id','naminal','summa','typeFond')->where('naminal',$request->naminal)->whereIn('cell_id',$validateCellunique)->where('priznak',0)->where('typeFond',0)->orderBy('id','desc')->limit(1)->get();
     $oborot=[];
+//  echo array_sum($validateSumma);
+  
+ 
     try {
      
     foreach($ostatkiResult AS $ostatkiResults)
@@ -357,12 +385,31 @@ if($kodeOper<=0)
         $oborot['user_id']=Auth::id();
         $oborot['comment']=$request->comment;
         $oborot['n_doc']=$request->n_doc;
-            echo "<pre>";
-           print_r($oborot);
-           echo "</pre>";
-       Oborot::create($oborot);
+        
+
+        $request->request->remove('_token');
+        $kode_oper= new Kode_Oper;
+        $kode_oper->datetime=date("Y-m-d H:i:s");
+        $kode_oper->kode_oper=$request->kodeOper;
+        $kode_oper->Prikhod=4;
+        $kode_oper->Raskhod=7;
+        $kode_oper->Summa=array_sum($validateSumma);
+        $kode_oper->user_id=Auth::id();
+        $kode_oper->host=Auth::id();
+        $kode_oper->save();
+      
+    
+        //   echo "<pre>";
+        //   print_r(json_decode($kode_oper,true));
+        //   echo "</pre>";
+        //     echo "<pre>";
+        //    print_r($oborot);
+        //    echo "</pre>";
+     Oborot::create($oborot);
      $ostatki_safe->save();
-       FondEmisions::whereIn('nn',$validateNomer)->where('serial',$request->Serial)->update(['priznak'=>1,'comment'=>$request->comment]);
+  
+     
+     FondEmisions::whereIn('nn',$validateNomer)->where('serial',$request->Serial)->update(['priznak'=>1,'comment'=>$request->comment]);
       }
     }
     DB::commit();

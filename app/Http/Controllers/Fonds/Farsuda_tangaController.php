@@ -10,6 +10,7 @@ use App\Models\SprCells;
 use App\Models\SprQators;
 use App\Models\SprEds;
 use App\Models\Oborot;
+use App\Models\Kode_Oper;
 use App\Models\FondEmisions;
 use App\Models\SprAccounts;
 use App\Models\FondCoins;
@@ -18,6 +19,7 @@ use App\Repositories\InterfacesSomoni;
 use App\Repositories\RepositoryRashod;
 use App\Repositories\AddRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class Farsuda_tangaController extends Controller
 {
     /**
@@ -36,13 +38,24 @@ class Farsuda_tangaController extends Controller
     {
         //
         //
-        $kodeOperObort= oborots_coin::orderBy('kod_oper','DESC')->value('kod_oper');
-        if($kodeOperObort<=0)
-        {
-            $kodeOperObort=1;
-        }else{
-        $kodeOperObort++;
+    //     $kodeOperObort= oborots_coin::orderBy('kod_oper','DESC')->value('kod_oper');
+    //     if($kodeOperObort<=0)
+    //     {
+    //         $kodeOperObort=1;
+    //     }else{
+    //     $kodeOperObort++;
+    // }
+
+    $kodeOperObort=Kode_Oper::orderBy('kode_oper','DESC')->value('kode_oper');
+    if($kodeOperObort<=0)
+    {
+     $kodeOperObort=1;
+    }else{
+      $kodeOperObort++;
     }
+
+
+
     $FondMoneyTang=FondCoins::orderBy('date','DESC')->get()->groupBy('kode_oper');
 //  SelectRashodTanga($type,$priznak)
         $arrayResult= $this->RepositoryRashod->SelectRashodTanga(2,0);
@@ -52,13 +65,13 @@ class Farsuda_tangaController extends Controller
         $sprCells= SprCells::all();
         $sprQators= SprQators::all();
         $sprAccounts= SprAccounts::all();
-        $kodeOper= FondCoins::orderBy('kode_oper','DESC')->value('kode_oper');
-        if($kodeOper<=0)
-          {
-          $kodeOper=1;
-          }else{
-        $kodeOper++;
-          }
+        // $kodeOper= FondCoins::orderBy('kode_oper','DESC')->value('kode_oper');
+        // if($kodeOper<=0)
+        //   {
+        //   $kodeOper=1;
+        //   }else{
+       $kodeOper=$kodeOperObort;
+        //   }
           $json =json_encode($arrayResult,true);
           //   // print_r( json_decode($json,true));
       $allsum=array_sum(array_column(json_decode($json,true), 'summa'));  
@@ -88,11 +101,33 @@ class Farsuda_tangaController extends Controller
     //    / dd($request);
         if(isset($request['id']))
         {
+
+            $sumAll=0;
+            foreach($request['id'] AS $input)
+            {
+                        if($request['Summarashod'.$input][0]>0)
+                        {
+                         $sumAll+=$request['Summarashod'.$input][0];
+                         }
+            }
+
+            // e
             $arrayResult= $this->RepositoryRashod->InsertRashodFarsudaToOstatkiTanga($request);
             // print_r($arrayResult);
          
             if($arrayResult AND !$request->acccounti=='farsuda')
             {
+
+                $kode_oper= new Kode_Oper;
+                $kode_oper->datetime=date("Y-m-d H:i:s");
+                $kode_oper->kode_oper=$request->kode_oper;
+                $kode_oper->Prikhod=10;
+                $kode_oper->Raskhod=8;
+                $kode_oper->Summa=$sumAll;
+                $kode_oper->user_id=Auth::id();
+                $kode_oper->host=Auth::id();
+                $kode_oper->save();     
+
              return redirect()->route('farsuda_tanga.index')->with('success','Фонд расход успешно создан!');
             }
             if($request->acccounti=='farsuda')
@@ -117,6 +152,20 @@ class Farsuda_tangaController extends Controller
             $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,1);
         
              try{
+
+
+                $kode_oper= new Kode_Oper;
+                $kode_oper->datetime=date("Y-m-d H:i:s");
+                $kode_oper->kode_oper=$request->kode_oper;
+                $kode_oper->Prikhod=10;
+                $kode_oper->Raskhod=11;
+                $kode_oper->Summa=$request->AllSumma;
+                $kode_oper->user_id=Auth::id();
+                $kode_oper->host=Auth::id();
+                $kode_oper->save();
+
+
+
                 foreach ($money as $key => $value) {
                     # code...
              

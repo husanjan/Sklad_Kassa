@@ -13,6 +13,7 @@ use App\Models\FondEmisions;
 use App\Models\SprAccounts;
 use App\Models\FondMoney;
 use App\Models\Oborot;
+use App\Models\Kode_Oper;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\InterfacesSomoni;
 use App\Repositories\AddRequest;
@@ -36,26 +37,35 @@ class WornouController extends Controller
 
     public function index()
     {
-        $kodeOperObort= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
-        if($kodeOperObort<=0)
-        {
-            $kodeOperObort=1;
-        }else{
-        $kodeOperObort++;
-    }
+    //     $kodeOperObort= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
+    //     if($kodeOperObort<=0)
+    //     {
+    //         $kodeOperObort=1;
+    //     }else{
+    //     $kodeOperObort++;
+    // }
+    $kodeOperObort= Kode_Oper::orderBy('kode_oper','DESC')->value('kode_oper');
+    if($kodeOperObort<=0)
+    {
+     $kodeOperObort=1;
+     }else{
+      $kodeOperObort++;
+
+       }
     $safes = SprSafes::all();
      $sprEds = SprEds::all();
       $shkafs = SprShkafs::all();
       $sprCells= SprCells::all();
        $sprQators= SprQators::all();
        $sprAccounts= SprAccounts::all();
-        $kodeOper= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
-                 if($kodeOper<=0)
-                 {
-                  $kodeOper=1;
-                  }else{
-                   $kodeOper++;
-                    }
+       $kodeOper=$kodeOperObort;
+        // $kodeOper= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
+        //          if($kodeOper<=0)
+        //          {
+        //           $kodeOper=1;
+        //           }else{
+        //            $kodeOper++;
+        //             }
                     $arrayResult= $this->RepositoryRashod->SelectRashod(2,0);
                     $json =json_encode($arrayResult,true);
                     //   // print_r( json_decode($json,true));
@@ -88,19 +98,64 @@ class WornouController extends Controller
        
         $inputs = $request->all();
           
-
+         
            
         if(isset($request['id']))
         {
-            $arrayResult= $this->RepositoryRashod->InsertRashodFarsudaToOstatki($request);
+          $arrayResult= $this->RepositoryRashod->InsertRashodFarsudaToOstatki($request);
             // print_r($arrayResult);
+        
+            $sumAll=0;
+            foreach($request['id'] AS $input)
+            {
+                        if($request['Summarashod'.$input][0]>0)
+                        {
+                         $sumAll+=$request['Summarashod'.$input][0];
+                         }
+            }
+            // echo   $sumAll;
+
+           
+
+
+      
              if($arrayResult AND !$request->farsudai=='farsudai')
                {
-                return redirect()->route('fondwornou.index')->with('success','Фонд расход успешно создан!');
+                $kode_oper= new Kode_Oper;
+                $kode_oper->datetime=date("Y-m-d H:i:s");
+                $kode_oper->kode_oper=$request->kode_oper;
+                $kode_oper->Prikhod=4;
+                $kode_oper->Raskhod=1;
+                $kode_oper->Summa=$sumAll;
+                $kode_oper->user_id=Auth::id();
+                $kode_oper->host=Auth::id();
+                $kode_oper->save();      
+              
+                foreach($request['id'] AS $input)
+                {
+                            if($request['Summarashod'.$input][0]>0)
+                            {
+                                $sumAll+=$request['Summarashod'.$input][0];
+                             }
+                }
+                // $kode_oper= new Kode_Oper;
+                // $kode_oper->datetime=date("Y-m-d H:i:s");
+                // $kode_oper->kode_oper=$request->kode_oper;
+                // $kode_oper->Prikhod=4;
+                // $kode_oper->Raskhod=1;
+                // $kode_oper->Summa=$sumAll;
+                // $kode_oper->user_id=Auth::id();
+                // $kode_oper->host=Auth::id();
+                // $kode_oper->save();        
+
+
+                // return redirect()->route('fondwornou.index')->with('success','Фонд расход успешно создан!');
+               return    redirect()->back()->with('success','Фонд расход успешно создан!');
                }
                if($request->farsudai=='farsudai')
                {
-                return redirect()->route('home')->with('danger','Фарсуда фонд  не успешно!');
+                // return redirect()->route('home')->with('danger','Фарсуда фонд  не успешно!');
+                return redirect()->back()->with('danger','Фарсуда фонд  не успешно!');
                }
           
 
@@ -129,6 +184,15 @@ class WornouController extends Controller
               //prihod korshoyam ostatki  
              
              try{
+                $kode_oper= new Kode_Oper;
+                $kode_oper->datetime=date("Y-m-d H:i:s");
+                $kode_oper->kode_oper=$request->kode_oper;
+                $kode_oper->Prikhod=2;
+                $kode_oper->Raskhod=4;
+                $kode_oper->Summa=$request->AllSumma;
+                $kode_oper->user_id=Auth::id();
+                $kode_oper->host=Auth::id();
+                $kode_oper->save();
                 foreach ($money as $key => $value) {
                     # code...
                 FondMoney::create($money[$key]);

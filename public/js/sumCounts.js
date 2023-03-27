@@ -134,7 +134,7 @@ function add(accumulator, a) {
         
     });
     var   Type= $(this).data('type');
-    var htmlSum='<div class="alert alert-primary  mt-2"><div class="btn-group" role="group" aria-label="Basic example"> Общие сумма  '+sum+' Cомони  </div></div>';
+    var htmlSum='<div class="alert alert-primary  mt-2"><div class="btn-group" role="group" aria-label="Basic example"> Общие сумма  '+sum+'  Cомони <input type="hidden" name="AllSumma" value="'+sum+'" >  </div></div>';
                
     $("#AllSumma").html(htmlSum);
     

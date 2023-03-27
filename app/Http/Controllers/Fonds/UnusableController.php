@@ -14,6 +14,7 @@ use App\Models\Oborot;
 use App\Models\FondEmisions;
 use App\Models\SprAccounts;
 use App\Models\FondMoney;
+use App\Models\Kode_Oper;
 use App\Models\ostatki_safe;
 use App\Http\Controllers\Fonds\WornouController;
 use Illuminate\Support\Facades\Auth;
@@ -40,13 +41,13 @@ class UnusableController extends Controller
     public function index()
     {
         //
-        $kodeOperObort= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
-        if($kodeOperObort<=0)
-        {
-            $kodeOperObort=1;
-        }else{
-        $kodeOperObort++;
-    }
+    //     $kodeOperObort= Oborot::orderBy('kod_oper','DESC')->value('kod_oper');
+    //     if($kodeOperObort<=0)
+    //     {
+    //         $kodeOperObort=1;
+    //     }else{
+    //     $kodeOperObort++;
+    // }
 
  
            $safes = SprSafes::all();
@@ -55,14 +56,24 @@ class UnusableController extends Controller
             $sprCells= SprCells::all();
              $sprQators= SprQators::all();
              $sprAccounts= SprAccounts::all();
-              $kodeOper= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
-                       if($kodeOper<=0)
-                       {
-                        $kodeOper=1;
-                        }else{
-                         $kodeOper++;
-                          }
+            //   $kodeOper= FondMoney::orderBy('kode_oper','DESC')->value('kode_oper');
+            //            if($kodeOper<=0)
+            //            {
+            //             $kodeOper=1;
+            //             }else{
+            //              $kodeOper++;
+            //               }
+            $kodeOper= Kode_Oper::orderBy('kode_oper','DESC')->value('kode_oper');
+            if($kodeOper<=0)
+            {
+             $kodeOper=1;
+             }else{
+              $kodeOper++;
+
+               }
+               $kodeOperObort=$kodeOper;   
                         //   ($type=1,$priznak=1)
+                   
                      $arrayResult= $this->RepositoryRashod->SelectRashod(1,0);
                   //      echo "<pre>";
                         $json =json_encode($arrayResult,true);
@@ -96,15 +107,38 @@ class UnusableController extends Controller
 
         $inputs=$request->all();
  
- 
+      //     dd($inputs);
          $arrayRashod=[];
-        //  print_r($inputs);
+        // ss
         //  exit;
         if(isset($request['id']))
         {   
              //priznak   prihod 0/ rashod 1
-            $arrayResult= $this->RepositoryRashod->InsertRashodKorshoyamToOstatki($request,0);
-             
+             $inputs = $request->all();
+            //  dd($inputs);
+            $sumAll=0;
+            foreach($request['id'] AS $input)
+            {
+                        if($request['Summarashod'.$input][0]>0)
+                        {
+                            $sumAll+=$request['Summarashod'.$input][0];
+                         }
+            }
+            $kode_oper= new Kode_Oper;
+            $kode_oper->datetime=date("Y-m-d H:i:s");
+            $kode_oper->kode_oper=$request->kode_oper;
+            $kode_oper->Prikhod=3;
+            $kode_oper->Raskhod=2;
+            $kode_oper->Summa=$sumAll;
+            $kode_oper->user_id=Auth::id();
+            $kode_oper->host=Auth::id();
+            $kode_oper->save();           
+          
+
+
+
+             $arrayResult= $this->RepositoryRashod->InsertRashodKorshoyamToOstatki($request,0);
+         
                if($arrayResult AND !$request->acccounti=='korshoyam')
                {
                 return redirect()->route('fondunusable.index')->with('success','Фонд расход успешно создан!');
@@ -118,7 +152,7 @@ class UnusableController extends Controller
         
         }
     
-     
+   
        DB::beginTransaction();
         $inputs = $request->all();
  
@@ -126,12 +160,26 @@ class UnusableController extends Controller
         $oborots =  $this->addRepository->addRequestsOborot($request,1);
                 
         $money= $this->addRepository->addRequests($request);
-
-  
+    
+      
+        //  echo "<pre>";
+        //  print_r($kode_oper);
+        //  echo "</pre>";
+        // exit;
        
  
          if(is_array($oborots) AND is_array($money) AND $request->src==4)
          {
+
+            $kode_oper= new Kode_Oper;
+            $kode_oper->datetime=date("Y-m-d H:i:s");
+            $kode_oper->kode_oper=$request->kode_oper;
+            $kode_oper->Prikhod=1;
+            $kode_oper->Raskhod=4;
+            $kode_oper->Summa=$request->AllSumma;
+            $kode_oper->user_id=Auth::id();
+            $kode_oper->host=Auth::id();
+            $kode_oper->save();
                    //prihod korshoyam ostatki
          $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
     

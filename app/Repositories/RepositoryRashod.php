@@ -356,6 +356,28 @@ class RepositoryRashod{
                      $ostatki_safe=  $ostatki_safe->save();
                      
 
+
+                     //insert botilshuda 
+                     $ostatki_safe = new ostatki_safe;
+                     $ostatki_safe->date=$request['date'];
+                     // $ostatki_safe->comment=$request['comment'];
+                     $ostatki_safe->src=2;
+                     $ostatki_safe->naminal=$request['naminal'.$input];
+                     $ostatki_safe->priznak=0;
+                     $ostatki_safe->ed_id=2; 
+                     $ostatki_safe->type=3;
+                     //$ostatki_safe->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+                     $ostatki_safe->summa  =$request['Summarashod'.$input][0];
+                     $ostatki_safe->safe_id= $request['safe'.$input];   
+                     $ostatki_safe->shkaf_id=$request['shkaf'.$input];   
+                     $ostatki_safe->qator_id=$request['sprQator'.$input];   
+                     $ostatki_safe->cell_id = $request['sprCell'.$input];   
+                     $ostatki_safe->typeFond=0;   
+                  //    $ostatki_safe->n_doc= $request['ndoc'];   
+                     $ostatki_safe->host =$request->ip();   
+                     $ostatki_safe->user_id =Auth::id();   
+                     $ostatki_safe=  $ostatki_safe->save();
+
                         //ostatki safe
                     $ostatki_safe = new ostatki_safe;
                     $ostatki_safe->date=$request['date'];
@@ -405,7 +427,7 @@ class RepositoryRashod{
                      $FondMoney->priznak=$request['priznak'];
                      $FondMoney->comment=$request['comment'];
                      $FondMoney->type=3;
-                     $FondMoney->src=0;
+                     $FondMoney->src=$request['src'];
                      $FondMoney->naminal=$request['naminal'.$input];
                      $FondMoney->ed_id=2; 
                      $FondMoney->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
@@ -427,7 +449,7 @@ class RepositoryRashod{
                        //ostatki safe
                        $ostatki_safe = new ostatki_safe;
                        $ostatki_safe->date=$request['date'];
-                       $ostatki_safe->src=0;
+                       $ostatki_safe->src=$request['src'];
                        $ostatki_safe->naminal=$request['naminal'.$input];
                        $ostatki_safe->priznak=1;
                        $ostatki_safe->ed_id=2; 
@@ -446,22 +468,22 @@ class RepositoryRashod{
                                 //ostatki safe
                     $ostatki_safe = new ostatki_safe;
                     $ostatki_safe->date=$request['date'];
-                    $ostatki_safe->src=0;
+                    $ostatki_safe->src=$request['src'];
                     $ostatki_safe->naminal=$request['naminal'.$input];
                     $ostatki_safe->priznak=0;
                     $ostatki_safe->ed_id=2; 
                     $ostatki_safe->type=3;
                     //$ostatki_safe->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
-                    $ostatki_safe->summa  = $request['ostatkiResults'.$input]-$request['Summarashod'.$input][0];
+                    $ostatki_safe->summa= $request['ostatkiResults'.$input]-$request['Summarashod'.$input][0];
                     $ostatki_safe->safe_id= $request['safe'.$input];   
                     $ostatki_safe->shkaf_id=$request['shkaf'.$input];   
                     $ostatki_safe->qator_id=$request['sprQator'.$input];   
                     $ostatki_safe->cell_id = $request['sprCell'.$input];   
                     $ostatki_safe->typeFond=0;   
                  //    $ostatki_safe->n_doc= $request['ndoc'];   
-                    $ostatki_safe->host =$request->ip();   
+                    $ostatki_safe->host=$request->ip();   
                     $ostatki_safe->user_id =Auth::id();   
-                    $ostatki_safe=  $ostatki_safe->save();
+                    $ostatki_safe->save();
                  
         }
       
@@ -596,6 +618,7 @@ class RepositoryRashod{
                      $ostatki_safe->host = $request->ip();   
                      $ostatki_safe->user_id = Auth::id();   
                      $ostatki_safe->save();
+                     //insert botlshuda
                             //ostatki safe rashod 
                  $ostatki_safe = new ostatki_safe;
                  $ostatki_safe->comment=$request['comment'];
@@ -679,6 +702,27 @@ class RepositoryRashod{
                         $ostatki_safe->host =$request->ip();   
                         $ostatki_safe->user_id =Auth::id();   
                         $ostatki_safe=  $ostatki_safe->save();
+                        // insert botilshuda
+                            //ostatki safe
+                            $ostatki_safe = new ostatki_safe;
+                            $ostatki_safe->date=$request['date'];
+                            // $ostatki_safe->comment=$request['comment'];
+                            $ostatki_safe->src=$request['src'];
+                            $ostatki_safe->naminal=$request['naminal'.$input];
+                            $ostatki_safe->priznak=0;
+                            $ostatki_safe->ed_id=2; 
+                            $ostatki_safe->type=3;
+                            //$ostatki_safe->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
+                            $ostatki_safe->summa  = $request['Summarashod'.$input][0];
+                            $ostatki_safe->safe_id= $request['safe'.$input];   
+                            $ostatki_safe->shkaf_id=$request['shkaf'.$input];   
+                            $ostatki_safe->qator_id=$request['sprQator'.$input];   
+                            $ostatki_safe->cell_id = $request['sprCell'.$input];   
+                            $ostatki_safe->typeFond=1;   
+                         //    $ostatki_safe->n_doc= $request['ndoc'];   
+                            $ostatki_safe->host =$request->ip();   
+                            $ostatki_safe->user_id =Auth::id();   
+                            $ostatki_safe=  $ostatki_safe->save();
                  //ostatki safe
                     $ostatki_safe = new ostatki_safe;
                     $ostatki_safe->date=$request['date'];
@@ -711,9 +755,11 @@ class RepositoryRashod{
       //botilshuda rashod 
       public function InsertRashodBotilshudaToOstatkiTanga($request)
       {
+
+     
         foreach($request['id'] AS $input)
         {
-            // print_r($input);
+            // print_r($FondMoney);
             // exit;
                     if($request['Summarashod'.$input][0]>0)
                     {
@@ -724,7 +770,7 @@ class RepositoryRashod{
                     $FondMoney->priznak=$request['priznak'];
                     $FondMoney->comment=$request['comment'];
                     $FondMoney->type=3;
-                    $FondMoney->src=0;
+                    $FondMoney->src=$request['src'];
                     $FondMoney->naminal=$request['naminal'.$input];
                     $FondMoney->ed_id=2; 
                     $FondMoney->kol=$request['Summarashod'.$input][0]/1000/$request['naminal'.$input];   
@@ -737,16 +783,16 @@ class RepositoryRashod{
                     $FondMoney->n_doc=$request['ndoc'];   
                     $FondMoney->host=$request->ip();   
                     $FondMoney->user_id=Auth::id();   
-                    $FondMoney->save();
+                      $FondMoney->save();
                     //Oborot insert
                     
-          
+              
 
                    //rashod 
                       //ostatki safe
                       $ostatki_safe = new ostatki_safe;
                       $ostatki_safe->date=$request['date'];
-                      $ostatki_safe->src=0;
+                      $ostatki_safe->src=$request['src'];
                       $ostatki_safe->naminal=$request['naminal'.$input];
                       $ostatki_safe->priznak=1;
                       $ostatki_safe->ed_id=2; 
@@ -760,12 +806,13 @@ class RepositoryRashod{
                       $ostatki_safe->typeFond=1;   
                    //    $ostatki_safe->n_doc= $request['ndoc'];   
                       $ostatki_safe->host =$request->ip();   
-                      $ostatki_safe->user_id =Auth::id();   
-                      $ostatki_safe=  $ostatki_safe->save();
-                               //ostatki safe
+                      $ostatki_safe->user_id = Auth::id();   
+                       $ostatki_safe=  $ostatki_safe->save();
+                   
+                      //ostatki safe
                    $ostatki_safe = new ostatki_safe;
                    $ostatki_safe->date=$request['date'];
-                   $ostatki_safe->src=0;
+                   $ostatki_safe->src=$request['src'];
                    $ostatki_safe->naminal=$request['naminal'.$input];
                    $ostatki_safe->priznak=0;
                    $ostatki_safe->ed_id=2; 
@@ -778,9 +825,14 @@ class RepositoryRashod{
                    $ostatki_safe->cell_id = $request['sprCell'.$input];   
                    $ostatki_safe->typeFond=1;   
                 //    $ostatki_safe->n_doc= $request['ndoc'];   
-                   $ostatki_safe->host =$request->ip();   
-                   $ostatki_safe->user_id =Auth::id();   
-                   $ostatki_safe=  $ostatki_safe->save();
+                $ostatki_safe->host =$request->ip();   
+                $ostatki_safe->user_id =Auth::id();   
+               //  echo "<pre>";
+                      
+               //  print_r(json_decode($ostatki_safe,true));
+                
+               //  echo "</pre>";
+               $ostatki_safe=  $ostatki_safe->save();
                 
        }
      
@@ -790,7 +842,7 @@ class RepositoryRashod{
   
         }    
         
-        return true;
+     return true;
   
       }   
 }

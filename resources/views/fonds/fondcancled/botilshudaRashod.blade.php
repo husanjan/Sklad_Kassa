@@ -5,7 +5,7 @@
     <input     value="botilshudar"   name="botilshudar" type="hidden">
     <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}">
     <input            name="farsuda" type="hidden"   value="1" >
-    <input type="hidden" name="src" value="4">
+    {{-- <input type="hidden" name="src" value="4"> --}}
   <!-- Modal -->
  
     <div class="modal-dialog  modal-xl" role="document">
@@ -20,15 +20,16 @@
             <div class="row">
                 <div class="col-md-3  ">
                     <label for="date">Дата	</label>
-                    <input  type="datetime-local"readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"     name="date" class="form-control"    >
+                    <input  type="datetime-local" readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"     name="date" class="form-control"    >
 
-                    <input     value="1"    name="priznak" type="hidden"    >
+                    {{-- <input     value="1"    name="priznak" type="hidden"    > --}}
                     <input            name="kode_operRashod" type="hidden"   value="{{$kodeOper}}">
                     <input            name="KorshoyamRashod" type="hidden"   value="3" >
                     <input          name="priznak" type="hidden" value="1"    >
                
                          
                     <input            name="farsuda" type="hidden"   value="3" >
+                   
                 </div>
      
            
@@ -36,8 +37,19 @@
                 <div class="col-md-2">
                     <label for="count01">Номер Документ	</label>
                     <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
+               </div>
+                <div class="col-md-2 mt-4">
+                  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="src" id="btnradio1" autocomplete="off"  value="6" required>
+                    <label class="btn btn-outline-secondary" for="btnradio1">Душанбе</label>
+                  
+                    <input type="radio" class="btn-check" name="src" id="btnradio2" autocomplete="off" value="6" required>
+                    <label class="btn btn-outline-secondary" for="btnradio2">Нобудкуни</label>
+         
+                  </div>
                 </div>
-                <label for="" class="offset-md-9 mt-4">  <span class="badge badge-light text-black "><h6><b>Общие сумма : </b>{{$allsumbotilshuda}}</h6></span> </label>
+    
+            </div>
  
          {{-- //Table ostatki  --}}
          <table class="table mt-2">
@@ -59,6 +71,7 @@
                 @php
                $i=1;//Initialize variable
               @endphp
+              {{-- {{ dd($botilshudaRas) }} --}}
                 @foreach($botilshudaRas AS  $ostatkiResults)
                 @if($ostatkiResults->summa>0)
                 <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
@@ -72,7 +85,7 @@
                     @endforeach
                     {{-- <td>{{ $ostatkiResults->safe_id }}</td> --}}
             
-                    @foreach ( $shkafs as $shkaf )
+                    @foreach ( $shkafs as $shkaf)
            
                     @if($ostatkiResults->shkaf_id===$shkaf->id ) <td><input type="hidden" name="shkaf{{$ostatkiResults->id}}" value="{{$shkaf->id}}">{{ $shkaf->shkaf }}</td>  @endif
                     @endforeach
@@ -101,11 +114,13 @@
 
             </div>
             <textarea name="comment" id="" cols="50" rows="3" class="form-control mt-1" placeholder="Коммент"></textarea>
+        
+           <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыт</button>
+            <button type="submit" class="btn btn-primary" disabled>Save changes</button>
+           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыт</button>
-          <button type="submit" class="btn btn-primary" disabled>Save changes</button>
-        </div>
+        
       </div>
     </div>
  

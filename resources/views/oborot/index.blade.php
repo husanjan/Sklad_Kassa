@@ -205,7 +205,7 @@
                     <div class="modal-footer ">
                         <div class="row mb-0 ">
                             <div class="col-md-8 justify-content-center">
-                                <button type="submit" class="btn btn-facebook active addform" disabled>
+                                <button type="submit" class="btn btn-primary" disabled>
                                     {{ __('Добавить') }}
                                 </button>
                             </div>

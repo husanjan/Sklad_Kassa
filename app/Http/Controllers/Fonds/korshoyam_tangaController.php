@@ -10,6 +10,7 @@ use App\Models\SprCells;
 use App\Models\SprQators;
 use App\Models\SprEds;
 use App\Models\Oborot;
+use App\Models\Kode_Oper;
 use App\Models\FondEmisions;
 use App\Models\SprAccounts;
 use App\Models\FondCoins;
@@ -18,7 +19,8 @@ use App\Repositories\InterfacesSomoni;
 use App\Repositories\RepositoryRashod;
 use App\Repositories\AddRequest;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
+ 
 class korshoyam_tangaController extends Controller
 {
     /**
@@ -88,19 +90,44 @@ class korshoyam_tangaController extends Controller
     public function store(Request $request)
     {
         //use App\Repositories\InterfacesSomoni;
+      //  dd($request->all());
         if(isset($request['id']))
         {
             //priznak prihod 0 rashod 1
+            // exit;
+       
+            // exit;
             $arrayResult= $this->RepositoryRashod->InsertRashodKorshoyamToOstatkiTanga($request,0);
     
+                 $sumAll=0;
+                     foreach($request['id'] AS $input)
+            {
+                        if($request['Summarashod'.$input][0]>0)
+                        {
+                            $sumAll+=$request['Summarashod'.$input][0];
+                         }
+            }
+        
+       
+
+
              
                if($arrayResult AND !$request->acccounti=='korshoyam')
                {
-                return redirect()->route('korshoyam_tanga.index')->with('success','Фонд расход успешно создан!');
+                $kode_oper= new Kode_Oper;
+                $kode_oper->datetime=date("Y-m-d H:i:s");
+                $kode_oper->kode_oper=$request->kode_oper;
+                $kode_oper->Prikhod=9;
+                $kode_oper->Raskhod=10;
+                $kode_oper->Summa=$sumAll;
+                $kode_oper->user_id=Auth::id();
+                $kode_oper->host=Auth::id();
+                $kode_oper->save();   
+                return redirect()->back()->with('success','Фонд расход успешно создан!');
                }
                if($request->acccounti=='korshoyam')
                {
-                return redirect()->route('home')->with('danger','Коршоям танга фонд  не успешно!');
+                return redirect()->back()->with('danger','Коршоям танга фонд  не успешно!');
                }
               
        exit;
@@ -112,7 +139,17 @@ class korshoyam_tangaController extends Controller
    
         if(is_array($oborots) AND is_array($money) AND $request->src==4)
         {
-          
+    
+       
+            $kode_oper= new Kode_Oper;
+            $kode_oper->datetime=date("Y-m-d H:i:s");
+            $kode_oper->kode_oper=$request->kode_oper;
+            $kode_oper->Prikhod=10;
+            $kode_oper->Raskhod=9;
+            $kode_oper->Summa=$request->AllSumma;
+            $kode_oper->user_id=Auth::id();
+            $kode_oper->host=Auth::id();
+            $kode_oper->save();   
                      //prihod korshoyam ostatki
          $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
     
@@ -130,11 +167,12 @@ class korshoyam_tangaController extends Controller
           }
               DB::Commit();
            
-      return redirect()->route('korshoyam_tanga.index')->with('success','Коршоям фонд успешно создан!');
+    //   return redirect()->route('korshoyam_tanga.index')->with('success','Коршоям фонд успешно создан!');
+      return redirect()->back()->with('success','Коршоям фонд успешно создан!');
             } catch (\Illuminate\Database\QueryException $e) {
               DB::rollback();
               return response(['message'=>'FAILURE'], 500);
-         return redirect()->route('korshoyam_tanga.index')->with('danger','Коршоям фонд  не успешно!');
+         return redirect()->back()->with('danger','Коршоям фонд  не успешно!');
             }
           
 

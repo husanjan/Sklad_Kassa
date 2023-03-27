@@ -221,7 +221,8 @@ class Repositoryschet{
         
    
         $endsum=0;
-      
+      // echo $src;
+      // exit;
        
        
         if($request->startDate &&$request->EndDate):
@@ -269,6 +270,7 @@ class Repositoryschet{
         endif; 
        
       //  if($Prihod>0 ||  $endsum>0 AND $Rashod<=$Prihod):
+             $schetId=0;
             if($src==1):
                 $schetId=11; 
             endif;    

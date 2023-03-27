@@ -26,6 +26,5 @@ class FondCoins extends Model
         'n_doc',
         'user_id',
         'host',
-        
-    ];
+     ];
 }

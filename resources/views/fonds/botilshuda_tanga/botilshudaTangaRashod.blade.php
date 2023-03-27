@@ -1,40 +1,52 @@
-  {{--  Расход Модал--}}
-  <form method="POST" action="{{route('fondwornou.store')}}">
+<form method="POST" action="{{route('botilshuda_tanga.store')}}">
     @csrf
     <input     value="1"   name="priznak" type="hidden">
-    <input     value="farsudai"   name="farsudai" type="hidden">
     <input            name="kode_oper" type="hidden"   value="{{$kodeOper}}">
-    <input            name="farsuda" type="hidden"   value="2" >
+    <input            name="farsuda" type="hidden"   value="1" >
     <input type="hidden" name="src" value="4">
   <!-- Modal -->
  
     <div class="modal-dialog  modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Фарсуда/Расход</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Ботилшуда/Расход</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-md-3  ">
-                    <label for="date">Дата	</label>
+                <div class="col-md-3">
+                    <label for="date">Дата</label>
                     <input  type="datetime-local"readonly="readonly"     style="width: 11rem;"     value="<?php echo date('Y-m-d H:i:s'); ?>"     name="date" class="form-control"    >
 
                     <input     value="1"    name="priznak" type="hidden"    >
                     <input            name="kode_operRashod" type="hidden"   value="{{$kodeOper}}">
                     <input            name="KorshoyamRashod" type="hidden"   value="3" >
-                
+                    <input          name="priznak" type="hidden" value="1"    >
+               
+                         
+                   
                 </div>
-             
-                    <input type="hidden" name="kode_oper_oborRashod" value="{{$kodeOperObort }}">
+     
            
               
                 <div class="col-md-2">
                     <label for="count01">Номер Документ	</label>
                     <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
+                   
                 </div>
+               <div class="col-md-4 mt-4">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="src" id="btnradio1" autocomplete="off" value="5" required="">
+                    <label class="btn btn-outline-secondary" for="btnradio1">Душанбе</label>
+                  
+                    <input type="radio" class="btn-check" name="src" id="btnradio2" autocomplete="off" value="6" required="">
+                    <label class="btn btn-outline-secondary" for="btnradio2">Нобудкуни</label>
+         
+                  </div></div> 
+                 
+                {{-- <label for="" class="offset-md-9 mt-4">  <span class="badge badge-light text-black "><h6><b>Общие сумма :{{$allsum }}</b></h6></span> </label> --}}
  
          {{-- //Table ostatki  --}}
          <table class="table mt-2">
@@ -56,7 +68,7 @@
                 @php
                $i=1;//Initialize variable
               @endphp
-                @foreach($farsudaRashod AS  $ostatkiResults)
+                @foreach($botilsudaRas AS  $ostatkiResults)
                 @if($ostatkiResults->summa>0)
                 <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
                   <tr class="border-bottom" id="t{{$ostatkiResults->id}}">
@@ -79,7 +91,7 @@
                     @endforeach
                     @foreach ( $sprCells as $sprCell )
            
-                    @if($ostatkiResults->cell_id===$sprCell->id ) <td><input type="hidden" name="sprCell{{$ostatkiResults->id}}" value="{{$sprCell->id}}">{{ $sprCell->cell }}</td>  @endif
+                    @if($ostatkiResults->cell_id===$sprCell->id) <td><input type="hidden" name="sprCell{{$ostatkiResults->id}}" value="{{$sprCell->id}}">{{ $sprCell->cell }}</td>  @endif
                     @endforeach
                     @foreach ($sprEds as $sprEd )
            
@@ -87,16 +99,17 @@
                     @endforeach
               
                     <td> {{ $ostatkiResults->naminal=='razne'?'Разные':$ostatkiResults->naminal}} <input type="hidden"  id="naminal{{$ostatkiResults->id}}"  name="naminal{{$ostatkiResults->id}}" value="{{$ostatkiResults->naminal}}"></td>
-                    <td > <input type="hidden" id="sumr{{$ostatkiResults->id}}" class="{{$ostatkiResults->id}}" name="ostatkiResults{{$ostatkiResults->id}}" value="{{ $ostatkiResults->summa}}"> {{ $ostatkiResults->summa}}  сомони</td>
-                    <td><input type="text" class="form-control col-md-4 summaRF"  name="Summarashod{{$ostatkiResults->id}}[]" id="{{$ostatkiResults->id}}"></td>
+                    <td ><label for="" id="sumr{{$ostatkiResults->id}}" class="{{$ostatkiResults->id}}"><input type="hidden" name="ostatkiResults{{$ostatkiResults->id}}" value="{{ $ostatkiResults->summa}}"> {{ $ostatkiResults->summa}}</label> сомони</td>
+                    <td><input type="text" class="form-control col-md-4 summaR"  name="Summarashod{{$ostatkiResults->id}}[]" id="{{$ostatkiResults->id}}"></td>
                     
-                  </tr>
-                 @endif
+                  </tr>@endif
+                 
                 @endforeach
         </tbody>
          </table>
 
             </div>
+            <textarea name="comment" id="" cols="50" rows="3" class="form-control mt-1" placeholder="Коммент"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыт</button>
@@ -104,93 +117,5 @@
         </div>
       </div>
     </div>
- 
+  </div>
    </form>
-
-   <script>
- $(document).ready(function(){
-   
- 
-$(".summaRF").keyup(function(){
- 
-// console.log();
-   //console.log(parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0);
-if(parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0)
-{
-
-
-function selectValidation(id_select) {
- var selectIsValid = null;
- var incr=0;
- var decriment=0;
- 
-$('.summaRF').each(function() {
-
-    var values= $('#sumr'+$(this).attr('id')).val();
-    if(parseFloat($(this).val())>0 && parseFloat($(this).val())/1000/parseFloat($('#naminal'+$(this).attr('id')).val())%1==0)
-    {
-    
-
-         incr++;
-      
-        if(values>=parseFloat($(this).val())&& parseFloat($(this).val())>0)
-        {
-            decriment++;
-            // console.log(values);
-            if(incr==decriment)
-    {
-             selectIsValid=true;
-             $(':input[type="submit"]').prop('disabled',true);
-              return;
-      }
-        }
-
-           
- 
-        }
-
-        });
-
-
-return     selectIsValid;
-}
-
-
-let id=$(this).attr("id");
-
-    if(selectValidation())
-    {
-        $(':input[type="submit"]').prop('disabled', false);
-    }else{
-        $(':input[type="submit"]').prop('disabled', true);
-       return;
-    }
-
- 
-if($('#sumr'+id).val()>=parseFloat($(this).val()) && parseFloat($(this).val())>0)
-{
-      $('#t'+id).removeClass('border-danger');
-     // $('#t'+id).addClass('border-success');
-     $(':input[type="submit"]').prop('disabled', false);
-      return;
-
-}else{
-//  $('#t'+id).removeClass('border-success');
-      $('#t'+id).addClass('border-danger');  
-      $(':input[type="submit"]').prop('disabled', true);
-      return;
-}
-//     if(selectValidation()==false){
-//     $('#t'+id).removeClass('border-danger');  
-//     $('#t'+id).removeClass('border-success');
-//             return 
-//    }
-}else{
- 
-$(':input[type="submit"]').prop('disabled', true);
-}
-//end validate checked nomnal summa rashod summa
-});
-
-});
-</script>

@@ -26,12 +26,7 @@
 </div>
 @endif
 
-<!-- Modal -->
-<div class="modal fade" id="rashodBotilshuda"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            
-    @include('fonds.fondcancled.botilshudaRashod')
-   
-  </div>
+
  
 <form method="POST" action="{{ route('fondcanceled.store') }}" id="submit" >
     @csrf
@@ -1133,7 +1128,7 @@
     <div class="modal-dialog  modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Ботилшуда/Расход</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -1147,10 +1142,10 @@
                     <input     value="1"    name="priznak" type="hidden"    >
                     <input            name="kode_operRashod" type="hidden"   value="{{$kodeOper}}">
                     <input            name="KorshoyamRashod" type="hidden"   value="3" >
-                    <input          name="priznak" type="hidden" value="1"    >
+                    <input  name="priznak" type="hidden" value="1">
                
                          
-                    <input    name="farsuda" type="hidden"   value="3" >
+                    <input   name="farsuda" type="hidden"   value="3" >
                 </div>
      
            
@@ -1159,7 +1154,6 @@
                     <label for="count01">Номер Документ	</label>
                     <input        type="text"  name="ndoc" class="form-control "  autocomplete="off" required>
                 </div>
-                <label for="" class="offset-md-9 mt-4">  <span class="badge badge-light text-black "><h6><b>Общие сумма :  {{ $allsum }}</b></h6></span> </label>
  
          {{-- //Table ostatki  --}}
          <table class="table mt-2">
@@ -1181,6 +1175,7 @@
                 @php
                $i=1;//Initialize variable
               @endphp
+                
                 @foreach( $arrayResult AS  $ostatkiResults)
                 @if($ostatkiResults->summa>0)
                 <input type="hidden" name="id[]" value="{{$ostatkiResults->id}}">
@@ -1236,8 +1231,9 @@
        
           <div class="ml-4">
               <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rashodBotilshuda"   id="priznak" value="0">Приход </button>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Botilshuda"  value="1">Расход</button>
+                
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Botilshuda"  value="0">Приход</button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rashodBotilshuda"   id="priznak" value="1">  Расход</button>
 
               </div>
           </div>
@@ -1332,7 +1328,12 @@
 </div>
 {{--modal 1 Коршоям Детализация--}}
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="rashodBotilshuda"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            
+    @include('fonds.fondcancled.botilshudaRashod')
+   
+</div>
 @endsection
 
  
