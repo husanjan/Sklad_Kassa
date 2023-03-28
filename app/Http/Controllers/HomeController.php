@@ -282,12 +282,13 @@ class HomeController extends Controller
             $allsumfarsudaTanga=array_sum(array_column(json_decode(json_encode($farsudaTanga),true), 'summa'));
             $allsumbotilshudaTanga=array_sum(array_column(json_decode(json_encode($botilshudaTanga),true), 'summa'));
             //End summa
+            $operatsion=Kode_Oper::orderBy('kode_oper','DESC')->get();
             if($request->ajax()) {
             
-              return view('oborot.pagination',compact('bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'))->render();
+              return view('oborot.pagination',compact('operatsion','bik','sprAccounts','kodeOper','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang'))->render();
 
           }
-                return view('home',compact('botilsudaRas','allsumbotilshudaTanga','allsumfarsudaTanga','allsumkorshoyamTanga','allsumbotilshuda','allsumbotilshuda','allsumfarsuda','allsumkorshoyam','botilshudaTanga','farsudaTanga','korshoyamTanga','bik','sprAccounts','sprQators','sprCells','kodeOper','shkafs','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang','korshoyamRashod','farsudaRashod','botilshudaRas'));
+                return view('home',compact('operatsion','botilsudaRas','allsumbotilshudaTanga','allsumfarsudaTanga','allsumkorshoyamTanga','allsumbotilshuda','allsumbotilshuda','allsumfarsuda','allsumkorshoyam','botilshudaTanga','farsudaTanga','korshoyamTanga','bik','sprAccounts','sprQators','sprCells','kodeOper','shkafs','response','FondMoney','kodOperf','kodeOpero','safes','sprEds','kodeOperObort','kodeOperObortTanga','kodOperTanga','OborTanga','FondMoneyTang','korshoyamRashod','farsudaRashod','botilshudaRas'));
     }
 
     public function fetch_data()
@@ -777,14 +778,24 @@ public  function FondTableTanga(Request $request)
 
 public function oborotInsertTanga(Request $request)
 {
-    // dd( $request->all());
-
+  // dd( $request->all());
+          
+     $kode_oper= new Kode_Oper;
+     $kode_oper->datetime=date("Y-m-d H:i:s");
+     $kode_oper->kode_oper=$request->kod_oper;
+     $kode_oper->Prikhod=8;
+     $kode_oper->Raskhod=0;
+     $kode_oper->Summa=$request->AllSumma;
+     $kode_oper->user_id=Auth::id();
+     $kode_oper->host=Auth::id();
+     $kode_oper->save();
+    // exit;
      $this->addRepository->AddInsertOborotTanga($request);
      return redirect()->route('home')->with('success','Оборот Танга  успешно создан!');
 }
 public function InsertTanga(Request $request)
 {
-             //    dd($request->all());
+                //  dd($request->all());
        DB::beginTransaction();
        $oborots = $this->addRepository->ModaladdRequestsOborottanga($request,$request->farsuda);
         $money= $this->addRepository->ModaladdRequestsTanga($request);
@@ -793,13 +804,26 @@ public function InsertTanga(Request $request)
         // print_r($money);
         // echo "</pre>";
         // exit;
-        // echo $request->src;
-         
+        // echo $request->farsuda;
+        $src=10;
+          if($request->farsuda==1)
+          {
+            $src=11;
+          }
         if(is_array($money) AND is_array($oborots) AND $request->src==4)
           {
             $detailsFond = $this->addRepository->Fondostatki($money,'cell_id');
     
          $arrayResult= $this->RepositoryRashod->InsertRashod($detailsFond,1);
+         $kode_oper= new Kode_Oper;
+         $kode_oper->datetime=date("Y-m-d H:i:s");
+         $kode_oper->kode_oper=$request->kode_oper;
+         $kode_oper->Prikhod=8;
+         $kode_oper->Raskhod=$src;
+         $kode_oper->Summa=$request->AllSumma;
+         $kode_oper->user_id=Auth::id();
+         $kode_oper->host=Auth::id();
+         $kode_oper->save();
              
              try{
                 foreach ($money as $key => $value) {

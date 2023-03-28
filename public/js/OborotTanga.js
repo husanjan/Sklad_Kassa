@@ -31,7 +31,7 @@ $( document ).ready(function() {
              
             });
             //console.log(CountTanga.reduce((a, b) => a + b, 0));
-            $('#AllSummaTanga').html('<div class="alert alert-primary  mt-2"><div class="btn-group" role="group" aria-label="Basic example"> Общие сумма  '+CountTanga.reduce((a, b) => a + b, 0)+' Cомони  </div></div>')
+            $('#AllSummaTanga').html('<div class="alert alert-primary  mt-2"><div class="btn-group" role="group" aria-label="Basic example"> Общие сумма <input type="hidden" name="AllSumma" value="'+CountTanga.reduce((a, b) => a + b, 0)+'"> '+CountTanga.reduce((a, b) => a + b, 0)+' Cомони  </div></div>')
             // console.log(CountTanga);
         $("#"+$(this).attr('id')+"Add").attr("disabled", false);
         $(".addform").attr("disabled", false);

@@ -2001,7 +2001,62 @@
             </form>
             {{-- End Modalka Tanga  --}}
 
+            <div class="row  mt-3">
+     
+   
 
+                {{--        Oborot table --}}
+                @php($countOper=0)
+     
+                        <div class="col-12 col-lg-6 " id="oborot-Pul">
+                
+                            <div class="card ">
+                                <div class="card-body">
+                                    <h4>Операция</h4>
+                
+                                    <br>
+                {{--                    Oborot table limit 20 //--}}
+                                    <table class="table col-md-auto">
+                                        <tbody><tr class="something">
+                                            <th>#</th>
+                                            <th class="col-md-3">Дата</th>
+                                            <th>Приход</th>
+                                            <th>Расход</th>
+                                            <th>Сумма</th>
+                                            <th></th>
+                                             
+                                        </tr>
+                                        @foreach ($operatsion as $operatsions)
+                                            
+                                        @php($countOper++)
+                                        <tr>
+                                                <td>{{$countOper }}</td>
+                                                <td>{{ $operatsions->datetime }}</td>
+                                                @foreach($sprAccounts AS $sprAccount)
+
+
+                                                @if($sprAccount->id==$operatsions->Prikhod)
+                                                <td> {{ $sprAccount->account }}</td>
+                                                @endif
+                                                @if($sprAccount->id==$operatsions->Raskhod)
+                                                <td> {{ $sprAccount->account }}</td>
+                                                @endif
+                                              
+                                                @endforeach
+                                                @if($operatsions->Raskhod==0)
+                                                <td>  </td>
+                                                @endif
+                                                <td>{{ $operatsions->Summa }}</td>
+                                             
+
+                                        </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>      
+                                 </div>                           
+                             </div>                           
+                        </div>                           
+             </div>                           
  
     <div class="row  mt-3">
      
